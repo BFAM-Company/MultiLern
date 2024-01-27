@@ -6,14 +6,14 @@ import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, Touchable
 
 function HomeScreen(props: any) {
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View style={styles.mainContainer}>
         <ImageBackground
             source= {require('./../../assets/gradientBackground.png')}
             style={styles.image}
         >
             <Text>SignUp Screen</Text>
         </ImageBackground>
-    </SafeAreaView>
+    </View>
   );
 }
 

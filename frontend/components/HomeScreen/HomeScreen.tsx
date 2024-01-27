@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Dimensions } from 'react-native';
-import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 
 
 
 function HomeScreen(props: any) {
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View style={styles.mainContainer}>
         <ImageBackground
             source= {require('./../../assets/gradientBackground.png')}
             style={styles.ImageBackground}
@@ -58,10 +58,12 @@ function HomeScreen(props: any) {
                 </View>
             </View>
         </ImageBackground>
-    </SafeAreaView>
+    </View>
   );
 }
-const LogoSize = Dimensions.get('window').width*0.10;
+
+const PCRatio = Platform.OS === 'web' ? 0.5 : 1
+const LogoSize = Dimensions.get('window').width*0.10*PCRatio;
 const ButtonsSize = Dimensions.get('window').height*0.07;
 
 const styles = StyleSheet.create({
@@ -75,16 +77,32 @@ const styles = StyleSheet.create({
         width:'100%',
         height:'100%',
         display:'flex',
-        justifyContent:'flex-end',
+        
         alignItems:'center',
-        objectFit: 'cover'
+        objectFit: 'cover',
+        ...Platform.select({
+            web: {
+                justifyContent:'center',
+            },
+            default: {
+                justifyContent:'flex-end',
+            }
+        }),
+        
     },
     AccountCreateContainer:{
         width:'100%',
         height:'50%',
         display:'flex',
         justifyContent:'space-around',
-        marginBottom:20,
+        ...Platform.select({
+            web: {
+                alignItems:'center',
+            },
+            default: {
+                marginBottom:20,
+            }
+        }),
     }, 
     LogoContainer:{
         width:'100%',
@@ -95,7 +113,7 @@ const styles = StyleSheet.create({
     },
     LogoImage:{
         width:LogoSize,
-        height:LogoSize,
+        height:LogoSize,        
         borderRadius:5,
     },
     accountServiceIcon:{
@@ -132,7 +150,14 @@ const styles = StyleSheet.create({
         textAlign:'center',
     },
     buttonsContainer:{
-        width:'100%',
+        ...Platform.select({
+            web: {
+                width: '50%'
+            },
+            default: {
+                width: '100%'
+            }
+        }),
         display:'flex',
         justifyContent:'space-around',
         alignItems:'center',
