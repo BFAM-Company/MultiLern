@@ -14,45 +14,49 @@ function HomeScreen(props: any) {
             <View style={styles.AccountCreateContainer}>
                 <View style={styles.LogoContainer}>
                     <Image source={require('./../../assets/multilern-logo.png')} style={styles.LogoImage}/>
-                    <Text style={styles.learnlyText}>Multilern</Text>
+                    <Text style={styles.titleText}>MultiLern</Text>
                 </View>
                 <View style={styles.mainTextContainer}>
-                    <Text style={styles.mainText}>Let's start using Multilern and improve your learning skills</Text>
+                    <Text style={styles.mainText}>Dołącz do nas i podnieść swoją naukę na wyższy poziom</Text>
                 </View>
                 <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={styles.buttonSignUp}
-                    onPress = {
-                        ()=>{
-                            props.pageSwitcher('SignUp')
+                    <TouchableOpacity style={[styles.buttonSignUp, styles.button]}
+                        onPress = {
+                            ()=>{
+                                props.pageSwitcher('SignUp')
+                            }
                         }
-                    }
-                >
-                    <Text style={styles.buttonsText}>Sign up for free</Text>
-                    <Image source={require('./../../assets/googleIcon.png')} style={styles.LogoGoogleImage}/>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonLogIn}
-                    onPress = {
-                        ()=>{
-                            props.pageSwitcher('SignUp')
+                    >
+                        <Text style={styles.buttonsText}>Zarejestruj się</Text>
+                        <View style={styles.imagesContainer}>
+                            <Image source={require('./../../assets/googleIcon.png')} style={styles.accountServiceIcon}/>
+                            <Image source={require('./../../assets/apple-icon.png')} style={styles.accountServiceIcon}/>
+                            <Image source={require('./../../assets/facebook-icon.png')} style={[styles.accountServiceIcon, {borderRadius:200}]}/>
+                            <Image source={require('./../../assets/lock-alt.png')} style={styles.accountServiceIcon}/>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.buttonLogIn, styles.button]}
+                        onPress = {
+                            ()=>{
+                                props.pageSwitcher('SignUp')
+                            }
                         }
-                    }
-                >
-                    <Text style={styles.buttonsText}>Log in</Text>
-                    <Image source={require('./../../assets/lock-alt.png')} style={styles.LogoGoogleImage}/>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonLogIn}
-                    onPress = {
-                        ()=>{
-                            props.pageSwitcher('SignUp')
+                    >
+                        <Text style={styles.buttonsText}>Zaloguj się</Text>
+                        <Image source={require('./../../assets/logIn-icon.png')} style={styles.iconImage}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.buttonGuest, styles.button]}
+                        onPress = {
+                            ()=>{
+                                props.pageSwitcher('SignUp')
+                            }
                         }
-                    }
-                >
-                    <Text style={styles.buttonsText}>Continue as a guest</Text>
-                    <Image source={require('./../../assets/lock-alt.png')} style={styles.LogoGoogleImage}/>
-                </TouchableOpacity>
+                    >
+                        <Text style={[styles.buttonsText, {color:'white'}]}>Kontynuj jako gość</Text>
+                        <Image source={require('./../../assets/guest-icon.png')} style={[styles.iconImage, {tintColor: 'white'}]}/>
+                    </TouchableOpacity>
+                </View>
             </View>
-            </View>
-            
         </ImageBackground>
     </SafeAreaView>
   );
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
         width:'100%',
         height:'100%',
         //backgroundColor:'rgb(15,15,15)',
-        backgroundColor: 'lightgray'
+        backgroundColor: 'white'
     },
     ImageBackground:{
         width:'100%',
@@ -94,14 +98,24 @@ const styles = StyleSheet.create({
         height:LogoSize,
         borderRadius:5,
     },
-    LogoGoogleImage:{
-        width:LogoSize*0.8,
-        height:LogoSize*0.8,
-        borderRadius:5,
+    accountServiceIcon:{
+        width:LogoSize*0.45,
+        height:LogoSize*0.45,
+        margin:5
     },
-    learnlyText:{
-        fontSize:20,
-        color:'white',
+    iconImage:{
+        width:LogoSize*0.6,
+        height:LogoSize*0.6,
+    },
+    imagesContainer:{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems:'center',
+        justifyContent:'space-around',
+    },
+    titleText:{
+        fontSize:30,
+        color:'rgb(33,33,43)',
         fontWeight:'600',
         margin:10
     },
@@ -111,11 +125,11 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     mainText:{
-        fontSize:22,
+        width:'90%',
+        fontSize:19,
         fontWeight:'700',
-        color:'white',
+        color:'gray',
         textAlign:'center',
-        width:'100%',
     },
     buttonsContainer:{
         width:'100%',
@@ -124,10 +138,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         margin:10,
     },
-    buttonSignUp:{
+    button:{
         width:'80%',
         height: ButtonsSize,
-        backgroundColor:'white',
+        //backgroundColor:'white',
         borderRadius:20,
         display:'flex',
         flexDirection:'row',
@@ -136,21 +150,24 @@ const styles = StyleSheet.create({
         margin:15,
         paddingLeft:50,
         paddingRight:50,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 8,
+        },
+        shadowOpacity: 0.44,
+        shadowRadius: 10.32,
+
+        elevation: 16,
+    },
+    buttonSignUp:{
+        backgroundColor:'white'
+    },
+    buttonGuest:{
+        backgroundColor:'rgb(33,33,43)'
     },
     buttonLogIn:{
-        width:'80%',
-        height: ButtonsSize,
-        backgroundColor:'white',
-        borderRadius:20,
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        margin:15,
-        paddingLeft:50,
-        paddingRight:50,
-        borderWidth:1,
-        borderColor:'lightgray'
+        backgroundColor:'white'
     },
     buttonsText:{
         fontSize:17,

@@ -4,28 +4,33 @@ import { NavigationContainer } from '@react-navigation/native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './components/HomeScreen/HomeScreen';
-// import SignUpScreen from './SignUpScreen';
+import SignUpScreen from './components/SignUpScreen/SignUpScreen';
+import PageSwitchTemplateProps from './types/types';
 
 
-var Theme = true;
-
-function HomePage({ navigation }: any) {
+const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, children }) => {
   const pageChanger = (page: string) => {
     navigation.navigate(page);
-  }
+  };
 
+  return React.cloneElement(children, {pageSwitcher: pageChanger });
+};
+
+const HomePage = ({ navigation }: any) => {
   return (
-    <HomeScreen theme={Theme} pageSwitcher={pageChanger} />
+    <PageSwitchTamplte navigation={navigation}>
+          <HomeScreen/>
+    </PageSwitchTamplte>
+
   );
 }
-// function SignUpPage({navigation}) {
-//   const pageChanger = (page)=>{
-//     navigation.navigate(page);
-//   }
-//   return (
-//     <SignUpScreen theme={Theme} pageSwitcher = {pageChanger} />
-//   );
-// }
+const SignUpPage = ({navigation}: any) => {
+  return (
+    <PageSwitchTamplte navigation={navigation}>
+      <SignUpScreen/>
+    </PageSwitchTamplte>
+  );
+}
 
 const Stack = createNativeStackNavigator();
 
@@ -39,7 +44,7 @@ function App() {
        >
         
          <Stack.Screen name="Home" component={HomePage} />
-         {/* <Stack.Screen name="SignUp" component={SignUpPage} /> */}
+         <Stack.Screen name="SignUp" component={SignUpPage} />
        </Stack.Navigator>
     </NavigationContainer>
   );
