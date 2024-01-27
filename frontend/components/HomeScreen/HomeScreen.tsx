@@ -3,11 +3,12 @@ import { Dimensions } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 
 
+
 function HomeScreen(props: any) {
   return (
     <SafeAreaView style={styles.mainContainer}>
         <ImageBackground
-            source= {require('./../../assets/favicon.png')}
+            source= {require('./../../assets/gradientBackground.png')}
             style={styles.ImageBackground}
         >
             <View style={styles.AccountCreateContainer}>
@@ -27,7 +28,7 @@ function HomeScreen(props: any) {
                     }
                 >
                     <Text style={styles.buttonsText}>Sign up for free</Text>
-                    <Image source={require('./../../assets/favicon.png')} style={styles.LogoGoogleImage}/>
+                    <Image source={require('./../../assets/googleIcon.png')} style={styles.LogoGoogleImage}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonLogIn}
                     onPress = {
@@ -37,7 +38,17 @@ function HomeScreen(props: any) {
                     }
                 >
                     <Text style={styles.buttonsText}>Log in</Text>
-                    <Image source={require('./../../assets/favicon.png')} style={styles.LogoGoogleImage}/>
+                    <Image source={require('./../../assets/lock-alt.png')} style={styles.LogoGoogleImage}/>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonLogIn}
+                    onPress = {
+                        ()=>{
+                            props.pageSwitcher('SignUp')
+                        }
+                    }
+                >
+                    <Text style={styles.buttonsText}>Continue as a guest</Text>
+                    <Image source={require('./../../assets/lock-alt.png')} style={styles.LogoGoogleImage}/>
                 </TouchableOpacity>
             </View>
             </View>
@@ -53,7 +64,8 @@ const styles = StyleSheet.create({
     mainContainer:{
         width:'100%',
         height:'100%',
-        backgroundColor:'rgb(15,15,15)',
+        //backgroundColor:'rgb(15,15,15)',
+        backgroundColor: 'lightgray'
     },
     ImageBackground:{
         width:'100%',
@@ -61,6 +73,7 @@ const styles = StyleSheet.create({
         display:'flex',
         justifyContent:'flex-end',
         alignItems:'center',
+        objectFit: 'cover'
     },
     AccountCreateContainer:{
         width:'100%',
