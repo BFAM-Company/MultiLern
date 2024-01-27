@@ -7,16 +7,16 @@ function HomeScreen(props: any) {
   return (
     <SafeAreaView style={styles.mainContainer}>
         <ImageBackground
-            source= {require('./assets/favicon.png')}
+            source= {require('./../../assets/favicon.png')}
             style={styles.ImageBackground}
         >
             <View style={styles.AccountCreateContainer}>
                 <View style={styles.LogoContainer}>
-                    <Image source={require('./assets/mainIcon2.png')} style={styles.LogoImage}/>
-                    <Text style={styles.learnlyText}>learnly</Text>
+                    <Image source={require('./../../assets/multilern-logo.png')} style={styles.LogoImage}/>
+                    <Text style={styles.learnlyText}>Multilern</Text>
                 </View>
                 <View style={styles.mainTextContainer}>
-                    <Text style={styles.mainText}>Let's start using learnly and improve your learning skills</Text>
+                    <Text style={styles.mainText}>Let's start using Multilern and improve your learning skills</Text>
                 </View>
                 <View style={styles.buttonsContainer}>
                 <TouchableOpacity style={styles.buttonSignUp}
@@ -26,8 +26,8 @@ function HomeScreen(props: any) {
                         }
                     }
                 >
-                    <Text style={styles.buttonsText}>Sign up for free?</Text>
-                    <Image source={require('./assets/googleIcon.png')} style={styles.LogoGoogleImage}/>
+                    <Text style={styles.buttonsText}>Sign up for free</Text>
+                    <Image source={require('./../../assets/favicon.png')} style={styles.LogoGoogleImage}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonLogIn}
                     onPress = {
@@ -37,7 +37,7 @@ function HomeScreen(props: any) {
                     }
                 >
                     <Text style={styles.buttonsText}>Log in</Text>
-                    <Image source={require('./assets/lock-alt.png')} style={styles.LogoGoogleImage}/>
+                    <Image source={require('./../../assets/favicon.png')} style={styles.LogoGoogleImage}/>
                 </TouchableOpacity>
             </View>
             </View>
