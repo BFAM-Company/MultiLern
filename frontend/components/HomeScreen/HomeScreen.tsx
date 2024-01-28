@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     mainContainer:{
         width:'100%',
         height:'100%',
-        //backgroundColor:'rgb(15,15,15)',
         backgroundColor: 'white'
     },
     ImageBackground:{
@@ -81,16 +80,17 @@ const styles = StyleSheet.create({
         
     },
     AccountCreateContainer:{
-        width:'100%',
         height:'50%',
         display:'flex',
         justifyContent:'space-around',
         ...Platform.select({
             web: {
                 alignItems:'center',
+                width: '75%'
             },
             default: {
                 marginBottom:20,
+                width:'100%',
             }
         }),
     }, 
