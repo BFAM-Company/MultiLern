@@ -10,6 +10,8 @@ function HomeScreen(props: any) {
         <ImageBackground
             source= {require('./../../assets/gradientBackground.png')}
             style={styles.ImageBackground}
+            resizeMode='cover'
+            blurRadius={40}
         >
             <View style={styles.AccountCreateContainer}>
                 <View style={styles.LogoContainer}>
