@@ -1,23 +1,21 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import { Animated, Dimensions, TextInput } from 'react-native';
-import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
-import { useFonts } from 'expo-font';
-import LinearGradient from 'react-native-linear-gradient';
+import React, { useEffect } from 'react';
+import {Animated, Dimensions, KeyboardAvoidingView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image, Platform } from 'react-native';
+import Button from '../Button/Button';
+import { useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 
-function HomeScreen(props: any) {
+
+function SignUpScreen(props: any) {
+	const [login, setLogin] = useState<string | undefined>(undefined)
+	const [passwordText, setPasswordText] = useState<string | undefined>(undefined)
 
     const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
-    const fadeAnimContainer = React.useRef(new Animated.Value(0)).current;
-    const [login, setLogin] = useState<string | undefined>(undefined);
-    const [password, setPassword] = useState<string | undefined>(undefined);
-
-    const [fontsLoaded, fontError] = useFonts({
-        'MPLUSRounded1c-ExtraBold': require('./../../assets/fonts/MPLUSRounded1c-ExtraBold.ttf'),
-    });
+    const fadeAnimContainer = React.useRef(new Animated.Value(1)).current;
 
     useEffect(() => {
         fadeIn(fadeAnimHeader, 3000);
-        fadeIn(fadeAnimContainer, 5000);
+        //fadeIn(fadeAnimContainer, 5000);
       }, []);
 
     const fadeIn = (animVariable: Animated.Value, durationValue: number | undefined) => {
@@ -28,64 +26,106 @@ function HomeScreen(props: any) {
         }).start();
     };
 
-    
-      if (!fontsLoaded && !fontError) {
-        return null;
-      }
-    return (
-        <View style={styles.mainContainer}>
-            <ImageBackground
-                source= {require('./../../assets/gradientBackground.png')}
-                style={styles.image}
-                resizeMode='cover'
-                blurRadius={40}
-            >
+
+  return (
+    <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={[styles.mainContainer, {flex:1}]}
+    >
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ImageBackground
+            source= {require('./../../assets/gradientBackground.png')}
+            style={styles.image}
+            resizeMode='cover'
+            blurRadius={40}
+        >
+            <View style={styles.AccountCreateContainer}>
+                <Animated.View
+                        style={[
+                            styles.fadingHeader,
+                            {
+                                opacity: fadeAnimHeader,
+                            },
+                        ]}>
+                    <View style={styles.LogoContainer}>
+                        <Image source={require('./../../assets/multilern-logo.png')} style={styles.LogoImage}/>
+                        <Text style={styles.titleText}>MultiLern</Text>
+                    </View>
+                    <View style={styles.mainTextContainer}>
+                        <Text style={styles.mainText}>Dołącz do nas i podnieść swoją naukę na wyższy poziom</Text>
+                    </View>
+                </Animated.View>
                 <Animated.View
                     style={[
                         styles.fadingHeader,
                         {
-                            opacity: fadeAnimHeader,
-                        },
-                    ]}>
-                    <Text style={styles.fadingText}>Zaloguj się</Text>
-                </Animated.View>
-
-                <Animated.View
-                    style={[
-                        styles.fadingContainer,
-                        {
                             opacity: fadeAnimContainer,
                         },
                     ]}>
-                    <TextInput 
-                        style={styles.input}
-                        onChangeText={setLogin}
-                        value={login}
-                        placeholder='username lub email'/>
-                    <TextInput 
-                        style={styles.input}
-                        onChangeText={setPassword}
-                        value={password}
-                        secureTextEntry={true} 
-                        placeholder='password'/>
-                    <TouchableOpacity style={styles.logInButton}
-                        onPress = {
-                            ()=>{
-                                
-                            }
-                        }
-                    >
-                        <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4c669f', '#3b5998', '#192f6a']}>
-                        <Text style={null}>Kontynuj jako gość</Text>
-                        <Image source={require('./../../assets/lock-alt.png')} style={[styles.iconImage, {tintColor: 'white'}]}/>
-                        </LinearGradient>
-                        
-                    </TouchableOpacity>
+                        <View style={styles.buttonsContainer}>
+                            <TextInput 
+                                style={styles.input} 
+                                value={login} 
+                                onChangeText={setLogin} 
+                                placeholder='nazwa użytkownika lub email'/>
+                            <TextInput 
+                                style={styles.input} 
+                                value={passwordText} 
+                                secureTextEntry={true}
+                                onChangeText={setPasswordText} 
+                                placeholder='Hasło '/>
+                            
+
+                            <Button
+                                colors={['rgb(33,33,43)','rgb(13,13,23)']}
+                                buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                icons={[require('./../../assets/logIn-icon.png')]}
+                                fontColor='white'>
+                                Zaloguj się
+                            </Button>
+                            
+
+                            <View style={styles.ORTextContainer}>
+                                <Text style={styles.mainText}>~ LUB UŻYJ ~</Text>
+                            </View>
+                            <Button
+                                colors={['white']}
+                                buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                icons={[require('./../../assets/googleIcon.png')]}>
+                            Google account
+                            </Button>
+                                                <Button
+                                    colors={['white']}
+                                    buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                    icons={[require('./../../assets/apple-icon.png')]}>
+                                Apple ID
+                            </Button>
+                                                <Button
+                                    colors={['white']}
+                                    buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                    icons={[require('./../../assets/facebook-icon.png')]}>
+                                Facebook account
+                            </Button>
+                                                <Button
+                                    colors={['white']}
+                                    buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                    icons={[require('./../../assets/lock-alt.png')]}>
+                                Utwórz konto w MultiLern
+                            </Button>
+                        </View>
                 </Animated.View>
-            </ImageBackground>
-        </View>
-    );
+            </View>
+        </ImageBackground>
+    </ScrollView>
+    </KeyboardAvoidingView>
+  );
 }
+
+
+const PCRatio = Platform.OS === 'web' ? 0.4 : 1
+const LogoSize = Dimensions.get('window').width*0.10*PCRatio;
+const InputSize = Dimensions.get('window').height*0.07;
+
 
 const styles = StyleSheet.create({
     mainContainer:{
@@ -96,59 +136,123 @@ const styles = StyleSheet.create({
     image:{
         width:'100%',
         height:'100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
+        display:'flex',
+        
+        alignItems:'center',
+        objectFit: 'cover',
+        ...Platform.select({
+            web: {
+                justifyContent:'center',
+            },
+            default: {
+                justifyContent:'flex-end',
+            }
+        }),
+        
     },
     fadingHeader:{
         width:'100%',
         display:'flex',
         alignItems:'center',
         justifyContent: 'center',
-        marginTop:100,
     },
-    fadingContainer:{
-        width:'90%',
-        minHeight:300,
-        display: 'flex',
+    AccountCreateContainer:{
+        height:'60%',
+        display:'flex',
+        justifyContent:'space-around',
+        ...Platform.select({
+            web: {
+                alignItems:'center',
+								width: '75%'
+            },
+            default: {
+								width:'100%',	
+								justifyContent: 'flex-end',
+                marginBottom:20,
+            }
+        }),
+    }, 
+    LogoContainer:{
+        width:'100%',
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
         alignItems:'center',
-        justifyContent: 'space-around',
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        marginTop:50,
+    },
+    LogoImage:{
+        width:LogoSize,
+        height:LogoSize,        
+        borderRadius:5,
+    },
+    titleText:{
+        fontSize:30,
+        color:'rgb(33,33,43)',
+        fontWeight:'600',
+        margin:10
+    },
+    mainTextContainer:{
+        width:'100%',
+        display:'flex',
+        alignItems:'center',
+    },
+    mainText:{
+        width:'90%',
+        fontSize:19,
+        fontWeight:'700',
+        color:'gray',
+        textAlign:'center',
+    },
+		ORTextContainer: {
+			width: '100%',
+			display: 'flex',
+			alignItems: 'center',
+			margin: 10
+		},
+    buttonsContainer:{
+        ...Platform.select({
+            web: {
+                width: '50%'
+            },
+            default: {
+                width: '100%'
+            }
+        }),
+        display:'flex',
+        justifyContent:'space-around',
+        alignItems:'center',
+        margin:10,
+    },
+    loginButton:{
+        width:'80%',
+        borderRadius:20,
+        height:InputSize,
+        display: 'flex',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    input: {
+        backgroundColor: 'white',
+        width:'80%',
+        height: InputSize,
+        borderRadius:20,
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        margin:15,
+        paddingLeft:40,
+        paddingRight:40,
         shadowColor: "#000",
         shadowOffset: {
-            width: 0,
-            height: 8,
+                width: 0,
+                height: 8,
         },
         shadowOpacity: 0.44,
         shadowRadius: 10.32,
 
         elevation: 16,
-    },
-    logoImage:{
-        width:50,
-        height:50,
-    },
-    fadingText:{
-        color:'rgb(33,33,43)',
-        fontWeight:'900',
-        fontSize:34,
-        letterSpacing:0.6,
-        //fontFamily:'MPLUSRounded1c-ExtraBold'
-
-    },
-    input:{
-        width:'90%',
-        padding:5,
-        borderBottomWidth:1,
-        borderColor:'lightgray',
-        fontSize:18,
-    },
-    logInButton:{
-
-    },
+    }
 })
 
 
-export default HomeScreen;
+export default SignUpScreen;
