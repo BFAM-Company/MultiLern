@@ -9,6 +9,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 function SignUpScreen(props: any) {
 	const [login, setLogin] = useState<string | undefined>(undefined)
 	const [passwordText, setPasswordText] = useState<string | undefined>(undefined)
+    const [scroll, setScroll] = useState<boolean>(false)
 
     const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
     const fadeAnimContainer = React.useRef(new Animated.Value(1)).current;
@@ -25,7 +26,9 @@ function SignUpScreen(props: any) {
         useNativeDriver: true,
         }).start();
     };
-
+    const scrollBehaviorChange = () =>{
+        setScroll(!scroll)
+    }
 
   return (
     <KeyboardAvoidingView
@@ -67,7 +70,9 @@ function SignUpScreen(props: any) {
                                 style={styles.input} 
                                 value={login} 
                                 onChangeText={setLogin} 
-                                placeholder='nazwa użytkownika lub email'/>
+                                placeholder='nazwa użytkownika lub email'
+                                onPressIn={scrollBehaviorChange}
+                                />
                             <TextInput 
                                 style={styles.input} 
                                 value={passwordText} 
