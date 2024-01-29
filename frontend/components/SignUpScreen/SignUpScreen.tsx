@@ -108,13 +108,13 @@ function SignUpScreen(props: any) {
                                     icons={[require('./../../assets/apple-icon.png')]}>
                                 Apple ID
                             </Button>
-                                                <Button
+                            <Button
                                     colors={['white']}
                                     buttonAction={() => {props.pageSwitcher('SignUp')}}
                                     icons={[require('./../../assets/facebook-icon.png')]}>
                                 Facebook account
                             </Button>
-                                                <Button
+                            <Button
                                     colors={['white']}
                                     buttonAction={() => {props.pageSwitcher('SignUp')}}
                                     icons={[require('./../../assets/lock-alt.png')]}>
