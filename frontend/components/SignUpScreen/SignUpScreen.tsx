@@ -35,7 +35,7 @@ function SignUpScreen(props: any) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} scrollEnabled={scroll}>
         <ImageBackground
             source= {require('./../../assets/gradientBackground.png')}
             style={styles.image}
@@ -72,14 +72,18 @@ function SignUpScreen(props: any) {
                                 onChangeText={setLogin} 
                                 placeholder='nazwa użytkownika lub email'
                                 onPressIn={scrollBehaviorChange}
+                                onPressOut={scrollBehaviorChange}
                                 />
                             <TextInput 
                                 style={styles.input} 
                                 value={passwordText} 
                                 secureTextEntry={true}
                                 onChangeText={setPasswordText} 
-                                placeholder='Hasło '/>
-                            
+                                placeholder='Hasło '
+                                onPressIn={scrollBehaviorChange}
+                                onPressOut={scrollBehaviorChange}
+                                />
+
 
                             <Button
                                 colors={['rgb(33,33,43)','rgb(13,13,23)']}
