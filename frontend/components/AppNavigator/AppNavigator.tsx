@@ -6,6 +6,14 @@ import HomeScreen from '../HomeScreen/HomeScreen';
 import SignUpScreen from '../SignUpScreen/SignUpScreen';
 import PageSwitchTemplateProps from '../../types/types';
 
+const linking: any = {
+  config: {
+    screens: {
+      Home: "",
+      SignUp: "signUp"
+    }
+  }
+}
 
 const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, children }) => {
   const pageChanger = (page: string) => {
@@ -31,11 +39,11 @@ const SignUpPage = ({navigation}: any) => {
   );
 }
 
-const Stack = createNativeStackNavigator();
+const Stack: any = createNativeStackNavigator();
 
 function AppNavigator() {
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
        <Stack.Navigator
          screenOptions={{
            headerShown: false
