@@ -3,7 +3,6 @@ import {Animated, Dimensions, KeyboardAvoidingView, ScrollView, TextInput, Touch
 import { View, Text, StyleSheet, ImageBackground, Image, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { useState } from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
 
 
 function SignUpScreen(props: any) {
