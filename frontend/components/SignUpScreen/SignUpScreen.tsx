@@ -3,6 +3,7 @@ import {Animated, Dimensions, KeyboardAvoidingView, ScrollView, TextInput, Touch
 import { View, Text, StyleSheet, ImageBackground, Image, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { useState } from 'react';
+import { StylesVariables } from '../../utils/GLOBALS';
 
 
 function SignUpScreen(props: any) {
@@ -129,12 +130,6 @@ function SignUpScreen(props: any) {
   );
 }
 
-
-const PCRatio = Platform.OS === 'web' ? 0.4 : 1
-const LogoSize = Dimensions.get('window').width*0.10*PCRatio;
-const InputSize = Dimensions.get('window').height*0.07;
-
-
 const styles = StyleSheet.create({
     mainContainer:{
         width:'100%',
@@ -188,8 +183,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     LogoImage:{
-        width:LogoSize,
-        height:LogoSize,        
+        width:StylesVariables.LogoSize,
+        height:StylesVariables.LogoSize,        
         borderRadius:5,
     },
     titleText:{
@@ -233,7 +228,7 @@ const styles = StyleSheet.create({
     loginButton:{
         width:'80%',
         borderRadius:20,
-        height:InputSize,
+        height:StylesVariables.InputSize,
         display: 'flex',
         justifyContent:'center',
         alignItems:'center',
@@ -241,7 +236,7 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: 'white',
         width:'80%',
-        height: InputSize,
+        height: StylesVariables.InputSize,
         borderRadius:20,
         display:'flex',
         flexDirection:'row',

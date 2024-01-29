@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react'
 import { Dimensions, Image, Platform, StyleProp, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StylesVariables } from '../../utils/GLOBALS';
 
 interface ButtonProps {
   buttonAction: () => void,
@@ -33,14 +34,13 @@ function Button({buttonAction, icons, children, colors, fontColor}: ButtonProps)
   )
 }
 
-const PCRatio = Platform.OS === 'web' ? 0.4 : 1
-const LogoSize = Dimensions.get('window').width*0.10*PCRatio;
-const ButtonsSize = Dimensions.get('window').height*0.06;
+
+
 
 const styles = StyleSheet.create({
   button:{
     width:'80%',
-    height: ButtonsSize,
+    height:StylesVariables.ButtonSize,
     borderRadius:20,
     display:'flex',
     flexDirection:'row',
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     justifyContent:'space-around',
   },
   accountServiceIcon:{
-    width:LogoSize*0.6,
-    height:LogoSize*0.6,
+    width: StylesVariables.LogoSize*0.6,
+    height:StylesVariables.LogoSize*0.6,
     margin: 5
 },
 })

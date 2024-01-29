@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import Button from '../Button/Button';
-
+import { StylesVariables } from '../../utils/GLOBALS';
 
 
 function HomeScreen(props: any) {
@@ -55,9 +55,6 @@ function HomeScreen(props: any) {
   );
 }
 
-const PCRatio = Platform.OS === 'web' ? 0.4 : 1
-const LogoSize = Dimensions.get('window').width*0.10*PCRatio;
-
 const styles = StyleSheet.create({
     mainContainer:{
         width:'100%',
@@ -104,8 +101,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     LogoImage:{
-        width:LogoSize,
-        height:LogoSize,        
+        width:StylesVariables.LogoSize,
+        height:StylesVariables.LogoSize,        
         borderRadius:5,
     },
     titleText:{

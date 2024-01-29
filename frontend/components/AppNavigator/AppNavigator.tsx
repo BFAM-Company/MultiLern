@@ -4,19 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from '../HomeScreen/HomeScreen';
 import SignUpScreen from '../SignUpScreen/SignUpScreen';
-import PageSwitchTemplateProps from '../../types/types';
+import {PageSwitchTemplateProps} from '../../types/types';
 import { Platform } from 'react-native';
+import  {linking} from './../../utils/GLOBALS';
 
-
-
-const linking: any = {
-  config: {
-    screens: {
-      Home: "",
-      SignUp: "signUp"
-    }
-  }
-}
 
 const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, children }) => {
   const pageChanger = (page: string) => {
