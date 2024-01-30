@@ -5,7 +5,8 @@ import Button from '../Button/Button';
 import { StylesVariables } from '../../utils/GLOBALS';
 
 
-function HomeScreen(props: any) {
+
+function HomeScreen({pageSwitcher}: any) {
   return (
     <View style={styles.mainContainer}>
         <ImageBackground
@@ -25,7 +26,7 @@ function HomeScreen(props: any) {
                 <View style={styles.buttonsContainer}>
                     <Button
                             colors={['white']}
-                            buttonAction={() => {props.pageSwitcher('SignUp')}}
+                            buttonAction={() => {pageSwitcher('SignUp')}}
                             icons={[require('./../../assets/googleIcon.png'), 
                                     require('./../../assets/apple-icon.png'),
                                     require('./../../assets/facebook-icon.png'),
@@ -35,7 +36,7 @@ function HomeScreen(props: any) {
                     </Button>
                     <Button
                         colors={['white']}
-                        buttonAction={() => {props.pageSwitcher('SignUp')}}
+                        buttonAction={() => {pageSwitcher('SignUp')}}
                         icons={[require('./../../assets/logIn-icon.png')]}
                     >
                         Zaloguj się
@@ -43,7 +44,7 @@ function HomeScreen(props: any) {
                     <Button
                         colors={['rgb(33,33,43)']}
                         fontColor='white'
-                        buttonAction={() => {props.pageSwitcher('SignUp')}}
+                        buttonAction={() => {pageSwitcher('SignUp')}}
                         icons={[require('./../../assets/guest-icon.png')]}
                     >
                         Kontynuj jako gość

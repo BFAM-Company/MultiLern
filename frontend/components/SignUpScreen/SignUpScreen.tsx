@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { StylesVariables } from '../../utils/GLOBALS';
 
 
-function SignUpScreen(props: any) {
+function SignUpScreen({pageSwitcher}: any) {
 	const [login, setLogin] = useState<string | undefined>(undefined)
 	const [passwordText, setPasswordText] = useState<string | undefined>(undefined)
     const [scroll, setScroll] = useState<boolean>(false)
@@ -70,7 +70,7 @@ function SignUpScreen(props: any) {
                                 style={styles.input} 
                                 value={login} 
                                 onChangeText={setLogin} 
-                                placeholder='nazwa użytkownika lub email'
+                                placeholder='Nazwa użytkownika lub email'
                                 onPressIn={scrollBehaviorChange}
                                 onPressOut={scrollBehaviorChange}
                                 />
@@ -87,7 +87,7 @@ function SignUpScreen(props: any) {
 
                             <Button
                                 colors={['rgb(33,33,43)','rgb(13,13,23)']}
-                                buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                buttonAction={() => {pageSwitcher('SignUp')}}
                                 icons={[require('./../../assets/logIn-icon.png')]}
                                 fontColor='white'>
                                 Zaloguj się
@@ -99,25 +99,25 @@ function SignUpScreen(props: any) {
                             </View>
                             <Button
                                 colors={['white']}
-                                buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                buttonAction={() => {pageSwitcher('SignUp')}}
                                 icons={[require('./../../assets/googleIcon.png')]}>
                             Google account
                             </Button>
-                                                <Button
+                             <Button
                                     colors={['white']}
-                                    buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                    buttonAction={() => {pageSwitcher('SignUp')}}
                                     icons={[require('./../../assets/apple-icon.png')]}>
                                 Apple ID
                             </Button>
                             <Button
                                     colors={['white']}
-                                    buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                    buttonAction={() => {pageSwitcher('SignUp')}}
                                     icons={[require('./../../assets/facebook-icon.png')]}>
                                 Facebook account
                             </Button>
                             <Button
                                     colors={['white']}
-                                    buttonAction={() => {props.pageSwitcher('SignUp')}}
+                                    buttonAction={() => {pageSwitcher('SignUp')}}
                                     icons={[require('./../../assets/lock-alt.png')]}>
                                 Utwórz konto w MultiLern
                             </Button>

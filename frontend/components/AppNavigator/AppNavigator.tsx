@@ -4,20 +4,19 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from '../HomeScreen/HomeScreen';
 import SignUpScreen from '../SignUpScreen/SignUpScreen';
-import {PageSwitchTemplateProps} from '../../types/types';
-import { Platform } from 'react-native';
 import  {linking} from './../../utils/GLOBALS';
+import { HomePageProps, PageSwitchTemplateProps, RootStackParamList, SignUpPageProps } from '../../types/types';
 
 
 const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, children }) => {
-  const pageChanger = (page: string) => {
+  const pageChanger = (page: keyof RootStackParamList) => {
     navigation.navigate(page);
   };
 
   return React.cloneElement(children, {pageSwitcher: pageChanger });
 };
 
-const HomePage = ({ navigation }: any) => {
+const HomePage: React.FC<HomePageProps> = ({ navigation }) => {
   return (
     <PageSwitchTamplte navigation={navigation}>
           <HomeScreen/>
@@ -25,7 +24,7 @@ const HomePage = ({ navigation }: any) => {
 
   );
 }
-const SignUpPage = ({navigation}: any) => {
+const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
   return (
     <PageSwitchTamplte navigation={navigation}>
       <SignUpScreen/>
@@ -33,7 +32,7 @@ const SignUpPage = ({navigation}: any) => {
   );
 }
 
-const Stack: any = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
   return (

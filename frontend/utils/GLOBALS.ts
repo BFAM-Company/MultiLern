@@ -15,9 +15,7 @@ export const linking: any = {
 
 
 export const StylesVariables: IStylesVariable = {
-    PCRatio: Platform.OS === 'web' ? 0.4 : 1,
-
-    LogoSize: Dimensions.get('window').width*0.10*(Platform.OS === 'web' ? 0.4 : 1),
+    LogoSize: Dimensions.get('window').width*0.10*(Platform.OS === 'web' ? 0.3 : 1),
 
     ButtonSize: Dimensions.get('window').height*0.06,
 
