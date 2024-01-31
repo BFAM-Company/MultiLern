@@ -5,7 +5,7 @@ export const linking: any = {
     config: {
       screens: {
         Home: "",
-        SignUp: "signUp"
+        LogIn: "login",
       }
     }
   }

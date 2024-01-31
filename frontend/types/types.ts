@@ -4,7 +4,7 @@ import { DimensionValue } from "react-native"
 
 export type RootStackParamList = {
     Home: undefined,
-    SignUp: undefined
+    LogIn: undefined
 }
 
 export interface PageSwitchTemplateProps {
@@ -17,8 +17,8 @@ export interface HomePageProps {
     navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
   }
   
-export interface SignUpPageProps {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
+export interface LogInPageProps {
+    navigation: NativeStackNavigationProp<RootStackParamList, 'LogIn'>;
   }
 
 export interface IStylesVariable{

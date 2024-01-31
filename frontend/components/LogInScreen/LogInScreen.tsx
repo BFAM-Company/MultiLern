@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { StylesVariables } from '../../utils/GLOBALS';
 
 
-function SignUpScreen({pageSwitcher}: any) {
+function LogInScreen({pageSwitcher}: any) {
 	const [login, setLogin] = useState<string | undefined>(undefined)
 	const [passwordText, setPasswordText] = useState<string | undefined>(undefined)
     const [scroll, setScroll] = useState<boolean>(false)
@@ -258,4 +258,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default SignUpScreen;
+export default LogInScreen;

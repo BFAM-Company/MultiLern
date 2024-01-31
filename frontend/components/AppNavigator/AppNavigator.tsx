@@ -3,9 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from '../HomeScreen/HomeScreen';
-import SignUpScreen from '../SignUpScreen/SignUpScreen';
+import LogInScreen from '../LogInScreen/LogInScreen';
 import  {linking} from './../../utils/GLOBALS';
-import { HomePageProps, PageSwitchTemplateProps, RootStackParamList, SignUpPageProps } from '../../types/types';
+import { HomePageProps, PageSwitchTemplateProps, RootStackParamList, LogInPageProps } from '../../types/types';
 
 
 const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, children }) => {
@@ -24,10 +24,10 @@ const HomePage: React.FC<HomePageProps> = ({ navigation }) => {
 
   );
 }
-const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
+const LogInPage: React.FC<LogInPageProps> = ({navigation}) => {
   return (
     <PageSwitchTamplte navigation={navigation}>
-      <SignUpScreen/>
+      <LogInScreen/>
     </PageSwitchTamplte>
   );
 }
@@ -42,9 +42,8 @@ function AppNavigator() {
            headerShown: false
          }}
        >
-        
          <Stack.Screen name="Home" component={HomePage} />
-         <Stack.Screen name="SignUp" component={SignUpPage} />
+         <Stack.Screen name="LogIn" component={LogInPage} />
        </Stack.Navigator>
     </NavigationContainer>
   );

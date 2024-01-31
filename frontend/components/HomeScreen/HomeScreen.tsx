@@ -26,7 +26,7 @@ function HomeScreen({pageSwitcher}: any) {
                 <View style={styles.buttonsContainer}>
                     <Button
                             colors={['white']}
-                            buttonAction={() => {pageSwitcher('SignUp')}}
+                            buttonAction={() => {pageSwitcher('LogIn')}}
                             icons={[require('./../../assets/googleIcon.png'), 
                                     require('./../../assets/apple-icon.png'),
                                     require('./../../assets/facebook-icon.png'),
@@ -36,7 +36,7 @@ function HomeScreen({pageSwitcher}: any) {
                     </Button>
                     <Button
                         colors={['white']}
-                        buttonAction={() => {pageSwitcher('SignUp')}}
+                        buttonAction={() => {pageSwitcher('LogIn')}}
                         icons={[require('./../../assets/logIn-icon.png')]}
                     >
                         Zaloguj się
@@ -44,7 +44,7 @@ function HomeScreen({pageSwitcher}: any) {
                     <Button
                         colors={['rgb(33,33,43)']}
                         fontColor='white'
-                        buttonAction={() => {pageSwitcher('SignUp')}}
+                        buttonAction={() => {pageSwitcher('LogIn')}}
                         icons={[require('./../../assets/guest-icon.png')]}
                     >
                         Kontynuj jako gość
