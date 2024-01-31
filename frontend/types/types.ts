@@ -4,7 +4,8 @@ import { DimensionValue } from "react-native"
 
 export type RootStackParamList = {
     Home: undefined,
-    LogIn: undefined
+    LogIn: undefined,
+    SignUp: undefined
 }
 
 export interface PageSwitchTemplateProps {
@@ -14,12 +15,16 @@ export interface PageSwitchTemplateProps {
 
 
 export interface HomePageProps {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
   }
   
 export interface LogInPageProps {
     navigation: NativeStackNavigationProp<RootStackParamList, 'LogIn'>;
-  }
+}
+
+export interface SignUpPageProps {
+    navigation: NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
+}
 
 export interface IStylesVariable{
     LogoSize:  number

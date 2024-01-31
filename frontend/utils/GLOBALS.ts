@@ -6,14 +6,11 @@ export const linking: any = {
       screens: {
         Home: "",
         LogIn: "login",
+        SignUp: "signup"
       }
     }
   }
   
-
-
-
-
 export const StylesVariables: IStylesVariable = {
     LogoSize: Dimensions.get('window').width*0.10*(Platform.OS === 'web' ? 0.3 : 1),
 
