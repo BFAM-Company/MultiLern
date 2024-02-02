@@ -4,21 +4,19 @@ import { View, Text, ImageBackground, Image, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { useState } from 'react';
 import { styles } from './SignUpScreen.styled';
-
+import { useForm } from 'react-hook-form';
 
 function SignUpScreen({pageSwitcher}: any) {
-  const [username, setUsername] = useState<string | undefined>(undefined)
-	const [email, setEmail] = useState<string | undefined>(undefined)
-	const [passwordText, setPasswordText] = useState<string | undefined>(undefined)
-	const [repeatedPasswordText, setRepeatedPasswordText] = useState<string | undefined>(undefined)
-  // const [scroll, setScroll] = useState<boolean>(false)
+	const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
-    const fadeAnimContainer = React.useRef(new Animated.Value(1)).current;
+	const handleRegistration = (data: any) => console.log(data);
+  const handleError = (errors: any) => {console.log(errors)};
+
+	const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
+	const fadeAnimContainer = React.useRef(new Animated.Value(1)).current;
 
     useEffect(() => {
         fadeIn(fadeAnimHeader, 3000);
-        //fadeIn(fadeAnimContainer, 5000);
       }, []);
 
     const fadeIn = (animVariable: Animated.Value, durationValue: number | undefined) => {
@@ -28,9 +26,6 @@ function SignUpScreen({pageSwitcher}: any) {
         useNativeDriver: true,
         }).start();
     };
-    // const scrollBehaviorChange = () =>{
-    //     setScroll(!scroll)
-    // }
 
   return (
     <KeyboardAvoidingView
@@ -38,7 +33,10 @@ function SignUpScreen({pageSwitcher}: any) {
         style={[styles.mainContainer, {flex:1}]}
     >
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} 
-          // scrollEnabled={scroll}
+          alwaysBounceHorizontal={false}
+          alwaysBounceVertical={false}
+          bounces={false}
+          overScrollMode='never'
           >
         <ImageBackground
             source= {require('./../../assets/gradientBackground.png')}
@@ -69,77 +67,69 @@ function SignUpScreen({pageSwitcher}: any) {
                             opacity: fadeAnimContainer,
                         },
                     ]}>
-                        <View style={styles.buttonsContainer}>
-                            <TextInput 
-                                style={styles.input} 
-                                value={username} 
-                                onChangeText={setUsername} 
-                                placeholder='Podaj nazwę użytkownika'
-                                // onPressIn={scrollBehaviorChange}
-                                // onPressOut={scrollBehaviorChange}
-                                />
-                            <TextInput 
-                                style={styles.input} 
-                                value={email} 
-                                onChangeText={setEmail} 
-                                placeholder='Podaj email'
-                                // onPressIn={scrollBehaviorChange}
-                                // onPressOut={scrollBehaviorChange}
-                                />
-                            <TextInput 
-                                style={styles.input} 
-                                value={passwordText} 
-                                secureTextEntry={true}
-                                onChangeText={setPasswordText} 
-                                placeholder='Hasło '
-                                // onPressIn={scrollBehaviorChange}
-                                // onPressOut={scrollBehaviorChange}
-                                />
-                            <TextInput 
-                                style={styles.input} 
-                                value={repeatedPasswordText} 
-                                secureTextEntry={true}
-                                onChangeText={setPasswordText} 
-                                placeholder='Powtórz hasło '
-                                // onPressIn={scrollBehaviorChange}
-                                // onPressOut={scrollBehaviorChange}
-                                />
-                            <Button
-                                colors={['rgb(33,33,43)','rgb(13,13,23)']}
-                                buttonAction={() => {pageSwitcher('SignUp')}}
-                                icons={[require('./../../assets/logIn-icon.png')]}
-                                fontColor='white'>
-                                Zarejestruj się
-                            </Button>
-                            
+                        <View style={styles.mainContentContainer}>
+                            <View style={styles.formContainer}>
+                                <TextInput 
+                                    style={styles.input} 
+                                    placeholder='Podaj nazwę użytkownika'
+																		{...register('username')}
+                                    />
+                                <TextInput 
+                                    style={styles.input} 
+                                    placeholder='Podaj email'
+																		{...register('email')}
+                                    />
+                                <TextInput 
+                                    style={styles.input} 
+                                    secureTextEntry={true}
+                                    placeholder='Podaj hasło '
+																		{...register('password')}
+                                    />
+                                <TextInput 
+                                    style={styles.input} 
+                                    secureTextEntry={true}
+                                    placeholder='Powtórz hasło '
+																		{...register('repeatedPassword')}
+                                    />
+                                <Button
+                                    colors={['rgb(33,33,43)','rgb(13,13,23)']}
+                                    buttonAction={() => {handleSubmit(handleRegistration)}}
+                                    icons={[require('./../../assets/logIn-icon.png')]}
+                                    fontColor='white'>
+                                    Zarejestruj się
+                                </Button>
+                            </View>
 
                             <View style={styles.ORTextContainer}>
                                 <Text style={styles.mainText}>~ LUB UŻYJ ~</Text>
                             </View>
-                            <Button
-                                colors={['white']}
-                                buttonAction={() => {pageSwitcher('SignUp')}}
-                                icons={[require('./../../assets/googleIcon.png')]}>
-                            Google account
-                            </Button>
-                             <Button
+
+                            <View style={styles.buttonsContainer}>                            
+                                <Button
                                     colors={['white']}
                                     buttonAction={() => {pageSwitcher('SignUp')}}
-                                    icons={[require('./../../assets/apple-icon.png')]}>
-                                Apple ID
-                            </Button>
-                            <Button
-                                    colors={['white']}
-                                    buttonAction={() => {pageSwitcher('SignUp')}}
-                                    icons={[require('./../../assets/facebook-icon.png')]}>
-                                Facebook account
-                            </Button>
-                            <Button
-                                    colors={['white']}
-                                    buttonAction={() => {pageSwitcher('SignUp')}}
-                                    icons={[require('./../../assets/lock-alt.png')]}>
-                                Utwórz konto w MultiLern
-                            </Button>
+                                    icons={[require('./../../assets/googleIcon.png')]}>
+                                Google account
+                                </Button>
+                                <Button
+                                        colors={['white']}
+                                        buttonAction={() => {pageSwitcher('SignUp')}}
+                                        icons={[require('./../../assets/apple-icon.png')]}>
+                                    Apple ID
+                                </Button>
+                                <Button
+                                        colors={['white']}
+                                        buttonAction={() => {pageSwitcher('SignUp')}}
+                                        icons={[require('./../../assets/facebook-icon.png')]}>
+                                    Facebook account
+                                </Button>
+                                <Button
+                                        colors={['white']}
+                                        buttonAction={() => {pageSwitcher('SignUp')}}
+                                        icons={[require('./../../assets/lock-alt.png')]}>
+                                    Utwórz konto w MultiLern
+                                </Button>
+                            </View>
                         </View>
                 </Animated.View>
             </View>

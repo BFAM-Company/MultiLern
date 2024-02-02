@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react'
-import { Dimensions, Image, Platform, StyleProp, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { StylesVariables } from '../../utils/GLOBALS';
 
 interface ButtonProps {
@@ -18,7 +18,7 @@ function Button({buttonAction, icons, children, colors, fontColor}: ButtonProps)
   }
 
   return (
-    <TouchableOpacity style={styles.button} onPress = {buttonAction}>
+    <TouchableOpacity style={[styles.button]} onPress = {buttonAction}>
       <LinearGradient
       colors={colors}
       style={styles.gradient}
