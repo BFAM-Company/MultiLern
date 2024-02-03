@@ -6,7 +6,6 @@ interface ExamsSectionProps{
     pageSwitcher: any
 }
 
-
 function ExamsSection({pageSwitcher}: ExamsSectionProps) {
   return (
     <Animated.View
