@@ -23,17 +23,16 @@ function BoxCarousel({pageSwitcher}: any) {
                 Najlepsze rozwiązania zadań. Wszystkie podręcziki i 
                 sprawdzone odpowiedzi przez ekspertów i specjalną sztuczną inteligencję
             </FeatureBox>
-            <FeatureBox buttonAction={()=>{pageSwitcher('main')}} title={'Rozwiązania Zadań'} buttonText={'Zobacz'} imageSource={IMAGES.ImageBackground2}>
-                Najlepsze rozwiązania zadań. Wszystkie podręcziki i 
-                sprawdzone odpowiedzi przez ekspertów i specjalną sztuczną inteligencję
+            <FeatureBox buttonAction={()=>{pageSwitcher('main')}} title={'Nowoczesne Sposoby Nauki'} buttonText={'Zobacz'} imageSource={IMAGES.ImageBackground2}>
+                Już dziś zacznij korzystać z nowoczesnych technik nauki i pomocy naukowych. 
+                Fiszki, notatki to tylko część dostępnych narzędzi
             </FeatureBox>
-            <FeatureBox buttonAction={()=>{pageSwitcher('main')}} title={'Rozwiązania Zadań'} buttonText={'Zobacz'} imageSource={IMAGES.ImageBackground3}>
-                Najlepsze rozwiązania zadań. Wszystkie podręcziki i 
-                sprawdzone odpowiedzi przez ekspertów i specjalną sztuczną inteligencję
+            <FeatureBox buttonAction={()=>{pageSwitcher('main')}} title={'Baza Sprawdzianów'} buttonText={'Zobacz'} imageSource={IMAGES.ImageBackground3}>
+                Największa baza sprawdzianów, z różnych szkół, nauczycieli i poziomów nauczania. 
+                Sprawdź czy mamy coś co może Ci pomóc
             </FeatureBox>
-            <FeatureBox buttonAction={()=>{pageSwitcher('main')}} title={'Rozwiązania Zadań'} buttonText={'Zobacz'} imageSource={IMAGES.ImageBackground4}>
-                Najlepsze rozwiązania zadań. Wszystkie podręcziki i 
-                sprawdzone odpowiedzi przez ekspertów i specjalną sztuczną inteligencję
+            <FeatureBox buttonAction={()=>{pageSwitcher('main')}} title={'Korepetycje'} buttonText={'Zobacz'} imageSource={IMAGES.ImageBackground4}>
+                Znajdź osoby chętne do pomocy z całej Polski. Umów spotakania za pośrednictwem naszego chatu. Daj sobie pomóc!
             </FeatureBox>
         </ScrollView>
     </View>
