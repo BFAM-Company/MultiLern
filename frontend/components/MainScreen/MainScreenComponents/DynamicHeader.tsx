@@ -1,11 +1,7 @@
 import React from 'react';
-import { Animated, Dimensions } from 'react-native';
-import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
+import { Animated } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import SearchBar from './SearchBar';
-import Navbar from './Navbar';
-
-
-
 
 function DynamicHeader({pageSwitcher}: any) {
   return (
