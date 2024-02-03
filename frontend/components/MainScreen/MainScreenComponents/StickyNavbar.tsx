@@ -1,8 +1,6 @@
 import React from 'react';
 import { Animated, Dimensions } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
-import SearchBar from './SearchBar';
-import Navbar from './Navbar';
 import NotificationDot from './NotificationDot';
 
 
