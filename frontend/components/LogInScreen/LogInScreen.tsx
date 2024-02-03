@@ -9,7 +9,6 @@ import { StylesVariables } from '../../utils/GLOBALS';
 function LogInScreen({pageSwitcher}: any) {
 	const [login, setLogin] = useState<string | undefined>(undefined)
 	const [passwordText, setPasswordText] = useState<string | undefined>(undefined)
-    const [scroll, setScroll] = useState<boolean>(false)
 
     const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
     const fadeAnimContainer = React.useRef(new Animated.Value(1)).current;
@@ -26,16 +25,19 @@ function LogInScreen({pageSwitcher}: any) {
         useNativeDriver: true,
         }).start();
     };
-    const scrollBehaviorChange = () =>{
-        setScroll(!scroll)
-    }
 
   return (
     <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }} scrollEnabled={scroll}>
+        <ScrollView 
+            contentContainerStyle={{ flexGrow: 1 }}
+            alwaysBounceHorizontal={false}
+            alwaysBounceVertical={false}
+            bounces={false}
+            overScrollMode='never'
+        >
         <ImageBackground
             source= {require('./../../assets/gradientBackground.png')}
             style={styles.image}
@@ -71,8 +73,6 @@ function LogInScreen({pageSwitcher}: any) {
                                 value={login} 
                                 onChangeText={setLogin} 
                                 placeholder='Nazwa użytkownika lub email'
-                                onPressIn={scrollBehaviorChange}
-                                onPressOut={scrollBehaviorChange}
                                 />
                             <TextInput 
                                 style={styles.input} 
@@ -80,8 +80,6 @@ function LogInScreen({pageSwitcher}: any) {
                                 secureTextEntry={true}
                                 onChangeText={setPasswordText} 
                                 placeholder='Hasło '
-                                onPressIn={scrollBehaviorChange}
-                                onPressOut={scrollBehaviorChange}
                                 />
 
 

@@ -68,6 +68,7 @@ export const styles = StyleSheet.create({
       width:'100%',
       display:'flex',
       alignItems:'center',
+      marginBottom: 10
   },
   mainText:{
       width:'90%',
@@ -76,13 +77,7 @@ export const styles = StyleSheet.create({
       color:'gray',
       textAlign:'center',
   },
-  ORTextContainer: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    margin: 20
-  },
-  buttonsContainer:{
+  mainContentContainer:{
       ...Platform.select({
           web: {
               width: '50%'
@@ -97,6 +92,28 @@ export const styles = StyleSheet.create({
       alignItems:'center',
       margin:10,
   },
+  formContainer: {
+    width: '100%', 
+    display: 'flex',
+    margin: 10, 
+    justifyContent:'space-around',
+    alignItems:'center',
+    height: '55%'
+  },
+  ORTextContainer: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    margin: 20
+  },
+  buttonsContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent:'space-around',
+    alignItems:'center',
+    height: '40%',
+    margin: 10
+  },
   input: {
       backgroundColor: 'white',
       width:'80%',
@@ -106,7 +123,7 @@ export const styles = StyleSheet.create({
       flexDirection:'row',
       justifyContent:'space-between',
       alignItems:'center',
-      margin:25,
+      margin:20,
       paddingLeft:40,
       paddingRight:40,
       shadowColor: "#000",
