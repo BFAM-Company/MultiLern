@@ -44,7 +44,7 @@ function HomeScreen({pageSwitcher}: any) {
                     <Button
                         colors={['rgb(33,33,43)']}
                         fontColor='white'
-                        buttonAction={() => {pageSwitcher('LogIn')}}
+                        buttonAction={() => {pageSwitcher('Main')}}
                         icons={[require('./../../assets/guest-icon.png')]}
                     >
                         Kontynuj jako gość

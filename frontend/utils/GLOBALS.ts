@@ -6,7 +6,8 @@ export const linking: any = {
       screens: {
         Home: "",
         LogIn: "login",
-        SignUp: "signup"
+        SignUp: "signup",
+        Main: "home"
       }
     }
   }

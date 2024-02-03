@@ -5,7 +5,8 @@ import { DimensionValue } from "react-native"
 export type RootStackParamList = {
     Home: undefined,
     LogIn: undefined,
-    SignUp: undefined
+    SignUp: undefined,
+    Main: undefined
 }
 
 export interface PageSwitchTemplateProps {
