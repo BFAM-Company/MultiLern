@@ -1,16 +1,33 @@
-import React, { useEffect } from 'react';
-import {Animated, KeyboardAvoidingView, ScrollView, TextInput } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {Alert, Animated, KeyboardAvoidingView, Modal, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, ImageBackground, Image, Platform } from 'react-native';
 import Button from '../Button/Button';
-import { useState } from 'react';
 import { styles } from './SignUpScreen.styled';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+
+type FormData = {
+	username: string,
+	email: string,
+	password: string,
+	repeatedPassword: string
+}
 
 function SignUpScreen({pageSwitcher}: any) {
-	const { register, handleSubmit, formState: { errors } } = useForm();
+	const [modalVisibility, setModalVisibility] = useState(false)
 
-	const handleRegistration = (data: any) => console.log(data);
-  const handleError = (errors: any) => {console.log(errors)};
+	const {handleSubmit, watch, control, formState: {errors}} = useForm<FormData>({
+		defaultValues: {
+			username: "",
+			email: "",
+			password: "",
+			repeatedPassword: ""
+		}
+	});
+
+	const onSubmit = (data: FormData) => {
+    console.log(data);
+  };
 
 	const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
 	const fadeAnimContainer = React.useRef(new Animated.Value(1)).current;
@@ -32,12 +49,59 @@ function SignUpScreen({pageSwitcher}: any) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }} 
+				<Modal
+					animationType='slide'
+					transparent={true}
+					visible={modalVisibility}
+					onRequestClose={() => {
+						setModalVisibility(!modalVisibility)
+					}}
+				>
+					<TouchableOpacity
+					style={{
+							width: '100%',
+							height: '100%',
+							//@ts-ignore
+							cursor: 'default'
+						}}
+						onPress={() => setModalVisibility(false)}
+						activeOpacity={1}
+					>
+					<View style={styles.centeredViewModal}>
+						<View style={styles.modalView}>
+							<ErrorMessage
+								errors={errors}
+								name='username'
+								render={({message}) => <Text style={styles.errorMessage}>⚠ {message}</Text>}
+							/>
+							<ErrorMessage
+								errors={errors}
+								name='email'
+								render={({message}) => <Text style={styles.errorMessage}>⚠ {message}</Text>}
+							/>
+							<ErrorMessage
+								errors={errors}
+								name='password'
+								render={({message}) => <Text style={styles.errorMessage}>⚠ {message}</Text>}
+							/>
+							<ErrorMessage
+								errors={errors}
+								name='repeatedPassword'
+								render={({message}) => <Text style={styles.errorMessage}>⚠ {message}</Text>}
+							/>
+						</View>
+					</View>
+					</TouchableOpacity>
+
+
+				</Modal>
+				<ScrollView contentContainerStyle={{ flexGrow: 1 }} 
           alwaysBounceHorizontal={false}
           alwaysBounceVertical={false}
           bounces={false}
           overScrollMode='never'
           >
+						
         <ImageBackground
             source= {require('./../../assets/gradientBackground.png')}
             style={styles.image}
@@ -68,38 +132,83 @@ function SignUpScreen({pageSwitcher}: any) {
                         },
                     ]}>
                         <View style={styles.mainContentContainer}>
+													
                             <View style={styles.formContainer}>
-                                <TextInput 
-                                    style={styles.input} 
-                                    placeholder='Podaj nazwę użytkownika'
-																		{...register('username')}
+																<Controller
+																	name='username'
+																	control={control}
+																	render={({field: {onChange, onBlur, value}}) => (
+																		<TextInput 
+																			style={styles.input} 
+																			placeholder='Podaj nazwę użytkownika'
+																			onBlur={onBlur}
+																			onChangeText={onChange}
+																			value={value}
                                     />
-                                <TextInput 
-                                    style={styles.input} 
-                                    placeholder='Podaj email'
-																		{...register('email')}
+																	)}
+																	rules={{required: "Nazwa uzytkownika jest wymagana",}}
+																	/>
+																<Controller
+																	name='email'
+																	control={control}
+																	render={({field: {onChange, onBlur, value}}) => (
+																		<TextInput 
+																			style={styles.input} 
+																			placeholder='Podaj email'
+																			onBlur={onBlur}
+																			onChangeText={onChange}
+																			value={value}
                                     />
-                                <TextInput 
-                                    style={styles.input} 
-                                    secureTextEntry={true}
-                                    placeholder='Podaj hasło '
-																		{...register('password')}
-                                    />
-                                <TextInput 
-                                    style={styles.input} 
-                                    secureTextEntry={true}
-                                    placeholder='Powtórz hasło '
-																		{...register('repeatedPassword')}
-                                    />
+																	)}
+																	rules={{
+																		required: "Email jest wymagany",
+																		pattern: {
+																			value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+																			message: "Email jest niepoprawny"
+																		} }}
+																	/>
+																
+																<Controller
+																	name='password'
+																	control={control}
+																	render={({field: {onChange, onBlur, value}}) => (
+																		<TextInput 
+																			style={styles.input} 
+																			secureTextEntry={true}
+																			placeholder='Podaj hasło '
+																			onBlur={onBlur}
+																			onChangeText={onChange}
+																			value={value}
+																			/>
+																		)}
+																	rules={{required: "Hasło jest wymagane",}}
+																	/>
+																	<Controller
+																		name='repeatedPassword'
+																		control={control}
+																		render={({field: {onChange, onBlur, value}}) => (
+																			<TextInput
+																				style={styles.input} 
+																				secureTextEntry={true}
+																				placeholder='Powtórz hasło '
+																				onBlur={onBlur}
+																				onChangeText={onChange}
+																				value={value}
+																			/>
+																		)}
+																		rules={{
+																			required: "Musisz podać ponownie hasło",
+																			validate: (value) => value === watch('password') || 'Hasła muszą być identyczne'
+																		}}
+																	/>
                                 <Button
                                     colors={['rgb(33,33,43)','rgb(13,13,23)']}
-                                    buttonAction={() => {handleSubmit(handleRegistration)}}
+                                    buttonAction={handleSubmit(onSubmit, () => setModalVisibility(true))}
                                     icons={[require('./../../assets/logIn-icon.png')]}
                                     fontColor='white'>
                                     Zarejestruj się
                                 </Button>
                             </View>
-
                             <View style={styles.ORTextContainer}>
                                 <Text style={styles.mainText}>~ LUB UŻYJ ~</Text>
                             </View>
