@@ -2,6 +2,31 @@ import { StyleSheet, Platform } from "react-native";
 import { StylesVariables } from "../../utils/GLOBALS";
 
 export const styles = StyleSheet.create({
+	centeredViewModal: {
+			flex: 1,
+			justifyContent: 'flex-end',
+			alignItems: 'center',
+			marginBottom: 10,
+	},
+	modalView: {
+			margin: 20,
+			backgroundColor: 'white',
+			borderRadius: 20,
+			padding: 25,
+			alignItems: 'center',
+			shadowColor: '#000',
+			shadowOffset: {
+					width: 0,
+					height: 2,
+			},
+			shadowOpacity: 0.25,
+			shadowRadius: 4,
+			elevation: 5, 
+	},
+	errorMessage: {
+		color: '#bf1650',
+		margin: 4
+	},
   mainContainer:{
       width:'100%',
       height:'100%',
@@ -80,7 +105,8 @@ export const styles = StyleSheet.create({
   mainContentContainer:{
       ...Platform.select({
           web: {
-              width: '50%'
+              width: '85%',
+              flexDirection: 'row',
           },
           default: {
               width: '100%'
@@ -93,26 +119,47 @@ export const styles = StyleSheet.create({
       margin:10,
   },
   formContainer: {
-    width: '100%', 
+    ...Platform.select({
+        web: {
+            width: '42.5%',
+            height: '100%',
+
+        },
+        default: {
+            width: '100%',
+            height: '55%',
+        }
+    }),
     display: 'flex',
-    margin: 10, 
     justifyContent:'space-around',
     alignItems:'center',
-    height: '55%'
   },
   ORTextContainer: {
-    width: '100%',
+    ...Platform.select({
+        web: {
+            width: '15%',
+        },
+        default: {
+            width: '100%'
+        }
+    }),
     display: 'flex',
     alignItems: 'center',
     margin: 20
   },
   buttonsContainer: {
-    width: '100%',
+    ...Platform.select({
+        web: {
+            width: '42.5%',
+        },
+        default: {
+            width: '100%'
+        }
+    }),
     display: 'flex',
     justifyContent:'space-around',
     alignItems:'center',
     height: '40%',
-    margin: 10
   },
   input: {
       backgroundColor: 'white',
@@ -123,7 +170,14 @@ export const styles = StyleSheet.create({
       flexDirection:'row',
       justifyContent:'space-between',
       alignItems:'center',
-      margin:20,
+      ...Platform.select({
+        web: {
+            margin:10,
+        },
+        default: {
+            margin:20,
+        }
+    }),
       paddingLeft:40,
       paddingRight:40,
       shadowColor: "#000",

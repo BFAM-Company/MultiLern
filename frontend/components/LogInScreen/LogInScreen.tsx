@@ -167,8 +167,8 @@ const styles = StyleSheet.create({
 								width: '75%'
             },
             default: {
-								width:'100%',	
-								justifyContent: 'flex-end',
+                width:'100%',	
+                justifyContent: 'flex-end',
                 marginBottom:20,
             }
         }),
