@@ -1,5 +1,15 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/MPLUSRounded1c-ExtraBold.ttf"
+          ]
+        }
+      ]
+    ],
     "name": "frontend",
     "slug": "frontend",
     "version": "1.0.0",
