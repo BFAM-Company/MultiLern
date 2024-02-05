@@ -7,6 +7,7 @@ import LogInScreen from '../LogInScreen/LogInScreen';
 import  {linking} from './../../utils/GLOBALS';
 import { HomePageProps, PageSwitchTemplateProps, RootStackParamList, LogInPageProps } from '../../types/types';
 import SignUpScreen from '../SignUpScreen/SignUpScreen';
+import MainScreen from '../MainScreen/MainScreen';
 
 
 const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, children }) => {
@@ -42,6 +43,14 @@ const SignUpPage: React.FC<LogInPageProps> = ({navigation}) => {
   );
 }
 
+const MainPage: React.FC<LogInPageProps> = ({navigation}) => {
+  return (
+    <PageSwitchTamplte navigation={navigation}>
+      <MainScreen/>
+    </PageSwitchTamplte>
+  );
+}
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
@@ -54,7 +63,8 @@ function AppNavigator() {
        >
          <Stack.Screen name="Home" component={HomePage} />
          <Stack.Screen name="LogIn" component={LogInPage} />
-         <Stack.Screen name="SignUp" component={SignUpScreen} />
+         <Stack.Screen name="SignUp" component={SignUpPage} />
+         <Stack.Screen name="Main" component={MainPage} />
        </Stack.Navigator>
     </NavigationContainer>
   );
