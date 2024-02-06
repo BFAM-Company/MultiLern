@@ -3,7 +3,11 @@ import { Animated } from 'react-native';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import SearchBar from './SearchBar';
 
-function DynamicHeader({pageSwitcher}: any) {
+interface DynamicHeaderProps{
+    pageSwitcher: ()=>void
+}       
+
+function DynamicHeader({pageSwitcher}: DynamicHeaderProps) {
   return (
     <Animated.View 
         style={styles.fixedContainer}

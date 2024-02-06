@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Animated, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import { StylesVariables } from '../../utils/GLOBALS';
@@ -9,23 +9,35 @@ import NotepadSection from './MainScreenComponents/NotepadSection';
 import FlashcardsSection from './MainScreenComponents/FlashcardsSection';
 import SubjectsSection from './MainScreenComponents/SubjectsSection';
 import ExamsSection from './MainScreenComponents/ExamsSection';
+import UserModal from './MainScreenComponents/UserModal';
 
 
 
 function MainScreen({pageSwitcher}: any) {
     const scrollY  = useRef(new Animated.Value(0)).current;
+    const [userModalVisible, setUserModalVisible] = useState<boolean>(false)
 
     const translateY = scrollY.interpolate({
-        inputRange: [0, 100], // Zakres, w którym chcesz zastosować animację
-        outputRange: [0, -50], // Przesunięcie elementu w górę
+        inputRange: [0, 100], 
+        outputRange: [0, -50], 
         extrapolate: 'clamp',
     })
+
+    const modalShowHandler = () =>{
+        setUserModalVisible(true)
+        console.log(userModalVisible)
+    }
+    const modalHideHandler = () =>{
+        setUserModalVisible(false)
+        console.log(userModalVisible)
+    }
 
   return (
     <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
+        <UserModal isVisible={userModalVisible} hideHandler={modalHideHandler} buttonAction={pageSwitcher}/>
         <ImageBackground
                 source= {require('./../../assets/gradientBoobles.png')}
                 style={styles.fixedContainerBgc}
@@ -49,7 +61,7 @@ function MainScreen({pageSwitcher}: any) {
                 stickyHeaderIndices={[0]}
                 showsVerticalScrollIndicator={false}
             >
-                <StickyNavbar />
+                <StickyNavbar modalHandler={()=>{modalShowHandler()}}/>
                 <View style={styles.contentContainer}>
                     <View style={{width:100, height:3, backgroundColor:'lightgray', marginTop:5, marginBottom:150}}></View>
                     <BoxCarousel />
@@ -73,7 +85,7 @@ function MainScreen({pageSwitcher}: any) {
                 //height: translateY, // Ustawienia animacji wysokości, jeśli używasz interpolacji
                 }}
             >
-                <DynamicHeader/>
+                <DynamicHeader pageSwitcher={pageSwitcher}/>
             </Animated.View>
         </ImageBackground>
     </KeyboardAvoidingView>
