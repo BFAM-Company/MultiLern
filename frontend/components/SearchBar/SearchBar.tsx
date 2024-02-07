@@ -1,22 +1,26 @@
-import React from 'react';
-import { Animated, Dimensions, TextInput } from 'react-native';
-import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { Pressable, TextInput, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
+import Button from '../Button/Button';
 
+function SearchBar({pageSwitcher, setModalVisibility}: any) {
+  const [searchedText, setSearchedText] = useState<string>('')
 
-
-
-function SearchBar({pageSwitcher}: any) {
   return (
     <View style={styles.mainContainer}>
         <TextInput 
             style={styles.TextInput}
             placeholder='wyszukaj zadania...'
+						defaultValue={searchedText}
+						onChangeText={newText => setSearchedText(newText)}
         />
         <View style={styles.iconContainer}>
-            <Image 
-                source={require('./../../../assets/search-icon.png')}
-                style={styles.icon}
-            />
+            <TouchableOpacity onPress={() => {setModalVisibility(false);pageSwitcher('Excercises', {searchableText: searchedText})}}>
+                <Image 
+                    source={require('./../../assets/search-icon.png')}
+                    style={styles.icon}
+                />
+            </TouchableOpacity>
         </View>
     </View>
   );
@@ -65,7 +69,16 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         paddingLeft:10,
         borderRadius:20,
-    }
+    },
+    // button: {
+    //     backgroundColor: 'none',
+    //     color: 'inherit',
+    //     // border: 'none',
+    //     elevation: 0,
+    //     borderRadius: 0,
+    //     padding: 0,
+    //     // font: 'inherit',
+    // }
 })
 
 
