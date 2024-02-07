@@ -10,12 +10,14 @@ import FlashcardsSection from './MainScreenComponents/FlashcardsSection';
 import SubjectsSection from './MainScreenComponents/SubjectsSection';
 import ExamsSection from './MainScreenComponents/ExamsSection';
 import UserModal from './MainScreenComponents/UserModal';
+import NotificationModal from './MainScreenComponents/NotificationModal';
 
 
 
 function MainScreen({pageSwitcher}: any) {
     const scrollY  = useRef(new Animated.Value(0)).current;
     const [userModalVisible, setUserModalVisible] = useState<boolean>(false)
+    const [notiModalVisible, setNotiModalVisible] = useState<boolean>(false)
 
     const translateY = scrollY.interpolate({
         inputRange: [0, 100], 
@@ -23,13 +25,28 @@ function MainScreen({pageSwitcher}: any) {
         extrapolate: 'clamp',
     })
 
-    const modalShowHandler = () =>{
+    const userModalShowHandler = () =>{
         setUserModalVisible(true)
         console.log(userModalVisible)
     }
-    const modalHideHandler = () =>{
+    const userModalHideHandler = () =>{
         setUserModalVisible(false)
         console.log(userModalVisible)
+    }
+
+    const notificationModalShowHandler = () =>{
+        setNotiModalVisible(true)
+        console.log(userModalVisible)
+    }
+    const notificationModalHideHandler = () =>{
+        setNotiModalVisible(false)
+        console.log(userModalVisible)
+    }
+
+    const user ={
+        username: 'Johny123',
+        email:'john.smith@example.com',
+        avatar: require('./../../assets/demo-user-icon.png')
     }
 
   return (
@@ -37,7 +54,8 @@ function MainScreen({pageSwitcher}: any) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
-        <UserModal isVisible={userModalVisible} hideHandler={modalHideHandler} buttonAction={pageSwitcher}/>
+        <UserModal isVisible={userModalVisible} hideHandler={userModalHideHandler} user={user} buttonAction={pageSwitcher}/>
+        <NotificationModal isVisible={notiModalVisible} hideHandler={notificationModalHideHandler} user={user} buttonAction={pageSwitcher}/>
         <ImageBackground
                 source= {require('./../../assets/gradientBoobles.png')}
                 style={styles.fixedContainerBgc}
@@ -61,7 +79,7 @@ function MainScreen({pageSwitcher}: any) {
                 stickyHeaderIndices={[0]}
                 showsVerticalScrollIndicator={false}
             >
-                <StickyNavbar modalHandler={()=>{modalShowHandler()}}/>
+                <StickyNavbar userModalHandler={()=>{userModalShowHandler()}} notificationModalHandler={()=>{notificationModalShowHandler()}} />
                 <View style={styles.contentContainer}>
                     <View style={{width:100, height:3, backgroundColor:'lightgray', marginTop:5, marginBottom:150}}></View>
                     <BoxCarousel />

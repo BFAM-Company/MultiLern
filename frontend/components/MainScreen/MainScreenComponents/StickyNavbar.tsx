@@ -4,11 +4,12 @@ import { View, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } 
 import NotificationDot from './NotificationDot';
 
 interface StickyNavbarProps{
-    modalHandler: ()=>void
+    userModalHandler: ()=>void
+    notificationModalHandler: ()=>void
 }
 
 
-function StickyNavbar({modalHandler}: StickyNavbarProps) {
+function StickyNavbar({userModalHandler, notificationModalHandler}: StickyNavbarProps) {
   return (
     <Animated.View
         style={styles.mainContainer}
@@ -16,7 +17,7 @@ function StickyNavbar({modalHandler}: StickyNavbarProps) {
         <View style={[styles.shadowContainer, styles.shadow]}>
         <TouchableOpacity
             style={[styles.button, styles.shadow]}
-            onPress={modalHandler}
+            onPress={userModalHandler}
         >
             <Image
                 source={require('./../../../assets/demo-user-icon.png')}
@@ -25,6 +26,7 @@ function StickyNavbar({modalHandler}: StickyNavbarProps) {
         </TouchableOpacity>
         <TouchableOpacity
             style={styles.button}
+            onPress={notificationModalHandler}
         >
             <Image
                 source={require('./../../../assets/notification-icon.png')}
