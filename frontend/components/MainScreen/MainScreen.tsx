@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Animated, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Animated, KeyboardAvoidingView } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import { StylesVariables } from '../../utils/GLOBALS';
 import DynamicHeader from './MainScreenComponents/DynamicHeader';
@@ -73,7 +73,7 @@ function MainScreen({pageSwitcher}: any) {
                 //height: translateY, // Ustawienia animacji wysokości, jeśli używasz interpolacji
                 }}
             >
-                <DynamicHeader/>
+                <DynamicHeader pageSwitcher={pageSwitcher}/>
             </Animated.View>
         </ImageBackground>
     </KeyboardAvoidingView>

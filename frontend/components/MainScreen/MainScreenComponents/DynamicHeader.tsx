@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated } from 'react-native';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import SearchBar from './SearchBar';
+import SearchBar from '../../SearchBar/SearchBar';
 
 function DynamicHeader({pageSwitcher}: any) {
   return (
@@ -12,7 +12,7 @@ function DynamicHeader({pageSwitcher}: any) {
                 <Image source={require('./../../../assets/multilern-logo.png')} style={styles.LogoImage}/>
                 <Text style={styles.titleText}>MultiLern</Text>
             </View>
-            <SearchBar/>            
+            <SearchBar pageSwitcher={pageSwitcher}/>            
     </Animated.View>
   );
 }
