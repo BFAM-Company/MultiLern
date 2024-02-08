@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, KeyboardAvoidingView, Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Image, KeyboardAvoidingView, Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
 import Modal from 'react-native-modal'
 import SearchBar from '../SearchBar/SearchBar'
 function Footer({pageSwitcher}: any) {
@@ -7,14 +7,21 @@ function Footer({pageSwitcher}: any) {
 
   return (
     <View style={styles.footerContainer}>
-        <Modal style={styles.modal} isVisible={modalVisibility} onBackdropPress={() => setModalVisibility(false)}>
-          <KeyboardAvoidingView
+
+        <Modal 
+          deviceWidth={Dimensions.get("window").width} 
+          style={styles.modal} 
+          isVisible={modalVisibility} 
+          onBackdropPress={() => setModalVisibility(false)}>
+          <KeyboardAvoidingView 
             behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={{flex:1}}
+            style={{display: 'flex',alignItems: 'center', width: 200}}
           >
-            <SearchBar setModalVisibility={setModalVisibility} pageSwitcher={pageSwitcher}/>
+            <SearchBar modalVisibility={modalVisibility} setModalVisibility={setModalVisibility} pageSwitcher={pageSwitcher}/>
           </KeyboardAvoidingView>
         </Modal>
+
+
         <View style={[styles.shadowContainer, styles.shadow]}>
         <TouchableOpacity style={[styles.button]}>
           <Image
@@ -50,12 +57,12 @@ function Footer({pageSwitcher}: any) {
 
 const styles = StyleSheet.create({
   modal: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
+    width:'100%',
+    height:'100%',
+    margin:0,
+    display:'flex',
+    alignItems:'center',  
+    flex: 1   
   },
   footerContainer:{
     position:'absolute',
@@ -67,7 +74,9 @@ const styles = StyleSheet.create({
     marginBottom: -10,
     borderTopLeftRadius:20,
     borderTopRightRadius:20,
-    overflow:'hidden',
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
     paddingBottom:-5,
   },
   shadowContainer:{
