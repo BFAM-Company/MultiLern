@@ -56,6 +56,17 @@ function NotificationModal({buttonAction, hideHandler, isVisible, user}: Notific
         swipeDirection="left"
         >
         <View style={styles.mainModalContainer}>
+          <View style={styles.closeButtonContainer}>
+            <TouchableOpacity
+              onPress={()=>{hideHandler()}}
+              style={styles.closeButton}
+            >
+              <Image 
+                source={require('./../../../assets/close-icon-bold.png')}
+                style={styles.closeButtonIcon}
+              />
+            </TouchableOpacity>
+          </View>
           <View style={styles.buttonsContainer}>
             <Notification content={'Wyszukaj'} icon={require('./../../../assets/search-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
             <Notification content={'Twoje Zadania'} icon={require('./../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
@@ -76,7 +87,7 @@ const styles = StyleSheet.create({
         alignItems:'flex-end',        
     },
     mainModalContainer:{
-        width:"70%",
+        width:"100%",
         height:'100%',
         backgroundColor:'#fff',
         display:'flex',
@@ -137,6 +148,26 @@ const styles = StyleSheet.create({
 
       elevation: 16,
       },
+      closeButtonContainer:{
+        width:'100%',
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'flex-end',
+        alignContent:'center',
+        margin:10,
+      },
+      closeButton:{
+        width:'auto',
+        margin:10,
+        display:'flex',
+        justifyContent:'flex-end',
+        alignItems:'center',
+      },
+      closeButtonIcon:{
+        width:30,
+        height:30,
+        tintColor:'rgb(33,33,43)',
+      }
 })
 
 
