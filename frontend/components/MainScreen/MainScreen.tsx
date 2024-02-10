@@ -11,6 +11,7 @@ import SubjectsSection from './MainScreenComponents/SubjectsSection';
 import ExamsSection from './MainScreenComponents/ExamsSection';
 import UserModal from './MainScreenComponents/UserModal';
 import NotificationModal from './MainScreenComponents/NotificationModal';
+import Footer from '../Footer/Footer';
 
 
 
@@ -104,8 +105,9 @@ function MainScreen({pageSwitcher}: any) {
                 }}
             >
                 <DynamicHeader pageSwitcher={pageSwitcher}/>
-                <DynamicHeader pageSwitcher={pageSwitcher}/>
+                
             </Animated.View>
+            <Footer pageSwitcher={pageSwitcher}/>
         </ImageBackground>
     </KeyboardAvoidingView>
   );

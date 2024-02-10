@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     left:0,
     zIndex:10000,
     width:'100%',
-    height:100,
+    height:120,
     marginBottom: -10,
     borderTopLeftRadius:20,
     borderTopRightRadius:20,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   shadowContainer:{
       width:'100%',
-      height:120,
+      height:100,
       paddingBottom:30,
       borderTopLeftRadius:20,
       borderTopRightRadius:20,
@@ -112,17 +112,18 @@ const styles = StyleSheet.create({
       elevation: 20,
   },
   image:{
-      width:50,
-      height:50,
-  },
-  verticalLine: {
-    height: '75%',
-    width: 1,
-    backgroundColor: '#rgb(33,33,43)',
-  },
-  bellIcon:{
       width:30,
       height:30,
+  },
+  verticalLine: {
+    // height: '75%',
+    // width: 1,
+    // backgroundColor: '#rgb(33,33,43)',
+  },
+  bellIcon:{
+      width:25,
+      height:25,
+      tintColor:'#c085ff',
   },
 })
 
