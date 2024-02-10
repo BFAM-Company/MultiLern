@@ -1,5 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { Animated, Dimensions, ImageSourcePropType } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
+import SearchBar from '../../SearchBar/SearchBar';
+
 
 interface FeatureBoxProps{
     buttonAction: () => void,

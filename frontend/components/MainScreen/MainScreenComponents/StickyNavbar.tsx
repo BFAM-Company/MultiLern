@@ -1,6 +1,6 @@
 import React from 'react';
-import { Animated, Dimensions } from 'react-native';
-import { View, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
+import { Animated } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import NotificationDot from './NotificationDot';
 
 interface StickyNavbarProps{

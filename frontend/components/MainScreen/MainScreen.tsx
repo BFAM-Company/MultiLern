@@ -104,6 +104,7 @@ function MainScreen({pageSwitcher}: any) {
                 }}
             >
                 <DynamicHeader pageSwitcher={pageSwitcher}/>
+                <DynamicHeader pageSwitcher={pageSwitcher}/>
             </Animated.View>
         </ImageBackground>
     </KeyboardAvoidingView>
