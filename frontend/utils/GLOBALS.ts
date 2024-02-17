@@ -7,7 +7,20 @@ export const linking: any = {
         Home: "",
         LogIn: "login",
         SignUp: "signup",
-        Main: "home"
+        Main: "home",
+        NewFlashcard: 'newflashcard',
+        FlashcardsList: {
+          path: "flashcards/:range",
+          parse: {
+            range: (range: string) => range,
+          },
+        },
+        FlashcardsSet: {
+          path: "flashcardsset/:id",
+          parse: {
+            id: (id: number) => id,
+          },
+        },
       }
     }
   }
