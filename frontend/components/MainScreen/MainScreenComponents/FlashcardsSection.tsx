@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-function FlashcardsSection() {
+function FlashcardsSection({pageSwitcher}: any) {
   return (
     <Animated.View
         style={styles.mainContainer}
@@ -11,6 +11,7 @@ function FlashcardsSection() {
         </View>
         <TouchableOpacity
             style={styles.container}
+            onPress={ () => pageSwitcher('FlashcardsList', {range: 'my'})}
         >
             <Image
                 style={styles.image}
@@ -26,6 +27,7 @@ function FlashcardsSection() {
         </TouchableOpacity>
         <TouchableOpacity
             style={styles.container}
+            onPress={ () => pageSwitcher('NewFlashcard')}
         >
             <Image
                 style={styles.image}
