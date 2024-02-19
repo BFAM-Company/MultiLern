@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, Dimensions, ImageSourcePropType } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
-import SearchBar from './SearchBar';
+import SearchBar from '../../SearchBar/SearchBar';
 
 
 interface FeatureBoxProps{
