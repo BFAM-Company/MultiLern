@@ -3,10 +3,13 @@ import { Animated } from 'react-native';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import NotificationDot from './NotificationDot';
 
+interface StickyNavbarProps{
+    userModalHandler: ()=>void
+    notificationModalHandler: ()=>void
+}
 
 
-
-function StickyNavbar({pageSwitcher}: any) {
+function StickyNavbar({userModalHandler, notificationModalHandler}: StickyNavbarProps) {
   return (
     <Animated.View
         style={styles.mainContainer}
@@ -14,6 +17,7 @@ function StickyNavbar({pageSwitcher}: any) {
         <View style={[styles.shadowContainer, styles.shadow]}>
         <TouchableOpacity
             style={[styles.button, styles.shadow]}
+            onPress={userModalHandler}
         >
             <Image
                 source={require('./../../../assets/demo-user-icon.png')}
@@ -22,6 +26,7 @@ function StickyNavbar({pageSwitcher}: any) {
         </TouchableOpacity>
         <TouchableOpacity
             style={styles.button}
+            onPress={notificationModalHandler}
         >
             <Image
                 source={require('./../../../assets/notification-icon.png')}
