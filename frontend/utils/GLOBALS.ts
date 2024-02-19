@@ -14,6 +14,19 @@ export const linking: any = {
             description: (description: string) => description,
           },
         },
+        NewFlashcard: 'newflashcard',
+        FlashcardsList: {
+          path: "flashcards/:range",
+          parse: {
+            range: (range: string) => range,
+          },
+        },
+        FlashcardsSet: {
+          path: "flashcardsset/:id",
+          parse: {
+            id: (id: number) => id,
+          },
+        },
       }
     }
   }

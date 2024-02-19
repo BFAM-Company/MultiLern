@@ -14,6 +14,9 @@ export type RootStackParamList = {
     SignUp: undefined,
     Main: undefined,
     Excercises: {description: string}
+    NewFlashcard: undefined,
+    FlashcardsList: {range: string},
+    FlashcardsSet: {id: number}
 }
 
 export interface PageSwitchTemplateProps {
@@ -38,6 +41,7 @@ export interface SignUpPageProps {
     navigation: NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
 }
 
+
 export interface ExcercisesPageProps {
     navigation: NativeStackNavigationProp<RootStackParamList, 'Excercises'>;
     route: {
@@ -46,6 +50,11 @@ export interface ExcercisesPageProps {
         };
     };
 }
+
+export interface NewFlashcardPageProps {
+    navigation: NativeStackNavigationProp<RootStackParamList, 'NewFlashcard'>;
+}
+
 
 export interface IStylesVariable{
     LogoSize:  number
