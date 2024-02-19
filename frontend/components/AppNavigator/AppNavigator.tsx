@@ -11,6 +11,8 @@ import MainScreen from '../MainScreen/MainScreen';
 import NewFlashcardScreen from '../Flashcards/NewFlashcardScreen/NewFlashcardScreen';
 import FlashcardsListScreen from '../Flashcards/FlashcardsListScreen/FlashcardsListScreen';
 import FlashcardsSetScreen from '../Flashcards/FlashcardsSetScreen/FlashcardsSetScreen';
+import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
+import NotesScreen from '../NotesScreen/NotesScreen';
 
 
 const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, children}) => {
@@ -82,6 +84,14 @@ const FlashcardsSetPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
+const NotesPage: React.FC<any> = ({ navigation, route }) => {
+
+  return (
+    <PageSwitchTamplte navigation={navigation}>
+      <NotesScreen />
+    </PageSwitchTamplte>
+  );
+};
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
@@ -99,6 +109,7 @@ function AppNavigator() {
          <Stack.Screen name="NewFlashcard" component={NewFlashcardPage} />
          <Stack.Screen name="FlashcardsList" component={FlashcardsListPage} />
          <Stack.Screen name="FlashcardsSet" component={FlashcardsSetPage} />
+         <Stack.Screen name="Notes" component={gestureHandlerRootHOC(NotesPage)} />
        </Stack.Navigator>
     </NavigationContainer>
   );

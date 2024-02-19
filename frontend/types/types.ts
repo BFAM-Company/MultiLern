@@ -10,7 +10,7 @@ export type RootStackParamList = {
     NewFlashcard: undefined,
     FlashcardsList: {range: string},
     FlashcardsSet: {id: number}
-
+    Notes: undefined
 }
 
 export interface PageSwitchTemplateProps {

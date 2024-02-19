@@ -21,6 +21,7 @@ export const linking: any = {
             id: (id: number) => id,
           },
         },
+        Notes: "notes"
       }
     }
   }
