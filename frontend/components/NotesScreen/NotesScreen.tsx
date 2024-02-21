@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import DrawingComponent from '../DrawingComponent/DrawingComponent';
+import {DrawingComponent} from '../DrawingComponent/DrawingComponent';
 
 function NotesScreen() {
   return (

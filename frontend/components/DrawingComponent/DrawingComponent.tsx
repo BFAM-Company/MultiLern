@@ -1,63 +1,79 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, useWindowDimensions } from "react-native";
-import { Canvas, Circle, Fill, Skia, Path } from "@shopify/react-native-skia";
-import { GestureDetector, Gesture } from "react-native-gesture-handler";
-import Animated, { useSharedValue, withDecay } from "react-native-reanimated";
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import {
+  Canvas,
+  Color,
+  Path,
+  SkPath,
+  Skia,
+  TouchInfo,
+  useTouchHandler,
+} from "@shopify/react-native-skia";
+import React, { useCallback, useState } from "react";
+import { StyleSheet } from "react-native";
 
+type pathType = {
+  path: SkPath;
+  color?: string;
+  width?: number;
+};
 
-function DrawingComponent() {
-    // const [paths, addPaths] = useState<any>([]);
+export const DrawingComponent = () => {
+  const [paths, setPaths] = useState<pathType[]>([]);
 
-    const translateX = useSharedValue<number>(100);
-    const translateY = useSharedValue<number>(100);
+  const drawingStartHandler = useCallback((touchInfo: TouchInfo) => {
+    setPaths((currentPaths: any) => {
+      const { x, y } = touchInfo;
+      const newPath = Skia.Path.Make();
+      newPath.moveTo(x, y);
+      return [
+        ...currentPaths,
+        {
+          path: newPath,
+          color: 'black',
+          width: 2,
+        },
+      ];
+    });
+  }, []);
 
-    const path = useSharedValue<any>(Skia.Path.Make())
+  const positionChangeHandler = useCallback((touchInfo: TouchInfo) => {
+    setPaths((currentPaths: any) => {
+      const { x, y } = touchInfo;
+      const currentPath = currentPaths[currentPaths.length - 1];
+      const lastPoint = currentPath.path.getLastPt();
+      const xMid = (lastPoint.x + x) / 2;
+      const yMid = (lastPoint.y + y) / 2;
 
-    const gesture = Gesture.Pan()
-    .onStart((e) => {
-      //path.value = Skia.Path.Make()
-      path.value.moveTo(e.x, e.y)
-    })
-    .onChange((e) => {
-      translateX.value = e.x
-      translateY.value = e.y
-      path.value.lineTo(e.x, e.y)
-    })
-    .onEnd((e)=>{
-      //path.value.close();
-      console.debug('path closed')
-      // addPaths((current: any) => [...current, path.value])
-    })
+      currentPath.path.quadTo(lastPoint.x, lastPoint.y, xMid, yMid);
+      return [...currentPaths.slice(0, currentPaths.length - 1), currentPath];
+    });
+  }, []);
 
-    // let pathsElements: any = null;
-    // for(let path of paths){
-    //   pathsElements += (<Path path={path} color="red"/>)
-    // }
+  const touchHandler = useTouchHandler(
+    {
+      onActive: positionChangeHandler,
+      onStart: drawingStartHandler,
+    },
+    [positionChangeHandler, drawingStartHandler]
+  );
+
   return (
-    <GestureDetector gesture={gesture}>
-      <Canvas style={[styles.container,{ flex: 1 }]}>
-        <Fill color="white" />
-        <Circle cx={translateX} cy={translateY} r={20} color="lightgray" />
-        <Path 
-          path={path} 
-          color="hotpink" 
-          style="stroke"
-          strokeWidth={3}
+    <Canvas style={style.container} onTouch={touchHandler}>
+      {paths.map((path, index) => (
+        <Path
+          key={index}
+          path={path.path}
+          color={"black"}
+          style={"stroke"}
+          strokeWidth={2}
         />
-      </Canvas>
-    </GestureDetector>
-  )
-}
+      ))}
+    </Canvas>
+  );
+};
 
-
-
-
-const styles = StyleSheet.create({
-    container: {
-        width:'100%',
-        height:'100%',
-    }
-})
-
-export default DrawingComponent;
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+  },
+});
