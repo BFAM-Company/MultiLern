@@ -6,16 +6,17 @@ import HomeScreen from '../HomeScreen/HomeScreen';
 import LogInScreen from '../LogInScreen/LogInScreen';
 import  {linking} from './../../utils/GLOBALS';
 
-import { HomePageProps, PageSwitchTemplateProps, RootStackParamList, LogInPageProps, SignUpPageProps, NewFlashcardPageProps } from '../../types/types';
+import { HomePageProps, PageSwitchTemplateProps, RootStackParamList, LogInPageProps, SignUpPageProps, NewFlashcardPageProps, MainProps } from '../../types/types';
 import SignUpScreen from '../SignUpScreen/SignUpScreen';
 import MainScreen from '../MainScreen/MainScreen';
 import NewFlashcardScreen from '../Flashcards/NewFlashcardScreen/NewFlashcardScreen';
 import FlashcardsListScreen from '../Flashcards/FlashcardsListScreen/FlashcardsListScreen';
 import FlashcardsSetScreen from '../Flashcards/FlashcardsSetScreen/FlashcardsSetScreen';
+import ExcercisesScreen from '../ExercisesScreen/ExcercisesScreen';
 
 
 
-const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, children}) => {
+const PageSwitchTemplate: React.FC<PageSwitchTemplateProps> = ({ navigation, children}) => {
   const pageChanger = (page: keyof RootStackParamList, params?: any) => {
     navigation.navigate(page, params);
   };
@@ -25,34 +26,34 @@ const PageSwitchTamplte: React.FC<PageSwitchTemplateProps> = ({ navigation, chil
 
 const HomePage: React.FC<HomePageProps> = ({ navigation }) => {
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
           <HomeScreen/>
-    </PageSwitchTamplte>
+    </PageSwitchTemplate>
 
   );
 }
 
 const LogInPage: React.FC<LogInPageProps> = ({navigation}) => {
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
       <LogInScreen/>
-    </PageSwitchTamplte>
+    </PageSwitchTemplate>
   );
 }
 
 const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
       <SignUpScreen/>
-    </PageSwitchTamplte>
+    </PageSwitchTemplate>
   );
 }
 
 const MainPage: React.FC<MainProps> = ({navigation}) => {
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
       <MainScreen/>
-    </PageSwitchTamplte>
+    </PageSwitchTemplate>
   );
 }
 
@@ -60,7 +61,7 @@ const ExcercisesPage: React.FC<any> = ({ navigation, route }) => {
   const { searchableText } = route.params;
 
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
       <ExcercisesScreen searchableText={searchableText}/>
     </PageSwitchTemplate>
     ); 
@@ -70,9 +71,9 @@ const ExcercisesPage: React.FC<any> = ({ navigation, route }) => {
       
 const NewFlashcardPage: React.FC<NewFlashcardPageProps> = ({navigation}) => {
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
       <NewFlashcardScreen />
-    </PageSwitchTamplte>
+    </PageSwitchTemplate>
   );
 }
 
@@ -80,9 +81,9 @@ const FlashcardsListPage: React.FC<any> = ({ navigation, route }) => {
   const { range } = route.params;
 
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
       <FlashcardsListScreen range={range}/>
-    </PageSwitchTamplte>
+    </PageSwitchTemplate>
   );
 };
 
@@ -90,9 +91,9 @@ const FlashcardsSetPage: React.FC<any> = ({ navigation, route }) => {
   const { id } = route.params;
 
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
       <FlashcardsSetScreen id={id}/>
-    </PageSwitchTamplte>
+    </PageSwitchTemplate>
   );
 };
 
