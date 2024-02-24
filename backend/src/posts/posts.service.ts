@@ -8,6 +8,7 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 export class PostsService {
     constructor(private prisma: PrismaService) {}
 
+    //TODO do poprawienia, nie createMany tylko create zwykłe i tablice wjebać tak jak w fiches
     createPost(createPostDto: CreatePostDto) {
         return this.prisma.posts.create({
             data: {
