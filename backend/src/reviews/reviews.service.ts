@@ -12,8 +12,8 @@ export class ReviewsService {
             data: {
                 rate: createReviewDto.rate,
                 posts_reviews: {
-                    connect: {
-                        id: createReviewDto.postId,
+                    create: {
+                        postId: createReviewDto.postId,
                     },
                 },
             },
