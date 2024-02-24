@@ -1,33 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { findByNicknameAndPasswordUserDto } from './dto/findByNicknameAndPassword-user.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { UserModelDto } from './dto/model-user.dto';
 
-//chwilowo bo mi sie nie chce z baza laczyc
-let tempUsers = [
-    { id: 1, name: 'goroncyMati', email: 'goroncymati@example.com' },
-    { id: 2, name: 'HotKubus', email: 'hotkubus@example.com' },
-];
-
-//tu bedzie kod z baza docelowo
-
-@Injectable() //element wstrzykiwalny
+@Injectable()
 export class UsersService {
-    getAll() {
-        //tu bedzie jakis madry kodzik
-        return tempUsers;
+    constructor(private prisma: PrismaService) {}
+    create(createUserDto: UserModelDto) {
+        return this.prisma.users.create({
+            data: createUserDto,
+        });
     }
 
-    getByID(id: number) {
-        return tempUsers.find((x) => x.id === id);
+    findByUsernameAndPassword(
+        userWhereNicknameAndPassword: findByNicknameAndPasswordUserDto
+    ) {
+        return this.prisma.users.findUnique({
+            where: {
+                nickname: userWhereNicknameAndPassword.nickname,
+                password: userWhereNicknameAndPassword.password,
+            },
+        });
     }
 
-    add(name: string, email: string) {
-        const id = tempUsers[tempUsers.length - 1].id + 1;
-
-        const newUser = { id, name, email };
-
-        tempUsers.push(newUser);
-    }
-
-    removeById(id: number) {
-        tempUsers = tempUsers.filter((x) => x.id !== id);
+    update(id: number, updateUserDto: UserModelDto) {
+        return this.prisma.users.update({
+            where: {
+                id: id,
+            },
+            data: updateUserDto,
+        });
     }
 }

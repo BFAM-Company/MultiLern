@@ -1,43 +1,29 @@
-import {
-    Body,
-    Controller,
-    Get,
-    Param,
-    Post,
-    Delete,
-    HttpCode,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dtos/create-user.dto';
+import { UserModelDto } from './dto/model-user.dto';
 
-//localhost:3000-(czy ile tam bedziemy mieli w dockerze itp)/users
 @Controller('users')
 export class UsersController {
-    private usersService;
-
-    constructor(usersServive: UsersService) {
-        this.usersService = usersServive;
-    }
-
-    @Get()
-    getAllUsers() {
-        //nie wiem czy nie useless ale bedzie najwyzej sie usunie
-        return this.usersService.getAll();
-    }
-
-    @Get('/:id')
-    getUser(@Param('id') id: string) {
-        return this.usersService.getByID(parseInt(id));
-    }
+    constructor(private readonly usersService: UsersService) {}
 
     @Post()
-    addUser(@Body() body: CreateUserDto) {
-        return this.usersService.add(body.name, body.email);
+    create(@Body() createUserDto: UserModelDto) {
+        return this.usersService.create(createUserDto);
     }
 
-    @Delete('/:id')
-    @HttpCode(204)
-    removeProduct(@Param('id') id: string) {
-        return this.usersService.removeById(parseInt(id));
+    @Get(':nickname/:password')
+    findByUsernameAndPassword(
+        @Param('nickname') nickname: string,
+        @Param('password') password: string
+    ) {
+        return this.usersService.findByUsernameAndPassword({
+            nickname,
+            password,
+        });
+    }
+
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updateUserDto: UserModelDto) {
+        return this.usersService.update(+id, updateUserDto);
     }
 }
