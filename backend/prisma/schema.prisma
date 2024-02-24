@@ -27,7 +27,7 @@ model fiches_translations {
 
 model images {
   id           Int            @id @default(autoincrement())
-  img          Bytes?         @db.Blob
+  img          String?        @db.LongText
   posts_images posts_images[]
 }
 
