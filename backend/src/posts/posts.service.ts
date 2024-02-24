@@ -13,6 +13,7 @@ export class PostsService {
             data: {
                 title: createPostDto.title,
                 content: createPostDto.content,
+                category: createPostDto.category,
                 date: createPostDto.date,
                 postType: 'post',
                 posts_images: {
@@ -80,6 +81,11 @@ export class PostsService {
                         },
                     },
                 },
+                posts_reviews: {
+                    include: {
+                        reviews: true,
+                    },
+                },
                 tags_posts: {
                     include: {
                         tags: {
@@ -106,6 +112,11 @@ export class PostsService {
                                 img: true,
                             },
                         },
+                    },
+                },
+                posts_reviews: {
+                    include: {
+                        reviews: true,
                     },
                 },
                 tags_posts: {

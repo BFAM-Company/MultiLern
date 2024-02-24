@@ -7,6 +7,9 @@ export class CreatePostDto {
     @ApiProperty({ example: 'Hejka pomocy nie umiem macie' })
     content: string;
 
+    @ApiProperty({ example: 'Biology' })
+    category: string;
+
     @ApiProperty({ example: new Date() })
     date: Date | string;
 

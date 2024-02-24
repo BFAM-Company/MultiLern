@@ -35,6 +35,7 @@ model posts {
   id            Int             @id @default(autoincrement())
   title         String          @db.VarChar(70)
   content       String          @db.VarChar(250)
+  category      String?         @db.VarChar(40)
   date          DateTime        @db.DateTime(0)
   parentPostId  Int?
   postType      String          @db.VarChar(50)
