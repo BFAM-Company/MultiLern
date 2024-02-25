@@ -7,6 +7,7 @@ function NotesScreen() {
   const [color, setColor] = useState<string>('black')
   const [width, setWidth] = useState<number>(2)
   const [style, setStyle] = useState<string>('normal')
+  const [isDrawingEnabled, setIsDrawingEnabled] = useState<boolean>(true)
 
   const colorChanger = (col: string) => {
     setColor(col)
@@ -19,11 +20,27 @@ function NotesScreen() {
   const styleChanger = (stl: string) => {
     setStyle(stl)
   }
-
+  const drawingChanger = (drw: boolean) => {
+    setIsDrawingEnabled(drw)
+  }
   return (
       <View style={styles.container}>
-        <DrawingComponent color={color} width={width} style={style}/>
-        <ToolKit color={color} width={width} style={style} returnColor={colorChanger} returnWidth={widthChanger} returnStyle={styleChanger}/>
+        <DrawingComponent 
+          color={color} 
+          width={width} 
+          style={style} 
+          isDrawingEnabled={isDrawingEnabled}
+        />
+        <ToolKit 
+          color={color} 
+          width={width} 
+          style={style} 
+          isDrawingEnabled={isDrawingEnabled}
+          returnColor={colorChanger} 
+          returnWidth={widthChanger} 
+          returnStyle={styleChanger}
+          returnIsDrawingEnabled={drawingChanger}
+        />
       </View>
   );
 }

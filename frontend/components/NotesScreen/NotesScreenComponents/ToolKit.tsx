@@ -6,12 +6,14 @@ interface ToolKitProps{
     returnColor: any
     returnWidth: any
     returnStyle: any
+    returnIsDrawingEnabled: any
     color:string
     width:number
     style:string
+    isDrawingEnabled: boolean 
 }
 
-function ToolKit({color, width, style, returnColor, returnWidth, returnStyle}: ToolKitProps) {
+function ToolKit({color, width, style,  isDrawingEnabled, returnColor, returnWidth, returnStyle, returnIsDrawingEnabled}: ToolKitProps) {
 
   const [selectedColor, setSelectedColor] = useState<string>(color)
   const [selectedWidth, setSelectedWidth] = useState<number>(width)
@@ -19,7 +21,7 @@ function ToolKit({color, width, style, returnColor, returnWidth, returnStyle}: T
   const [isVisibleColor, setIsVisibleColor] = useState<boolean>(false)
   const [isVisibleWidth, setIsVisibleWidth] = useState<boolean>(false)
   const [isVisibleStyle, setIsVisibleStyle] = useState<boolean>(false)
-  const [isPenSelected, setIsPenSelected] = useState<boolean>(true)
+  const [isPenSelected, setIsPenSelected] = useState<boolean>(isDrawingEnabled)
 
   return (
       <View style={styles.container}>
@@ -302,7 +304,10 @@ function ToolKit({color, width, style, returnColor, returnWidth, returnStyle}: T
         </TouchableOpacity>
 
         <TouchableOpacity
-            onPress={()=>{setIsPenSelected(!isPenSelected)}}
+            onPress={()=>{
+                returnIsDrawingEnabled(true)
+                setIsPenSelected(true)
+            }}
             activeOpacity={1}
         >
             <Image source={require('./../../../assets/pencil.png')} 
@@ -310,7 +315,11 @@ function ToolKit({color, width, style, returnColor, returnWidth, returnStyle}: T
             />
         </TouchableOpacity>
         <TouchableOpacity
-            onPress={()=>{setIsPenSelected(!isPenSelected)}}
+            onPress={()=>{
+                //console.log(false)
+                returnIsDrawingEnabled(false)
+                setIsPenSelected(false)
+            }}
             activeOpacity={1}
         >
             <Image source={require('./../../../assets/rubber.png')} 

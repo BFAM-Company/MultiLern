@@ -14,49 +14,78 @@ interface DrawingComponentProps{
   color:string
   width: number
   style: string
+  isDrawingEnabled: boolean
 }
 
-export const DrawingComponent = ({color, width, style}: DrawingComponentProps) => {
+export const DrawingComponent = ({color, width, style, isDrawingEnabled}: DrawingComponentProps) => {
   const [paths, setPaths] = useState<pathType[]>([]);
   const selectedColor = useSharedValue<string>(color)
   const selectedWidth = useSharedValue<number>(width)
   const selectedStyle = useSharedValue<string>(style)
+  const isPenSelected = useSharedValue<boolean>(isDrawingEnabled)
 
   useEffect(()=>{
     selectedColor.value = color
     selectedWidth.value = width
     selectedStyle.value = style
+    isPenSelected.value = isDrawingEnabled
   })
 
   const drawingStartHandler = useCallback((touchInfo: TouchInfo) => {
-    setPaths((currentPaths: any) => {
-      const { x, y } = touchInfo;
-      const newPath = Skia.Path.Make();
-      newPath.moveTo(x, y);
-      return [
-        ...currentPaths,
-        {
-          path: newPath,
-          color: selectedColor.value,
-          width: selectedWidth.value,
-          style: selectedStyle.value,
-        },
-      ];
-    });
-  }, []);
+    if(isPenSelected.value){
+      setPaths((currentPaths: any) => {
+        const { x, y } = touchInfo;
+        const newPath = Skia.Path.Make();
+        newPath.moveTo(x, y);
+        return [
+          ...currentPaths,
+          {
+            path: newPath,
+            color: selectedColor.value,
+            width: selectedWidth.value,
+            style: selectedStyle.value,
+          },
+        ]
+      })
+    }
+    else{
+      setPaths((currentPaths: any) => {
+        const { x, y } = touchInfo;
+        for(let i = 0; i<currentPaths.length; i++ ){
+          if(currentPaths[i]?.path.contains(x, y)){
+            return [...currentPaths.slice(0, i), ...currentPaths.slice(i+1)]
+          }
+        }
+        return[...currentPaths]
+      })
+    }
+  }, [isPenSelected, selectedColor.value, selectedWidth.value, selectedStyle.value, paths]);
 
   const positionChangeHandler = useCallback((touchInfo: TouchInfo) => {
-    setPaths((currentPaths: any) => {
-      const { x, y } = touchInfo;
-      const currentPath = currentPaths[currentPaths.length - 1];
-      const lastPoint = currentPath.path.getLastPt();
-      const xMid = (lastPoint.x + x) / 2;
-      const yMid = (lastPoint.y + y) / 2;
-
-      currentPath.path.quadTo(lastPoint.x, lastPoint.y, xMid, yMid);
-      return [...currentPaths.slice(0, currentPaths.length - 1), currentPath];
-    });
-  }, []);
+    if(isPenSelected.value){
+      setPaths((currentPaths: any) => {
+        const { x, y } = touchInfo;
+        const currentPath = currentPaths[currentPaths.length - 1];
+        const lastPoint = currentPath.path.getLastPt();
+        const xMid = (lastPoint.x + x) / 2;
+        const yMid = (lastPoint.y + y) / 2;
+  
+        currentPath.path.quadTo(lastPoint.x, lastPoint.y, xMid, yMid);
+        return [...currentPaths.slice(0, currentPaths.length - 1), currentPath];
+      });
+    }   
+    else{
+      setPaths((currentPaths: any) => {
+        const { x, y } = touchInfo;
+        for(let i = 0; i<currentPaths.length; i++ ){
+          if(currentPaths[i]?.path.contains(x, y)){
+            return [...currentPaths.slice(0, i), ...currentPaths.slice(i+1)]
+          }
+        }
+        return[...currentPaths]
+      })
+    }
+  }, [isPenSelected, paths]);
 
   const touchHandler = useTouchHandler(
     {
