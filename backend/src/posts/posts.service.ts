@@ -8,7 +8,6 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 export class PostsService {
     constructor(private prisma: PrismaService) {}
 
-    //TODO do poprawienia, nie createMany tylko create zwykłe i tablice wjebać tak jak w fiches
     createPost(createPostDto: CreatePostDto) {
         return this.prisma.posts.create({
             data: {
@@ -18,9 +17,7 @@ export class PostsService {
                 date: createPostDto.date,
                 postType: 'post',
                 posts_images: {
-                    createMany: {
-                        data: createPostDto.images,
-                    },
+                    create: createPostDto.images,
                 },
                 tags_posts: {
                     createMany: {
@@ -48,9 +45,7 @@ export class PostsService {
                 date: createPostDto.date,
                 postType: 'comment',
                 posts_images: {
-                    createMany: {
-                        data: createPostDto.images,
-                    },
+                    create: createPostDto.images,
                 },
                 users_posts: {
                     create: {
@@ -143,7 +138,7 @@ export class PostsService {
                 content: updatePostDto.content,
                 date: updatePostDto.date,
                 posts_images: {
-                    connectOrCreate: updatePostDto.images,
+                    create: updatePostDto.images,
                 },
                 tags_posts: {
                     connectOrCreate: updatePostDto.tags,

@@ -11,17 +11,13 @@ export class UpdatePostDto {
     date: Date | string;
 
     @ApiProperty({
-        example: [
-            { where: { id: 1 }, create: { imgId: 1 } },
-            { where: { id: 2 }, create: { imgId: 2 } },
-        ],
+        example: [{ images: { create: { img: 'Image in base64' } } }],
     })
     images?: {
-        where: {
-            id: number;
-        };
-        create: {
-            imgId: number;
+        images: {
+            create: {
+                img: string;
+            };
         };
     }[];
 

@@ -13,9 +13,15 @@ export class CreatePostDto {
     @ApiProperty({ example: new Date() })
     date: Date | string;
 
-    @ApiProperty({ example: [{ imgId: 1 }, { imgId: 2 }] })
+    @ApiProperty({
+        example: [{ images: { create: { img: 'Image in base64' } } }],
+    })
     images?: {
-        imgId: number;
+        images: {
+            create: {
+                img: string;
+            };
+        };
     }[];
 
     @ApiProperty({ example: [{ tagsId: 1 }, { tagsId: 2 }] })
