@@ -15,4 +15,7 @@ export class UserModelDto {
 
     @ApiProperty({ example: 'hotkubusiek@example.com' })
     email: string;
+
+    @ApiProperty({ example: 'avatar in base64 or link' })
+    avatar: string;
 }
