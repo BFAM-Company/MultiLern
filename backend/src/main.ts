@@ -9,6 +9,7 @@ async function bootstrap() {
         .setTitle('Multilern')
         .setDescription('The ultimate Multilern API description')
         .setVersion('0.1')
+        .addBearerAuth()
         .build();
 
     const document = SwaggerModule.createDocument(app, config);
