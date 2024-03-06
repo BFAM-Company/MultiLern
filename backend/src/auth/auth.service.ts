@@ -4,6 +4,7 @@ import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 import { sign, verify } from 'jsonwebtoken';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { compare } from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -57,9 +58,9 @@ export class AuthService {
             return undefined;
         }
 
-        if (user.password !== password) {
-            return undefined;
-        }
+        const isMatch = await compare(password, user.password);
+        if (!isMatch) return undefined;
+
         return this.newRefreshAndAccessToken(user, values);
     }
 

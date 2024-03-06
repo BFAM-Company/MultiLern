@@ -1,14 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserModelDto } from './dto/model-user.dto';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UsersService {
     private saltOrRounds = 10;
     constructor(private prisma: PrismaService) {}
-    create(createUserDto: UserModelDto) {
+
+    async create(createUserDto: UserModelDto) {
+        const hashedPassword = await hash(
+            createUserDto.password,
+            this.saltOrRounds
+        );
         return this.prisma.users.create({
-            data: createUserDto,
+            data: {
+                password: hashedPassword,
+                nickname: createUserDto.nickname,
+                email: createUserDto.email,
+                avatar: createUserDto.avatar,
+            },
         });
     }
 
@@ -44,24 +55,4 @@ export class UsersService {
         }
         return undefined;
     }
-
-    // findByUsernameAndPassword(
-    //     userWhereNicknameAndPassword: findByNicknameAndPasswordUserDto
-    // ) {
-    //     return this.prisma.users.findUnique({
-    //         where: {
-    //             nickname: userWhereNicknameAndPassword.nickname,
-    //             password: userWhereNicknameAndPassword.password,
-    //         },
-    //     });
-    // }
-
-    // update(id: number, updateUserDto: UserModelDto) {
-    //     return this.prisma.users.update({
-    //         where: {
-    //             id: id,
-    //         },
-    //         data: updateUserDto,
-    //     });
-    // }
 }
