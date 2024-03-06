@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model fiches {
+  id                  Int                   @id @default(autoincrement())
+  title               String?               @db.VarChar(50)
+  fiches_translations fiches_translations[]
+  users_fiches        users_fiches[]
+}
+
+model fiches_translations {
+  id             Int          @id @default(autoincrement())
+  fichesId       Int
+  translationsId Int
+  fiches         fiches       @relation(fields: [fichesId], references: [id], onUpdate: Restrict, map: "fiches_translations_ibfk_1")
+  translations   translations @relation(fields: [translationsId], references: [id], onUpdate: Restrict, map: "fiches_translations_ibfk_2")
+
+  @@index([fichesId], map: "fichesId")
+  @@index([translationsId], map: "translationsId")
+}
+
+model images {
+  id           Int            @id @default(autoincrement())
+  img          String?        @db.LongText
+  posts_images posts_images[]
+}
+
+model posts {
+  id            Int             @id @default(autoincrement())
+  title         String          @db.VarChar(70)
+  content       String          @db.VarChar(250)
+  category      String?         @db.VarChar(40)
+  date          DateTime        @db.DateTime(0)
+  parentPostId  Int?
+  postType      String          @db.VarChar(50)
+  posts         posts?          @relation("postsToposts", fields: [parentPostId], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "posts_ibfk_1")
+  other_posts   posts[]         @relation("postsToposts")
+  posts_images  posts_images[]
+  posts_reviews posts_reviews[]
+  tags_posts    tags_posts[]
+  users_posts   users_posts[]
+
+  @@index([parentPostId], map: "parentPostId")
+}
+
+model posts_images {
+  id     Int    @id @default(autoincrement())
+  postId Int
+  imgId  Int
+  posts  posts  @relation(fields: [postId], references: [id], onUpdate: Restrict, map: "posts_images_ibfk_1")
+  images images @relation(fields: [imgId], references: [id], onUpdate: Restrict, map: "posts_images_ibfk_2")
+
+  @@index([imgId], map: "imgId")
+  @@index([postId], map: "postId")
+}
+
+model posts_reviews {
+  id        Int     @id @default(autoincrement())
+  postId    Int
+  reviewsId Int
+  posts     posts   @relation(fields: [postId], references: [id], onUpdate: Restrict, map: "posts_reviews_ibfk_1")
+  reviews   reviews @relation(fields: [reviewsId], references: [id], onUpdate: Restrict, map: "posts_reviews_ibfk_2")
+
+  @@index([postId], map: "postId")
+  @@index([reviewsId], map: "reviewsId")
+}
+
+model reviews {
+  id            Int             @id @default(autoincrement())
+  rate          Int?
+  posts_reviews posts_reviews[]
+}
+
+model tags {
+  id         Int          @id @default(autoincrement())
+  title      String       @db.VarChar(50)
+  tags_posts tags_posts[]
+}
+
+model tags_posts {
+  id     Int   @id @default(autoincrement())
+  tagsId Int
+  postId Int
+  posts  posts @relation(fields: [postId], references: [id], onUpdate: Restrict, map: "tags_posts_ibfk_1")
+  tags   tags  @relation(fields: [tagsId], references: [id], onUpdate: Restrict, map: "tags_posts_ibfk_2")
+
+  @@index([postId], map: "postId")
+  @@index([tagsId], map: "tagsId")
+}
+
+model translations {
+  id                  Int                   @id @default(autoincrement())
+  foreignTranslation  String?               @db.VarChar(250)
+  polishTranslation   String?               @db.VarChar(250)
+  fiches_translations fiches_translations[]
+}
+
+model users {
+  id             Int              @id @default(autoincrement())
+  nickname       String           @unique(map: "nickname") @db.VarChar(100)
+  password       String           @db.VarChar(100)
+  email          String           @unique(map: "email") @db.VarChar(100)
+  avatar         String?          @db.Text
+  refresh_tokens refresh_tokens[]
+  users_fiches   users_fiches[]
+  users_posts    users_posts[]
+}
+
+model users_fiches {
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  fichesId Int
+  users    users  @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "users_fiches_ibfk_1")
+  fiches   fiches @relation(fields: [fichesId], references: [id], onUpdate: Restrict, map: "users_fiches_ibfk_2")
+
+  @@index([fichesId], map: "fichesId")
+  @@index([userId], map: "userId")
+}
+
+model users_posts {
+  id     Int   @id @default(autoincrement())
+  userId Int
+  postId Int
+  users  users @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "users_posts_ibfk_1")
+  posts  posts @relation(fields: [postId], references: [id], onUpdate: Restrict, map: "users_posts_ibfk_2")
+
+  @@index([postId], map: "postId")
+  @@index([userId], map: "userId")
+}
+
+model refresh_tokens {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  userAgent String? @db.Text
+  ipAdress  String? @db.Text
+  users     users   @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "refresh_tokens_ibfk_1")
+
+  @@index([userId], map: "userId")
+}
