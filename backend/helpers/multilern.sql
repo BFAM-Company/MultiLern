@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 24, 2024 at 05:02 PM
+-- Generation Time: Mar 05, 2024 at 09:38 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -72,6 +72,7 @@ CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `title` varchar(70) NOT NULL,
   `content` varchar(250) NOT NULL,
+  `category` varchar(40) DEFAULT NULL,
   `date` datetime NOT NULL,
   `parentPostId` int(11) DEFAULT NULL,
   `postType` varchar(50) NOT NULL
@@ -81,8 +82,8 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `content`, `date`, `parentPostId`, `postType`) VALUES
-(2, 'Czas na biologie zad.1 str.3123', 'Hejka pomocy nie umiem macie', '2024-02-24 15:58:11', NULL, 'post');
+INSERT INTO `posts` (`id`, `title`, `content`, `category`, `date`, `parentPostId`, `postType`) VALUES
+(2, 'Czas na biologie zad.1 str.3123', 'Hejka pomocy nie umiem macie', '', '2024-02-24 15:58:11', NULL, 'post');
 
 -- --------------------------------------------------------
 
@@ -116,6 +117,27 @@ CREATE TABLE `posts_reviews` (
   `reviewsId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `posts_reviews`
+--
+
+INSERT INTO `posts_reviews` (`id`, `postId`, `reviewsId`) VALUES
+(1, 2, 2),
+(2, 2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `refresh_tokens`
+--
+
+CREATE TABLE `refresh_tokens` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `userAgent` text DEFAULT NULL,
+  `ipAdress` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +148,14 @@ CREATE TABLE `reviews` (
   `id` int(11) NOT NULL,
   `rate` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `rate`) VALUES
+(2, 5),
+(3, 1);
 
 -- --------------------------------------------------------
 
@@ -188,18 +218,17 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `nickname` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `surname` varchar(70) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  `avatar` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nickname`, `password`, `name`, `surname`, `email`) VALUES
-(1, 'Kubus', 'zartowalemWoleOliwkeHiHi', 'Jakub', 'Szrama', 'hotkubusiek@example.com'),
-(10, 'Mateuszek', 'kochamKubusiaIMozecieToMowic', 'Mateusz', 'Szortyka', 'oBozeJakGoKocham@example.com');
+INSERT INTO `users` (`id`, `nickname`, `password`, `email`, `avatar`) VALUES
+(1, 'Kubus', 'zartowalemWoleOliwkeHiHi', 'hotkubusiek@example.com', ''),
+(10, 'Mateuszek', 'kochamKubusiaIMozecieToMowic', 'oBozeJakGoKocham@example.com', '');
 
 -- --------------------------------------------------------
 
@@ -278,6 +307,13 @@ ALTER TABLE `posts_reviews`
   ADD PRIMARY KEY (`id`),
   ADD KEY `postId` (`postId`),
   ADD KEY `reviewsId` (`reviewsId`);
+
+--
+-- Indeksy dla tabeli `refresh_tokens`
+--
+ALTER TABLE `refresh_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`);
 
 --
 -- Indeksy dla tabeli `reviews`
@@ -367,13 +403,19 @@ ALTER TABLE `posts_images`
 -- AUTO_INCREMENT for table `posts_reviews`
 --
 ALTER TABLE `posts_reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `refresh_tokens`
+--
+ALTER TABLE `refresh_tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tags`
@@ -441,6 +483,12 @@ ALTER TABLE `posts_images`
 ALTER TABLE `posts_reviews`
   ADD CONSTRAINT `posts_reviews_ibfk_1` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`),
   ADD CONSTRAINT `posts_reviews_ibfk_2` FOREIGN KEY (`reviewsId`) REFERENCES `reviews` (`id`);
+
+--
+-- Constraints for table `refresh_tokens`
+--
+ALTER TABLE `refresh_tokens`
+  ADD CONSTRAINT `refresh_tokens_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `tags_posts`

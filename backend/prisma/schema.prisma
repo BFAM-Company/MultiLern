@@ -102,14 +102,14 @@ model translations {
 }
 
 model users {
-  id           Int            @id @default(autoincrement())
-  nickname     String         @unique(map: "nickname") @db.VarChar(100)
-  password     String         @db.VarChar(100)
-  name         String         @db.VarChar(50)
-  surname      String         @db.VarChar(70)
-  email        String         @unique(map: "email") @db.VarChar(100)
-  users_fiches users_fiches[]
-  users_posts  users_posts[]
+  id             Int              @id @default(autoincrement())
+  nickname       String           @unique(map: "nickname") @db.VarChar(100)
+  password       String           @db.VarChar(100)
+  email          String           @unique(map: "email") @db.VarChar(100)
+  avatar         String?          @db.Text
+  refresh_tokens refresh_tokens[]
+  users_fiches   users_fiches[]
+  users_posts    users_posts[]
 }
 
 model users_fiches {
@@ -131,5 +131,15 @@ model users_posts {
   posts  posts @relation(fields: [postId], references: [id], onUpdate: Restrict, map: "users_posts_ibfk_2")
 
   @@index([postId], map: "postId")
+  @@index([userId], map: "userId")
+}
+
+model refresh_tokens {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  userAgent String? @db.Text
+  ipAdress  String? @db.Text
+  users     users   @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "refresh_tokens_ibfk_1")
+
   @@index([userId], map: "userId")
 }
