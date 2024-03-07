@@ -1,7 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions, Platform, Image } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions, Platform, Image, Pressable } from 'react-native';
 import Modal from 'react-native-modal'
+import { AuthContext } from '../../context/AuthContext';
 
 interface UserModalProps{
     buttonAction: any
@@ -35,6 +36,7 @@ function Button({buttonAction, icon, content, coloredIcon = true}: ButtonProps){
 
 
 function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps) {
+  const authContext = useContext(AuthContext)
   const [modalVisible, setModalVisible] = useState(false);
     
   const deviceWidth = Dimensions.get("window").width;
@@ -43,6 +45,11 @@ function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps)
   useEffect(()=>{
     setModalVisible(isVisible)
   })
+
+  const logout = async() => {
+    await authContext?.logout()
+  }
+
   return (
     <Modal
         style={styles.Modal}
@@ -68,6 +75,7 @@ function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps)
             <Button content={'Twoje Zadania'} icon={require('./../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
             <Button content={'Konto'} icon={user.avatar} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
             <Button content={'Ustawienia'} icon={require('./../../../assets/settings-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
+            <Pressable onPress={logout}><Text>Wyloguj mnie kurwo</Text></Pressable>
           </LinearGradient>
         </View>
     </Modal>

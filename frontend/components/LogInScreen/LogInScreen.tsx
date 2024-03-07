@@ -1,14 +1,54 @@
-import React, { useEffect } from 'react';
-import {Animated, Dimensions, KeyboardAvoidingView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import {Alert, Animated, Dimensions, KeyboardAvoidingView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet, ImageBackground, Image, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { useState } from 'react';
 import { StylesVariables } from '../../utils/GLOBALS';
+import { AuthContext } from '../context/AuthContext';
+import { AxiosContext } from '../context/AxiosProvider';
+// import { setGenericPassword } from 'react-native-keychain';
+import { UserDataContext } from '../context/UserContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function LogInScreen({pageSwitcher}: any) {
 	const [login, setLogin] = useState<string | undefined>(undefined)
 	const [passwordText, setPasswordText] = useState<string | undefined>(undefined)
+
+    const authContext = useContext(AuthContext)
+    const { authAxios } = useContext(AxiosContext);
+    // const {userData, setUserData} = useContext(UserDataContext);
+
+    const onLogin = async () => {
+        try {
+            const res = await authAxios.post('/login', {
+                username: login,
+                password: passwordText
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            if(res.data) {
+                const {accessToken, refreshToken} = res.data;
+                await AsyncStorage.setItem('auth', JSON.stringify({
+                    accessToken,
+                    refreshToken,
+                }))
+
+                authContext?.setAuthState({
+                    accessToken,
+                    refreshToken,
+                    authenticated: true,
+                });
+            }
+            else Alert.alert('Nieprawidłowe dane spierdalaj')
+        }
+        catch(error: any){
+            Alert.alert('Login Failed', error.response.data.message);
+        }
+        
+    }
 
     const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
     const fadeAnimContainer = React.useRef(new Animated.Value(1)).current;
@@ -73,6 +113,8 @@ function LogInScreen({pageSwitcher}: any) {
                                 value={login} 
                                 onChangeText={setLogin} 
                                 placeholder='Nazwa użytkownika lub email'
+                                autoCapitalize='none'
+                                autoCorrect={false}
                                 />
                             <TextInput 
                                 style={styles.input} 
@@ -80,12 +122,14 @@ function LogInScreen({pageSwitcher}: any) {
                                 secureTextEntry={true}
                                 onChangeText={setPasswordText} 
                                 placeholder='Hasło '
+                                autoCapitalize='none'
+                                autoCorrect={false}
                                 />
 
 
                             <Button
                                 colors={['rgb(33,33,43)','rgb(13,13,23)']}
-                                buttonAction={() => {pageSwitcher('SignUp')}}
+                                buttonAction={() => {onLogin()}}
                                 icons={[require('./../../assets/logIn-icon.png')]}
                                 fontColor='white'>
                                 Zaloguj się
@@ -98,8 +142,8 @@ function LogInScreen({pageSwitcher}: any) {
                             <Button
                                 colors={['white']}
                                 buttonAction={() => {pageSwitcher('SignUp')}}
-                                icons={[require('./../../assets/googleIcon.png')]}>
-                            Google account
+                                icons={[require('./../../assets/discord-icon.png')]}>
+                            Discord
                             </Button>
                              <Button
                                     colors={['white']}
