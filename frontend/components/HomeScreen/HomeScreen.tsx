@@ -27,7 +27,7 @@ function HomeScreen({pageSwitcher}: any) {
                     <Button
                             colors={['white']}
                             buttonAction={() => {pageSwitcher('SignUp')}}
-                            icons={[require('./../../assets/googleIcon.png'), 
+                            icons={[require('./../../assets/discord-icon.png'), 
                                     require('./../../assets/apple-icon.png'),
                                     require('./../../assets/facebook-icon.png'),
                                     require('./../../assets/lock-alt.png')
