@@ -20,6 +20,7 @@
     "expo": "~50.0.2",
     "expo-linear-gradient": "~12.7.1",
     "expo-status-bar": "~1.11.1",
+    "expo-web-browser": "^12.8.2",
     "fuse.js": "^7.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
