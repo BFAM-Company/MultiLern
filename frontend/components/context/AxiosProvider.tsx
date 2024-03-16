@@ -40,7 +40,7 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   authAxios.interceptors.request.use(
     (config) => {
       if (!config.headers.Authorization) {
-        config.headers.Authorization = `Bearer ${authContext?.getAccessToken()}`;
+        config.headers.Authorization = `Bearer ${authContext?.authState.accessToken}`;
       }
 
       return config;
@@ -64,25 +64,27 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     return axios(options)
       .then(async (tokenRefreshResponse: any) => {
         failedRequest.response.config.headers.Authorization =
-          "Bearer " + tokenRefreshResponse.data.accessToken;
+          "Bearer " + tokenRefreshResponse.data;
+
+        await AsyncStorage.setItem('auth',JSON.stringify({
+            accessToken: tokenRefreshResponse.data,
+            refreshToken: authContext?.authState.refreshToken,
+        }))
 
         authContext?.setAuthState({
           ...authContext.authState,
           accessToken: tokenRefreshResponse.data,
         });
-
-        await AsyncStorage.setItem('auth',JSON.stringify({
-            accessToken: tokenRefreshResponse.data,
-            refreshToken: authContext?.authState.refreshToken,
-        }) )
+        
         return Promise.resolve();
       })
-      .catch((e: any) => {
+      .catch(async (e: any) => {
         authContext?.setAuthState({
           accessToken: null,
           refreshToken: null,
           authenticated: false
         });
+        await AsyncStorage.clear()
       });
   };
 

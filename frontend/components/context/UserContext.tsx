@@ -1,9 +1,9 @@
 import React, { createContext, useState, ReactNode } from "react";
 
-interface UserDataState {
+export interface UserDataState {
   nickname: string;
   email: string;
-  avatar: string | null;
+  avatar: any;
   isLogged: boolean
 }
 

@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { createContext, useState, ReactNode, useContext } from "react";
+import React, { createContext, useState, ReactNode, useContext, Dispatch, SetStateAction } from "react";
 import { UserDataContext } from "./UserContext";
 
 interface AuthState {
@@ -11,7 +11,7 @@ interface AuthState {
 export interface AuthContextType {
   authState: AuthState;
   getAccessToken: () => string | null;
-  setAuthState: (state: AuthState) => void;
+  setAuthState: Dispatch<SetStateAction<AuthState>>;
   logout: () => Promise<void>;
 }
 

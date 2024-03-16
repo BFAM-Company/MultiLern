@@ -24,14 +24,13 @@ function MainScreen({pageSwitcher}: any) {
     const [userModalVisible, setUserModalVisible] = useState<boolean>(false)
     const [notiModalVisible, setNotiModalVisible] = useState<boolean>(false)
     const authContext = useContext(AuthContext)
-    const { authAxios, publicAxios } = useContext(AxiosContext);
+    const { authAxios } = useContext(AxiosContext);
     const userContext = useContext(UserDataContext)
 
 
     useEffect(() => {
         fetchUserData()
-        console.log(userContext?.userData)
-    }, [userContext?.userData?.isLogged])
+    }, [authContext?.authState.authenticated])
 
     const fetchUserData = async () => {
        try {
@@ -43,8 +42,14 @@ function MainScreen({pageSwitcher}: any) {
                 isLogged: true
             })
         } catch (error: any) {
-            console.error('Error fetching user data:', error.message);
+            await AsyncStorage.clear()
+            authContext?.setAuthState({
+                accessToken: '',
+                refreshToken: '',
+                authenticated: false
+            })
         }
+
     }
 
     const translateY = scrollY.interpolate({
@@ -82,8 +87,8 @@ function MainScreen({pageSwitcher}: any) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
-        <UserModal isVisible={userModalVisible} hideHandler={userModalHideHandler} user={user} buttonAction={pageSwitcher}/>
-        <NotificationModal isVisible={notiModalVisible} hideHandler={notificationModalHideHandler} user={user} buttonAction={pageSwitcher}/>
+        <UserModal isVisible={userModalVisible} hideHandler={userModalHideHandler} user={userContext?.userData} buttonAction={pageSwitcher}/>
+        <NotificationModal isVisible={notiModalVisible} hideHandler={notificationModalHideHandler} user={userContext?.userData} buttonAction={pageSwitcher}/>
         <ImageBackground
                 source= {require('./../../assets/gradientBoobles.png')}
                 style={styles.fixedContainerBgc}

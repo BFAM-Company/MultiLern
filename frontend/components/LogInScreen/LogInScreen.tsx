@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import {Alert, Animated, Dimensions, KeyboardAvoidingView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import {Alert, Animated, Dimensions, KeyboardAvoidingView, Linking, Modal, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet, ImageBackground, Image, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { useState } from 'react';
@@ -7,23 +7,23 @@ import { StylesVariables } from '../../utils/GLOBALS';
 import { AuthContext } from '../context/AuthContext';
 import { AxiosContext } from '../context/AxiosProvider';
 // import { setGenericPassword } from 'react-native-keychain';
-import { UserDataContext } from '../context/UserContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { dismissBrowser, openAuthSessionAsync } from 'expo-web-browser';
 
 
 function LogInScreen({pageSwitcher}: any) {
 	const [login, setLogin] = useState<string | undefined>(undefined)
 	const [passwordText, setPasswordText] = useState<string | undefined>(undefined)
-
     const authContext = useContext(AuthContext)
     const { authAxios } = useContext(AxiosContext);
-    // const {userData, setUserData} = useContext(UserDataContext);
 
     const onLogin = async () => {
         try {
             const res = await authAxios.post('/login', {
                 username: login,
-                password: passwordText
+                password: passwordText,
+                isLogingFromOutside: false,
+                logginMethod: 'Multilern'
             }, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -37,8 +37,8 @@ function LogInScreen({pageSwitcher}: any) {
                 }))
 
                 authContext?.setAuthState({
-                    accessToken,
-                    refreshToken,
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
                     authenticated: true,
                 });
             }
@@ -48,6 +48,29 @@ function LogInScreen({pageSwitcher}: any) {
             Alert.alert('Login Failed', error.response.data.message);
         }
         
+    }
+
+    const loginByDiscord = async () => {
+        const response = await openAuthSessionAsync('http://localhost:3001/auth/discord', 'http://localhost:3001/auth/discord/callback')
+        if(response.type === 'success') {
+            const REGEX =  /[?&]([^=#]+)=([^&#]*)/g
+            let params: any = {}, match;
+            while (match = REGEX.exec(response.url)) {
+                params[match[1]] = match[2];
+            }
+            const {accessToken, refreshToken} = params
+            await AsyncStorage.setItem('auth', JSON.stringify({
+                    accessToken,
+                    refreshToken,
+                }))
+
+                authContext?.setAuthState({
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
+                    authenticated: true,
+                });
+        }            
+        dismissBrowser()
     }
 
     const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
@@ -141,7 +164,7 @@ function LogInScreen({pageSwitcher}: any) {
                             </View>
                             <Button
                                 colors={['white']}
-                                buttonAction={() => {pageSwitcher('SignUp')}}
+                                buttonAction={loginByDiscord}
                                 icons={[require('./../../assets/discord-icon.png')]}>
                             Discord
                             </Button>

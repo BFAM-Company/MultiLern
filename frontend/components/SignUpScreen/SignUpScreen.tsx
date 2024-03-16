@@ -7,6 +7,9 @@ import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AxiosContext } from '../context/AxiosProvider';
+import { AuthContext } from '../context/AuthContext';
+import { dismissBrowser, openAuthSessionAsync } from 'expo-web-browser';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type FormData = {
 	username: string,
@@ -18,6 +21,7 @@ type FormData = {
 function SignUpScreen({pageSwitcher}: any) {
 	const [modalVisibility, setModalVisibility] = useState(false)
 	const {publicAxios} = useContext(AxiosContext);
+	const authContext = useContext(AuthContext)
 
 	const {handleSubmit, watch, control, formState: {errors}} = useForm<FormData>({
 		defaultValues: {
@@ -29,12 +33,12 @@ function SignUpScreen({pageSwitcher}: any) {
 	});
 
 	const onSubmit = async (data: FormData) => {
-    	console.log(data); 
 		 try {
             await publicAxios.post('/users/create', {
                 nickname: data.username,
                 password: data.password,
-				email: data.email
+				email: data.email,
+				logginMethod: 'Multilern'
             }, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -47,6 +51,29 @@ function SignUpScreen({pageSwitcher}: any) {
             Alert.alert('Register failed', error.response.data.message);
         }
   	};
+
+	const loginByDiscord = async () => {
+        const response = await openAuthSessionAsync('http://localhost:3001/auth/discord', 'http://localhost:3001/auth/discord/callback')
+        if(response.type === 'success') {
+            const REGEX =  /[?&]([^=#]+)=([^&#]*)/g
+            let params: any = {}, match;
+            while (match = REGEX.exec(response.url)) {
+                params[match[1]] = match[2];
+            }
+            const {accessToken, refreshToken} = params
+            await AsyncStorage.setItem('auth', JSON.stringify({
+                    accessToken,
+                    refreshToken,
+                }))
+
+                authContext?.setAuthState({
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
+                    authenticated: true,
+                });
+        }            
+        dismissBrowser()
+    }
 
 	const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
 	const fadeAnimContainer = React.useRef(new Animated.Value(1)).current;
@@ -253,7 +280,7 @@ function SignUpScreen({pageSwitcher}: any) {
                             <View style={styles.buttonsContainer}>                            
                                 <Button
                                     colors={['white']}
-                                    buttonAction={() => {pageSwitcher('SignUp')}}
+                                    buttonAction={loginByDiscord}
                                     icons={[require('./../../assets/discord-icon.png')]}>
                                 Discord
                                 </Button>
