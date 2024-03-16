@@ -9,4 +9,10 @@ export class LoginDto {
 
     @ApiProperty({ example: 'zartowalemWoleOliwkeHiHi' })
     password: string;
+
+    @ApiProperty({ example: 'false' })
+    isLogingFromOutside: boolean;
+
+    @ApiProperty({ example: 'Multilern' })
+    logginMethod: string;
 }
