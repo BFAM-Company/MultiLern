@@ -2,16 +2,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions, Platform, Image } from 'react-native';
 import Modal from 'react-native-modal'
+import { UserDataState } from '../../context/UserContext';
 
 interface NotificationModalProps{
     buttonAction: any
     hideHandler: () => void
     isVisible: boolean
-    user: {
-      username: string,
-      email: string,
-      avatar: any
-    }
+    user: UserDataState | undefined
 }
 interface NotificationProps{
   buttonAction: any
@@ -26,7 +23,7 @@ function Notification({buttonAction, icon, content, coloredIcon = true}: Notific
       style={styles.modalButton}
       onPress={()=>{buttonAction}}
     >
-      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={icon}/>
+      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={{uri: icon}}/>
       <Text style={{fontSize:16,}}>{content}</Text>
     </TouchableOpacity>
   );
@@ -70,7 +67,7 @@ function NotificationModal({buttonAction, hideHandler, isVisible, user}: Notific
           <View style={styles.buttonsContainer}>
             <Notification content={'Wyszukaj'} icon={require('./../../../assets/search-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
             <Notification content={'Twoje Zadania'} icon={require('./../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
-            <Notification content={'Konto'} icon={user.avatar} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
+            <Notification content={'Konto'} icon={{uri: user?.avatar}} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
             <Notification content={'Ustawienia'} icon={require('./../../../assets/settings-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
           </View>
         </View>

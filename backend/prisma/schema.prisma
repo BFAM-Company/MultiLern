@@ -103,10 +103,11 @@ model translations {
 
 model users {
   id             Int              @id @default(autoincrement())
-  nickname       String           @unique(map: "nickname") @db.VarChar(100)
+  nickname       String?          @db.VarChar(100)
   password       String           @db.VarChar(100)
-  email          String           @unique(map: "email") @db.VarChar(100)
+  email          String           @db.VarChar(100)
   avatar         String?          @db.Text
+  logginMethod   String           @db.VarChar(20)
   refresh_tokens refresh_tokens[]
   users_fiches   users_fiches[]
   users_posts    users_posts[]

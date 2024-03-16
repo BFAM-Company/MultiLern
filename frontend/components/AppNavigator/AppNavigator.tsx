@@ -1,18 +1,20 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, {useCallback, useContext, useEffect} from 'react';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from '../HomeScreen/HomeScreen';
 import LogInScreen from '../LogInScreen/LogInScreen';
 import  {linking} from './../../utils/GLOBALS';
 
-import { HomePageProps, PageSwitchTemplateProps, RootStackParamList, LogInPageProps, SignUpPageProps, NewFlashcardPageProps, MainProps } from '../../types/types';
+import { HomePageProps, PageSwitchTemplateProps, RootStackParamList, LogInPageProps, SignUpPageProps, NewFlashcardPageProps, MainProps, AuthPageProps } from '../../types/types';
 import SignUpScreen from '../SignUpScreen/SignUpScreen';
 import MainScreen from '../MainScreen/MainScreen';
 import NewFlashcardScreen from '../Flashcards/NewFlashcardScreen/NewFlashcardScreen';
 import FlashcardsListScreen from '../Flashcards/FlashcardsListScreen/FlashcardsListScreen';
 import FlashcardsSetScreen from '../Flashcards/FlashcardsSetScreen/FlashcardsSetScreen';
 import ExcercisesScreen from '../ExercisesScreen/ExcercisesScreen';
+import { AuthContext } from '../context/AuthContext';
+import AuthScreen from '../AuthScreen/AuthScreen';
 
 
 
@@ -24,7 +26,7 @@ const PageSwitchTemplate: React.FC<PageSwitchTemplateProps> = ({ navigation, chi
   return React.cloneElement(children, {pageSwitcher: pageChanger });
 };
 
-const HomePage: React.FC<HomePageProps> = ({ navigation }) => {
+export const HomePage: React.FC<HomePageProps> = ({ navigation }) => {
   return (
     <PageSwitchTemplate navigation={navigation}>
           <HomeScreen/>
@@ -32,6 +34,15 @@ const HomePage: React.FC<HomePageProps> = ({ navigation }) => {
 
   );
 }
+
+export const MainPage: React.FC<MainProps> = ({navigation}) => {
+  return (
+    <PageSwitchTemplate navigation={navigation}>
+      <MainScreen/>
+    </PageSwitchTemplate>
+  );
+}
+
 
 const LogInPage: React.FC<LogInPageProps> = ({navigation}) => {
   return (
@@ -49,13 +60,6 @@ const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
   );
 }
 
-const MainPage: React.FC<MainProps> = ({navigation}) => {
-  return (
-    <PageSwitchTemplate navigation={navigation}>
-      <MainScreen/>
-    </PageSwitchTemplate>
-  );
-}
 
 const ExcercisesPage: React.FC<any> = ({ navigation, route }) => {
   const { searchableText } = route.params;
@@ -66,9 +70,7 @@ const ExcercisesPage: React.FC<any> = ({ navigation, route }) => {
     </PageSwitchTemplate>
     ); 
 }
-      
-      
-      
+            
 const NewFlashcardPage: React.FC<NewFlashcardPageProps> = ({navigation}) => {
   return (
     <PageSwitchTemplate navigation={navigation}>
@@ -97,6 +99,14 @@ const FlashcardsSetPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
+const AuthPage: React.FC<AuthPageProps> = ({navigation}) => {
+  return (
+    <PageSwitchTemplate navigation={navigation}>
+      <AuthScreen />
+    </PageSwitchTemplate>
+  );
+}
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
@@ -107,10 +117,11 @@ function AppNavigator() {
            headerShown: false
          }}
        >
-         <Stack.Screen name="Home" component={HomePage} />
+         <Stack.Screen name="Auth" component={AuthPage} />
+         <Stack.Screen name="Home" component={HomePage} options={{headerBackVisible: false, gestureEnabled: false}}  />
          <Stack.Screen name="LogIn" component={LogInPage} />
          <Stack.Screen name="SignUp" component={SignUpPage} />
-         <Stack.Screen name="Main" component={MainPage} />
+         <Stack.Screen name="Main" component={MainPage} options={{headerBackVisible: false, gestureEnabled: false}} />
          <Stack.Screen name="Excercises" component={ExcercisesPage}/>
          <Stack.Screen name="NewFlashcard" component={NewFlashcardPage} />
          <Stack.Screen name="FlashcardsList" component={FlashcardsListPage} />

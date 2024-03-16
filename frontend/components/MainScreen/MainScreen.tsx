@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Animated, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import { StylesVariables } from '../../utils/GLOBALS';
@@ -12,6 +12,10 @@ import ExamsSection from './MainScreenComponents/ExamsSection';
 import UserModal from './MainScreenComponents/UserModal';
 import NotificationModal from './MainScreenComponents/NotificationModal';
 import Footer from '../Footer/Footer';
+import { AuthContext } from '../context/AuthContext';
+import { AxiosContext } from '../context/AxiosProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserDataContext } from '../context/UserContext';
 
 
 
@@ -19,6 +23,34 @@ function MainScreen({pageSwitcher}: any) {
     const scrollY  = useRef(new Animated.Value(0)).current;
     const [userModalVisible, setUserModalVisible] = useState<boolean>(false)
     const [notiModalVisible, setNotiModalVisible] = useState<boolean>(false)
+    const authContext = useContext(AuthContext)
+    const { authAxios } = useContext(AxiosContext);
+    const userContext = useContext(UserDataContext)
+
+
+    useEffect(() => {
+        fetchUserData()
+    }, [authContext?.authState.authenticated])
+
+    const fetchUserData = async () => {
+       try {
+            const userDataResponse = await authAxios.get('/users/me');
+            userContext?.setUserData({
+                nickname: userDataResponse.data.nickname,
+                avatar: userDataResponse.data.avatar,
+                email: userDataResponse.data.email,
+                isLogged: true
+            })
+        } catch (error: any) {
+            await AsyncStorage.clear()
+            authContext?.setAuthState({
+                accessToken: '',
+                refreshToken: '',
+                authenticated: false
+            })
+        }
+
+    }
 
     const translateY = scrollY.interpolate({
         inputRange: [0, 100], 
@@ -28,20 +60,20 @@ function MainScreen({pageSwitcher}: any) {
 
     const userModalShowHandler = () =>{
         setUserModalVisible(true)
-        console.log(userModalVisible)
+        // console.log(userModalVisible)
     }
     const userModalHideHandler = () =>{
         setUserModalVisible(false)
-        console.log(userModalVisible)
+        // console.log(userModalVisible)
     }
 
     const notificationModalShowHandler = () =>{
         setNotiModalVisible(true)
-        console.log(userModalVisible)
+        // console.log(userModalVisible)
     }
     const notificationModalHideHandler = () =>{
         setNotiModalVisible(false)
-        console.log(userModalVisible)
+        // console.log(userModalVisible)
     }
 
     const user ={
@@ -55,8 +87,8 @@ function MainScreen({pageSwitcher}: any) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
-        <UserModal isVisible={userModalVisible} hideHandler={userModalHideHandler} user={user} buttonAction={pageSwitcher}/>
-        <NotificationModal isVisible={notiModalVisible} hideHandler={notificationModalHideHandler} user={user} buttonAction={pageSwitcher}/>
+        <UserModal isVisible={userModalVisible} hideHandler={userModalHideHandler} user={userContext?.userData} buttonAction={pageSwitcher}/>
+        <NotificationModal isVisible={notiModalVisible} hideHandler={notificationModalHideHandler} user={userContext?.userData} buttonAction={pageSwitcher}/>
         <ImageBackground
                 source= {require('./../../assets/gradientBoobles.png')}
                 style={styles.fixedContainerBgc}

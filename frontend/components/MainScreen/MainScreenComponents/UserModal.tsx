@@ -1,17 +1,15 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions, Platform, Image } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions, Platform, Image, Pressable } from 'react-native';
 import Modal from 'react-native-modal'
+import { AuthContext } from '../../context/AuthContext';
+import { UserDataState } from '../../context/UserContext';
 
 interface UserModalProps{
     buttonAction: any
     hideHandler: () => void
     isVisible: boolean
-    user: {
-      username: string,
-      email: string,
-      avatar: any
-    }
+    user: UserDataState | undefined
 }
 interface ButtonProps{
   buttonAction: any
@@ -26,7 +24,7 @@ function Button({buttonAction, icon, content, coloredIcon = true}: ButtonProps){
       style={styles.modalButton}
       onPress={()=>{buttonAction}}
     >
-      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={icon}/>
+      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={{uri: icon}}/>
       <Text style={{fontSize:16,}}>{content}</Text>
     </TouchableOpacity>
   );
@@ -35,6 +33,7 @@ function Button({buttonAction, icon, content, coloredIcon = true}: ButtonProps){
 
 
 function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps) {
+  const authContext = useContext(AuthContext)
   const [modalVisible, setModalVisible] = useState(false);
     
   const deviceWidth = Dimensions.get("window").width;
@@ -43,6 +42,11 @@ function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps)
   useEffect(()=>{
     setModalVisible(isVisible)
   })
+
+  const logout = async() => {
+    await authContext?.logout()
+  }
+
   return (
     <Modal
         style={styles.Modal}
@@ -58,16 +62,17 @@ function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps)
         <View style={styles.mainModalContainer}>
           <LinearGradient colors={['rgb(33,33,43)', 'rgb(53,53,53)']} style={styles.accountContainer}>
             <View>
-              <Text style={styles.usernameTitle}>{user.username}</Text>
-              <Text style={styles.emailText}>{user.email}</Text>
+              <Text style={styles.usernameTitle}>{user?.nickname}</Text>
+              <Text style={styles.emailText}>{user?.email}</Text>
             </View>
-            <Image style={styles.avatarImage} source={user.avatar} />
+            <Image style={styles.avatarImage} source={{uri: user?.avatar}} />
           </LinearGradient>
           <LinearGradient colors={['#fff', '#eee' , '#CDE1F1']} style={styles.buttonsContainer}>
             <Button content={'Wyszukaj'} icon={require('./../../../assets/search-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
             <Button content={'Twoje Zadania'} icon={require('./../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
-            <Button content={'Konto'} icon={user.avatar} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
+            <Button content={'Konto'} icon={user?.avatar} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
             <Button content={'Ustawienia'} icon={require('./../../../assets/settings-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
+            <Pressable onPress={logout}><Text>Wyloguj się</Text></Pressable>
           </LinearGradient>
         </View>
     </Modal>
@@ -109,6 +114,7 @@ const styles = StyleSheet.create({
     avatarImage:{
       width:50,
       height:50,
+      borderRadius: 100
     },
     buttonsContainer:{
       width:'100%',
@@ -121,6 +127,7 @@ const styles = StyleSheet.create({
     buttonIcon:{
       width:30,
       height:30,
+      borderRadius: 100
     },
     modalButton:{
       width:'100%',

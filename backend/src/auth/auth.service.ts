@@ -46,20 +46,32 @@ export class AuthService {
     }
 
     async login(
+        logginMethod: string,
         password: string,
         values: { userAgent: string; ipAdress: string },
         email?: string,
+        isLoggingFromOutside: boolean = false,
         username?: string
     ): Promise<{ accessToken: string; refreshToken: string } | undefined> {
-        const user = email
-            ? await this.userService.findByEmail(email)
-            : await this.userService.findByUsername(username);
+        let user;
+        if (logginMethod === 'Multilern') {
+            user = email
+                ? await this.userService.findByEmail(email)
+                : await this.userService.findByUsername(username);
+        } else
+            user = await this.userService.findWithLogginMethod(
+                logginMethod,
+                email
+            );
+
         if (!user) {
             return undefined;
         }
 
-        const isMatch = await compare(password, user.password);
-        if (!isMatch) return undefined;
+        if (!isLoggingFromOutside) {
+            const isMatch = await compare(password, user.password);
+            if (!isMatch) return undefined;
+        }
 
         return this.newRefreshAndAccessToken(user, values);
     }

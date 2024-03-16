@@ -12,4 +12,7 @@ export class UserModelDto {
 
     @ApiProperty({ example: 'avatar in base64 or link' })
     avatar?: string;
+
+    @ApiProperty({ example: 'Multilern' })
+    logginMethod?: string;
 }

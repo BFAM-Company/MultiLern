@@ -11,7 +11,9 @@ class RefreshToken {
     ipAdress: string;
 
     sign(): string {
-        return sign({ ...this }, process.env.REFRESH_SECRET);
+        return sign({ ...this }, process.env.REFRESH_SECRET, {
+            expiresIn: '7d',
+        });
     }
 }
 
