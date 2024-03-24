@@ -7,13 +7,13 @@ import { UserDataProvider } from './components/context/UserContext';
 
 function App() {
   return (
-    <AuthProvider>
-      <AxiosProvider>
-        <UserDataProvider>
-          <AppNavigator/>
-        </UserDataProvider>
-      </AxiosProvider>
-    </AuthProvider>
+      <AuthProvider>
+        <AxiosProvider>
+          <UserDataProvider>
+            <AppNavigator/>
+          </UserDataProvider>
+        </AxiosProvider>
+      </AuthProvider>
   );
 }
 

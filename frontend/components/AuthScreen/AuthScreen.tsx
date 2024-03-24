@@ -22,7 +22,6 @@ function AuthScreen({pageSwitcher}: any) {
             const jwt = JSON.parse(value);
                 if(jwt.accessToken === '')
                     throw new Error('chuj dupa kamien i kupa')
-
                 authContext?.setAuthState({
                 accessToken: jwt.accessToken,
                 refreshToken: jwt.refreshToken,
@@ -30,10 +29,10 @@ function AuthScreen({pageSwitcher}: any) {
                 });
 
                 userContext?.setUserData({
+                    id: -1,
                     nickname: '',
                     email: 'null',
                     avatar: null,
-                    isLogged: true
                 })
           }
         }

@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Dimensions } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { StylesVariables } from '../../utils/GLOBALS';
+import { AuthContext } from '../context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 function HomeScreen({pageSwitcher}: any) {
+    const authContext = useContext(AuthContext)
+
+    const loginByGuest = async () => {
+        authContext?.setAuthState({
+            accessToken: 'dupa',
+            refreshToken: 'dupa',
+            authenticated: true,
+            isLoggingByGuest: true
+        });
+    }
+
   return (
     <View style={styles.mainContainer}>
         <ImageBackground
@@ -44,7 +57,7 @@ function HomeScreen({pageSwitcher}: any) {
                     <Button
                         colors={['rgb(33,33,43)']}
                         fontColor='white'
-                        buttonAction={() => {pageSwitcher('Main')}}
+                        buttonAction={loginByGuest}
                         icons={[require('./../../assets/guest-icon.png')]}
                     >
                         Kontynuj jako gość

@@ -23,8 +23,7 @@ function StickyNavbar({userModalHandler, notificationModalHandler}: StickyNavbar
             onPress={userModalHandler}
         >
             <Image
-                // source={require('./../../../assets/demo-user-icon.png')}
-                source={{uri: userContext?.userData?.avatar}}
+                source={userContext?.userData?.avatar}
                 style={[styles.image]}
                 />
         </TouchableOpacity>
@@ -51,7 +50,6 @@ const styles = StyleSheet.create({
         zIndex:10000,
         width:'100%',
         height:170,
-        //marginTop:50,
         borderBottomLeftRadius:20,
         borderBottomRightRadius:20,
         overflow:'hidden',
@@ -83,7 +81,6 @@ const styles = StyleSheet.create({
         shadowOffset: {
             width: 0,
             height: 0,
-            // height: 150,
         },
         shadowOpacity: 0.58,
         shadowRadius: 16.00,
@@ -94,7 +91,6 @@ const styles = StyleSheet.create({
         width:50,
         height:50,
         borderRadius: 100
-        //tintColor:'rgb(33,33,43)',
     },
     bellIcon:{
         width:30,

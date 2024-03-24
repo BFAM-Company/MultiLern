@@ -34,19 +34,37 @@ function MainScreen({pageSwitcher}: any) {
 
     const fetchUserData = async () => {
        try {
-            const userDataResponse = await authAxios.get('/users/me');
-            userContext?.setUserData({
-                nickname: userDataResponse.data.nickname,
-                avatar: userDataResponse.data.avatar,
-                email: userDataResponse.data.email,
-                isLogged: true
-            })
+            if(!authContext?.authState.isLoggingByGuest) {
+                const userDataResponse = await authAxios.get('/users/me');
+                if(userDataResponse.data)
+                    userContext?.setUserData({
+                        id: userDataResponse.data.id,
+                        nickname: userDataResponse.data.nickname,
+                        avatar: {uri: userDataResponse.data.avatar},
+                        email: userDataResponse.data.email,
+                    })
+                else {
+                    userContext?.setUserData({
+                        id: -1,
+                        nickname: 'Gość',
+                        avatar: require('./../../assets/demo-user-icon.png'),
+                        email: '',
+                    })
+                }
+            }
+            else {
+                userContext?.setUserData({
+                    id: -1,
+                    nickname: 'Gość',
+                    avatar: require('./../../assets/demo-user-icon.png'),
+                    email: '',})
+            }  
         } catch (error: any) {
             await AsyncStorage.clear()
             authContext?.setAuthState({
                 accessToken: '',
                 refreshToken: '',
-                authenticated: false
+                authenticated: false,
             })
         }
 
@@ -81,7 +99,6 @@ function MainScreen({pageSwitcher}: any) {
         email:'john.smith@example.com',
         avatar: require('./../../assets/demo-user-icon.png')
     }
-
   return (
     <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}

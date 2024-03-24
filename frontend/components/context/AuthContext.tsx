@@ -6,6 +6,7 @@ interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
   authenticated: boolean | null;
+  isLoggingByGuest?: boolean | null;
 }
 
 export interface AuthContextType {
@@ -19,6 +20,7 @@ const initialAuthState: AuthState = {
   accessToken: null,
   refreshToken: null,
   authenticated: false,
+  isLoggingByGuest: false
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -30,18 +32,19 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 
   const logout = async () => {
+    userContext?.setUserData({
+      id: -1,
+      nickname: '',
+      email: 'null',
+      avatar: null,
+    })
     await AsyncStorage.clear()
     setAuthState({
       accessToken: null,
       refreshToken: null,
       authenticated: false,
+      isLoggingByGuest: false
     });
-    userContext?.setUserData({
-      nickname: '',
-      email: 'null',
-      avatar: null,
-      isLogged: false
-    })
   };
 
   const getAccessToken = () => {
