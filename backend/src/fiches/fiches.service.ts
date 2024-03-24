@@ -23,12 +23,34 @@ export class FichesService {
         });
     }
 
-    findAll() {
-        return this.prisma.fiches.findMany();
+    findAll(page: number) {
+        return this.prisma.fiches.findMany({
+            skip: page * 10,
+            take: 10,
+        });
     }
 
-    findAllByUser(id: number) {
-        return this.prisma.fiches.findMany({ where: { id: id } });
+    findById(id: number) {
+        return this.prisma.fiches.findUnique({
+            where: {
+                id: id,
+            },
+            include: {
+                fiches_translations: {
+                    select: {
+                        translations: true,
+                    },
+                },
+            },
+        });
+    }
+
+    findAllByUser(id: number, page: number) {
+        return this.prisma.fiches.findMany({
+            where: { users_fiches: { every: { userId: id } } },
+            skip: page * 10,
+            take: 10,
+        });
     }
 
     //TODO mozliwosc zmiany tlumaczen
@@ -42,6 +64,11 @@ export class FichesService {
     }
 
     remove(id: number) {
-        return this.prisma.fiches.delete({ where: { id: id } });
+        return this.prisma.fiches.delete({
+            where: { id: id },
+            include: {
+                fiches_translations: { select: { translations: true } },
+            },
+        });
     }
 }
