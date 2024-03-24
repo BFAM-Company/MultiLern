@@ -1,33 +1,24 @@
-import {
-    Controller,
-    Get,
-    Post,
-    Body,
-    Patch,
-    Param,
-    Delete,
-} from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
 import { FichesService } from './fiches.service';
-import { CreateFichDto } from './dto/create-fich.dto';
 import { UpdateFichDto } from './dto/update-fich.dto';
 
 @Controller('fiches')
 export class FichesController {
     constructor(private readonly fichesService: FichesService) {}
 
-    @Post()
-    create(@Body() createFichDto: CreateFichDto) {
-        return this.fichesService.create(createFichDto);
+    @Get('/:page')
+    findAll(@Param('page') page: string) {
+        return this.fichesService.findAll(+page);
     }
 
-    @Get()
-    findAll() {
-        return this.fichesService.findAll();
+    @Get('id/:id')
+    findById(@Param('id') id: string) {
+        return this.fichesService.findById(+id);
     }
 
-    @Get(':id')
-    findAllByUser(@Param('id') id: string) {
-        return this.fichesService.findAllByUser(+id);
+    @Get('userId/:id/:page')
+    findAllByUser(@Param('id') id: string, @Param('page') page: string) {
+        return this.fichesService.findAllByUser(+id, +page);
     }
 
     @Patch(':id')
