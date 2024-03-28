@@ -1,24 +1,29 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { KeyboardAvoidingView, Platform, Text, StyleSheet, View, ScrollView, Image, TouchableOpacity, Animated, FlatList } from "react-native";
+import { KeyboardAvoidingView, Platform, Text, StyleSheet, View, ScrollView, Image, TouchableOpacity, Animated, FlatList, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FlashcardsListItem from "./FlashcardsListComponents/FlashcardsListItem";
 import { AxiosContext } from "../../context/AxiosProvider";
 import { UserDataContext } from "../../context/UserContext";
 import { ActivityIndicator } from "react-native-paper";
+import Modal from "react-native-modal";
+import Button from "../../Button/Button";
 
-interface fichesSet {
+export interface IFichesSet {
   id: number,
   title: string
 }
 
 function FlashcardsListScreen({pageSwitcher, range}: any) {
-	const {publicAxios} = useContext(AxiosContext);
+	const {publicAxios, authAxios} = useContext(AxiosContext);
   const userContext = useContext(UserDataContext)
 
-  const [fichesSet, setFichesSet] = useState<fichesSet[]>([]);
+  const [fichesSet, setFichesSet] = useState<IFichesSet[]>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [isListEnd, setIsListEnd] = useState(false);
+
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [chosenFlashcardSet, setChosenFlashcardCard] = useState<IFichesSet>();
 
   useEffect(() => {
     const getFiches = async () => {
@@ -61,11 +66,31 @@ function FlashcardsListScreen({pageSwitcher, range}: any) {
     getFiches()
   }, [page])
   
+  const deleteFlashcard = async () => {
+    try {
+        await authAxios.delete(`/fiches/${chosenFlashcardSet?.id}`)
+        setModalVisibility(false)
+			  Alert.alert('Success!', 'Usunięto fiszki!');
+        setFichesSet([]);
+        setPage(0)
+    }
+    catch(error: any){
+      Alert.alert('Ups...coś poszło nie tak', error.response.data.message);
+    }
+  }
+
 
   const FlashcardSet = ({item}: any) => {
     return (
       <View style={styles.optionsContainer}>
-        <FlashcardsListItem key={item.id} pageSwitcher={pageSwitcher} flashcardsID={item.id} title={item.title}/>
+        <FlashcardsListItem 
+          key={item.id} 
+          pageSwitcher={pageSwitcher} 
+          flashcardsID={item.id} 
+          title={item.title} 
+          setChosenFlashcardCard={setChosenFlashcardCard}
+          setModalVisibility={setModalVisibility}
+          range={range}/>
       </View>)
   }
 
@@ -89,6 +114,21 @@ function FlashcardsListScreen({pageSwitcher, range}: any) {
 
   return (
     <SafeAreaView style={styles.mainContainer} edges={['top']}>
+      <Modal 
+          isVisible={modalVisibility} 
+          onBackdropPress={() => {setChosenFlashcardCard({id: 0, title: ''}); setModalVisibility(false)}}
+          style={styles.fichesModal}>
+          <View 
+            style={styles.fichesModalView}>
+            <Text style={{fontSize: 20, textAlign: 'center'}}>Czy na pewno chcesz usunąć fiszki <Text style={{fontSize: 32, fontWeight: '700'}}>{chosenFlashcardSet?.title}?</Text></Text>
+             <Button
+                colors={['rgb(244,68,78)']}
+                fontColor='white'
+                buttonAction={deleteFlashcard}>
+                Usuń
+              </Button>
+          </View>
+        </Modal>
           <FlatList
             style={{width: '100%', flex: 1}}
             ListHeaderComponent={range === 'all' ? <Text style={styles.header}>Wszystkie fiszki</Text> : <Text style={styles.header}>Twoje fiszki</Text>}
@@ -138,7 +178,24 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+  fichesModal: {
+    width:'100%',
+    height:'100%',
+    alignItems: 'center',
+    margin:0,
+  },
+  fichesModalView: {
+      width:"95%",
+      height:'30%',
+      backgroundColor:'#fff',
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center',
+      justifyContent:'center',
+      borderRadius: 20,
+      padding: 16,
+    },
 })
 
 

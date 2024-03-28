@@ -7,6 +7,7 @@ import { UserDataContext } from '../../context/UserContext';
 import Modal from "react-native-modal";
 import Button from '../../Button/Button';
 import { AxiosContext } from '../../context/AxiosProvider';
+import { FichesContext } from '../../context/FichesContext';
 
 
 function NewFlashcardScreen({pageSwitcher}: any) {
@@ -15,32 +16,63 @@ function NewFlashcardScreen({pageSwitcher}: any) {
   const userContext = useContext(UserDataContext)
   const signUpModalVisibility = useMemo(() => {return userContext?.userData?.id === -1}, [userContext?.userData?.id])
   const [errorModalVisibility, setErrorModalVisibility] = useState(false)
-  const {authAxios} = useContext(AxiosContext);
+  const {authAxios, publicAxios} = useContext(AxiosContext);
+  const fichesContext = useContext(FichesContext)
 
 
 
-  const {handleSubmit, watch, control, formState: {errors}} = useForm();
+  const {handleSubmit, control, formState: {errors}} = useForm({
+  });
   const { fields, remove, append } = useFieldArray({
     control,
     name: "translationsList",
   });
 
   useEffect(() => {
-    append({});
-  }, []);
+    const getFiches = async () => {
+      if(fichesContext?.fichesState  && fichesContext?.fichesState !== 0) {
+        const response = await publicAxios.get(`/fiches/id/${fichesContext.fichesState}`)
+        if(response && response.data) {
+          response.data.fiches_translations.map((item:any) => (
+            append({ translations: { create: { foreignTranslation: item.translations.foreignTranslation, polishTranslation: item.translations.polishTranslation } } })
+          ))
+          setTitle(response.data.title)
+        }
+      }
+      else {
+        append({});
+      }
+    }
+    getFiches()
+  }, [fichesContext?.fichesState]);
+
 
   const onSubmit = async (data: any) => {
     try {
-        await authAxios.post('/fiches', {
-          title: data.title ? data.title : 'Zestaw fiszek',
-          userId: userContext?.userData?.id,
-          translationsList: data.translationsList
-        }, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-			Alert.alert('Success!', 'Stworzono fiszki!');
+        if(!fichesContext?.fichesState || fichesContext?.fichesState === 0) {
+          await authAxios.post('/fiches', {
+            title: data.title ? data.title : 'Zestaw fiszek',
+            userId: userContext?.userData?.id,
+            }, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+          })
+          Alert.alert('Success!', 'Stworzono fiszki!');
+          pageSwitcher('Main')
+        }
+        else {
+          await authAxios.patch(`/fiches/${fichesContext.fichesState}`, {
+            title: data.title || title,
+            translationsList: data.translationsList
+          }, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          Alert.alert('Success!', 'Edytowano fiszki!');
+          pageSwitcher('Main')
+        }
     }
     catch(error: any){
       Alert.alert('Ups...coś poszło nie tak', error.response.data.message);
@@ -148,6 +180,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                         placeholder='Podaj obce tłumaczenie'
                         onBlur={onBlur}
                         onChangeText={onChange}
+                        value={value}
                       />
                     )}
                     rules={{required: "Obce tłumaczenie jest wymagane",}}
@@ -161,6 +194,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                           placeholder='Podaj obce tłumaczenie'
                           onBlur={onBlur}
                           onChangeText={onChange}
+                          value={value}
                         />
                       )}
                       rules={{required: "Polskie tłumaczenie jest wymagane",}}
@@ -196,7 +230,8 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center'
+      alignItems: 'center',
+      paddingLeft: 10
     },
     input: {
       backgroundColor: 'white',
