@@ -18,11 +18,11 @@ model fiches_translations {
   id             Int          @id @default(autoincrement())
   fichesId       Int
   translationsId Int
-  fiches         fiches       @relation(fields: [fichesId], references: [id], onUpdate: Restrict, map: "fiches_translations_ibfk_1")
-  translations   translations @relation(fields: [translationsId], references: [id], onUpdate: Restrict, map: "fiches_translations_ibfk_2")
+  fiches         fiches       @relation(fields: [fichesId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fiches_translations_ibfk_1")
+  translations   translations @relation(fields: [translationsId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fiches_translations_ibfk_2")
 
-  @@index([fichesId], map: "fichesId")
-  @@index([translationsId], map: "translationsId")
+  @@index([fichesId], map: "fiches_translations_ibfk_1")
+  @@index([translationsId], map: "fiches_translations_ibfk_2")
 }
 
 model images {

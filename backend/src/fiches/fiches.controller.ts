@@ -1,6 +1,5 @@
-import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { FichesService } from './fiches.service';
-import { UpdateFichDto } from './dto/update-fich.dto';
 
 @Controller('fiches')
 export class FichesController {
@@ -19,15 +18,5 @@ export class FichesController {
     @Get('userId/:id/:page')
     findAllByUser(@Param('id') id: string, @Param('page') page: string) {
         return this.fichesService.findAllByUser(+id, +page);
-    }
-
-    @Patch(':id')
-    update(@Param('id') id: string, @Body() updateFichDto: UpdateFichDto) {
-        return this.fichesService.update(+id, updateFichDto);
-    }
-
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.fichesService.remove(+id);
     }
 }
