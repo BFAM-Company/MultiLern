@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { StylesVariables } from '../../utils/GLOBALS';
-import DrawingComponent from '../DrawingComponent/DrawingComponent';
+
 
 
 

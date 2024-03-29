@@ -21,6 +21,7 @@ function ToolKit({color, width, style,  isDrawingEnabled, returnColor, returnWid
   const [isVisibleColor, setIsVisibleColor] = useState<boolean>(false)
   const [isVisibleWidth, setIsVisibleWidth] = useState<boolean>(false)
   const [isVisibleStyle, setIsVisibleStyle] = useState<boolean>(false)
+  const [isVisibleText, setIsVisibleText] = useState<boolean>(false)
   const [isPenSelected, setIsPenSelected] = useState<boolean>(isDrawingEnabled)
 
   return (
@@ -254,6 +255,28 @@ function ToolKit({color, width, style,  isDrawingEnabled, returnColor, returnWid
                 </View>
             </TouchableOpacity>
         </Modal>
+        <Modal style={styles.Modal}
+            animationType="slide"
+            visible={isVisibleText}
+            transparent={true}
+            onRequestClose={() => {setIsVisibleText(false)}}
+        >
+            <TouchableOpacity 
+                style={styles.ModalContainerStyle}
+                onPress={() => {setIsVisibleText(false)}}
+                activeOpacity={1}
+            >
+                <View 
+                    style={styles.WidthPickerModal}
+                >
+                    <TouchableOpacity
+                        
+                    >
+
+                    </TouchableOpacity>
+                </View>
+            </TouchableOpacity>
+        </Modal>
         <TouchableOpacity
             style={[{
                 backgroundColor: selectedColor
@@ -316,7 +339,6 @@ function ToolKit({color, width, style,  isDrawingEnabled, returnColor, returnWid
         </TouchableOpacity>
         <TouchableOpacity
             onPress={()=>{
-                //console.log(false)
                 returnIsDrawingEnabled(false)
                 setIsPenSelected(false)
             }}
@@ -328,6 +350,9 @@ function ToolKit({color, width, style,  isDrawingEnabled, returnColor, returnWid
         </TouchableOpacity>
         <TouchableOpacity 
             style={styles.textButton}
+            onPress={()=>{
+                setIsVisibleText(true)
+            }}
         >
             <Text style={styles.text}>Aa</Text>
         </TouchableOpacity>
