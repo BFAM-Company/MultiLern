@@ -65,7 +65,7 @@ function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps)
               <Text style={styles.usernameTitle}>{user?.nickname}</Text>
               <Text style={styles.emailText}>{user?.email}</Text>
             </View>
-            <Image style={styles.avatarImage} source={{uri: user?.avatar}} />
+            <Image style={styles.avatarImage} source={user?.avatar} />
           </LinearGradient>
           <LinearGradient colors={['#fff', '#eee' , '#CDE1F1']} style={styles.buttonsContainer}>
             <Button content={'Wyszukaj'} icon={require('./../../../assets/search-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>

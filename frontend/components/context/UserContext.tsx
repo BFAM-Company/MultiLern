@@ -1,10 +1,10 @@
 import React, { createContext, useState, ReactNode } from "react";
 
 export interface UserDataState {
+  id: number,
   nickname: string;
   email: string;
   avatar: any;
-  isLogged: boolean
 }
 
 export interface UserDataContextType {

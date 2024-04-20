@@ -18,9 +18,10 @@ function FlashcardsSection({pageSwitcher}: any) {
                 source={require('./../../../assets/flashcards-icon2.png')}
             />
             <Text style={styles.buttonTitle}>Twoje Fiszki</Text>
-            <Text style={styles.buttonDescription}>Zobacz wszystkie</Text>
+            <TouchableOpacity onPress={ () => pageSwitcher('FlashcardsList', {range: 'all'})}><Text style={styles.buttonDescription}>Zobacz wszystkie</Text></TouchableOpacity>
             <TouchableOpacity
                 style={styles.button}
+                onPress={ () => pageSwitcher('FlashcardsList', {range: 'my'})}
             >
                 <Text style={styles.buttonText}>Dalej</Text>
             </TouchableOpacity>
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            // height: 150,
             height: 0,
         },
         shadowOpacity: 0.58,

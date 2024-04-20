@@ -9,6 +9,8 @@ import {
     Get,
     Request,
     Res,
+    Param,
+    Patch,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -18,12 +20,16 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateFichDto } from 'src/fiches/dto/create-fich.dto';
+import { FichesService } from 'src/fiches/fiches.service';
+import { UpdateFichDto } from 'src/fiches/dto/update-fich.dto';
 
 @Controller('auth')
 export class AuthController {
     constructor(
         private readonly authService: AuthService,
         private readonly usersService: UsersService,
+        private readonly fichesService: FichesService,
         private prisma: PrismaService
     ) {}
 
@@ -104,5 +110,24 @@ export class AuthController {
     @Delete('logout')
     async logout(@Body() body: RefreshTokenDto) {
         return this.authService.logout(body.refreshToken);
+    }
+
+    @Post('fiches')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    create(@Body() createFichDto: CreateFichDto) {
+        return this.fichesService.create(createFichDto);
+    }
+
+    @Delete('fiches/:id')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    remove(@Param('id') id: string) {
+        return this.fichesService.remove(+id);
+    }
+
+    @Patch('fiches/:id')
+    update(@Param('id') id: string, @Body() updateFichDto: UpdateFichDto) {
+        return this.fichesService.update(+id, updateFichDto);
     }
 }

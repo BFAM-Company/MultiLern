@@ -1,31 +1,136 @@
-import React, { useEffect, useState } from 'react';
-import { Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import {Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, Modal as ErrorModal, View, Alert, TouchableOpacity} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StylesVariables } from '../../../utils/GLOBALS';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import { UserDataContext } from '../../context/UserContext';
+import Modal from "react-native-modal";
+import Button from '../../Button/Button';
+import { AxiosContext } from '../../context/AxiosProvider';
+import { FichesContext } from '../../context/FichesContext';
+
 
 function NewFlashcardScreen({pageSwitcher}: any) {
   const [isEditing, setIsEditing] = useState(false)
   const [title, setTitle] = useState('Tytuł twojego zestawu!')
+  const userContext = useContext(UserDataContext)
+  const signUpModalVisibility = useMemo(() => {return userContext?.userData?.id === -1}, [userContext?.userData?.id])
+  const [errorModalVisibility, setErrorModalVisibility] = useState(false)
+  const {authAxios, publicAxios} = useContext(AxiosContext);
+  const fichesContext = useContext(FichesContext)
 
-  const {handleSubmit, watch, control, formState: {errors}} = useForm();
+  useEffect(() => {
+    return () => {
+        fichesContext?.setFichesState(0);
+      };
+  }, []);
+
+  const {handleSubmit, control, formState: {errors}} = useForm({
+  });
   const { fields, remove, append } = useFieldArray({
     control,
-    name: "flashcards",
+    name: "translationsList",
   });
 
   useEffect(() => {
-    append({});
-  }, []);
+    const getFiches = async () => {
+      if(fichesContext?.fichesState && fichesContext?.fichesState !== 0) {
+        const response = await publicAxios.get(`/fiches/id/${fichesContext.fichesState}`)
+        if(response && response.data) {
+          response.data.fiches_translations.map((item:any) => (
+            append({ translations: { create: { foreignTranslation: item.translations.foreignTranslation, polishTranslation: item.translations.polishTranslation } } })
+          ))
+          setTitle(response.data.title)
+        }
+      }
+      else {
+        append({});
+      }
+    }
+    getFiches()
+  }, [fichesContext?.fichesState]);
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+
+  const onSubmit = async (data: any) => {
+    try {
+        if(!fichesContext?.fichesState || fichesContext?.fichesState === 0) {
+          await authAxios.post('/fiches', {
+            title: data.title ? data.title : 'Zestaw fiszek',
+            translationsList: data.translationsList,
+            userId: userContext?.userData?.id,
+            }, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+          })
+          Alert.alert('Success!', 'Stworzono fiszki!');
+          pageSwitcher('Main')
+        }
+        else {
+          await authAxios.patch(`/fiches/${fichesContext.fichesState}`, {
+            title: data.title || title,
+            translationsList: data.translationsList
+          }, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          Alert.alert('Success!', 'Edytowano fiszki!');
+          pageSwitcher('Main')
+        }
+    }
+    catch(error: any){
+      Alert.alert('Ups...coś poszło nie tak', error.response.data.message);
+    }
   };
   
   return (
     <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
+        <Modal 
+          isVisible={signUpModalVisibility} 
+          onBackdropPress={() => {pageSwitcher('Main')}}
+          style={styles.signUpModal}>
+          <View 
+            style={styles.signUpView}>
+            <Text style={{fontSize: 20}}>Zaloguj się aby stworzyć fiszki!</Text>
+             <Button
+                colors={['rgb(33,33,43)']}
+                fontColor='white'
+                buttonAction={() => pageSwitcher('Home')}
+              >
+                Zaloguj się lub zajerestruj!
+              </Button>
+          </View>
+        </Modal>
+        <ErrorModal
+					animationType='slide'
+					transparent={true}
+					visible={errorModalVisibility}
+					onRequestClose={() => {
+						setErrorModalVisibility(!errorModalVisibility)
+					}}
+				>
+					<TouchableOpacity
+					style={{
+							width: '100%',
+							height: '100%',
+							//@ts-ignore
+							cursor: 'default'
+						}}
+						onPress={() => setErrorModalVisibility(false)}
+						activeOpacity={1}
+					>
+					<View style={styles.centeredViewModal}>
+						<View style={styles.modalView}>
+              <Text style={styles.errorMessage}>⚠ Nie uzupełniłes wszystkich pól!</Text>
+						</View>
+					</View>
+					</TouchableOpacity>
+
+
+				</ErrorModal>
         <ScrollView>
           <SafeAreaView style={styles.mainContainer}>
             <View style={styles.topicContainer}>
@@ -37,6 +142,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                     <TextInput 
                       style={[styles.topicInput]} 
                       placeholder='Wpisz tytuł'
+                      defaultValue={title}
                       autoFocus
                       onBlur={() => {onBlur; setIsEditing(false)}}
                       onChangeText={(text) => {onChange(text); setTitle(text)}}
@@ -49,7 +155,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
               } 
               <View style={styles.saveIcon}>
                 <Pressable
-                  onPress={handleSubmit(onSubmit)}>
+                  onPress={handleSubmit(onSubmit, () => setErrorModalVisibility(true))}>
                   <Image
                     style={{width: 25, height: 25, tintColor: '#764ba3',}}
                     source= {require('./../../../assets/check-mark_icon.png')}
@@ -71,7 +177,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                     </Pressable>
                   </View>
                   <Controller
-                    name={`flashcards[${index}].foreignTranslation`}
+                    name={`translationsList[${index}].translations.create.foreignTranslation`}
                     control={control}
                     render={({field: {onChange, onBlur, value}}) => (
                       <TextInput 
@@ -79,12 +185,13 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                         placeholder='Podaj obce tłumaczenie'
                         onBlur={onBlur}
                         onChangeText={onChange}
+                        value={value}
                       />
                     )}
                     rules={{required: "Obce tłumaczenie jest wymagane",}}
                     />
                     <Controller
-                      name={`flashcards[${index}].polishTranslation`}
+                      name={`translationsList[${index}].translations.create.polishTranslation`}
                       control={control}
                       render={({field: {onChange, onBlur, value}}) => (
                         <TextInput 
@@ -92,6 +199,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                           placeholder='Podaj obce tłumaczenie'
                           onBlur={onBlur}
                           onChangeText={onChange}
+                          value={value}
                         />
                       )}
                       rules={{required: "Polskie tłumaczenie jest wymagane",}}
@@ -127,7 +235,8 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center'
+      alignItems: 'center',
+      paddingLeft: 10
     },
     input: {
       backgroundColor: 'white',
@@ -183,7 +292,6 @@ const styles = StyleSheet.create({
       shadowOffset: {
               width: 0,
               height: 0,
-              // height: -100,
       },
     shadowOpacity: 0.44,
     shadowRadius: 10.32,
@@ -220,7 +328,49 @@ const styles = StyleSheet.create({
       color: '#764ba3',
       zIndex: 2,
       marginRight: 7
-    }
+    },
+    signUpModal: {
+      width:'100%',
+      height:'100%',
+      alignItems: 'center',
+      margin:0,
+    },
+    signUpView: {
+      width:"90%",
+      height:'30%',
+      backgroundColor:'#fff',
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center',
+      justifyContent:'center',
+      borderRadius: 20
+    },
+    centeredViewModal: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 25,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  errorMessage: {
+    color: "#bf1650",
+    margin: 4,
+  },
+
 })
 
 export default NewFlashcardScreen;
