@@ -71,8 +71,9 @@ function FlashcardsListScreen({pageSwitcher, range}: any) {
         await authAxios.delete(`/fiches/${chosenFlashcardSet?.id}`)
         setModalVisibility(false)
 			  Alert.alert('Success!', 'Usunięto fiszki!');
-        setFichesSet([]);
-        setPage(0)
+        setFichesSet(prevFichesSet => 
+          prevFichesSet.filter(item => item.id !== chosenFlashcardSet?.id)
+        );
     }
     catch(error: any){
       Alert.alert('Ups...coś poszło nie tak', error.response.data.message);
