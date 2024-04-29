@@ -8,7 +8,8 @@ export class DiscordStrategy extends PassportStrategy(Strategy, 'discord') {
         super({
             clientID: process.env.DISCORD_CLIENT_ID,
             clientSecret: process.env.DISCORD_CLIENT_SECRET,
-            callbackURL: 'http://localhost:3001/auth/discord/callback',
+            callbackURL:
+                'https://multilern-production.up.railway.app/auth/discord/callback',
             scope: ['identify', 'email'],
         });
     }

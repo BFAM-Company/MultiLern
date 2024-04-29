@@ -4,7 +4,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
-    app.enableCors();
+    app.enableCors({
+        origin: true,
+    });
     const config = new DocumentBuilder()
         .setTitle('Multilern')
         .setDescription('The ultimate Multilern API description')
