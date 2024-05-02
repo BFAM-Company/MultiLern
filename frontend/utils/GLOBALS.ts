@@ -51,3 +51,8 @@ export const StylesVariables: IStylesVariable = {
 
   InputSize: Dimensions.get("window").height * 0.07,
 };
+
+
+export const BackendVariables = {
+  basicURL: 'multilern-production.up.railway.app'
+}

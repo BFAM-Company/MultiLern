@@ -57,7 +57,7 @@ function FlashcardsListScreen({pageSwitcher, range}: any) {
           }
         }
       } catch (e: any) {
-        console.error(e.message);
+        console.log(e);
       } finally {
         setLoading(false);
       }
