@@ -25,27 +25,24 @@ function ExcercisesScreen({pageSwitcher, searchableText}: any) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
       >
-      <ImageBackground
-        source= {require('./../../assets/gradientBackground.png')}
-        style={styles.ImageBackground}
-        resizeMode='cover'
-        blurRadius={100}
-      >
       <SafeAreaView>
         <ScrollView style={{width: '100%'}}>
           <View style={styles.SearchBarContainer}>
             <SearchBar pageSwitcher={pageSwitcher} currentText={searchableText} />
           </View>
-          
+          <Text
+            style={styles.boldText}
+          >
+            Najlepsze trafienia
+          </Text>
           <View style={styles.excercisesCardsSection}>
             {filteredExercises.map(excercise => (
-              <ExcercisesCard key={excercise.item.id} image={excercise.item.category} title={excercise.item.title} description={excercise.item.content} buttonAction={() => {console.log('chuj')}}/>
+              <ExcercisesCard  key={excercise.item.id} id={1} category={excercise.item.category} title={excercise.item.title} description={excercise.item.content} buttonAction={() => {console.log('chuj')}}/>
             ))}
           </View>
           <View style={{height: 200}}></View>
         </ScrollView>
       </SafeAreaView>
-      </ImageBackground>
       <Footer pageSwitcher={pageSwitcher}/>
     </KeyboardAvoidingView>
   );
@@ -138,6 +135,13 @@ const styles = StyleSheet.create({
     display:'flex',
     alignItems:'center',
     justifyContent:'center',
+  },
+  boldText:{
+    fontSize:25,
+    fontWeight: '900',
+    paddingTop:50,
+    paddingLeft: 20,
+    paddingBottom:20,
   },
 })
 
