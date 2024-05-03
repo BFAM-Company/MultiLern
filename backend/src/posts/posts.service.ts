@@ -134,7 +134,32 @@ export class PostsService {
                     { title: { contains: keyWords } },
                     { content: { contains: keyWords } }
                 ]
-            }
+            },
+            include: {
+                posts_images: {
+                    select: {
+                        images: {
+                            select: {
+                                img: true,
+                            },
+                        },
+                    },
+                },
+                posts_reviews: {
+                    include: {
+                        reviews: true,
+                    },
+                },
+                tags_posts: {
+                    include: {
+                        tags: {
+                            select: {
+                                title: true,
+                            },
+                        },
+                    },
+                },
+            },
         });
     
         posts.sort((a, b) => {
