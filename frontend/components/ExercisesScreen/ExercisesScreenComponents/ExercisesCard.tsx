@@ -3,6 +3,7 @@ import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from
 import RateComponent from './RateComponent';
 
 
+
 interface SubjectCardProps {
   id: number,
   buttonAction: any,
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   categoryText:{
     fontSize:20,
-    color:'gray',
+    color:'gray'
   },
   titleText:{
     fontSize:22,
