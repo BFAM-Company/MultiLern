@@ -21,7 +21,7 @@ const AxiosContext = createContext<AxiosContextProps>({
     baseURL: "https://multilern-production.up.railway.app/auth",
   }),
   publicAxios: axios.create({
-    baseURL: 'https://multilern-production.up.railway.app',
+    baseURL: "https://multilern-production.up.railway.app",
   })
 });
 
@@ -35,7 +35,7 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   });
 
   const publicAxios = axios.create({
-    baseURL: 'https://multilern-production.up.railway.app',
+    baseURL: "https://multilern-production.up.railway.app",
   });
 
   authAxios.interceptors.request.use(
