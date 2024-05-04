@@ -1,24 +1,62 @@
-import React, { useMemo } from "react";
-import { KeyboardAvoidingView, Platform, Text, StyleSheet, View, ScrollView, Image, TouchableOpacity, Animated } from "react-native";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { KeyboardAvoidingView, Platform, Text, StyleSheet, View, ScrollView, Image, TouchableOpacity, Animated, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ExcercisesCard from "./ExercisesScreenComponents/ExercisesCard";
-import { excercises } from "./Excercises.mock";
-import Fuse from 'fuse.js'
 import Footer from "../Footer/Footer";
+import SearchBar from "../SearchBar/SearchBar";
+import { AxiosContext } from "../context/AxiosProvider";
 
 function ExcercisesScreen({pageSwitcher, searchableText}: any) {
-  const fuseOptions = {
-    keys: [
-      "title",
-      "content"
-    ]
-  }
-  const fuse = new Fuse(excercises, fuseOptions)
+  const {publicAxios, authAxios} = useContext(AxiosContext);
+  const [loading, setLoading] = useState(false);
+  const [filteredExercises, setFilteredExercises] = useState<any[]>([])
 
-  const filteredExercises = useMemo(() => {
-    return fuse.search(searchableText)
+  useEffect(()=>{
+    const fetchPosts = async() =>{
+      setLoading(true);
+      const result = await publicAxios.get(`/posts/search/${searchableText}`)
+      if(result){
+        //console.log(result)
+        setFilteredExercises(result.data)
+      }
+    }
+    fetchPosts()
   }, [searchableText])
-  
+
+  const calcRating = (exercise: any) =>{
+    let rating = 0
+    let counter = 0;
+    //console.log(exercise.posts_reviews)
+    if (exercise.posts_reviews && Array.isArray(exercise.posts_reviews)) {
+      for(let i = 0; i < exercise.posts_reviews.length; i++){
+        counter++
+        rating += exercise.posts_reviews[i].reviews.rate
+      }
+      if (counter > 0) {
+          return rating / counter;
+      } else {
+          return 0;
+      }
+    } else {
+        return 0;
+    }
+  }
+
+  function formatDate(isoDateString: string) {
+    const months = [
+        "styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec",
+        "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"
+    ];
+
+    const date = new Date(isoDateString);
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+
+    const formattedDate = `${day} ${months[monthIndex]} ${year}`;
+    return formattedDate;
+  }
+
   return (
     <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -26,12 +64,23 @@ function ExcercisesScreen({pageSwitcher, searchableText}: any) {
       >
       <SafeAreaView>
         <ScrollView style={{width: '100%'}}>
-          <Text numberOfLines={2} style={styles.resultsOfSearching}>Wyniki wyszukiwania dla: <Text style={styles.searchedPhrase}>{searchableText}</Text></Text>
+          <View style={styles.SearchBarContainer}>
+            <SearchBar pageSwitcher={pageSwitcher} currentText={searchableText} />
+          </View>
+          <Text
+            style={styles.boldText}
+          >
+            Najlepsze trafienia
+          </Text>
           <View style={styles.excercisesCardsSection}>
-            {filteredExercises.map(excercise => (
-              <ExcercisesCard key={excercise.item.id} image={excercise.item.category} title={excercise.item.title} description={excercise.item.content} buttonAction={() => {console.log('chuj')}}/>
-            ))}
-            </View>
+            {filteredExercises.map(excercise => {
+              const rating = calcRating(excercise)
+              const isoDateString = excercise.date
+              const formattedDate = formatDate(isoDateString);
+              return(<ExcercisesCard  key={excercise.id} id={1} category={excercise.category} title={excercise.title} description={excercise.content} rate={rating} date={formattedDate} buttonAction={() => {console.log('chuj')}}/>)
+            })}
+          </View>
+          <View style={{height: 200}}></View>
         </ScrollView>
       </SafeAreaView>
       <Footer pageSwitcher={pageSwitcher}/>
@@ -119,6 +168,20 @@ const styles = StyleSheet.create({
   bellIcon:{
       width:30,
       height:30,
+  },
+  SearchBarContainer:{
+    width:'100%',
+    marginTop:20,
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  boldText:{
+    fontSize:25,
+    fontWeight: '900',
+    paddingTop:50,
+    paddingLeft: 20,
+    paddingBottom:20,
   },
 })
 
