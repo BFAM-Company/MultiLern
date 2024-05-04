@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "netlify-cli": "^17.23.1",
     "prisma": "^5.9.1"
   }
 }

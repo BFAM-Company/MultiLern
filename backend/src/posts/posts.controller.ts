@@ -36,6 +36,11 @@ export class PostsController {
         return this.postsService.findManyByCategory(category);
     }
 
+    @Get('/search/:keywords')
+    findManyByKeyWords(@Param('keywords') keywords: string) {
+        return this.postsService.findManyByKeyWord(keywords);
+    }
+
     @Patch(':id')
     update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
         return this.postsService.update(+id, updatePostDto);

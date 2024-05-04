@@ -127,6 +127,61 @@ export class PostsService {
             },
         });
     }
+    async findManyByKeyWord(keyWords: string) {
+        const posts = await this.prisma.posts.findMany({
+            where: {
+                OR: [
+                    { title: { contains: keyWords } },
+                    { content: { contains: keyWords } }
+                ]
+            },
+            include: {
+                posts_images: {
+                    select: {
+                        images: {
+                            select: {
+                                img: true,
+                            },
+                        },
+                    },
+                },
+                posts_reviews: {
+                    include: {
+                        reviews: true,
+                    },
+                },
+                tags_posts: {
+                    include: {
+                        tags: {
+                            select: {
+                                title: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    
+        posts.sort((a, b) => {
+            const aKeywordsCount = this.countKeywordsInText(a.title + " " + a.content, keyWords);
+            const bKeywordsCount = this.countKeywordsInText(b.title + " " + b.content, keyWords);
+    
+            return bKeywordsCount - aKeywordsCount;
+        });
+    
+        return posts;
+    }
+    
+    countKeywordsInText(text: string, keyWords: string) {
+        const keywords = keyWords.split(" ");
+        let count = 0;
+        for (const keyword of keywords) {
+            if (text.toLowerCase().includes(keyword.toLowerCase())) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     update(id: number, updatePostDto: UpdatePostDto) {
         return this.prisma.posts.update({

@@ -19,7 +19,11 @@ function NewFlashcardScreen({pageSwitcher}: any) {
   const {authAxios, publicAxios} = useContext(AxiosContext);
   const fichesContext = useContext(FichesContext)
 
-
+  useEffect(() => {
+    return () => {
+        fichesContext?.setFichesState(0);
+      };
+  }, []);
 
   const {handleSubmit, control, formState: {errors}} = useForm({
   });
@@ -30,7 +34,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
 
   useEffect(() => {
     const getFiches = async () => {
-      if(fichesContext?.fichesState  && fichesContext?.fichesState !== 0) {
+      if(fichesContext?.fichesState && fichesContext?.fichesState !== 0) {
         const response = await publicAxios.get(`/fiches/id/${fichesContext.fichesState}`)
         if(response && response.data) {
           response.data.fiches_translations.map((item:any) => (
@@ -52,6 +56,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
         if(!fichesContext?.fichesState || fichesContext?.fichesState === 0) {
           await authAxios.post('/fiches', {
             title: data.title ? data.title : 'Zestaw fiszek',
+            translationsList: data.translationsList,
             userId: userContext?.userData?.id,
             }, {
               headers: {

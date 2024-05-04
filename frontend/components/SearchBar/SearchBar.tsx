@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { View, StyleSheet, Image } from 'react-native';
 import Button from '../Button/Button';
 
-function SearchBar({pageSwitcher, setModalVisibility, modalVisibility}: any) {
+function SearchBar({pageSwitcher, setModalVisibility, modalVisibility, currentText}: any) {
   const [searchedText, setSearchedText] = useState<string>('')
+
+  useEffect(() =>{
+    setSearchedText(currentText)
+  }, [])
 
   return (
     <View style={styles.mainContainer}>

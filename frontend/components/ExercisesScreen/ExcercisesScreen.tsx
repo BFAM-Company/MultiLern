@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
-import { KeyboardAvoidingView, Platform, Text, StyleSheet, View, ScrollView, Image, TouchableOpacity, Animated } from "react-native";
+import { KeyboardAvoidingView, Platform, Text, StyleSheet, View, ScrollView, Image, TouchableOpacity, Animated, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ExcercisesCard from "./ExercisesScreenComponents/ExercisesCard";
 import { excercises } from "./Excercises.mock";
 import Fuse from 'fuse.js'
 import Footer from "../Footer/Footer";
+import SearchBar from "../SearchBar/SearchBar";
 
 function ExcercisesScreen({pageSwitcher, searchableText}: any) {
   const fuseOptions = {
@@ -26,12 +27,20 @@ function ExcercisesScreen({pageSwitcher, searchableText}: any) {
       >
       <SafeAreaView>
         <ScrollView style={{width: '100%'}}>
-          <Text numberOfLines={2} style={styles.resultsOfSearching}>Wyniki wyszukiwania dla: <Text style={styles.searchedPhrase}>{searchableText}</Text></Text>
+          <View style={styles.SearchBarContainer}>
+            <SearchBar pageSwitcher={pageSwitcher} currentText={searchableText} />
+          </View>
+          <Text
+            style={styles.boldText}
+          >
+            Najlepsze trafienia
+          </Text>
           <View style={styles.excercisesCardsSection}>
             {filteredExercises.map(excercise => (
-              <ExcercisesCard key={excercise.item.id} image={excercise.item.category} title={excercise.item.title} description={excercise.item.content} buttonAction={() => {console.log('chuj')}}/>
+              <ExcercisesCard  key={excercise.item.id} id={1} category={excercise.item.category} title={excercise.item.title} description={excercise.item.content} buttonAction={() => {console.log('chuj')}}/>
             ))}
-            </View>
+          </View>
+          <View style={{height: 200}}></View>
         </ScrollView>
       </SafeAreaView>
       <Footer pageSwitcher={pageSwitcher}/>
@@ -119,6 +128,20 @@ const styles = StyleSheet.create({
   bellIcon:{
       width:30,
       height:30,
+  },
+  SearchBarContainer:{
+    width:'100%',
+    marginTop:20,
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  boldText:{
+    fontSize:25,
+    fontWeight: '900',
+    paddingTop:50,
+    paddingLeft: 20,
+    paddingBottom:20,
   },
 })
 
