@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Animated, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import { StylesVariables } from '../../utils/GLOBALS';
@@ -9,23 +9,103 @@ import NotepadSection from './MainScreenComponents/NotepadSection';
 import FlashcardsSection from './MainScreenComponents/FlashcardsSection';
 import SubjectsSection from './MainScreenComponents/SubjectsSection';
 import ExamsSection from './MainScreenComponents/ExamsSection';
+import UserModal from './MainScreenComponents/UserModal';
+import NotificationModal from './MainScreenComponents/NotificationModal';
+import Footer from '../Footer/Footer';
+import { AuthContext } from '../context/AuthContext';
+import { AxiosContext } from '../context/AxiosProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserDataContext } from '../context/UserContext';
 
 
 
 function MainScreen({pageSwitcher}: any) {
     const scrollY  = useRef(new Animated.Value(0)).current;
+    const [userModalVisible, setUserModalVisible] = useState<boolean>(false)
+    const [notiModalVisible, setNotiModalVisible] = useState<boolean>(false)
+    const authContext = useContext(AuthContext)
+    const { authAxios } = useContext(AxiosContext);
+    const userContext = useContext(UserDataContext)
+
+
+    useEffect(() => {
+        fetchUserData()
+    }, [authContext?.authState.authenticated])
+
+    const fetchUserData = async () => {
+       try {
+            if(!authContext?.authState.isLoggingByGuest) {
+                const userDataResponse = await authAxios.get('/users/me');
+                if(userDataResponse.data)
+                    userContext?.setUserData({
+                        id: userDataResponse.data.id,
+                        nickname: userDataResponse.data.nickname,
+                        avatar: {uri: userDataResponse.data.avatar},
+                        email: userDataResponse.data.email,
+                    })
+                else {
+                    userContext?.setUserData({
+                        id: -1,
+                        nickname: 'Gość',
+                        avatar: require('./../../assets/demo-user-icon.png'),
+                        email: '',
+                    })
+                }
+            }
+            else {
+                userContext?.setUserData({
+                    id: -1,
+                    nickname: 'Gość',
+                    avatar: require('./../../assets/demo-user-icon.png'),
+                    email: '',})
+            }  
+        } catch (error: any) {
+            await AsyncStorage.clear()
+            authContext?.setAuthState({
+                accessToken: '',
+                refreshToken: '',
+                authenticated: false,
+            })
+        }
+
+    }
 
     const translateY = scrollY.interpolate({
-        inputRange: [0, 100], // Zakres, w którym chcesz zastosować animację
-        outputRange: [0, -50], // Przesunięcie elementu w górę
+        inputRange: [0, 100], 
+        outputRange: [0, -50], 
         extrapolate: 'clamp',
     })
 
+    const userModalShowHandler = () =>{
+        setUserModalVisible(true)
+        // console.log(userModalVisible)
+    }
+    const userModalHideHandler = () =>{
+        setUserModalVisible(false)
+        // console.log(userModalVisible)
+    }
+
+    const notificationModalShowHandler = () =>{
+        setNotiModalVisible(true)
+        // console.log(userModalVisible)
+    }
+    const notificationModalHideHandler = () =>{
+        setNotiModalVisible(false)
+        // console.log(userModalVisible)
+    }
+
+    const user ={
+        username: 'Johny123',
+        email:'john.smith@example.com',
+        avatar: require('./../../assets/demo-user-icon.png')
+    }
   return (
     <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
+        <UserModal isVisible={userModalVisible} hideHandler={userModalHideHandler} user={userContext?.userData} buttonAction={pageSwitcher}/>
+        <NotificationModal isVisible={notiModalVisible} hideHandler={notificationModalHideHandler} user={userContext?.userData} buttonAction={pageSwitcher}/>
         <ImageBackground
                 source= {require('./../../assets/gradientBoobles.png')}
                 style={styles.fixedContainerBgc}
@@ -49,7 +129,7 @@ function MainScreen({pageSwitcher}: any) {
                 stickyHeaderIndices={[0]}
                 showsVerticalScrollIndicator={false}
             >
-                <StickyNavbar />
+                <StickyNavbar userModalHandler={()=>{userModalShowHandler()}} notificationModalHandler={()=>{notificationModalShowHandler()}} />
                 <View style={styles.contentContainer}>
                     <View style={{width:100, height:3, backgroundColor:'lightgray', marginTop:5, marginBottom:150}}></View>
                     <BoxCarousel />
@@ -73,7 +153,8 @@ function MainScreen({pageSwitcher}: any) {
                 //height: translateY, // Ustawienia animacji wysokości, jeśli używasz interpolacji
                 }}
             >
-                <DynamicHeader/>
+                <DynamicHeader pageSwitcher={pageSwitcher}/>
+                
             </Animated.View>
         </ImageBackground>
     </KeyboardAvoidingView>

@@ -17,18 +17,23 @@ function Button({buttonAction, icons, children, colors, fontColor}: ButtonProps)
     colors.push(colors[0]);
   }
 
+  const textAlignment = icons ? 'left' : 'center'
+  const width = icons ? 'auto' : '100%' 
+
   return (
     <TouchableOpacity style={[styles.button]} onPress = {buttonAction}>
       <LinearGradient
       colors={colors}
       style={styles.gradient}
       > 
-      <Text style={[styles.buttonsText, {color: fontColor}]}>{children}</Text>
-      <View style={styles.imagesContainer}>
-        {icons && icons?.map((icon) => (
-          <Image key={icon} source={icon} style={[styles.accountServiceIcon, {tintColor: fontColor}]}/>
-        ))}
-      </View>
+      <Text style={[styles.buttonsText, {color: fontColor, textAlign: textAlignment, width: width}]}>{children}</Text>
+      {icons && icons.length > 0 && 
+        <View style={styles.imagesContainer}>
+          {icons?.map((icon) => (
+            <Image key={icon} source={icon} style={[styles.accountServiceIcon, {tintColor: fontColor}]}/>
+          ))}
+        </View>
+      }
       </LinearGradient>
   </TouchableOpacity>
   )

@@ -2,8 +2,8 @@ import { View, Text } from "react-native";
 import React from "react";
 
 const COLORS: any = {
-    umiem: '#00eda6',
-    ćwiczę: '#ff006f'
+    umiem: '#89F58E',
+    ćwiczę: '#FFB200'
 }
 
 function Choice({ type }: any) {

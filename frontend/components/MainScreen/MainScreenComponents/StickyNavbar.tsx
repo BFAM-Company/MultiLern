@@ -1,12 +1,18 @@
-import React from 'react';
-import { Animated, Dimensions } from 'react-native';
-import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
+import React, { useContext } from 'react';
+import { Animated } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import NotificationDot from './NotificationDot';
+import { UserDataContext } from '../../context/UserContext';
+
+interface StickyNavbarProps{
+    userModalHandler: ()=>void
+    notificationModalHandler: ()=>void
+}
 
 
+function StickyNavbar({userModalHandler, notificationModalHandler}: StickyNavbarProps) {
+    const userContext = useContext(UserDataContext)
 
-
-function StickyNavbar({pageSwitcher}: any) {
   return (
     <Animated.View
         style={styles.mainContainer}
@@ -14,14 +20,16 @@ function StickyNavbar({pageSwitcher}: any) {
         <View style={[styles.shadowContainer, styles.shadow]}>
         <TouchableOpacity
             style={[styles.button, styles.shadow]}
+            onPress={userModalHandler}
         >
             <Image
-                source={require('./../../../assets/demo-user-icon.png')}
+                source={userContext?.userData?.avatar}
                 style={[styles.image]}
                 />
         </TouchableOpacity>
         <TouchableOpacity
             style={styles.button}
+            onPress={notificationModalHandler}
         >
             <Image
                 source={require('./../../../assets/notification-icon.png')}
@@ -42,7 +50,6 @@ const styles = StyleSheet.create({
         zIndex:10000,
         width:'100%',
         height:170,
-        //marginTop:50,
         borderBottomLeftRadius:20,
         borderBottomRightRadius:20,
         overflow:'hidden',
@@ -74,7 +81,6 @@ const styles = StyleSheet.create({
         shadowOffset: {
             width: 0,
             height: 0,
-            // height: 150,
         },
         shadowOpacity: 0.58,
         shadowRadius: 16.00,
@@ -84,7 +90,7 @@ const styles = StyleSheet.create({
     image:{
         width:50,
         height:50,
-        //tintColor:'rgb(33,33,43)',
+        borderRadius: 100
     },
     bellIcon:{
         width:30,
