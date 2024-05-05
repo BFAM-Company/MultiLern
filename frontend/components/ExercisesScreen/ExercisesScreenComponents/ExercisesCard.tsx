@@ -1,12 +1,12 @@
-import React from 'react'
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useRef, useState } from 'react'
+import { Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import RateComponent from './RateComponent';
+import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 
 
 
 interface SubjectCardProps {
   id: number,
-  buttonAction: any,
   category?: any[],
   title: string,
   description: string,
@@ -14,64 +14,123 @@ interface SubjectCardProps {
   date: string
 }
 
-function ExcercisesCard({id, buttonAction, category, title, description, rate, date}: SubjectCardProps) {
+function ExcercisesCard({id, category, title, description, rate, date}: SubjectCardProps) {
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
+  const width = useSharedValue(windowWidth*0.9)
+  const height = useSharedValue(250)
+  const [isActive, setIsActive] = useState<boolean>(false)
+
+
+  const [prevOffsetY, setPrevOffsetY] = useState(0);
+
+  const handleScroll = (event:any) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+
+    if (offsetY === 0 ) {
+      // Użytkownik był na górze i próbował jeszcze raz przewinąć do góry
+     setIsActive(false)
+    }
+
+    setPrevOffsetY(offsetY);
+  }
+
+  const handlePress = () =>{
+    width.value = withSpring(windowWidth)
+    height.value = withSpring(windowHeight)
+    setIsActive(true)
+  }
+
+  const handleClose = () =>{
+    width.value = withSpring(windowWidth*0.9)
+    height.value = withSpring(250),
+    setIsActive(false)
+  }
+
   return (
-    <TouchableOpacity
-        onPress={()=>{buttonAction('Main')}}
-        style={styles.cardContainer}
-    >
-        <ImageBackground
-          style={styles.ImageBackground}
-          source={require('./../../../assets/cool-background.png')}
-          imageStyle={{
-            borderRadius:20,
-          }}
-          blurRadius={100}
+    <>
+      <TouchableOpacity
+          onPress={()=>{handlePress()}}
+          style={[styles.cardContainer,{display:isActive?'none':'flex'}]}
+        >
+          <Animated.View
+            style={{width, height}}
+          >
+            <ImageBackground
+              style={styles.ImageBackground}
+              source={require('./../../../assets/cool-background.png')}
+              imageStyle={{
+                borderRadius:20,
+              }}
+              blurRadius={100}
+            >
+              <View
+                style={styles.infoContainer}
+              >
+                <Text
+                  style={styles.categoryText}
+                  numberOfLines={1}
+                >
+                  {category}
+                </Text>
+                <Text 
+                  style={styles.titleText}
+                  numberOfLines={2}
+                >
+                  {title}
+                </Text>
+                <Text
+                  numberOfLines={2}
+                >
+                  {description}
+                </Text>
+              </View>
+              <View
+                style={styles.userInfoContainer}
+              >
+                <Image
+                  style={styles.userIcon}
+                  source={require('./../../../assets/demo-user-icon.png')}
+                />
+                <View>
+                  <Text>
+                    UserName
+                  </Text>
+                  <Text>
+                    {date}
+                  </Text>
+                </View>
+                <View
+                  style={styles.ratingContainer}
+                >
+                  <RateComponent rate={rate}/>
+                </View>
+              </View>
+            </ImageBackground>
+          </Animated.View>
+      </TouchableOpacity>
+      <Modal
+        visible={isActive}
+        transparent={true}
+        style={styles.Modal}
+      >
+        <ScrollView
+          onScroll={handleClose}
+          style={{backgroundColor:'transparent'}}
         >
           <View
-            style={styles.infoContainer}
+            style={styles.elementsContainer}
           >
-            <Text
-              style={styles.categoryText}
-              numberOfLines={1}
-            >
-              {category}
-            </Text>
-            <Text 
-              style={styles.titleText}
-              numberOfLines={2}
-            >
-              {title}
-            </Text>
-            <Text
-              numberOfLines={2}
-            >
-              {description}
-            </Text>
-          </View>
-          <View
-            style={styles.userInfoContainer}
+          <Animated.View
+            style={[styles.animatedView, {width, height, backgroundColor:'#fff'}]}
           >
-            <Image
-              style={styles.userIcon}
-              source={require('./../../../assets/demo-user-icon.png')}
-            />
-            <View>
-              <Text>
-                UserName
-              </Text>
-              <Text>
-                {date}
-              </Text>
-            </View>
-            <View
-              style={styles.ratingContainer}
-            >
-              <RateComponent rate={rate}/>
-            </View>
+            
+          </Animated.View>
           </View>
-        </ImageBackground>
-    </TouchableOpacity>
+        </ScrollView>
+      </Modal>
+
+    </>
   );
 }
 
@@ -80,13 +139,42 @@ function ExcercisesCard({id, buttonAction, category, title, description, rate, d
 
 const styles = StyleSheet.create({
   cardContainer:{
-    margin:10,
-    width:'90%',
+    height:'auto',
     display:'flex',
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between',
+    margin:10,
+    width:'90%',
     borderRadius:20,
+    backgroundColor:'#fff',
+    shadowColor: "#000",
+    shadowOffset: {
+            width: 0,
+            height: 0,
+            // height: -100,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+
+    elevation: 16,
+  },
+  Modal:{
+    width:'100%',
+    height:'100%',
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  elementsContainer:{
+    width:'100%',
+    height:'100%',
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'transparent'
+  },
+  animatedView:{
     backgroundColor:'#fff',
     shadowColor: "#000",
     shadowOffset: {
@@ -101,7 +189,7 @@ const styles = StyleSheet.create({
   },
   ImageBackground:{
     width:'100%',
-    height:250,
+    height:'100%',
     display:'flex',
     flexDirection:'column',
     alignItems:'flex-start',

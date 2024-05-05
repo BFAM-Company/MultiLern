@@ -5,6 +5,7 @@ import ExcercisesCard from "./ExercisesScreenComponents/ExercisesCard";
 import Footer from "../Footer/Footer";
 import SearchBar from "../SearchBar/SearchBar";
 import { AxiosContext } from "../context/AxiosProvider";
+import { ActivityIndicator } from "react-native-paper";
 
 function ExcercisesScreen({pageSwitcher, searchableText}: any) {
   const {publicAxios, authAxios} = useContext(AxiosContext);
@@ -13,10 +14,10 @@ function ExcercisesScreen({pageSwitcher, searchableText}: any) {
 
   useEffect(()=>{
     const fetchPosts = async() =>{
-      setLoading(true);
+      setLoading(true)
       const result = await publicAxios.get(`/posts/search/${searchableText}`)
       if(result){
-        //console.log(result)
+        setLoading(false)
         setFilteredExercises(result.data)
       }
     }
@@ -73,11 +74,14 @@ function ExcercisesScreen({pageSwitcher, searchableText}: any) {
             Najlepsze trafienia
           </Text>
           <View style={styles.excercisesCardsSection}>
+            {loading ? (
+              <ActivityIndicator color="gray" style={{ margin: 15 }} />
+            ) : null}
             {filteredExercises.map(excercise => {
               const rating = calcRating(excercise)
               const isoDateString = excercise.date
               const formattedDate = formatDate(isoDateString);
-              return(<ExcercisesCard  key={excercise.id} id={1} category={excercise.category} title={excercise.title} description={excercise.content} rate={rating} date={formattedDate} buttonAction={() => {console.log('chuj')}}/>)
+              return(<ExcercisesCard  key={excercise.id} id={1} category={excercise.category} title={excercise.title} description={excercise.content} rate={rating} date={formattedDate} />)
             })}
           </View>
           <View style={{height: 200}}></View>

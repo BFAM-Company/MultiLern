@@ -113,9 +113,9 @@ const AuthPage: React.FC<AuthPageProps> = ({navigation}) => {
 const NotesPage: React.FC<any> = ({ navigation, route }) => {
 
   return (
-    <PageSwitchTamplte navigation={navigation}>
+    <PageSwitchTemplate navigation={navigation}>
       <NotesScreen />
-    </PageSwitchTamplte>
+    </PageSwitchTemplate>
   );
 };
 
