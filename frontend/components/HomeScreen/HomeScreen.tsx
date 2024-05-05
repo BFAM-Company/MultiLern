@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
+
 function HomeScreen({pageSwitcher}: any) {
     const authContext = useContext(AuthContext)
 

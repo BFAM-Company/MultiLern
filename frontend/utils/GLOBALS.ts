@@ -8,6 +8,7 @@ export const linking: any = {
       Home: "home",
       LogIn: "login",
       SignUp: "signup",
+      Notes: "notes",
       Main: "main",
       Excercises: {
         path: "exercises/:description",
@@ -42,6 +43,7 @@ export const SubjectCategories = {
   Chemistry: require("./../assets/chemia-icon.png"),
   IT: require("./../assets/informatyka-icon.png"),
 };
+
 
 export const StylesVariables: IStylesVariable = {
   LogoSize:

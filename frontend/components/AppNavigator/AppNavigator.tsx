@@ -15,6 +15,8 @@ import FlashcardsSetScreen from '../Flashcards/FlashcardsSetScreen/FlashcardsSet
 import ExcercisesScreen from '../ExercisesScreen/ExcercisesScreen';
 import { AuthContext } from '../context/AuthContext';
 import AuthScreen from '../AuthScreen/AuthScreen';
+import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
+import NotesScreen from '../NotesScreen/NotesScreen';
 
 
 
@@ -99,6 +101,7 @@ const FlashcardsSetPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
+
 const AuthPage: React.FC<AuthPageProps> = ({navigation}) => {
   return (
     <PageSwitchTemplate navigation={navigation}>
@@ -106,6 +109,15 @@ const AuthPage: React.FC<AuthPageProps> = ({navigation}) => {
     </PageSwitchTemplate>
   );
 }
+
+const NotesPage: React.FC<any> = ({ navigation, route }) => {
+
+  return (
+    <PageSwitchTamplte navigation={navigation}>
+      <NotesScreen />
+    </PageSwitchTamplte>
+  );
+};
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -126,6 +138,7 @@ function AppNavigator() {
          <Stack.Screen name="NewFlashcard" component={NewFlashcardPage} />
          <Stack.Screen name="FlashcardsList" component={FlashcardsListPage} />
          <Stack.Screen name="FlashcardsSet" component={FlashcardsSetPage} />
+         <Stack.Screen name="Notes" component={gestureHandlerRootHOC(NotesPage)} />
        </Stack.Navigator>
     </NavigationContainer>
   );
