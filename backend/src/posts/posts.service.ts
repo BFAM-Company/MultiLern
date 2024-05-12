@@ -136,6 +136,17 @@ export class PostsService {
                 ]
             },
             include: {
+                users_posts: {
+                    select:{
+                        users: {
+                            select:{
+                                id: true,
+                                nickname: true,
+                                avatar: true
+                            }
+                        }
+                    }
+                },
                 posts_images: {
                     select: {
                         images: {

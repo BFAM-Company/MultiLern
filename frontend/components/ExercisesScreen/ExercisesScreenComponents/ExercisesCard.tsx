@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import RateComponent from './RateComponent';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
+import PostContent from './PostContent';
 
 
 
@@ -12,9 +13,10 @@ interface SubjectCardProps {
   description: string,
   rate: number,
   date: string
+  posts_images: any[]
 }
 
-function ExcercisesCard({id, category, title, description, rate, date}: SubjectCardProps) {
+function ExcercisesCard({id, category, title, description, rate, date, posts_images}: SubjectCardProps) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const width = useSharedValue(windowWidth*0.9)
@@ -22,18 +24,14 @@ function ExcercisesCard({id, category, title, description, rate, date}: SubjectC
   const [isActive, setIsActive] = useState<boolean>(false)
 
 
-  const [prevOffsetY, setPrevOffsetY] = useState(0);
+  // const handleScroll = (event:any) => {
+  //   const offsetY = event.nativeEvent.contentOffset.y;
 
-  const handleScroll = (event:any) => {
-    const offsetY = event.nativeEvent.contentOffset.y;
-
-    if (offsetY === 0 ) {
-      // Użytkownik był na górze i próbował jeszcze raz przewinąć do góry
-     setIsActive(false)
-    }
-
-    setPrevOffsetY(offsetY);
-  }
+  //   if (offsetY === 0 ) {
+  //     // Użytkownik był na górze i próbował jeszcze raz przewinąć do góry
+  //    handleClose();
+  //   }
+  // }
 
   const handlePress = () =>{
     width.value = withSpring(windowWidth)
@@ -114,20 +112,15 @@ function ExcercisesCard({id, category, title, description, rate, date}: SubjectC
         transparent={true}
         style={styles.Modal}
       >
-        <ScrollView
-          onScroll={handleClose}
-          style={{backgroundColor:'transparent'}}
-        >
           <View
             style={styles.elementsContainer}
           >
           <Animated.View
             style={[styles.animatedView, {width, height, backgroundColor:'#fff'}]}
           >
-            
+            <PostContent title={title} handleClose={handleClose} posts_images={posts_images} content={description}/>
           </Animated.View>
           </View>
-        </ScrollView>
       </Modal>
 
     </>
@@ -159,6 +152,9 @@ const styles = StyleSheet.create({
 
     elevation: 16,
   },
+  fixedContainerBgc:{
+    width:'100%',
+},
   Modal:{
     width:'100%',
     height:'100%',

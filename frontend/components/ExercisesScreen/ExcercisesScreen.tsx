@@ -81,7 +81,14 @@ function ExcercisesScreen({pageSwitcher, searchableText}: any) {
               const rating = calcRating(excercise)
               const isoDateString = excercise.date
               const formattedDate = formatDate(isoDateString);
-              return(<ExcercisesCard  key={excercise.id} id={1} category={excercise.category} title={excercise.title} description={excercise.content} rate={rating} date={formattedDate} />)
+              return(
+                <ExcercisesCard  
+                  key={excercise.id} 
+                  id={1} category={excercise.category} 
+                  title={excercise.title} 
+                  description={excercise.content} 
+                  rate={rating} date={formattedDate} 
+                  posts_images={excercise.posts_images}/>)
             })}
           </View>
           <View style={{height: 200}}></View>
