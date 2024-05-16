@@ -84,6 +84,7 @@ function ExcercisesScreen({pageSwitcher, searchableText}: any) {
               return(
                 <ExcercisesCard  
                   key={excercise.id} 
+                  user_data={excercise.users_posts}
                   id={1} category={excercise.category} 
                   title={excercise.title} 
                   description={excercise.content} 

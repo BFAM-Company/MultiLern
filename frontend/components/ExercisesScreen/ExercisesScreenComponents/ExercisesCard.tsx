@@ -3,11 +3,13 @@ import { Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableO
 import RateComponent from './RateComponent';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import PostContent from './PostContent';
+import { useData } from '@shopify/react-native-skia';
 
 
 
 interface SubjectCardProps {
   id: number,
+  user_data: any[],
   category?: any[],
   title: string,
   description: string,
@@ -16,7 +18,7 @@ interface SubjectCardProps {
   posts_images: any[]
 }
 
-function ExcercisesCard({id, category, title, description, rate, date, posts_images}: SubjectCardProps) {
+function ExcercisesCard({id, category, title, description, rate, date, posts_images, user_data}: SubjectCardProps) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const width = useSharedValue(windowWidth*0.9)
@@ -88,11 +90,11 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
               >
                 <Image
                   style={styles.userIcon}
-                  source={require('./../../../assets/demo-user-icon.png')}
+                  source={user_data[0].users.avatar?{uri: user_data[0].users.avatar}:require('./../../../assets/demo-user-icon.png')}
                 />
                 <View>
                   <Text>
-                    UserName
+                    {user_data[0].users.nickname}
                   </Text>
                   <Text>
                     {date}
@@ -116,9 +118,9 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
             style={styles.elementsContainer}
           >
           <Animated.View
-            style={[styles.animatedView, {width, height, backgroundColor:'#fff'}]}
+            style={{width, height, backgroundColor:'transparent'}}
           >
-            <PostContent title={title} handleClose={handleClose} posts_images={posts_images} content={description}/>
+            <PostContent id={id} title={title} handleClose={handleClose} posts_images={posts_images} content={description} user_data={user_data} date={date}/>
           </Animated.View>
           </View>
       </Modal>

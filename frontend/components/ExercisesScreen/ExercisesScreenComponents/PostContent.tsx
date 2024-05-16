@@ -1,22 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Animated, Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Animated, Dimensions, Image, ImageBackground, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import YellowStar from './YellowStar';
 import DynamicHeader from './DynamicHeader';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { BoxShadow } from '@shopify/react-native-skia';
+import Comments from './Comments';
 
 
 
 interface PostContentProps{
+    id:number,
     title: string,
+    user_data: any[],
+    date: string,
     content: string,
     handleClose: any,
     posts_images: any[]
 }
 
 
-function PostContent({title, handleClose, posts_images, content}: PostContentProps) {
-    const scrollY  = useRef(new Animated.Value(0)).current;
+function PostContent({id, title, handleClose, posts_images, content, user_data, date}: PostContentProps) {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
     const [imageZoom, setImageZoom] = useState<boolean>(false)
@@ -45,39 +47,30 @@ function PostContent({title, handleClose, posts_images, content}: PostContentPro
         );
     }
   return (
-    <ImageBackground
-                source= {require('./../../../assets/cool-background.png')}
-                style={styles.fixedContainerBgc}
-                imageStyle={{height:350}}
-                resizeMode='cover'
-                blurRadius={40}
+    <View        
+        style={styles.fixedContainerBgc}
         >   
-            <Animated.ScrollView 
-                style={{
-                    zIndex:10,
-                }}
-                contentContainerStyle={{ 
-                flexGrow: 1,
-                paddingTop:350,
-                }}
-                onScroll={Animated.event(
-                            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                            { useNativeDriver: false,
-                                listener:(event:any) => {
-                                    //
-                                }
-                             },
-                        )
-                }
-                scrollEventThrottle={16}
-                stickyHeaderIndices={[0]}
-                showsVerticalScrollIndicator={false}
-            >
+            <ScrollView>
+                <View style={styles.separator}></View>
                 <View style={styles.contentContainer}>
                     <View
                         style={{width:windowWidth, display:'flex', alignItems:'center', justifyContent:'center'}}
                     >
-                        <View style={{width:100, height:3, backgroundColor:'lightgray', marginTop:5, marginBottom:100}}></View>
+                        <View style={{width:100, height:3, backgroundColor:'lightgray', marginTop:5, marginBottom:50}}></View>
+                    </View>
+                    <View style={styles.userInfoContainer}>
+                        <Image
+                            style={styles.userIcon}
+                            source={user_data[0].users.avatar?{uri: user_data[0].users.avatar}:require('./../../../assets/demo-user-icon.png')}
+                        />
+                        <View style={styles.verticalContainer}>
+                            <Text
+                                style={styles.nickname}
+                            >{user_data[0].users.nickname}</Text>
+                            <Text
+                                style={styles.date}
+                            >{date}</Text>
+                        </View>
                     </View>
                     <Carousel
                         ref={(c) => { let _carousel = c }}
@@ -99,24 +92,10 @@ function PostContent({title, handleClose, posts_images, content}: PostContentPro
                     >
                         {content}
                     </Text>
-                    <View style={{height:1000}}></View>
+                    <Comments id={id} />
+                    <View style={{height:100}}></View>
                 </View>
-            </Animated.ScrollView>
-            <Animated.View
-                style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                zIndex: scrollY.interpolate({
-                    inputRange: [0, 50],
-                    outputRange: [100, 0],
-                    extrapolate: 'clamp',
-                    })
-                }}
-            >
-                <DynamicHeader title={title}/>
-            </Animated.View>
+            </ScrollView>
             <Modal
                 visible={imageZoom}
             >
@@ -130,7 +109,7 @@ function PostContent({title, handleClose, posts_images, content}: PostContentPro
                     {/* <ImageViewer imageUrls={[{url: zoomedImage}]} /> */}
                 </TouchableOpacity>
             </Modal>
-        </ImageBackground>
+        </View>
   );
 }
 
@@ -148,8 +127,12 @@ const styles = StyleSheet.create({
     },
     fixedContainerBgc:{
         width:'100%',
+        backgroundColor:'transparent'
     },
-
+    separator:{
+        width:'100%',
+        height:250,
+    },
     contentContainer:{
         width:'100%',
         marginTop:-50,
@@ -177,6 +160,11 @@ const styles = StyleSheet.create({
         resizeMode:'cover',
         borderRadius:10,
     },
+    userIcon:{
+        width:50,
+        height:50,
+        borderRadius:100,
+      },
     postTitle:{
         fontSize:30,
         fontWeight:'900',
@@ -196,6 +184,32 @@ const styles = StyleSheet.create({
         fontWeight:'700',
         color:'rgb(45,45,55)'
     },
+    userInfoContainer:{
+        width:'100%',
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'flex-start',
+        alignItems:'center',
+        padding:20,
+        marginBottom:10,
+    },
+    verticalContainer:{
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'flex-start',
+        justifyContent:'space-around',
+        marginLeft:40,
+    },
+    nickname:{
+        fontSize:22,
+        fontWeight:'700',
+        color:'rgb(45,45,55)'
+    },
+    date:{
+        fontSize:16,
+        fontWeight:'500',
+        color:'gray',
+    }
 })
 
 export default PostContent;

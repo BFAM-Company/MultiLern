@@ -41,6 +41,11 @@ export class PostsController {
         return this.postsService.findManyByKeyWord(keywords);
     }
 
+    @Get('/postComments/:id')
+    getCommentsByPostId(@Param('id') id: number) {
+        return this.postsService.getCommentsById(id);
+    }
+
     @Patch(':id')
     update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
         return this.postsService.update(+id, updatePostDto);

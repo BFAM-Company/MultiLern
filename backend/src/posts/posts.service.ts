@@ -127,6 +127,24 @@ export class PostsService {
             },
         });
     }
+    getCommentsById(id: number) {
+        return this.prisma.posts.findMany({
+            where: {
+                parentPostId: id,
+            },
+            include: {
+                posts_images: {
+                    select: {
+                        images: {
+                            select: {
+                                img: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    }
     async findManyByKeyWord(keyWords: string) {
         const posts = await this.prisma.posts.findMany({
             where: {
