@@ -9,7 +9,7 @@ import { ActivityIndicator } from "react-native-paper";
 
 function ExcercisesScreen({pageSwitcher, searchableText}: any) {
   const {publicAxios, authAxios} = useContext(AxiosContext);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [filteredExercises, setFilteredExercises] = useState<any[]>([])
 
   useEffect(()=>{

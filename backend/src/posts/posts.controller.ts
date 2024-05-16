@@ -41,7 +41,7 @@ export class PostsController {
         return this.postsService.findManyByKeyWord(keywords);
     }
 
-    @Get('/postComments/:id')
+    @Get('/postcomments/:id')
     getCommentsByPostId(@Param('id') id: number) {
         return this.postsService.getCommentsById(id);
     }
