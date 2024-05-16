@@ -42,8 +42,8 @@ export class PostsController {
     }
 
     @Get('/postcomments/:id')
-    getCommentsByPostId(@Param('id') id: number) {
-        return this.postsService.getCommentsById(id);
+    getCommentsByPostId(@Param('id') id: string) {
+        return this.postsService.getCommentsById(Number(id));
     }
 
     @Patch(':id')
