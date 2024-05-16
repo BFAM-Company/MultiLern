@@ -133,6 +133,22 @@ export class PostsService {
                 parentPostId: id,
             },
             include: {
+                users_posts: {
+                    select:{
+                        users: {
+                            select:{
+                                id: true,
+                                nickname: true,
+                                avatar: true
+                            }
+                        }
+                    }
+                },
+                posts_reviews: {
+                    include: {
+                        reviews: true,
+                    },
+                },
                 posts_images: {
                     select: {
                         images: {
