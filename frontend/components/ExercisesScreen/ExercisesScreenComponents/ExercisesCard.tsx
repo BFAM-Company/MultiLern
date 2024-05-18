@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native'
+import { Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View, ScrollView, NativeUIEvent } from 'react-native'
 import RateComponent from './RateComponent';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import PostContent from './PostContent';
@@ -40,7 +40,12 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
     height.value = withSpring(windowHeight)
     setIsActive(true)
   }
-
+  const handleScroll = (event: any) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    if (offsetY == 0) {
+      handleClose();
+    }
+  }
   const handleClose = () =>{
     width.value = withSpring(windowWidth*0.9)
     height.value = withSpring(250),
@@ -120,7 +125,7 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
           <Animated.View
             style={{width, height, backgroundColor:'transparent'}}
           >
-            <PostContent id={id} title={title} handleClose={handleClose} posts_images={posts_images} content={description} user_data={user_data} date={date}/>
+            <PostContent id={id} title={title} handleClose={handleScroll} posts_images={posts_images} content={description} user_data={user_data} date={date}/>
           </Animated.View>
           </View>
       </Modal>
@@ -170,7 +175,7 @@ const styles = StyleSheet.create({
     display:'flex',
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor:'transparent'
+    backgroundColor:'rgba(0,0,0,0.5)'
   },
   animatedView:{
     backgroundColor:'#fff',

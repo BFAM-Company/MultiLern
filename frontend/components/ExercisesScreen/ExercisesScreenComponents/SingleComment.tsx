@@ -15,25 +15,16 @@ interface SubjectCardProps {
   description: string,
   rate: number,
   date: string
-  posts_images: any[]
+  posts_images: any[],
 }
 
 function SingleComment({id, category, title, description, rate, date, posts_images, user_data}: SubjectCardProps) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const width = useSharedValue(windowWidth*0.9)
-  const height = useSharedValue(250)
+  const height = useSharedValue(200)
   const [isActive, setIsActive] = useState<boolean>(false)
 
-
-  // const handleScroll = (event:any) => {
-  //   const offsetY = event.nativeEvent.contentOffset.y;
-
-  //   if (offsetY === 0 ) {
-  //     // Użytkownik był na górze i próbował jeszcze raz przewinąć do góry
-  //    handleClose();
-  //   }
-  // }
 
   const handlePress = () =>{
     width.value = withSpring(windowWidth)
@@ -41,9 +32,16 @@ function SingleComment({id, category, title, description, rate, date, posts_imag
     setIsActive(true)
   }
 
+  const handleScroll = (event: any) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    if (offsetY == 0) {
+      handleClose();
+    }
+  };
+
   const handleClose = () =>{
     width.value = withSpring(windowWidth*0.9)
-    height.value = withSpring(250),
+    height.value = withSpring(200),
     setIsActive(false)
   }
 
@@ -54,28 +52,36 @@ function SingleComment({id, category, title, description, rate, date, posts_imag
           style={[styles.cardContainer,{display:isActive?'none':'flex'}]}
         >
           <Animated.View
-            style={{width, height}}
+            style={[styles.commentContainer,{width, height}]}
           >
-            <View>
-                <Text>
-                {user_data[0].users.nickname}
-                </Text>
-                <Text>
-                {date}
-                </Text>
-            </View>
-            <View
+            <View style={styles.userContainer}>
+                <Image
+                    style={styles.userIcon}
+                    source={user_data[0].users.avatar?{uri: user_data[0].users.avatar}:require('./../../../assets/demo-user-icon.png')}
+                />
+                <View>
+                    <Text>
+                        {user_data[0].users.nickname}
+                    </Text>
+                    <Text>
+                        {date}
+                    </Text>
+                </View>
+                <View
                 style={styles.ratingContainer}
-            >
-                <RateComponent rate={rate}/>
+                >
+                    <RateComponent rate={rate}/>
+                </View>
             </View>
             <Text
                 numberOfLines={2}
+                style={styles.commentTitleText}
             >
                 {title}
             </Text>
             <Text
                 numberOfLines={4}
+                style={styles.commentContent}
             >
                 {description}
             </Text>
@@ -92,7 +98,7 @@ function SingleComment({id, category, title, description, rate, date, posts_imag
           <Animated.View
             style={{width, height, backgroundColor:'transparent'}}
           >
-            <PostContent id={id} title={title} handleClose={handleClose} posts_images={posts_images} content={description} user_data={user_data} date={date}/>
+            <PostContent id={id} title={title} handleClose={handleScroll} posts_images={posts_images} content={description} user_data={user_data} date={date}/>
           </Animated.View>
           </View>
       </Modal>
@@ -107,10 +113,6 @@ function SingleComment({id, category, title, description, rate, date, posts_imag
 const styles = StyleSheet.create({
   cardContainer:{
     height:'auto',
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
     margin:10,
     width:'90%',
     borderRadius:20,
@@ -126,8 +128,25 @@ const styles = StyleSheet.create({
 
     elevation: 16,
   },
+
   fixedContainerBgc:{
     width:'100%',
+},
+userContainer:{
+    width:'100%',
+    height:70,
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    padding:10,
+},
+commentContainer:{
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'flex-start',
+    alignItems:'flex-start',
+    padding:10,
 },
   Modal:{
     width:'100%',
@@ -142,7 +161,7 @@ const styles = StyleSheet.create({
     display:'flex',
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor:'transparent'
+    backgroundColor:'rgba(0,0,0,0.5)'
   },
   animatedView:{
     backgroundColor:'#fff',
@@ -198,6 +217,16 @@ const styles = StyleSheet.create({
   },
   ratingContainer:{
     width:'40%',
+  },
+  commentTitleText:{
+    fontSize:18,
+    fontWeight:'900',
+    color:'rgb(45,45,55)',
+  },
+  commentContent:{
+    fontSize:16,
+    color:'gray',
+    fontWeight:'500',
   },
 })
 

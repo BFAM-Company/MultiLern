@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import SearchBar from '../../SearchBar/SearchBar';
 import { AxiosContext } from '../../context/AxiosProvider';
-import SingleComment from './singleComment';
+import SingleComment from './SingleComment';
 import { ActivityIndicator } from 'react-native-paper';
+import CommentButton from './CommentButton';
       
 
 interface CommentsProps{
@@ -17,19 +18,18 @@ function Comments({id}: CommentsProps) {
 
 
     useEffect(()=>{
-        console.log('fetching')
-        const fetchPosts = async() =>{
-            setLoading(true)
-            const result = await publicAxios.get(`/posts/postcomments/${2}`)
-            if(result){
-                console.log(result.data)
-                setLoading(false)
-                setComments(result.data)
-            }
-        }
         fetchPosts()
         }, [id])
 
+    const fetchPosts = async() =>{
+        setLoading(true)
+        const result = await publicAxios.get(`/posts/postcomments/${id}`)
+        if(result){
+            //console.log(result.data)
+            setLoading(false)
+            setComments(result.data)
+        }
+    }
 
     function formatDate(isoDateString: string) {
         const months = [
@@ -83,13 +83,18 @@ function Comments({id}: CommentsProps) {
                 <SingleComment  
                   key={comment.id} 
                   user_data={comment.users_posts}
-                  id={1}
+                  id={comment.id}
                   title={comment.title} 
                   description={comment.content} 
-                  rate={3} 
+                  rate={rating} 
                   date={formattedDate} 
                   posts_images={comment.posts_images}/>)
             })}
+            {
+                !comments.length?(<Text style={{fontSize:18, color:'gray', fontWeight:'900', margin:10}}>Nic tu nie ma. Bądź pierwszy, który skomentuje!</Text>):null
+            }
+
+            <CommentButton id={id} handleRefresh={fetchPosts}/>
         </View>
     </View>
   );
@@ -104,8 +109,8 @@ const styles = StyleSheet.create({
         alignItems:'flex-start',
         padding:20,
         backgroundColor:'rgb(230,230,230)',
-        borderTopLeftRadius:10,
-        borderTopRightRadius:10,
+        borderTopLeftRadius:20,
+        borderTopRightRadius:20,
         marginTop:50,
     },
     boldText:{

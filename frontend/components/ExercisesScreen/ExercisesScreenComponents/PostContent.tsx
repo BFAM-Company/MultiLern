@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Animated, Dimensions, Image, ImageBackground, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import YellowStar from './YellowStar';
-import DynamicHeader from './DynamicHeader';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Carousel from 'react-native-snap-carousel';
 import Comments from './Comments';
 
 
@@ -50,7 +48,9 @@ function PostContent({id, title, handleClose, posts_images, content, user_data, 
     <View        
         style={styles.fixedContainerBgc}
         >   
-            <ScrollView>
+            <ScrollView
+                onScroll={handleClose}
+            >
                 <View style={styles.separator}></View>
                 <View style={styles.contentContainer}>
                     <View
@@ -93,7 +93,7 @@ function PostContent({id, title, handleClose, posts_images, content, user_data, 
                         {content}
                     </Text>
                     <Comments id={id} />
-                    <View style={{height:100}}></View>
+                    {/* <View style={{height:100}}></View> */}
                 </View>
             </ScrollView>
             <Modal
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         width:'100%',
         marginTop:-50,
         height:'auto',
-        paddingBottom:100,
+        //paddingBottom:100,
         display: 'flex',
         alignItems: 'center',
         justifyContent:'flex-start',
