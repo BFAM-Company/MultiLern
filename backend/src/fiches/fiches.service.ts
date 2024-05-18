@@ -8,65 +8,85 @@ export class FichesService {
     constructor(private readonly prisma: PrismaService) {}
 
     create(createFichDto: CreateFichDto) {
-        return this.prisma.fiches.create({
-            data: {
-                title: createFichDto.title,
-                users_fiches: {
-                    create: {
-                        userId: createFichDto.userId,
+        try {
+            return this.prisma.fiches.create({
+                data: {
+                    title: createFichDto.title,
+                    users_fiches: {
+                        create: {
+                            userId: createFichDto.userId,
+                        },
+                    },
+                    fiches_translations: {
+                        create: createFichDto.translationsList,
                     },
                 },
-                fiches_translations: {
-                    create: createFichDto.translationsList,
-                },
-            },
-        });
+            });
+        } catch (e) {
+            return e.message;
+        }
     }
 
     findAll(page: number) {
-        return this.prisma.fiches.findMany({
-            skip: page * 10,
-            take: 10,
-        });
+        try {
+            return this.prisma.fiches.findMany({
+                skip: page * 10,
+                take: 10,
+            });
+        } catch (e) {
+            return e.message;
+        }
     }
 
     findById(id: number) {
-        return this.prisma.fiches.findUnique({
-            where: {
-                id: id,
-            },
-            include: {
-                fiches_translations: {
-                    select: {
-                        id: true,
-                        translations: true,
-                    },
-                    orderBy: {
-                        id: 'desc',
+        try {
+            return this.prisma.fiches.findUnique({
+                where: {
+                    id: id,
+                },
+                include: {
+                    fiches_translations: {
+                        select: {
+                            id: true,
+                            translations: true,
+                        },
+                        orderBy: {
+                            id: 'desc',
+                        },
                     },
                 },
-            },
-        });
+            });
+        } catch (e) {
+            return e.message;
+        }
     }
 
     findAllByUser(id: number, page: number) {
-        return this.prisma.fiches.findMany({
-            where: { users_fiches: { some: { userId: id } } },
-            skip: page * 10,
-            take: 10,
-        });
+        try {
+            return this.prisma.fiches.findMany({
+                where: { users_fiches: { some: { userId: id } } },
+                skip: page * 10,
+                take: 10,
+            });
+        } catch (e) {
+            return e.message;
+        }
     }
 
     update(id: number, updateFichDto: UpdateFichDto) {
-        return this.prisma.fiches.update({
-            where: { id: id },
-            data: {
-                title: updateFichDto.title,
-                fiches_translations: {
-                    create: updateFichDto.translationsList,
+        try {
+            return this.prisma.fiches.update({
+                where: { id: id },
+                data: {
+                    title: updateFichDto.title,
+                    fiches_translations: {
+                        create: updateFichDto.translationsList,
+                    },
                 },
-            },
-        });
+            });
+        } catch (e) {
+            return e.message;
+        }
     }
 
     async remove(id: number) {
@@ -96,7 +116,7 @@ export class FichesService {
                 },
             });
         } catch (error) {
-            throw new Error(error.message);
+            return error.message;
         }
     }
 }
