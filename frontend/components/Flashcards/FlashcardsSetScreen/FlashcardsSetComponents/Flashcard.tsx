@@ -5,6 +5,7 @@ import Choice from './Choice';
 import { shadow } from 'react-native-paper';
 
 interface FlashcardProps {
+  testID: string,
   foreignTranslation: string,
   polishTranslation: string,
   isFirst: boolean,
@@ -14,7 +15,7 @@ interface FlashcardProps {
 }
 
 
-function Flashcard({foreignTranslation, polishTranslation, isFirst, swipe, titlSign,flashcardRotationValue ,...rest }: FlashcardProps) {
+function Flashcard({testID, foreignTranslation, polishTranslation, isFirst, swipe, titlSign,flashcardRotationValue ,...rest }: FlashcardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [animatedValue, setAnimatedValue] = useState(flashcardRotationValue);
 
@@ -100,6 +101,7 @@ function Flashcard({foreignTranslation, polishTranslation, isFirst, swipe, titlS
 
   return (
       <Animated.View
+        testID={testID}
           style={[
             styles.container,
             isFirst && animatedCardStyle,

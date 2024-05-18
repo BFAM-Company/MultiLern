@@ -1,9 +1,9 @@
 import * as React from 'react';
 import AppNavigator from './components/AppNavigator/AppNavigator';
-import { AuthProvider } from './components/context/AuthContext';
-import { AxiosProvider } from './components/context/AxiosProvider';
-import { UserDataProvider } from './components/context/UserContext';
-import { FichesProvider } from './components/context/FichesContext';
+import { AuthProvider } from './components/context/AuthContext/AuthContext';
+import { AxiosProvider } from './components/context/AxiosProvider/AxiosProvider';
+import { UserDataProvider } from './components/context/UserContext/UserContext';
+import { FichesProvider } from './components/context/FichesContext/FichesContext';
 
 
 function App() {

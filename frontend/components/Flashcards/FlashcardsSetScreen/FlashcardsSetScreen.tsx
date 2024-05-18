@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } 
 import { Platform, Text, StyleSheet, View, ScrollView, Image, TouchableOpacity, Animated, PanResponder, Dimensions, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Flashcard from "./FlashcardsSetComponents/Flashcard";
-import { AxiosContext } from "../../context/AxiosProvider";
+import { AxiosContext } from "../../context/AxiosProvider/AxiosProvider";
 
 interface FlashcardSetProps {
   id: number,
@@ -171,7 +171,7 @@ function FlashcardsSetScreen({pageSwitcher, id}: any) {
     </Modal>
     <SafeAreaView style={styles.mainContainer}>
       <Text style={styles.header}>FISZKI</Text>
-      <View style={styles.flashcardsContainer}>
+      <View style={styles.flashcardsContainer} testID="flashcards-container">
        {
         flashcards?.fiches_translations.map((item, index )=> {
           const isFirst = index == 0;
@@ -179,6 +179,7 @@ function FlashcardsSetScreen({pageSwitcher, id}: any) {
 
           return (
            <Flashcard
+             testID={`swipeable-flashcard`}
              key={index}
              foreignTranslation={item.translations.foreignTranslation}
              polishTranslation={item.translations.polishTranslation}

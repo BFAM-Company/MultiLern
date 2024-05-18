@@ -4,8 +4,8 @@ import { View, Text, StyleSheet, ImageBackground, Image, Platform } from 'react-
 import Button from '../Button/Button';
 import { useState } from 'react';
 import { StylesVariables } from '../../utils/GLOBALS';
-import { AuthContext } from '../context/AuthContext';
-import { AxiosContext } from '../context/AxiosProvider';
+import { AuthContext } from '../context/AuthContext/AuthContext';
+import { AxiosContext } from '../context/AxiosProvider/AxiosProvider';
 // import { setGenericPassword } from 'react-native-keychain';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { dismissBrowser, openAuthSessionAsync } from 'expo-web-browser';
@@ -42,7 +42,7 @@ function LogInScreen({pageSwitcher}: any) {
                     authenticated: true,
                 });
             }
-            else Alert.alert('Nieprawidłowe dane spierdalaj')
+            else Alert.alert('Login Failed', 'Nieprawidłowe dane spierdalaj')
         }
         catch(error: any){
             Alert.alert('Login Failed', error.response.data.message);
@@ -51,7 +51,7 @@ function LogInScreen({pageSwitcher}: any) {
     }
 
     const loginByDiscord = async () => {
-        const response = await openAuthSessionAsync('http://localhost:3001/auth/discord', 'http://localhost:3001/auth/discord/callback')
+        const response = await openAuthSessionAsync('https://multilern-production.up.railway.app/auth/discord', 'https://multilern-production.up.railway.app/auth/discord/callback')
         if(response.type === 'success') {
             const REGEX =  /[?&]([^=#]+)=([^&#]*)/g
             let params: any = {}, match;

@@ -23,6 +23,7 @@ function Button({buttonAction, icons, children, colors, fontColor}: ButtonProps)
   return (
     <TouchableOpacity style={[styles.button]} onPress = {buttonAction}>
       <LinearGradient
+      testID="gradient"
       colors={colors}
       style={styles.gradient}
       > 
@@ -30,7 +31,7 @@ function Button({buttonAction, icons, children, colors, fontColor}: ButtonProps)
       {icons && icons.length > 0 && 
         <View style={styles.imagesContainer}>
           {icons?.map((icon) => (
-            <Image key={icon} source={icon} style={[styles.accountServiceIcon, {tintColor: fontColor}]}/>
+            <Image testID="account-service-icon" key={icon} source={icon} style={[styles.accountServiceIcon, {tintColor: fontColor}]}/>
           ))}
         </View>
       }

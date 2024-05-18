@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Animated } from 'react-native';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import NotificationDot from './NotificationDot';
-import { UserDataContext } from '../../context/UserContext';
+import { UserDataContext } from '../../context/UserContext/UserContext';
 
 interface StickyNavbarProps{
     userModalHandler: ()=>void
@@ -21,6 +21,7 @@ function StickyNavbar({userModalHandler, notificationModalHandler}: StickyNavbar
         <TouchableOpacity
             style={[styles.button, styles.shadow]}
             onPress={userModalHandler}
+            testID='userModalButton'
         >
             <Image
                 source={userContext?.userData?.avatar}
@@ -30,6 +31,7 @@ function StickyNavbar({userModalHandler, notificationModalHandler}: StickyNavbar
         <TouchableOpacity
             style={styles.button}
             onPress={notificationModalHandler}
+            testID='notificationModalButton'
         >
             <Image
                 source={require('./../../../assets/notification-icon.png')}
