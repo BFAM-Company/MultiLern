@@ -1,0 +1,356 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlashcardsSection renders correctly 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "space-around",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "justifyContent": "center",
+        "padding": 20,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "rgb(33,33,43)",
+          "fontSize": 24,
+          "fontWeight": "900",
+        }
+      }
+    >
+      Fiszki
+    </Text>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#fff",
+        "borderRadius": 20,
+        "display": "flex",
+        "elevation": 20,
+        "height": 300,
+        "justifyContent": "space-between",
+        "opacity": 1,
+        "padding": 10,
+        "shadowColor": "#000",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0.58,
+        "shadowRadius": 16,
+        "width": 180,
+      }
+    }
+    testID="myPageSwitcher"
+  >
+    <Image
+      source={1}
+      style={
+        {
+          "backgroundColor": "#F5F5F5",
+          "borderRadius": 20,
+          "height": 170,
+          "width": 170,
+        }
+      }
+    />
+    <Text
+      style={
+        {
+          "color": "rgb(33,33,43)",
+          "fontSize": 18,
+          "fontWeight": "900",
+          "padding": 5,
+        }
+      }
+    >
+      Twoje Fiszki
+    </Text>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#c085ff",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "padding": 5,
+          }
+        }
+      >
+        Zobacz wszystkie
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "rgb(33,33,43)",
+          "borderRadius": 20,
+          "display": "flex",
+          "height": 30,
+          "justifyContent": "center",
+          "opacity": 1,
+          "width": "90%",
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#fff",
+            "fontSize": 16,
+            "fontWeight": "500",
+          }
+        }
+      >
+        Dalej
+      </Text>
+    </View>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#fff",
+        "borderRadius": 20,
+        "display": "flex",
+        "elevation": 20,
+        "height": 300,
+        "justifyContent": "space-between",
+        "opacity": 1,
+        "padding": 10,
+        "shadowColor": "#000",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0.58,
+        "shadowRadius": 16,
+        "width": 180,
+      }
+    }
+  >
+    <Image
+      resizeMode="contain"
+      source={1}
+      style={
+        {
+          "backgroundColor": "#F5F5F5",
+          "borderRadius": 20,
+          "height": 170,
+          "width": 170,
+        }
+      }
+    />
+    <Text
+      style={
+        {
+          "color": "rgb(33,33,43)",
+          "fontSize": 18,
+          "fontWeight": "900",
+          "padding": 5,
+        }
+      }
+    >
+      Nowe Fiszki
+    </Text>
+    <Text
+      style={
+        {
+          "color": "#c085ff",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "padding": 5,
+        }
+      }
+    >
+      Utwórz nowy set
+    </Text>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "rgb(33,33,43)",
+          "borderRadius": 20,
+          "display": "flex",
+          "height": 30,
+          "justifyContent": "center",
+          "opacity": 1,
+          "width": "90%",
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#fff",
+            "fontSize": 16,
+            "fontWeight": "500",
+          }
+        }
+      >
+        Utwórz +
+      </Text>
+    </View>
+  </View>
+</View>
+`;

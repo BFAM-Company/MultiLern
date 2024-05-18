@@ -85,10 +85,6 @@ export class AuthController {
             req.user.global_name
         );
 
-        //TODO check if user uses mobile or web
-        // res.redirect(
-        //     `http://localhost:8081?accessToken=${userData.accessToken}&refreshToken=${userData.refreshToken}`
-        // );
         res.redirect(
             `exp://192.168.33.8:8081?accessToken=${userData.accessToken}&refreshToken=${userData.refreshToken}`
         );

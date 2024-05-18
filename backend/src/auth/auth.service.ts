@@ -14,20 +14,24 @@ export class AuthService {
     ) {}
 
     async refresh(refreshStr: string): Promise<string | undefined> {
-        const refreshToken = await this.retrieveRefreshToken(refreshStr);
-        if (!refreshToken) return undefined;
+        try {
+            const refreshToken = await this.retrieveRefreshToken(refreshStr);
+            if (!refreshToken) return undefined;
 
-        const user = await this.userService.findOne(refreshToken.userId);
+            const user = await this.userService.findOne(refreshToken.userId);
 
-        if (!user) return undefined;
+            if (!user) return undefined;
 
-        const accessToken = {
-            userId: refreshToken.userId,
-        };
+            const accessToken = {
+                userId: refreshToken.userId,
+            };
 
-        return sign(accessToken, process.env.ACCESS_SECRET, {
-            expiresIn: '5m',
-        });
+            return sign(accessToken, process.env.ACCESS_SECRET, {
+                expiresIn: '5m',
+            });
+        } catch (e) {
+            return e.message;
+        }
     }
 
     private async retrieveRefreshToken(
@@ -53,27 +57,31 @@ export class AuthService {
         isLoggingFromOutside: boolean = false,
         username?: string
     ): Promise<{ accessToken: string; refreshToken: string } | undefined> {
-        let user;
-        if (logginMethod === 'Multilern') {
-            user = email
-                ? await this.userService.findByEmail(email)
-                : await this.userService.findByUsername(username);
-        } else
-            user = await this.userService.findWithLogginMethod(
-                logginMethod,
-                email
-            );
+        try {
+            let user;
+            if (logginMethod === 'Multilern') {
+                user = email
+                    ? await this.userService.findByEmail(email)
+                    : await this.userService.findByUsername(username);
+            } else
+                user = await this.userService.findWithLogginMethod(
+                    logginMethod,
+                    email
+                );
 
-        if (!user) {
-            return undefined;
+            if (!user) {
+                return undefined;
+            }
+
+            if (!isLoggingFromOutside) {
+                const isMatch = await compare(password, user.password);
+                if (!isMatch) return undefined;
+            }
+
+            return this.newRefreshAndAccessToken(user, values);
+        } catch (e) {
+            return e.message;
         }
-
-        if (!isLoggingFromOutside) {
-            const isMatch = await compare(password, user.password);
-            if (!isMatch) return undefined;
-        }
-
-        return this.newRefreshAndAccessToken(user, values);
     }
 
     private async newRefreshAndAccessToken(
@@ -107,15 +115,19 @@ export class AuthService {
     }
 
     async logout(refreshStr): Promise<void> {
-        const refreshToken = await this.retrieveRefreshToken(refreshStr);
+        try {
+            const refreshToken = await this.retrieveRefreshToken(refreshStr);
 
-        if (!refreshToken) {
-            return;
+            if (!refreshToken) {
+                return;
+            }
+
+            await this.prisma.refresh_tokens.delete({
+                where: { id: refreshToken.id },
+            });
+        } catch (e) {
+            return e.message;
         }
-
-        await this.prisma.refresh_tokens.delete({
-            where: { id: refreshToken.id },
-        });
     }
 
     private prismaTokenToObject(prismaResponse: any) {
