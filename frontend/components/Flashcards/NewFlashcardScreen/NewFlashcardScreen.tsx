@@ -3,11 +3,11 @@ import {Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StylesVariables } from '../../../utils/GLOBALS';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
-import { UserDataContext } from '../../context/UserContext';
+import { UserDataContext } from '../../context/UserContext/UserContext';
 import Modal from "react-native-modal";
 import Button from '../../Button/Button';
-import { AxiosContext } from '../../context/AxiosProvider';
-import { FichesContext } from '../../context/FichesContext';
+import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
+import { FichesContext } from '../../context/FichesContext/FichesContext';
 
 
 function NewFlashcardScreen({pageSwitcher}: any) {
@@ -155,6 +155,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
               } 
               <View style={styles.saveIcon}>
                 <Pressable
+                  testID='submitButton'
                   onPress={handleSubmit(onSubmit, () => setErrorModalVisibility(true))}>
                   <Image
                     style={{width: 25, height: 25, tintColor: '#764ba3',}}
@@ -168,6 +169,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                 <View key={field.id} style={styles.flashcard}>
                   <View style={styles.closeIcon}>
                     <Pressable
+                      testID='removeButton'
                       onPress={() => remove(index)}
                     >
                       <Image
@@ -196,7 +198,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                       render={({field: {onChange, onBlur, value}}) => (
                         <TextInput 
                           style={styles.input}  
-                          placeholder='Podaj obce tłumaczenie'
+                          placeholder='Podaj polskie tłumaczenie'
                           onBlur={onBlur}
                           onChangeText={onChange}
                           value={value}
@@ -209,6 +211,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
             </View>
             <View style={styles.addIcon}>
               <Pressable
+                testID='appendButton'
                 onPress={() => append({})}>
                 <Image
                   style={{width: 25, height: 25, tintColor: 'white',}}

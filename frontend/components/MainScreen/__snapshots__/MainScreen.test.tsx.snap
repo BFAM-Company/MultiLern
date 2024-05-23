@@ -1,0 +1,2564 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainScreen renders correctly 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    [
+      [
+        {
+          "backgroundColor": "white",
+          "height": "100%",
+          "width": "100%",
+        },
+        {
+          "flex": 1,
+        },
+      ],
+      {
+        "paddingBottom": 0,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityIgnoresInvertColors={true}
+    style={
+      {
+        "width": "100%",
+      }
+    }
+  >
+    <Image
+      blurRadius={40}
+      resizeMode="cover"
+      source={1}
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "height": undefined,
+            "width": "100%",
+          },
+          {
+            "height": 350,
+          },
+        ]
+      }
+      testID="dupa"
+    />
+    <RCTScrollView
+      collapsable={false}
+      contentContainerStyle={
+        {
+          "flexGrow": 1,
+          "paddingTop": 350,
+        }
+      }
+      onScroll={[Function]}
+      scrollEventThrottle={16}
+      showsVerticalScrollIndicator={false}
+      stickyHeaderIndices={
+        [
+          0,
+        ]
+      }
+      style={
+        {
+          "zIndex": 10,
+        }
+      }
+    >
+      <View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "borderBottomLeftRadius": 20,
+              "borderBottomRightRadius": 20,
+              "height": 170,
+              "left": 0,
+              "overflow": "hidden",
+              "paddingTop": -5,
+              "position": "absolute",
+              "top": 0,
+              "width": "100%",
+              "zIndex": 10000,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderBottomLeftRadius": 20,
+                  "borderBottomRightRadius": 20,
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "height": 120,
+                  "justifyContent": "space-between",
+                  "padding": 20,
+                  "paddingTop": 30,
+                  "width": "100%",
+                },
+                {
+                  "elevation": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.58,
+                  "shadowRadius": 16,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "borderRadius": 100,
+                  "display": "flex",
+                  "elevation": 20,
+                  "height": "auto",
+                  "justifyContent": "center",
+                  "opacity": 1,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.58,
+                  "shadowRadius": 16,
+                  "width": "auto",
+                }
+              }
+              testID="userModalButton"
+            >
+              <Image
+                style={
+                  [
+                    {
+                      "borderRadius": 100,
+                      "height": 50,
+                      "width": 50,
+                    },
+                  ]
+                }
+              />
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "borderRadius": 100,
+                  "display": "flex",
+                  "height": "auto",
+                  "justifyContent": "center",
+                  "opacity": 1,
+                  "width": "auto",
+                }
+              }
+              testID="notificationModalButton"
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              />
+              <View
+                style={
+                  {
+                    "backgroundColor": "#07fa40",
+                    "borderRadius": 100,
+                    "bottom": 2,
+                    "height": 10,
+                    "position": "absolute",
+                    "right": 2,
+                    "width": 10,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#fff",
+              "borderTopLeftRadius": 50,
+              "borderTopRightRadius": 50,
+              "display": "flex",
+              "elevation": 16,
+              "height": "auto",
+              "justifyContent": "flex-start",
+              "marginTop": -50,
+              "paddingBottom": 100,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0.44,
+              "shadowRadius": 10.32,
+              "width": "100%",
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "backgroundColor": "lightgray",
+                "height": 3,
+                "marginBottom": 150,
+                "marginTop": 5,
+                "width": 100,
+              }
+            }
+          />
+          <View
+            style={
+              {
+                "marginTop": 50,
+                "width": "100%",
+              }
+            }
+          >
+            <RCTScrollView
+              horizontal={true}
+              style={
+                {
+                  "backgroundColor": "#fff",
+                  "height": "auto",
+                  "paddingBottom": 20,
+                  "paddingTop": 20,
+                  "width": "100%",
+                }
+              }
+            >
+              <View>
+                <View
+                  style={
+                    {
+                      "backgroundColor": "#fff",
+                      "borderRadius": 10,
+                      "elevation": 16,
+                      "height": 250,
+                      "marginBottom": 40,
+                      "marginLeft": 20,
+                      "marginRight": 20,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 8,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.44,
+                      "shadowRadius": 10.32,
+                      "width": 320,
+                    }
+                  }
+                  testID="feature-box"
+                >
+                  <View
+                    accessibilityIgnoresInvertColors={true}
+                    style={
+                      {
+                        "alignItems": "flex-start",
+                        "borderRadius": 10,
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "space-around",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    <Image
+                      source={1}
+                      style={
+                        [
+                          {
+                            "bottom": 0,
+                            "left": 0,
+                            "position": "absolute",
+                            "right": 0,
+                            "top": 0,
+                          },
+                          {
+                            "height": "100%",
+                            "width": "100%",
+                          },
+                          {
+                            "borderRadius": 10,
+                          },
+                        ]
+                      }
+                    />
+                    <Text
+                      style={
+                        {
+                          "color": "rgb(33,33,43)",
+                          "fontSize": 24,
+                          "fontWeight": "900",
+                          "marginLeft": 10,
+                        }
+                      }
+                    >
+                      Rozwiązania Zadań
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "rgb(33,33,43)",
+                          "fontSize": 18,
+                          "marginLeft": 10,
+                        }
+                      }
+                    >
+                      Najlepsze rozwiązania zadań. Wszystkie podręcziki i sprawdzone odpowiedzi przez ekspertów i specjalną sztuczną inteligencję
+                    </Text>
+                    <View
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": undefined,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        {
+                          "alignItems": "center",
+                          "backgroundColor": "rgb(33,33,43)",
+                          "borderRadius": 10,
+                          "display": "flex",
+                          "height": 50,
+                          "justifyContent": "center",
+                          "marginLeft": 10,
+                          "opacity": 1,
+                          "width": 120,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#fff",
+                            "fontSize": 20,
+                            "fontWeight": "700",
+                          }
+                        }
+                      >
+                        Zobacz
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  style={
+                    {
+                      "backgroundColor": "#fff",
+                      "borderRadius": 10,
+                      "elevation": 16,
+                      "height": 250,
+                      "marginBottom": 40,
+                      "marginLeft": 20,
+                      "marginRight": 20,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 8,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.44,
+                      "shadowRadius": 10.32,
+                      "width": 320,
+                    }
+                  }
+                  testID="feature-box"
+                >
+                  <View
+                    accessibilityIgnoresInvertColors={true}
+                    style={
+                      {
+                        "alignItems": "flex-start",
+                        "borderRadius": 10,
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "space-around",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    <Image
+                      source={1}
+                      style={
+                        [
+                          {
+                            "bottom": 0,
+                            "left": 0,
+                            "position": "absolute",
+                            "right": 0,
+                            "top": 0,
+                          },
+                          {
+                            "height": "100%",
+                            "width": "100%",
+                          },
+                          {
+                            "borderRadius": 10,
+                          },
+                        ]
+                      }
+                    />
+                    <Text
+                      style={
+                        {
+                          "color": "rgb(33,33,43)",
+                          "fontSize": 24,
+                          "fontWeight": "900",
+                          "marginLeft": 10,
+                        }
+                      }
+                    >
+                      Nowoczesne Sposoby Nauki
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "rgb(33,33,43)",
+                          "fontSize": 18,
+                          "marginLeft": 10,
+                        }
+                      }
+                    >
+                      Już dziś zacznij korzystać z nowoczesnych technik nauki i pomocy naukowych. Fiszki, notatki to tylko część dostępnych narzędzi
+                    </Text>
+                    <View
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": undefined,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        {
+                          "alignItems": "center",
+                          "backgroundColor": "rgb(33,33,43)",
+                          "borderRadius": 10,
+                          "display": "flex",
+                          "height": 50,
+                          "justifyContent": "center",
+                          "marginLeft": 10,
+                          "opacity": 1,
+                          "width": 120,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#fff",
+                            "fontSize": 20,
+                            "fontWeight": "700",
+                          }
+                        }
+                      >
+                        Zobacz
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  style={
+                    {
+                      "backgroundColor": "#fff",
+                      "borderRadius": 10,
+                      "elevation": 16,
+                      "height": 250,
+                      "marginBottom": 40,
+                      "marginLeft": 20,
+                      "marginRight": 20,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 8,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.44,
+                      "shadowRadius": 10.32,
+                      "width": 320,
+                    }
+                  }
+                  testID="feature-box"
+                >
+                  <View
+                    accessibilityIgnoresInvertColors={true}
+                    style={
+                      {
+                        "alignItems": "flex-start",
+                        "borderRadius": 10,
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "space-around",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    <Image
+                      source={1}
+                      style={
+                        [
+                          {
+                            "bottom": 0,
+                            "left": 0,
+                            "position": "absolute",
+                            "right": 0,
+                            "top": 0,
+                          },
+                          {
+                            "height": "100%",
+                            "width": "100%",
+                          },
+                          {
+                            "borderRadius": 10,
+                          },
+                        ]
+                      }
+                    />
+                    <Text
+                      style={
+                        {
+                          "color": "rgb(33,33,43)",
+                          "fontSize": 24,
+                          "fontWeight": "900",
+                          "marginLeft": 10,
+                        }
+                      }
+                    >
+                      Baza Sprawdzianów
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "rgb(33,33,43)",
+                          "fontSize": 18,
+                          "marginLeft": 10,
+                        }
+                      }
+                    >
+                      Największa baza sprawdzianów, z różnych szkół, nauczycieli i poziomów nauczania. Sprawdź czy mamy coś co może Ci pomóc
+                    </Text>
+                    <View
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": undefined,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        {
+                          "alignItems": "center",
+                          "backgroundColor": "rgb(33,33,43)",
+                          "borderRadius": 10,
+                          "display": "flex",
+                          "height": 50,
+                          "justifyContent": "center",
+                          "marginLeft": 10,
+                          "opacity": 1,
+                          "width": 120,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#fff",
+                            "fontSize": 20,
+                            "fontWeight": "700",
+                          }
+                        }
+                      >
+                        Zobacz
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  style={
+                    {
+                      "backgroundColor": "#fff",
+                      "borderRadius": 10,
+                      "elevation": 16,
+                      "height": 250,
+                      "marginBottom": 40,
+                      "marginLeft": 20,
+                      "marginRight": 20,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 8,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.44,
+                      "shadowRadius": 10.32,
+                      "width": 320,
+                    }
+                  }
+                  testID="feature-box"
+                >
+                  <View
+                    accessibilityIgnoresInvertColors={true}
+                    style={
+                      {
+                        "alignItems": "flex-start",
+                        "borderRadius": 10,
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "space-around",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    <Image
+                      source={1}
+                      style={
+                        [
+                          {
+                            "bottom": 0,
+                            "left": 0,
+                            "position": "absolute",
+                            "right": 0,
+                            "top": 0,
+                          },
+                          {
+                            "height": "100%",
+                            "width": "100%",
+                          },
+                          {
+                            "borderRadius": 10,
+                          },
+                        ]
+                      }
+                    />
+                    <Text
+                      style={
+                        {
+                          "color": "rgb(33,33,43)",
+                          "fontSize": 24,
+                          "fontWeight": "900",
+                          "marginLeft": 10,
+                        }
+                      }
+                    >
+                      Korepetycje
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "rgb(33,33,43)",
+                          "fontSize": 18,
+                          "marginLeft": 10,
+                        }
+                      }
+                    >
+                      Znajdź osoby chętne do pomocy z całej Polski. Umów spotakania za pośrednictwem naszego chatu. Daj sobie pomóc!
+                    </Text>
+                    <View
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": undefined,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        {
+                          "alignItems": "center",
+                          "backgroundColor": "rgb(33,33,43)",
+                          "borderRadius": 10,
+                          "display": "flex",
+                          "height": 50,
+                          "justifyContent": "center",
+                          "marginLeft": 10,
+                          "opacity": 1,
+                          "width": 120,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#fff",
+                            "fontSize": 20,
+                            "fontWeight": "700",
+                          }
+                        }
+                      >
+                        Zobacz
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </RCTScrollView>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "justifyContent": "space-around",
+                "width": "100%",
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "flex-start",
+                  "display": "flex",
+                  "justifyContent": "center",
+                  "padding": 20,
+                  "width": "100%",
+                }
+              }
+            >
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Notatki
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={false}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 20,
+                  "height": 300,
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "padding": 10,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.58,
+                  "shadowRadius": 16,
+                  "width": 180,
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "backgroundColor": "#F5F5F5",
+                    "borderRadius": 20,
+                    "height": 170,
+                    "width": 170,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 18,
+                    "fontWeight": "900",
+                    "padding": 5,
+                  }
+                }
+              >
+                Twoje Notatki
+              </Text>
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "padding": 5,
+                  }
+                }
+              >
+                Zobacz wszystkie
+              </Text>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "rgb(33,33,43)",
+                    "borderRadius": 20,
+                    "display": "flex",
+                    "height": 30,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "90%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "color": "#fff",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                    }
+                  }
+                >
+                  Dalej
+                </Text>
+              </View>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={false}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 20,
+                  "height": 300,
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "padding": 10,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.58,
+                  "shadowRadius": 16,
+                  "width": 180,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source={1}
+                style={
+                  {
+                    "backgroundColor": "#F5F5F5",
+                    "borderRadius": 20,
+                    "height": 170,
+                    "width": 170,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 18,
+                    "fontWeight": "900",
+                    "padding": 5,
+                  }
+                }
+              >
+                Nowa Notatka
+              </Text>
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "padding": 5,
+                  }
+                }
+              >
+                Zacznij notować
+              </Text>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "rgb(33,33,43)",
+                    "borderRadius": 20,
+                    "display": "flex",
+                    "height": 30,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "90%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "color": "#fff",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                    }
+                  }
+                >
+                  Utwórz +
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "justifyContent": "space-around",
+                "width": "100%",
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "flex-start",
+                  "display": "flex",
+                  "justifyContent": "center",
+                  "padding": 20,
+                  "width": "100%",
+                }
+              }
+            >
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Fiszki
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 20,
+                  "height": 300,
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "padding": 10,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.58,
+                  "shadowRadius": 16,
+                  "width": 180,
+                }
+              }
+              testID="myPageSwitcher"
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "backgroundColor": "#F5F5F5",
+                    "borderRadius": 20,
+                    "height": 170,
+                    "width": 170,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 18,
+                    "fontWeight": "900",
+                    "padding": 5,
+                  }
+                }
+              >
+                Twoje Fiszki
+              </Text>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "opacity": 1,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "color": "#c085ff",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                      "padding": 5,
+                    }
+                  }
+                >
+                  Zobacz wszystkie
+                </Text>
+              </View>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "rgb(33,33,43)",
+                    "borderRadius": 20,
+                    "display": "flex",
+                    "height": 30,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "90%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "color": "#fff",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                    }
+                  }
+                >
+                  Dalej
+                </Text>
+              </View>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 20,
+                  "height": 300,
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "padding": 10,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.58,
+                  "shadowRadius": 16,
+                  "width": 180,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source={1}
+                style={
+                  {
+                    "backgroundColor": "#F5F5F5",
+                    "borderRadius": 20,
+                    "height": 170,
+                    "width": 170,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 18,
+                    "fontWeight": "900",
+                    "padding": 5,
+                  }
+                }
+              >
+                Nowe Fiszki
+              </Text>
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "padding": 5,
+                  }
+                }
+              >
+                Utwórz nowy set
+              </Text>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "rgb(33,33,43)",
+                    "borderRadius": 20,
+                    "display": "flex",
+                    "height": 30,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "90%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "color": "#fff",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                    }
+                  }
+                >
+                  Utwórz +
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "height": 500,
+                "justifyContent": "space-around",
+                "overflow": "hidden",
+                "paddingBottom": 100,
+                "width": "100%",
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "flex-start",
+                  "display": "flex",
+                  "justifyContent": "center",
+                  "padding": 20,
+                  "width": "100%",
+                }
+              }
+            >
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Przedmioty
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 16,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "margin": 10,
+                  "opacity": 1,
+                  "padding": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.44,
+                  "shadowRadius": 10.32,
+                  "width": "90%",
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 50,
+                    "width": 50,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Matematyka
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 16,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "margin": 10,
+                  "opacity": 1,
+                  "padding": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.44,
+                  "shadowRadius": 10.32,
+                  "width": "90%",
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 50,
+                    "width": 50,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Język Polski
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 16,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "margin": 10,
+                  "opacity": 1,
+                  "padding": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.44,
+                  "shadowRadius": 10.32,
+                  "width": "90%",
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 50,
+                    "width": 50,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Języki Obce
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 16,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "margin": 10,
+                  "opacity": 1,
+                  "padding": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.44,
+                  "shadowRadius": 10.32,
+                  "width": "90%",
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 50,
+                    "width": 50,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Geografia
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 16,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "margin": 10,
+                  "opacity": 1,
+                  "padding": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.44,
+                  "shadowRadius": 10.32,
+                  "width": "90%",
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 50,
+                    "width": 50,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Fizyka
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 16,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "margin": 10,
+                  "opacity": 1,
+                  "padding": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.44,
+                  "shadowRadius": 10.32,
+                  "width": "90%",
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 50,
+                    "width": 50,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Biologia
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 16,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "margin": 10,
+                  "opacity": 1,
+                  "padding": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.44,
+                  "shadowRadius": 10.32,
+                  "width": "90%",
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 50,
+                    "width": 50,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Chemia
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 16,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "margin": 10,
+                  "opacity": 1,
+                  "padding": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.44,
+                  "shadowRadius": 10.32,
+                  "width": "90%",
+                }
+              }
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 50,
+                    "width": 50,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Informatyka
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "bottom": 0,
+                  "height": 50,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "width": "100%",
+                }
+              }
+              testID="plusButton"
+            >
+              <ViewManagerAdapter_ExpoLinearGradient
+                colors={
+                  [
+                    436207616,
+                    4292072403,
+                    4294967295,
+                  ]
+                }
+                style={
+                  {
+                    "alignItems": "center",
+                    "borderTopLeftRadius": 20,
+                    "borderTopRightRadius": 20,
+                    "display": "flex",
+                    "height": "100%",
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "rgb(33,33,43)",
+                      "borderRadius": 100,
+                      "display": "flex",
+                      "height": 40,
+                      "justifyContent": "center",
+                      "width": 100,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      {
+                        "color": "#fff",
+                        "fontSize": 18,
+                        "fontWeight": "900",
+                      }
+                    }
+                  >
+                    więcej
+                  </Text>
+                </View>
+              </ViewManagerAdapter_ExpoLinearGradient>
+            </View>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "justifyContent": "space-around",
+                "marginTop": 100,
+                "width": "100%",
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "flex-start",
+                  "display": "flex",
+                  "justifyContent": "center",
+                  "padding": 20,
+                  "width": "100%",
+                }
+              }
+            >
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Sprawdziany - pewniaczki
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={false}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderRadius": 20,
+                  "display": "flex",
+                  "elevation": 20,
+                  "height": 500,
+                  "justifyContent": "space-between",
+                  "marginTop": 50,
+                  "opacity": 1,
+                  "padding": 10,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.58,
+                  "shadowRadius": 16,
+                  "width": "90%",
+                }
+              }
+            >
+              <Text
+                style={
+                  {
+                    "color": "rgb(33,33,43)",
+                    "fontSize": 24,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                Nasz Zbiór Sprawdzianów
+              </Text>
+              <Image
+                source={1}
+                style={
+                  {
+                    "backgroundColor": "#F5F5F5",
+                    "borderRadius": 20,
+                    "height": 200,
+                    "width": 200,
+                  }
+                }
+              />
+              <Text
+                style={
+                  {
+                    "color": "#c085ff",
+                    "fontSize": 20,
+                    "fontWeight": "500",
+                    "padding": 5,
+                    "textAlign": "center",
+                  }
+                }
+              >
+                Największa baza realnych sprawdzianów dodawanych przez użytkowników z całej Polski. Znajdź swój sprawdzian!
+              </Text>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "rgb(33,33,43)",
+                    "borderRadius": 20,
+                    "display": "flex",
+                    "height": 50,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "90%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "color": "#fff",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                    }
+                  }
+                >
+                  Sprawdź
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+    <View
+      collapsable={false}
+      style={
+        {
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 100,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "alignItems": "center",
+            "display": "flex",
+            "height": 350,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Image
+            source={1}
+            style={
+              {
+                "height": 30,
+                "width": 30,
+              }
+            }
+          />
+          <Text
+            style={
+              {
+                "color": "rgb(33,33,43)",
+                "fontSize": 30,
+                "fontWeight": "600",
+                "margin": 10,
+              }
+            }
+          >
+            MultiLern
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "backgroundColor": "rgb(33,33,43)",
+              "borderRadius": 100,
+              "display": "flex",
+              "elevation": 16,
+              "flexDirection": "row",
+              "height": 50,
+              "maxWidth": 700,
+              "minWidth": 300,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0.44,
+              "shadowRadius": 10.32,
+              "width": "80%",
+            }
+          }
+        >
+          <TextInput
+            defaultValue=""
+            onChangeText={[Function]}
+            placeholder="wyszukaj zadania..."
+            style={
+              {
+                "backgroundColor": "#fff",
+                "borderRadius": 20,
+                "height": "100%",
+                "paddingLeft": 10,
+                "width": "80%",
+              }
+            }
+          />
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "rgb(33,33,43)",
+                "borderBottomRightRadius": 20,
+                "borderTopRightRadius": 20,
+                "display": "flex",
+                "height": "100%",
+                "justifyContent": "center",
+                "width": "20%",
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "opacity": 1,
+                }
+              }
+              testID="search-icon"
+            >
+              <Image
+                source={1}
+                style={
+                  {
+                    "height": 20,
+                    "tintColor": "#fff",
+                    "width": 20,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

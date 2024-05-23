@@ -2,20 +2,20 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Animated, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import { StylesVariables } from '../../utils/GLOBALS';
-import DynamicHeader from './MainScreenComponents/DynamicHeader';
-import BoxCarousel from './MainScreenComponents/BoxCarousel';
+import DynamicHeader from './MainScreenComponents/DynamicHeader/DynamicHeader';
+import BoxCarousel from './MainScreenComponents/BoxCarousel/BoxCarousel';
 import StickyNavbar from './MainScreenComponents/StickyNavbar';
-import NotepadSection from './MainScreenComponents/NotepadSection';
-import FlashcardsSection from './MainScreenComponents/FlashcardsSection';
-import SubjectsSection from './MainScreenComponents/SubjectsSection';
-import ExamsSection from './MainScreenComponents/ExamsSection';
-import UserModal from './MainScreenComponents/UserModal';
-import NotificationModal from './MainScreenComponents/NotificationModal';
+import NotepadSection from './MainScreenComponents/NotepadSection/NotepadSection';
+import FlashcardsSection from './MainScreenComponents/FlashcardsSection/FlashcardsSection';
+import SubjectsSection from './MainScreenComponents/SubjectsSection/SubjectsSection';
+import ExamsSection from './MainScreenComponents/ExamsSection/ExamsSection';
+import UserModal from './MainScreenComponents/UserModal/UserModal';
+import NotificationModal from './MainScreenComponents/NotificationModal/NotificationModal';
 import Footer from '../Footer/Footer';
-import { AuthContext } from '../context/AuthContext';
-import { AxiosContext } from '../context/AxiosProvider';
+import { AuthContext } from '../context/AuthContext/AuthContext';
+import { AxiosContext } from '../context/AxiosProvider/AxiosProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { UserDataContext } from '../context/UserContext';
+import { UserDataContext } from '../context/UserContext/UserContext';
 
 
 
@@ -107,6 +107,7 @@ function MainScreen({pageSwitcher}: any) {
         <UserModal isVisible={userModalVisible} hideHandler={userModalHideHandler} user={userContext?.userData} buttonAction={pageSwitcher}/>
         <NotificationModal isVisible={notiModalVisible} hideHandler={notificationModalHideHandler} user={userContext?.userData} buttonAction={pageSwitcher}/>
         <ImageBackground
+                testID='dupa'
                 source= {require('./../../assets/gradientBoobles.png')}
                 style={styles.fixedContainerBgc}
                 imageStyle={{height:350}}
@@ -132,7 +133,7 @@ function MainScreen({pageSwitcher}: any) {
                 <StickyNavbar userModalHandler={()=>{userModalShowHandler()}} notificationModalHandler={()=>{notificationModalShowHandler()}} />
                 <View style={styles.contentContainer}>
                     <View style={{width:100, height:3, backgroundColor:'lightgray', marginTop:5, marginBottom:150}}></View>
-                    <BoxCarousel />
+                    <BoxCarousel pageSwitcher={pageSwitcher}/>
                     <NotepadSection pageSwitcher={pageSwitcher}/>
                     <FlashcardsSection pageSwitcher={pageSwitcher}/>
                     <SubjectsSection pageSwitcher={pageSwitcher}/>

@@ -3,10 +3,10 @@ import { ActivityIndicator, Dimensions } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { StylesVariables } from '../../utils/GLOBALS';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AxiosContext } from '../context/AxiosProvider';
-import { UserDataContext } from '../context/UserContext';
+import { AxiosContext } from '../context/AxiosProvider/AxiosProvider';
+import { UserDataContext } from '../context/UserContext/UserContext';
 
 
 
@@ -52,7 +52,7 @@ function AuthScreen({pageSwitcher}: any) {
 
     return (
         <View style={styles.mainContainer}>
-            <ActivityIndicator size="large"/>
+            <ActivityIndicator testID='loading-indicator' size="large"/>
         </View>
     )
 }

@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { KeyboardAvoidingView, Platform, Text, StyleSheet, View, ScrollView, Image, TouchableOpacity, Animated, FlatList, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FlashcardsListItem from "./FlashcardsListComponents/FlashcardsListItem";
-import { AxiosContext } from "../../context/AxiosProvider";
-import { UserDataContext } from "../../context/UserContext";
+import { AxiosContext } from "../../context/AxiosProvider/AxiosProvider";
+import { UserDataContext } from "../../context/UserContext/UserContext";
 import { ActivityIndicator } from "react-native-paper";
 import Modal from "react-native-modal";
 import Button from "../../Button/Button";
@@ -116,6 +116,7 @@ function FlashcardsListScreen({pageSwitcher, range}: any) {
   return (
     <SafeAreaView style={styles.mainContainer} edges={['top']}>
       <Modal 
+          testID="modal-backdrop"
           isVisible={modalVisibility} 
           onBackdropPress={() => {setChosenFlashcardCard({id: 0, title: ''}); setModalVisibility(false)}}
           style={styles.fichesModal}>
@@ -131,6 +132,7 @@ function FlashcardsListScreen({pageSwitcher, range}: any) {
           </View>
         </Modal>
           <FlatList
+            testID="FlatList"
             style={{width: '100%', flex: 1}}
             ListHeaderComponent={range === 'all' ? <Text style={styles.header}>Wszystkie fiszki</Text> : <Text style={styles.header}>Twoje fiszki</Text>}
             data={fichesSet}

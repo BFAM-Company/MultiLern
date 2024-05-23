@@ -3,8 +3,7 @@ import { Dimensions } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet, ImageBackground, Image, TouchableOpacity, Platform } from 'react-native';
 import Button from '../Button/Button';
 import { StylesVariables } from '../../utils/GLOBALS';
-import { AuthContext } from '../context/AuthContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../context/AuthContext/AuthContext';
 
 
 
@@ -31,7 +30,7 @@ function HomeScreen({pageSwitcher}: any) {
         >
             <View style={styles.AccountCreateContainer}>
                 <View style={styles.LogoContainer}>
-                    <Image source={require('./../../assets/multilern-logo.png')} style={styles.LogoImage}/>
+                    <Image testID='logoImage' source={require('./../../assets/multilern-logo.png')} style={styles.LogoImage}/>
                     <Text style={styles.titleText}>MultiLern</Text>
                 </View>
                 <View style={styles.mainTextContainer}>
@@ -61,7 +60,7 @@ function HomeScreen({pageSwitcher}: any) {
                         buttonAction={loginByGuest}
                         icons={[require('./../../assets/guest-icon.png')]}
                     >
-                        Kontynuj jako gość
+                        Kontynuuj jako gość
                     </Button>
                 </View>
             </View>

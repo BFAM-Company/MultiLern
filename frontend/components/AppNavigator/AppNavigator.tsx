@@ -13,7 +13,7 @@ import NewFlashcardScreen from '../Flashcards/NewFlashcardScreen/NewFlashcardScr
 import FlashcardsListScreen from '../Flashcards/FlashcardsListScreen/FlashcardsListScreen';
 import FlashcardsSetScreen from '../Flashcards/FlashcardsSetScreen/FlashcardsSetScreen';
 import ExcercisesScreen from '../ExercisesScreen/ExcercisesScreen';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext/AuthContext';
 import AuthScreen from '../AuthScreen/AuthScreen';
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
 import NotesScreen from '../NotesScreen/NotesScreen';
@@ -46,7 +46,7 @@ export const MainPage: React.FC<MainProps> = ({navigation}) => {
 }
 
 
-const LogInPage: React.FC<LogInPageProps> = ({navigation}) => {
+export const LogInPage: React.FC<LogInPageProps> = ({navigation}) => {
   return (
     <PageSwitchTemplate navigation={navigation}>
       <LogInScreen/>
@@ -54,7 +54,7 @@ const LogInPage: React.FC<LogInPageProps> = ({navigation}) => {
   );
 }
 
-const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
+export const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
   return (
     <PageSwitchTemplate navigation={navigation}>
       <SignUpScreen/>
@@ -63,7 +63,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
 }
 
 
-const ExcercisesPage: React.FC<any> = ({ navigation, route }) => {
+export const ExcercisesPage: React.FC<any> = ({ navigation, route }) => {
   const { searchableText } = route.params;
 
   return (
@@ -73,7 +73,7 @@ const ExcercisesPage: React.FC<any> = ({ navigation, route }) => {
     ); 
 }
             
-const NewFlashcardPage: React.FC<NewFlashcardPageProps> = ({navigation}) => {
+export const NewFlashcardPage: React.FC<NewFlashcardPageProps> = ({navigation}) => {
   return (
     <PageSwitchTemplate navigation={navigation}>
       <NewFlashcardScreen />
@@ -81,7 +81,7 @@ const NewFlashcardPage: React.FC<NewFlashcardPageProps> = ({navigation}) => {
   );
 }
 
-const FlashcardsListPage: React.FC<any> = ({ navigation, route }) => {
+export const FlashcardsListPage: React.FC<any> = ({ navigation, route }) => {
   const { range } = route.params;
 
   return (
@@ -91,7 +91,7 @@ const FlashcardsListPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
-const FlashcardsSetPage: React.FC<any> = ({ navigation, route }) => {
+export const FlashcardsSetPage: React.FC<any> = ({ navigation, route }) => {
   const { id } = route.params;
 
   return (
@@ -101,8 +101,7 @@ const FlashcardsSetPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
-
-const AuthPage: React.FC<AuthPageProps> = ({navigation}) => {
+export const AuthPage: React.FC<AuthPageProps> = ({navigation}) => {
   return (
     <PageSwitchTemplate navigation={navigation}>
       <AuthScreen />

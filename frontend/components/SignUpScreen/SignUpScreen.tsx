@@ -6,8 +6,8 @@ import { styles } from './SignUpScreen.styled';
 import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AxiosContext } from '../context/AxiosProvider';
-import { AuthContext } from '../context/AuthContext';
+import { AxiosContext } from '../context/AxiosProvider/AxiosProvider';
+import { AuthContext } from '../context/AuthContext/AuthContext';
 import { dismissBrowser, openAuthSessionAsync } from 'expo-web-browser';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -53,7 +53,7 @@ function SignUpScreen({pageSwitcher}: any) {
   	};
 
 	const loginByDiscord = async () => {
-        const response = await openAuthSessionAsync('http://localhost:3001/auth/discord', 'http://localhost:3001/auth/discord/callback')
+        const response = await openAuthSessionAsync('https://multilern-production.up.railway.app/auth/discord', 'https://multilern-production.up.railway.app/auth/discord/callback')
         if(response.type === 'success') {
             const REGEX =  /[?&]([^=#]+)=([^&#]*)/g
             let params: any = {}, match;

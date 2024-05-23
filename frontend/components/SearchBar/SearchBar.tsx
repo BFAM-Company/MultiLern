@@ -18,7 +18,7 @@ function SearchBar({currentText, pageSwitcher, setModalVisibility, modalVisibili
 						onChangeText={newText => setSearchedText(newText)}
         />
         <View style={styles.iconContainer}>
-            <TouchableOpacity onPress={() => { if(modalVisibility) {setModalVisibility(false)};pageSwitcher('Excercises', {searchableText: searchedText})}}>
+            <TouchableOpacity testID='search-icon' onPress={() => { if(modalVisibility) {setModalVisibility(false)};pageSwitcher('Excercises', {searchableText: searchedText})}}>
                 <Image 
                     source={require('./../../assets/search-icon.png')}
                     style={styles.icon}

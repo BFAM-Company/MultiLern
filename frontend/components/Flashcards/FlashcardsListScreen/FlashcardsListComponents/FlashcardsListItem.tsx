@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useContext } from 'react'
 import { Dimensions, Image, Platform, StyleProp, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { IFichesSet } from '../FlashcardsListScreen';
-import { FichesContext } from '../../../context/FichesContext';
+import { FichesContext } from '../../../context/FichesContext/FichesContext';
 
 
 interface FlashcardsListItemProps {
@@ -26,10 +26,10 @@ function FlashcardsListItem({flashcardsID, title, pageSwitcher, setChosenFlashca
         <View style={styles.iconContainer}>
           {range === 'my' && 
           <>
-            <TouchableOpacity onPress={() => {fichesContext?.setFichesState(flashcardsID);console.log(fichesContext?.fichesState);pageSwitcher('NewFlashcard')}}>
+            <TouchableOpacity testID='edit-icon' onPress={() => {fichesContext?.setFichesState(flashcardsID);console.log(fichesContext?.fichesState);pageSwitcher('NewFlashcard')}}>
               <Image source={require('./../../../../assets/pen-icon.png')} style={styles.icon}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {setChosenFlashcardCard({id: flashcardsID, title: title}); setModalVisibility(true)}}>
+            <TouchableOpacity testID='trash-icon' onPress={() => {setChosenFlashcardCard({id: flashcardsID, title: title}); setModalVisibility(true)}}>
               <Image source={require('./../../../../assets/trash-icon.png')} style={styles.icon}/>
             </TouchableOpacity>
           </>

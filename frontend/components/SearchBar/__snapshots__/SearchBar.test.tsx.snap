@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar renders correctly 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "rgb(33,33,43)",
+      "borderRadius": 100,
+      "display": "flex",
+      "elevation": 16,
+      "flexDirection": "row",
+      "height": 50,
+      "maxWidth": 700,
+      "minWidth": 300,
+      "shadowColor": "#000",
+      "shadowOffset": {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.44,
+      "shadowRadius": 10.32,
+      "width": "80%",
+    }
+  }
+>
+  <TextInput
+    defaultValue=""
+    onChangeText={[Function]}
+    placeholder="wyszukaj zadania..."
+    style={
+      {
+        "backgroundColor": "#fff",
+        "borderRadius": 20,
+        "height": "100%",
+        "paddingLeft": 10,
+        "width": "80%",
+      }
+    }
+  />
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "rgb(33,33,43)",
+        "borderBottomRightRadius": 20,
+        "borderTopRightRadius": 20,
+        "display": "flex",
+        "height": "100%",
+        "justifyContent": "center",
+        "width": "20%",
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="search-icon"
+    >
+      <Image
+        source={1}
+        style={
+          {
+            "height": 20,
+            "tintColor": "#fff",
+            "width": 20,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
