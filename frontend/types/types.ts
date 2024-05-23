@@ -3,6 +3,7 @@ import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { DimensionValue } from "react-native";
 
+
 export type PageChangerParams = {
   page: keyof RootStackParamList;
   params?: Record<string, any>; // You can make this more specific based on your actual parameters
@@ -18,6 +19,7 @@ export type RootStackParamList = {
   FlashcardsList: { range: string };
   FlashcardsSet: { id: number };
   Auth: undefined;
+  Notes: undefined
 };
 
 export interface PageSwitchTemplateProps {

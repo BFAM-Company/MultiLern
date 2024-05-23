@@ -8,6 +8,7 @@ export const linking: any = {
       Home: "home",
       LogIn: "login",
       SignUp: "signup",
+      Notes: "notes",
       Main: "main",
       Excercises: {
         path: "exercises/:description",
@@ -43,6 +44,7 @@ export const SubjectCategories = {
   IT: require("./../assets/informatyka-icon.png"),
 };
 
+
 export const StylesVariables: IStylesVariable = {
   LogoSize:
     Dimensions.get("window").width * 0.1 * (Platform.OS === "web" ? 0.3 : 1),
@@ -51,3 +53,8 @@ export const StylesVariables: IStylesVariable = {
 
   InputSize: Dimensions.get("window").height * 0.07,
 };
+
+
+export const BackendVariables = {
+  basicURL: 'multilern-production.up.railway.app'
+}

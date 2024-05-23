@@ -4,6 +4,8 @@ import { AuthProvider } from './components/context/AuthContext/AuthContext';
 import { AxiosProvider } from './components/context/AxiosProvider/AxiosProvider';
 import { UserDataProvider } from './components/context/UserContext/UserContext';
 import { FichesProvider } from './components/context/FichesContext/FichesContext';
+import {GestureHandlerRootView} from 'react-native-gesture-handler'
+import { StyleSheet } from 'react-native';
 
 
 function App() {
@@ -19,5 +21,14 @@ function App() {
       </AuthProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    width:'100%',
+    alignItems:'center',
+    justifyContent:'center'
+  }
+})
 
 export default App;

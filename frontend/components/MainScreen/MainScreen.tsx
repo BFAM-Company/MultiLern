@@ -134,7 +134,7 @@ function MainScreen({pageSwitcher}: any) {
                 <View style={styles.contentContainer}>
                     <View style={{width:100, height:3, backgroundColor:'lightgray', marginTop:5, marginBottom:150}}></View>
                     <BoxCarousel pageSwitcher={pageSwitcher}/>
-                    <NotepadSection />
+                    <NotepadSection pageSwitcher={pageSwitcher}/>
                     <FlashcardsSection pageSwitcher={pageSwitcher}/>
                     <SubjectsSection pageSwitcher={pageSwitcher}/>
                     <ExamsSection pageSwitcher={pageSwitcher} />

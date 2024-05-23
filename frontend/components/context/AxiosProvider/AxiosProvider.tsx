@@ -3,6 +3,7 @@ import axios, { AxiosInstance } from "axios";
 import { AuthContext } from "../AuthContext/AuthContext";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BackendVariables } from "../../utils/GLOBALS";
 // import * as Keychain from "react-native-keychain";
 
 interface AuthState {
@@ -17,10 +18,10 @@ interface AxiosContextProps {
 
 const AxiosContext = createContext<AxiosContextProps>({
   authAxios: axios.create({
-    baseURL: "http://localhost:3001/auth",
+    baseURL: "https://multilern-production.up.railway.app/auth",
   }),
   publicAxios: axios.create({
-    baseURL: "http://localhost:3001/",
+    baseURL: "https://multilern-production.up.railway.app",
   })
 });
 
@@ -30,11 +31,11 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: "http://localhost:3001/auth",
+    baseURL: "https://multilern-production.up.railway.app/auth",
   });
 
   const publicAxios = axios.create({
-    baseURL: "http://localhost:3001/",
+    baseURL: "https://multilern-production.up.railway.app",
   });
 
   authAxios.interceptors.request.use(
@@ -58,7 +59,7 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const options = {
       method: "POST",
       data,
-      url: "http://localhost:3001/auth/refresh",
+      url: "https://multilern-production.up.railway.app/auth/refresh",
     };
 
     return axios(options)

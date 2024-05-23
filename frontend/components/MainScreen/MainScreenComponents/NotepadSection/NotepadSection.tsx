@@ -1,7 +1,11 @@
 import React from 'react';
 import { Animated, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-function NotepadSection() {
+interface NotepadSectionProps{
+    pageSwitcher: any
+}
+
+function NotepadSection({pageSwitcher}: NotepadSectionProps) {
   return (
     <Animated.View
         style={styles.mainContainer}
@@ -11,6 +15,7 @@ function NotepadSection() {
         </View>
         <TouchableOpacity
             style={styles.container}
+            onPress={()=>{pageSwitcher('Notes')}}
         >
             <Image
                 style={styles.image}

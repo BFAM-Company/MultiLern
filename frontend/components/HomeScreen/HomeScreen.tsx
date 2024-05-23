@@ -7,6 +7,7 @@ import { AuthContext } from '../context/AuthContext/AuthContext';
 
 
 
+
 function HomeScreen({pageSwitcher}: any) {
     const authContext = useContext(AuthContext)
 
