@@ -1,10 +1,19 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-const YellowStar = ({rate}: any) => {
+interface YellowStarProps{
+    rate: number,
+    handlePress: any
+}
+
+
+const YellowStar = ({rate, handlePress}: YellowStarProps) => {
     let coverageWidth = rate*25 
     return(
-            <View style={styles.container}>
+            <TouchableOpacity 
+                style={styles.container}
+                onPress={handlePress}
+            >
                 <Image
                 source={require('./../../../assets/star-rate-icon.png')}
                 style={[styles.starIcon, {tintColor:'dimgray'}]}
@@ -15,7 +24,7 @@ const YellowStar = ({rate}: any) => {
                     style={[styles.starIcon, {tintColor:'gold', }]}
                 /> 
                 </View>
-            </View>
+            </TouchableOpacity>
     )
   
 }

@@ -1,9 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useContext } from 'react'
-import {StyleSheet, TouchableOpacity} from 'react-native'
-import { Text } from 'react-native-paper';
+import React, { useContext, useState } from 'react'
+import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View} from 'react-native'
 import { AxiosContext } from '../../context/AxiosProvider';
 import { UserDataContext } from '../../context/UserContext';
+
 
 
 
@@ -13,13 +13,19 @@ interface PostContentProps{
     handleRefresh: any,
 }
 
-
+const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
 function CommentButton({id, handleRefresh}: PostContentProps) {
   const userContext = useContext(UserDataContext)
   const {publicAxios, authAxios} = useContext(AxiosContext);
+  const [modalVisible, setModalVisibile] = useState<boolean>(false)
 
      
-  const  handleClick = async() =>{
+  const handleClick = () =>{
+    setModalVisibile(true)
+  }
+
+  const handleSubmit = async() =>{
         const event = new Date();
 
         await publicAxios.post(`/posts/comment`, {
@@ -39,17 +45,30 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
 
 
   return (
-    <TouchableOpacity
-        onPress={handleClick}
-        style={styles.button}
-    >
-        <LinearGradient
-            colors={['rgb(45,45,55)', 'rgb(45,45,55)', 'rgb(100,100,110)']}
-            style={styles.linearGradient}
+    <>
+        <Modal
+            visible={modalVisible}
+            style={{width:windowWidth, height:windowHeight}}
         >
-            <Text style={{color:'white', fontWeight:'900', fontSize:22}}>Odpowiedz</Text>
-        </LinearGradient>
-    </TouchableOpacity>
+            <View
+                style={styles.modalContainer}
+            >
+
+            </View> 
+        </Modal>
+        <TouchableOpacity
+            onPress={handleClick}
+            style={styles.button}
+        >
+            <LinearGradient
+                colors={['rgb(45,45,55)', 'rgb(45,45,55)', 'rgb(100,100,110)']}
+                style={styles.linearGradient}
+            >
+                <Text style={{color:'white', fontWeight:'900', fontSize:22}}>Odpowiedz</Text>
+            </LinearGradient>
+        </TouchableOpacity>
+    </>
+    
   );
 }
 
@@ -70,6 +89,13 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         borderRadius:20,
         alignItems:'center',
+    },
+    modalContainer:{
+        width:'100%',
+        height:'100%',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'space-between',
     },
 })
 

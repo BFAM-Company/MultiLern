@@ -1,10 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import RateComponent from './RateComponent';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import PostContent from './PostContent';
-import { useData } from '@shopify/react-native-skia';
-
 
 
 interface SubjectCardProps {
@@ -17,10 +15,10 @@ interface SubjectCardProps {
   date: string
   posts_images: any[],
 }
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 function SingleComment({id, category, title, description, rate, date, posts_images, user_data}: SubjectCardProps) {
-  const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
+  
   const width = useSharedValue(windowWidth*0.9)
   const height = useSharedValue(200)
   const [isActive, setIsActive] = useState<boolean>(false)
@@ -44,6 +42,7 @@ function SingleComment({id, category, title, description, rate, date, posts_imag
     height.value = withSpring(200),
     setIsActive(false)
   }
+
 
   return (
     <>
@@ -147,6 +146,8 @@ commentContainer:{
     justifyContent:'flex-start',
     alignItems:'flex-start',
     padding:10,
+    height:200,
+    width: windowWidth * .9
 },
   Modal:{
     width:'100%',
