@@ -28,6 +28,7 @@
         "@nestjs/swagger": "^7.3.0",
         "@prisma/client": "5.9.1",
         "bcrypt": "^5.1.1",
+        "fuzzball": "^2.1.2",
         "jsonwebtoken": "^9.0.2",
         "netlify-cli": "^17.23.1",
         "passport": "^0.7.0",

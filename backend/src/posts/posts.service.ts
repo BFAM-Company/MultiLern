@@ -3,6 +3,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
+import fuzz from 'fuzzball';
 
 @Injectable()
 export class PostsService {
@@ -162,18 +163,12 @@ export class PostsService {
         });
     }
     async findManyByKeyWord(keyWords: string) {
-        const posts = await this.prisma.posts.findMany({
-            where: {
-                OR: [
-                    { title: { contains: keyWords } },
-                    { content: { contains: keyWords } }
-                ]
-            },
+        const allPosts = await this.prisma.posts.findMany({
             include: {
                 users_posts: {
-                    select:{
+                    select: {
                         users: {
-                            select:{
+                            select: {
                                 id: true,
                                 nickname: true,
                                 avatar: true
@@ -207,14 +202,16 @@ export class PostsService {
             },
         });
     
-        posts.sort((a, b) => {
-            const aKeywordsCount = this.countKeywordsInText(a.title + " " + a.content, keyWords);
-            const bKeywordsCount = this.countKeywordsInText(b.title + " " + b.content, keyWords);
+        const postsWithScores = allPosts.map(post => ({
+            ...post,
+            score: fuzz.partial_ratio(keyWords, post.title + " " + post.content)
+        }));
     
-            return bKeywordsCount - aKeywordsCount;
-        });
+        postsWithScores.sort((a, b) => b.score - a.score);
     
-        return posts;
+        const filteredPosts = postsWithScores.filter(post => post.score > 50);
+    
+        return filteredPosts;
     }
     
     countKeywordsInText(text: string, keyWords: string) {
