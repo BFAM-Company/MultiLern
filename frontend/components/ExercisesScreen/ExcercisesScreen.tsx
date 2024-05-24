@@ -4,8 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ExcercisesCard from "./ExercisesScreenComponents/ExercisesCard";
 import Footer from "../Footer/Footer";
 import SearchBar from "../SearchBar/SearchBar";
-import { AxiosContext } from "../context/AxiosProvider";
 import { ActivityIndicator } from "react-native-paper";
+import { AxiosContext } from "../context/AxiosProvider/AxiosProvider";
 
 function ExcercisesScreen({pageSwitcher, searchableText}: any) {
   const {publicAxios, authAxios} = useContext(AxiosContext);

@@ -1,8 +1,10 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useContext, useState } from 'react'
-import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View} from 'react-native'
-import { AxiosContext } from '../../context/AxiosProvider';
-import { UserDataContext } from '../../context/UserContext';
+import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View, Image, ScrollView} from 'react-native'
+import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
+import { UserDataContext } from '../../context/UserContext/UserContext';
+import { TextInput } from 'react-native-paper';
+
 
 
 
@@ -14,11 +16,16 @@ interface PostContentProps{
 }
 
 const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
+const windowHeight = Dimensions.get('window').height;
+
 function CommentButton({id, handleRefresh}: PostContentProps) {
   const userContext = useContext(UserDataContext)
-  const {publicAxios, authAxios} = useContext(AxiosContext);
+  const {publicAxios, authAxios} = useContext(AxiosContext)
   const [modalVisible, setModalVisibile] = useState<boolean>(false)
+
+  const [title, onChangeTitle] = useState<string>('')
+  const [content, onChangeContent] = useState<string>('')
+
 
      
   const handleClick = () =>{
@@ -29,8 +36,8 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
         const event = new Date();
 
         await publicAxios.post(`/posts/comment`, {
-            title: 'Moja odpowiedz',
-            content: 'masz rozwiązanie',
+            title: title,
+            content: content,
             date: event.toISOString(),
             parentPostId: id,
             userId: userContext?.userData?.id,
@@ -39,7 +46,7 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
                 'Content-Type': 'application/json'
               }
           })
-
+        setModalVisibile(false)
         await handleRefresh()
       }
 
@@ -50,11 +57,62 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
             visible={modalVisible}
             style={{width:windowWidth, height:windowHeight}}
         >
+            <ScrollView>
             <View
                 style={styles.modalContainer}
             >
-
+                <View
+                    style={styles.closeButtonContainer}
+                >
+                    <TouchableOpacity
+                        onPress={()=>{setModalVisibile(false)}}
+                    >
+                        <Image 
+                            source={require('./../../../assets/close-icon-bold.png')} 
+                            style={{width:30,height:30,}}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <Text
+                    style={styles.hintText}
+                >
+                    Dodaj tytuł do swojej odpowiedzi!
+                </Text>
+                <Text>
+                    Może ułatwić to późniejsze znalezienie twojej odpowiedzi innym użytkownikom
+                </Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeTitle}
+                    value={title}
+                    placeholder='tytuł(opcjonalny)...'
+                />
+                 <Text
+                    style={styles.hintText}
+                 >
+                    Dodaj treść swojej odpowiedzi
+                </Text>
+                <TextInput
+                    editable
+                    multiline
+                    style={[styles.input, {minHeight:500,}]}
+                    onChangeText={onChangeContent}
+                    value={content}
+                    placeholder={'Rozwiązanie...'}
+                />
+                <TouchableOpacity
+                    onPress={handleSubmit}
+                    style={styles.button}
+                    >
+                        <LinearGradient
+                            colors={['rgb(45,45,55)', 'rgb(45,45,55)', 'rgb(100,100,110)']}
+                            style={styles.linearGradient}
+                        >
+                            <Text style={{color:'white', fontWeight:'900', fontSize:22}}>Wyślij</Text>
+                        </LinearGradient>
+                </TouchableOpacity>
             </View> 
+            </ScrollView>
         </Modal>
         <TouchableOpacity
             onPress={handleClick}
@@ -94,8 +152,37 @@ const styles = StyleSheet.create({
         width:'100%',
         height:'100%',
         display:'flex',
-        alignItems:'center',
-        justifyContent:'space-between',
+        alignItems:'flex-start',
+        justifyContent:'flex-start',
+        padding:20,
+    },
+    closeButtonContainer:{
+        width:'100%',
+        display:'flex',
+        alignItems:'flex-end',
+        padding:10,
+    },
+    input:{
+        width:'90%',
+        borderTopLeftRadius:10,
+        borderTopRightRadius:10,
+        backgroundColor:'#fff',
+        shadowColor: "#000",
+        shadowOffset: {
+                width: 0,
+                height: 0,
+        },
+        shadowOpacity: 0.44,
+        shadowRadius: 10.32,
+
+        elevation: 16,
+    },
+    hintText:{
+        marginTop:50,
+        marginBottom:20,
+        fontSize:20,
+        fontWeight:'900',
+        color:'rgb(45,45,55)',
     },
 })
 

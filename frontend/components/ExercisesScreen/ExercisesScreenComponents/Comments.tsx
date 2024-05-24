@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import SearchBar from '../../SearchBar/SearchBar';
-import { AxiosContext } from '../../context/AxiosProvider';
 import SingleComment from './SingleComment';
 import { ActivityIndicator } from 'react-native-paper';
 import CommentButton from './CommentButton';
+import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
       
 
 interface CommentsProps{
