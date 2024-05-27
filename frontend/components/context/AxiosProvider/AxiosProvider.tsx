@@ -3,7 +3,6 @@ import axios, { AxiosInstance } from "axios";
 import { AuthContext } from "../AuthContext/AuthContext";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BackendVariables } from "../../utils/GLOBALS";
 // import * as Keychain from "react-native-keychain";
 
 interface AuthState {

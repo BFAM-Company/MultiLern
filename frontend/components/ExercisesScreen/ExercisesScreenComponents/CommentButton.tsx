@@ -1,8 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useContext, useState } from 'react'
 import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View} from 'react-native'
-import { AxiosContext } from '../../context/AxiosProvider';
-import { UserDataContext } from '../../context/UserContext';
+import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
+import { UserDataContext } from '../../context/UserContext/UserContext';
 
 
 
