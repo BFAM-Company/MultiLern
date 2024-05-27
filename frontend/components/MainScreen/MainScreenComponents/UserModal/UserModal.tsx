@@ -24,7 +24,7 @@ function Button({buttonAction, icon, content, coloredIcon = true}: ButtonProps){
       style={styles.modalButton}
       onPress={buttonAction}
     >
-      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={{uri: icon}}/>
+      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={icon}/>
       <Text style={{fontSize:16,}}>{content}</Text>
     </TouchableOpacity>
   );
@@ -126,9 +126,8 @@ const styles = StyleSheet.create({
       justifyContent:'flex-start',
     },
     buttonIcon:{
-      width:30,
-      height:30,
-      borderRadius: 100
+      width:20,
+      height:20,    
     },
     modalButton:{
       width:'100%',
