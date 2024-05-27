@@ -6,19 +6,28 @@ import Footer from "../Footer/Footer";
 import SearchBar from "../SearchBar/SearchBar";
 import { ActivityIndicator } from "react-native-paper";
 import { AxiosContext } from "../context/AxiosProvider/AxiosProvider";
+import Fuse from "fuse.js";
 
 function ExcercisesScreen({pageSwitcher, searchableText}: any) {
   const {publicAxios, authAxios} = useContext(AxiosContext);
   const [loading, setLoading] = useState<boolean>(false);
   const [filteredExercises, setFilteredExercises] = useState<any[]>([])
 
+  const fuseOptions = {
+    keys: [
+      "title",
+      "content"
+    ]
+  }
+  
   useEffect(()=>{
     const fetchPosts = async() =>{
       setLoading(true)
-      const result = await publicAxios.get(`/posts/search/${searchableText}`)
-      if(result){
+      const result = await publicAxios.get(`/posts`)
+      if(result.data){
+        const fuse = new Fuse(result.data, fuseOptions)
         setLoading(false)
-        setFilteredExercises(result.data)
+        setFilteredExercises(fuse.search(searchableText))
       }
     }
     fetchPosts()
@@ -78,18 +87,19 @@ function ExcercisesScreen({pageSwitcher, searchableText}: any) {
               <ActivityIndicator color="gray" style={{ margin: 15 }} />
             ) : null}
             {filteredExercises.map(excercise => {
-              const rating = calcRating(excercise)
-              const isoDateString = excercise.date
+              console.log(excercise.item.users_posts)
+              const rating = calcRating(excercise.item)
+              const isoDateString = excercise.item.date
               const formattedDate = formatDate(isoDateString);
               return(
                 <ExcercisesCard  
-                  key={excercise.id} 
-                  user_data={excercise.users_posts}
-                  id={excercise.id} category={excercise.category} 
-                  title={excercise.title} 
-                  description={excercise.content} 
+                  key={excercise.item.id} 
+                  user_data={excercise.item.users_posts}
+                  id={excercise.item.id} category={excercise.item.category} 
+                  title={excercise.item.title} 
+                  description={excercise.item.content} 
                   rate={rating} date={formattedDate} 
-                  posts_images={excercise.posts_images}/>)
+                  posts_images={excercise.item.posts_images}/>)
             })}
           </View>
           <View style={{height: 200}}></View>

@@ -12,19 +12,17 @@ interface NotificationModalProps{
 }
 interface NotificationProps{
   buttonAction: any
-  icon: any,
   content: string
   coloredIcon?: boolean
 }
 
-function Notification({buttonAction, icon, content, coloredIcon = true}: NotificationProps){
+function Notification({buttonAction, content, coloredIcon = true}: NotificationProps){
   return(
     <TouchableOpacity 
       style={styles.modalButton}
       onPress={buttonAction}
     >
-      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={{uri: icon}}/>
-      <Text style={{fontSize:16,}}>{content}</Text>
+      <Text style={{fontSize:18, fontWeight:'700'}}>{content}</Text>
     </TouchableOpacity>
   );
 }
@@ -56,6 +54,11 @@ function NotificationModal({buttonAction, hideHandler, isVisible, user}: Notific
         >
         <View style={styles.mainModalContainer}>
           <View style={styles.closeButtonContainer}>
+          <Text
+                style={styles.notificationTitle}
+              >
+                Powiadomienia
+              </Text>
             <TouchableOpacity
               onPress={()=>{hideHandler()}}
               style={styles.closeButton}
@@ -68,10 +71,10 @@ function NotificationModal({buttonAction, hideHandler, isVisible, user}: Notific
             </TouchableOpacity>
           </View>
           <View style={styles.buttonsContainer}>
-            <Notification content={'Wyszukaj'} icon={require('../../../../assets/search-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
-            <Notification content={'Twoje Zadania'} icon={require('../../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
-            <Notification content={'Konto'} icon={{uri: user?.avatar}} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
-            <Notification content={'Ustawienia'} icon={require('../../../../assets/settings-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
+            <Notification content={'Dodaj swoje pierwsze zadanie'} buttonAction={()=>{buttonAction('Exercises')}}/>
+            <Notification content={'Pomagaj innym! Dodawaj własne rozwiązania i dziel się swoją wiedzą'}  buttonAction={()=>{buttonAction('Exercises')}}/>
+            <Notification content={'Zobacz najbardziej popularne sety leksykalne!'} buttonAction={()=>{buttonAction('FlashcardsList')}} coloredIcon={false}/>
+            <Notification content={'Notuj z MultiLern'} buttonAction={()=>{buttonAction('Notes')}}/>
           </View>
         </View>
     </Modal>
@@ -130,12 +133,13 @@ const styles = StyleSheet.create({
     },
     modalButton:{
       width:'100%',
+      height:90,
       display:'flex',
       flexDirection:'row',
       justifyContent:'space-between',
       alignItems:'center',
       padding:20,
-      marginTop:5,
+      marginTop:15,
       borderRadius:5,
       backgroundColor:'#fff',
       shadowColor: "#000",
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
         width:'100%',
         display:'flex',
         flexDirection:'row',
-        justifyContent:'flex-end',
+        justifyContent:'space-between',
         alignContent:'center',
         margin:10,
       },
@@ -167,6 +171,12 @@ const styles = StyleSheet.create({
         width:30,
         height:30,
         tintColor:'rgb(33,33,43)',
+      },
+      notificationTitle:{
+        fontSize:22,
+        fontWeight:'900',
+        padding:10,
+        color:'rgb(45,45,55)',
       }
 })
 

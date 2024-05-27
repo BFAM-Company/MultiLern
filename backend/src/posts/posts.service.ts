@@ -69,6 +69,17 @@ export class PostsService {
     findAll() {
         return this.prisma.posts.findMany({
             include: {
+                users_posts: {
+                    select:{
+                        users: {
+                            select:{
+                                id: true,
+                                nickname: true,
+                                avatar: true
+                            }
+                        }
+                    }
+                },
                 posts_images: {
                     select: {
                         images: {

@@ -78,7 +78,9 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
                 >
                     Dodaj tytuł do swojej odpowiedzi!
                 </Text>
-                <Text>
+                <Text
+                    style={styles.smallHintText}
+                >
                     Może ułatwić to późniejsze znalezienie twojej odpowiedzi innym użytkownikom
                 </Text>
                 <TextInput
@@ -92,10 +94,15 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
                  >
                     Dodaj treść swojej odpowiedzi
                 </Text>
+                <Text
+                    style={styles.smallHintText}
+                >
+                    Pomóż innym. Staraj się wyjaśnić rozwiązanie i swój tok myślenia!
+                </Text>
                 <TextInput
                     editable
                     multiline
-                    style={[styles.input, {minHeight:500,}]}
+                    style={[styles.input, {minHeight:400,}]}
                     onChangeText={onChangeContent}
                     value={content}
                     placeholder={'Rozwiązanie...'}
@@ -183,6 +190,11 @@ const styles = StyleSheet.create({
         fontSize:20,
         fontWeight:'900',
         color:'rgb(45,45,55)',
+    },
+    smallHintText:{
+        fontSize:16,
+        color:'gray',
+        marginBottom:20
     },
 })
 

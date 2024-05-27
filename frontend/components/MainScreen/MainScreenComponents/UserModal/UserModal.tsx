@@ -24,7 +24,7 @@ function Button({buttonAction, icon, content, coloredIcon = true}: ButtonProps){
       style={styles.modalButton}
       onPress={buttonAction}
     >
-      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={{uri: icon}}/>
+      <Image style={[styles.buttonIcon, coloredIcon?{tintColor:'rgb(33,33,43)'}:null]} source={icon}/>
       <Text style={{fontSize:16,}}>{content}</Text>
     </TouchableOpacity>
   );
@@ -73,7 +73,7 @@ function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps)
             <Button content={'Twoje Zadania'} icon={require('../../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
             <Button content={'Konto'} icon={user?.avatar} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
             <Button content={'Ustawienia'} icon={require('../../../../assets/settings-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
-            <Pressable onPress={logout}><Text>Wyloguj się</Text></Pressable>
+            <Pressable onPress={logout} style={{margin:20,}}><Text style={{fontWeight:'700', fontSize:20,}}>Wyloguj się</Text></Pressable>
           </LinearGradient>
         </View>
     </Modal>
@@ -126,9 +126,8 @@ const styles = StyleSheet.create({
       justifyContent:'flex-start',
     },
     buttonIcon:{
-      width:30,
-      height:30,
-      borderRadius: 100
+      width:20,
+      height:20,    
     },
     modalButton:{
       width:'100%',
