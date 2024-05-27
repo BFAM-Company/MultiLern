@@ -1,14 +1,10 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useContext, useState } from 'react'
-import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View, Image, ScrollView} from 'react-native'
+import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View, Image, ScrollView, Alert} from 'react-native'
 import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
 import { UserDataContext } from '../../context/UserContext/UserContext';
 import { TextInput } from 'react-native-paper';
-
-
-
-
-
+import * as ImagePicker from "expo-image-picker"; 
 
 interface PostContentProps{
     id:number,
@@ -23,10 +19,38 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
   const {publicAxios, authAxios} = useContext(AxiosContext)
   const [modalVisible, setModalVisibile] = useState<boolean>(false)
 
+  const [file, setFile] = useState();
+
   const [title, onChangeTitle] = useState<string>('')
   const [content, onChangeContent] = useState<string>('')
 
-
+  const pickImage = async () => {
+		const { status } = await ImagePicker. 
+            requestMediaLibraryPermissionsAsync(); 
+  
+        if (status !== "granted") { 
+  
+            // If permission is denied, show an alert 
+            Alert.alert( 
+                "Permission Denied", 
+                `Sorry, we need camera  
+                 roll permission to upload images.` 
+            ); 
+        } else { 
+  
+            // Launch the image library and get 
+            // the selected image 
+            const result = 
+                await ImagePicker.launchImageLibraryAsync(); 
+  
+            if (!result.canceled) { 
+  
+                // If an image is selected (not cancelled),  
+                // update the file state variable 
+								console.log(result);
+            } 
+        } 
+	}
      
   const handleClick = () =>{
     setModalVisibile(true)
@@ -118,6 +142,12 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
                             <Text style={{color:'white', fontWeight:'900', fontSize:22}}>Wyślij</Text>
                         </LinearGradient>
                 </TouchableOpacity>
+								<TouchableOpacity style={styles.button} 
+                onPress={pickImage}> 
+                <Text> 
+                    Choose Image 
+                </Text> 
+            </TouchableOpacity> 
             </View> 
             </ScrollView>
         </Modal>
