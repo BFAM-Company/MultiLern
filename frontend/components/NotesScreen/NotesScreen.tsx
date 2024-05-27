@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { StyleSheet, View } from 'react-native';
 import {DrawingComponent} from '../DrawingComponent/DrawingComponent';
 import ToolKit from './NotesScreenComponents/ToolKit';
+import HomeButton from './NotesScreenComponents/HomeButton';
 
-function NotesScreen() {
+function NotesScreen({pageSwitcher}: any) {
   const [color, setColor] = useState<string>('black')
   const [width, setWidth] = useState<number>(2)
   const [style, setStyle] = useState<string>('normal')
@@ -41,6 +42,7 @@ function NotesScreen() {
           returnStyle={styleChanger}
           returnIsDrawingEnabled={drawingChanger}
         />
+        <HomeButton pageSwitcher={()=>{pageSwitcher('Main')}}/>
       </View>
   );
 }

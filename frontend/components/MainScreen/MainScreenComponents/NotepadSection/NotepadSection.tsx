@@ -15,7 +15,6 @@ function NotepadSection({pageSwitcher}: NotepadSectionProps) {
         </View>
         <TouchableOpacity
             style={styles.container}
-            onPress={()=>{pageSwitcher('Notes')}}
         >
             <Image
                 style={styles.image}
@@ -31,6 +30,7 @@ function NotepadSection({pageSwitcher}: NotepadSectionProps) {
         </TouchableOpacity>
         <TouchableOpacity
             style={styles.container}
+            onPress={()=>{pageSwitcher('Notes')}}
         >
             <Image
                 style={styles.image}

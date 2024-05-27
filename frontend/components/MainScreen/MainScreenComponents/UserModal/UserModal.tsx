@@ -73,7 +73,7 @@ function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps)
             <Button content={'Twoje Zadania'} icon={require('../../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
             <Button content={'Konto'} icon={user?.avatar} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
             <Button content={'Ustawienia'} icon={require('../../../../assets/settings-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
-            <Pressable onPress={logout}><Text>Wyloguj się</Text></Pressable>
+            <Pressable onPress={logout} style={{margin:20,}}><Text style={{fontWeight:'700', fontSize:20,}}>Wyloguj się</Text></Pressable>
           </LinearGradient>
         </View>
     </Modal>
