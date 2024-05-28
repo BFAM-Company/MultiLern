@@ -1,19 +1,24 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useContext, useState } from 'react'
-import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View, Image, ScrollView} from 'react-native'
+import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View, Image, ScrollView, Alert} from 'react-native'
 import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
 import { UserDataContext } from '../../context/UserContext/UserContext';
 import { TextInput } from 'react-native-paper';
-
-
-
-
-
+import * as ImagePicker from "expo-image-picker"; 
+import * as ImageManipulator from 'expo-image-manipulator';
 
 interface PostContentProps{
     id:number,
     handleRefresh: any,
 }
+
+interface IImages {
+	images: {
+		create: {
+			img: string
+		}
+	}
+}[]
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -23,16 +28,45 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
   const {publicAxios, authAxios} = useContext(AxiosContext)
   const [modalVisible, setModalVisibile] = useState<boolean>(false)
 
+  const [file, setFile] = useState();
+
   const [title, onChangeTitle] = useState<string>('')
   const [content, onChangeContent] = useState<string>('')
+	const [images, setImages] = useState<IImages[]>([]);
 
+  const pickImage = async () => {
+		const { status } = await ImagePicker. 
+            requestMediaLibraryPermissionsAsync(); 
 
+		if (status !== "granted") { 
+
+			Alert.alert( 
+						"Permission Denied", 
+						`Sorry, we need camera  
+							roll permission to upload images.` 
+				); 
+		} else { 
+				const result = 
+						await ImagePicker.launchImageLibraryAsync({base64: true, quality: 0.1}); 
+				
+				if (!result.canceled && result.assets) {
+                const image: IImages = {
+                    images: {
+                        create: {
+                            img: `data:image/png;base64,${result.assets[0].base64}`
+                        }
+                    }
+                };
+                setImages((prevState) => [...prevState, image]);
+            }
+		} 
+	}
      
   const handleClick = () =>{
     setModalVisibile(true)
   }
 
-  const handleSubmit = async() =>{
+  const handleCommentSubmit = async() =>{
         const event = new Date();
 
         await publicAxios.post(`/posts/comment`, {
@@ -40,6 +74,7 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
             content: content,
             date: event.toISOString(),
             parentPostId: id,
+						images: images,
             userId: userContext?.userData?.id,
             }, {
               headers: {
@@ -83,12 +118,12 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
                 >
                     Może ułatwić to późniejsze znalezienie twojej odpowiedzi innym użytkownikom
                 </Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeTitle}
-                    value={title}
-                    placeholder='tytuł(opcjonalny)...'
-                />
+								<TextInput
+									style={styles.input}
+									onChangeText={onChangeTitle}
+									value={title}
+									placeholder='tytuł(opcjonalny)...'
+								/>
                  <Text
                     style={styles.hintText}
                  >
@@ -99,16 +134,35 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
                 >
                     Pomóż innym. Staraj się wyjaśnić rozwiązanie i swój tok myślenia!
                 </Text>
-                <TextInput
-                    editable
-                    multiline
-                    style={[styles.input, {minHeight:400,}]}
-                    onChangeText={onChangeContent}
-                    value={content}
-                    placeholder={'Rozwiązanie...'}
-                />
+								<TextInput
+									editable
+									multiline
+									style={[styles.input, {minHeight:400,}]}
+									onChangeText={onChangeContent}
+									value={content}
+									placeholder={'Rozwiązanie...'}
+							/>
+									<Text
+										style={styles.hintText}
+									>
+										Dodaj obrazy do swojej odpowiedzi
+									</Text>
+									<View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'}}>
+										{images && images.map((image: any) => (
+												<View style={styles.imageButton} key={image.images.create.img}>
+													<TouchableOpacity>
+														<Image style={{width: 100, height: 100, opacity: .7, borderRadius: 5}} source={{uri: image.images.create.img}}/>
+													</TouchableOpacity>
+												</View>
+										))}
+										<View style={styles.uploadButton}>
+											<TouchableOpacity onPress={pickImage}>
+												<Image style={{width: 50, height: 50,opacity: .5}} source={require('../../../assets/upload-icon.png')}/>
+											</TouchableOpacity>
+										</View>
+									</View>
                 <TouchableOpacity
-                    onPress={handleSubmit}
+                    onPress={handleCommentSubmit}
                     style={styles.button}
                     >
                         <LinearGradient
@@ -196,6 +250,22 @@ const styles = StyleSheet.create({
         color:'gray',
         marginBottom:20
     },
+		uploadButton: {
+			width: 70,
+			height: 70,
+			borderWidth: 1,
+			borderBlockColor: 'black',
+			padding:10,
+			borderRadius: 5,
+		},
+		imageButton: {
+			width: 100,
+			height: 100,
+			borderWidth: 1,
+			borderBlockColor: 'black',
+			borderRadius: 5,
+			margin: 5
+		}
 })
 
 export default CommentButton;
