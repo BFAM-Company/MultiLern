@@ -16,6 +16,7 @@ import { AuthContext } from '../context/AuthContext/AuthContext';
 import { AxiosContext } from '../context/AxiosProvider/AxiosProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserDataContext } from '../context/UserContext/UserContext';
+import ExercisesSection from './MainScreenComponents/ExercisesSection/ExercisesSection';
 
 
 
@@ -136,6 +137,7 @@ function MainScreen({pageSwitcher}: any) {
                     <BoxCarousel pageSwitcher={pageSwitcher}/>
                     <NotepadSection pageSwitcher={pageSwitcher}/>
                     <FlashcardsSection pageSwitcher={pageSwitcher}/>
+                    <ExercisesSection pageSwitcher={pageSwitcher}/>
                     <SubjectsSection pageSwitcher={pageSwitcher}/>
                     <ExamsSection pageSwitcher={pageSwitcher} />
                 </View>
