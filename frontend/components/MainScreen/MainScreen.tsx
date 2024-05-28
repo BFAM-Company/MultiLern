@@ -17,6 +17,8 @@ import { AxiosContext } from '../context/AxiosProvider/AxiosProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserDataContext } from '../context/UserContext/UserContext';
 import ExercisesSection from './MainScreenComponents/ExercisesSection/ExercisesSection';
+import ExcercisesCard from '../ExercisesScreen/ExercisesScreenComponents/ExercisesCard';
+import { ActivityIndicator } from 'react-native-paper';
 
 
 
@@ -25,12 +27,23 @@ function MainScreen({pageSwitcher}: any) {
     const [userModalVisible, setUserModalVisible] = useState<boolean>(false)
     const [notiModalVisible, setNotiModalVisible] = useState<boolean>(false)
     const authContext = useContext(AuthContext)
-    const { authAxios } = useContext(AxiosContext);
     const userContext = useContext(UserDataContext)
+    const {publicAxios, authAxios} = useContext(AxiosContext);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [exercises, setExercises] = useState<any[]>([])
 
 
     useEffect(() => {
         fetchUserData()
+        const fetchPosts = async() =>{
+            setLoading(true)
+            const result = await publicAxios.get(`/posts`)
+            if(result.data){
+              setLoading(false)
+              setExercises(result.data)
+            }
+          }
+          fetchPosts()
     }, [authContext?.authState.authenticated])
 
     const fetchUserData = async () => {
@@ -95,11 +108,48 @@ function MainScreen({pageSwitcher}: any) {
         // console.log(userModalVisible)
     }
 
+
+    
+    const calcRating = (exercise: any) =>{
+        let rating = 0
+        let counter = 0;
+        //console.log(exercise.posts_reviews)
+        if (exercise.posts_reviews && Array.isArray(exercise.posts_reviews)) {
+        for(let i = 0; i < exercise.posts_reviews.length; i++){
+            counter++
+            rating += exercise.posts_reviews[i].reviews.rate
+        }
+        if (counter > 0) {
+            return rating / counter;
+        } else {
+            return 0;
+        }
+        } else {
+            return 0;
+        }
+    }
+
+    function formatDate(isoDateString: string) {
+        const months = [
+            "styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec",
+            "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"
+        ];
+
+        const date = new Date(isoDateString);
+        const day = date.getDate();
+        const monthIndex = date.getMonth();
+        const year = date.getFullYear();
+
+        const formattedDate = `${day} ${months[monthIndex]} ${year}`;
+        return formattedDate;
+    }
     const user ={
         username: 'Johny123',
         email:'john.smith@example.com',
         avatar: require('./../../assets/demo-user-icon.png')
     }
+
+
   return (
     <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -138,6 +188,38 @@ function MainScreen({pageSwitcher}: any) {
                     <NotepadSection pageSwitcher={pageSwitcher}/>
                     <FlashcardsSection pageSwitcher={pageSwitcher}/>
                     <ExercisesSection pageSwitcher={pageSwitcher}/>
+                    <Text
+                        style={styles.boldText}
+                    >
+                        Najnowsze zadania, które czekają na odpowiedź
+                    </Text>
+                    <ScrollView 
+                        //horizontal={true}
+                        style={styles.excercisesCardsSection}
+                    >
+                        <View
+                            style={styles.exercisesContainer}
+                        >
+                            {loading ? (
+                            <ActivityIndicator color="gray" style={{ margin: 15 }} />
+                            ) : null}
+                            {exercises.slice(0,5).map(excercise => {
+                            console.log(excercise.users_posts)
+                            const rating = calcRating(excercise)
+                            const isoDateString = excercise.date
+                            const formattedDate = formatDate(isoDateString);
+                            return(
+                                <ExcercisesCard  
+                                key={excercise.id} 
+                                user_data={excercise.users_posts}
+                                id={excercise.id} category={excercise.category} 
+                                title={excercise.title} 
+                                description={excercise.content} 
+                                rate={rating} date={formattedDate} 
+                                posts_images={excercise.posts_images}/>)
+                            })}
+                        </View>
+                    </ScrollView>
                     <SubjectsSection pageSwitcher={pageSwitcher}/>
                     <ExamsSection pageSwitcher={pageSwitcher} />
                 </View>
@@ -193,7 +275,23 @@ const styles = StyleSheet.create({
         shadowRadius: 10.32,
 
         elevation: 16,
-    }
+    },
+    boldText:{
+        fontSize:25,
+        fontWeight: '900',
+        paddingTop:50,
+        paddingLeft: 20,
+        paddingBottom:20,
+      },
+      excercisesCardsSection: {
+        width: '100%',
+      },
+      exercisesContainer: {
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        paddingBottom:100,
+      },
 })
 
 
