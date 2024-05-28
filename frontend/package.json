@@ -30,6 +30,7 @@
     "axios-auth-refresh": "^3.3.6",
     "axios-mock-adapter": "^1.22.0",
     "expo": "~50.0.2",
+    "expo-image-manipulator": "^12.0.5",
     "expo-image-picker": "^15.0.5",
     "expo-linear-gradient": "~12.7.1",
     "expo-status-bar": "~1.11.1",
