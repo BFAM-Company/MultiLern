@@ -5,7 +5,6 @@ import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
 import { UserDataContext } from '../../context/UserContext/UserContext';
 import { TextInput } from 'react-native-paper';
 import * as ImagePicker from "expo-image-picker"; 
-import * as ImageManipulator from 'expo-image-manipulator';
 
 interface PostContentProps{
     id:number,
@@ -27,8 +26,6 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
   const userContext = useContext(UserDataContext)
   const {publicAxios, authAxios} = useContext(AxiosContext)
   const [modalVisible, setModalVisibile] = useState<boolean>(false)
-
-  const [file, setFile] = useState();
 
   const [title, onChangeTitle] = useState<string>('')
   const [content, onChangeContent] = useState<string>('')
@@ -65,7 +62,12 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
   const handleClick = () =>{
     setModalVisibile(true)
   }
-
+  
+    const removeImage = (imageId: number) => {
+        const updatedImages = images.filter((_, index) => index !== imageId);
+        setImages(updatedImages);
+    }
+    
   const handleCommentSubmit = async() =>{
         const event = new Date();
 
@@ -148,18 +150,18 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
 										Dodaj obrazy do swojej odpowiedzi
 									</Text>
 									<View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'}}>
-										{images && images.map((image: any) => (
-												<View style={styles.imageButton} key={image.images.create.img}>
-													<TouchableOpacity>
+										{images && images.map((image: any, index) => (
+                                            <TouchableOpacity key={index} onPress={() => removeImage(index)}>
+												<View style={styles.imageButton}>
 														<Image style={{width: 100, height: 100, opacity: .7, borderRadius: 5}} source={{uri: image.images.create.img}}/>
-													</TouchableOpacity>
 												</View>
+                                            </TouchableOpacity>
 										))}
-										<View style={styles.uploadButton}>
-											<TouchableOpacity onPress={pickImage}>
-												<Image style={{width: 50, height: 50,opacity: .5}} source={require('../../../assets/upload-icon.png')}/>
-											</TouchableOpacity>
-										</View>
+                                        <TouchableOpacity onPress={pickImage}>
+                                            <View style={styles.uploadButton}>
+                                                    <Image style={{width: 50, height: 50,opacity: .5}} source={require('../../../assets/upload-icon.png')}/>
+                                            </View>
+                                        </TouchableOpacity>
 									</View>
                 <TouchableOpacity
                     onPress={handleCommentSubmit}
