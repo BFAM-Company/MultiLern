@@ -32,7 +32,7 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
 
   const [title, onChangeTitle] = useState<string>('')
   const [content, onChangeContent] = useState<string>('')
-	const [images, setImages] = useState<IImages[]>([]);
+  const [images, setImages] = useState<IImages[]>([]);
 
   const pickImage = async () => {
 		const { status } = await ImagePicker. 
