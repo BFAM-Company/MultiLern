@@ -6,6 +6,8 @@ import SearchBar from "../SearchBar/SearchBar";
 import { ActivityIndicator } from "react-native-paper";
 import { AxiosContext } from "../context/AxiosProvider/AxiosProvider";
 import ExcercisesCard from "../ExercisesScreen/ExercisesScreenComponents/ExercisesCard";
+import PostCard from "./PostCard";
+import MiniPostCard from "./MiniPostCard";
 
 function PostByCategoryScreen({pageSwitcher, category}: any) {
   const {publicAxios, authAxios} = useContext(AxiosContext);
@@ -66,22 +68,36 @@ function PostByCategoryScreen({pageSwitcher, category}: any) {
       >
       <SafeAreaView>
         <ScrollView style={{width: '100%'}}>
-          <Text
-            style={styles.boldText}
-          >
-            Poznaj zadania z naszej bazy z kategorii {category}
-          </Text>
+            <ImageBackground
+                source={require('./../../assets/cool-background.png')}
+                blurRadius={0}
+                style={[styles.header, {marginBottom:50,}]}
+            >
+                <Text
+                    style={styles.boldText}
+                >
+                    Poznaj zadania z naszej bazy z kategorii {category}
+                </Text>
+            </ImageBackground>
+            <View style={styles.SearchBarContainer}>
+                <SearchBar pageSwitcher={pageSwitcher} currentText={''} />
+            </View>
           <View style={styles.excercisesCardsSection}>
+            <Text
+                style={styles.descText}
+            >
+                Ostatnio dodane
+            </Text>
             {loading ? (
               <ActivityIndicator color="gray" style={{ margin: 15 }} />
             ) : null}
-            {filteredExercises.map(excercise => {
+            {filteredExercises.slice(0,3).map(excercise => {
               console.log(excercise.users_posts)
               const rating = calcRating(excercise)
               const isoDateString = excercise.date
               const formattedDate = formatDate(isoDateString);
               return(
-                <ExcercisesCard
+                <PostCard
                   key={excercise.id} 
                   user_data={excercise.users_posts}
                   id={excercise.id} category={excercise.category} 
@@ -90,8 +106,46 @@ function PostByCategoryScreen({pageSwitcher, category}: any) {
                   rate={rating} date={formattedDate} 
                   posts_images={excercise.posts_images}/>)
             })}
+            <Text
+                style={styles.descText}
+            >
+                Pozostałe zadania
+            </Text>
+            <ScrollView
+                style={styles.horizontalScrollView}
+                horizontal={true}
+            >
+                {filteredExercises.slice(3,).map(excercise => {
+                console.log(excercise.users_posts)
+                const rating = calcRating(excercise)
+                const isoDateString = excercise.date
+                const formattedDate = formatDate(isoDateString);
+                return(
+                    <View
+                    key={excercise.id} 
+                    >
+                        <MiniPostCard
+                        user_data={excercise.users_posts}
+                        id={excercise.id} category={excercise.category} 
+                        title={excercise.title} 
+                        description={excercise.content} 
+                        rate={rating} date={formattedDate} 
+                        posts_images={excercise.posts_images}/>
+                    </View>)
+                })}
+            </ScrollView>
           </View>
-          <View style={{height: 200}}></View>
+          <TouchableOpacity
+            onPress={()=>{pageSwitcher('CreatePost')}}
+            style={styles.moreButton}
+            >
+                <Text
+                    style={styles.buttonText}
+                >
+                    Dodaj nowe
+                </Text>
+            </TouchableOpacity>
+          <View style={{height: 100}}></View>
         </ScrollView>
       </SafeAreaView>
       <Footer pageSwitcher={pageSwitcher}/>
@@ -134,6 +188,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius:20,
     overflow:'hidden',
     paddingBottom:-5,
+  },
+  header:{
+    width:'100%',
+    height:250,
+    display:'flex',
+    justifyContent:'flex-end',
+    borderBottomLeftRadius:20,
+    borderBottomRightRadius:20,
   },
   shadowContainer:{
       width:'100%',
@@ -193,6 +255,34 @@ const styles = StyleSheet.create({
     paddingTop:50,
     paddingLeft: 20,
     paddingBottom:20,
+    color:'rgb(45,45,55)'
+  },
+  descText:{
+    fontSize:22,
+    color:'dimgray',
+    fontWeight:'700',
+    width:'100%',
+    textAlign:'left',
+    padding:10,
+  },
+  horizontalScrollView:{
+    height:220,
+  },
+  moreButton:{
+    width:'90%',
+    height:50,
+    backgroundColor:'rgb(45,45,55)',
+    margin:20,
+    borderRadius:20,
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  buttonText:{
+    color:'#fff',
+    fontSize:18,
+    
+    fontWeight:'900',
   },
 })
 
