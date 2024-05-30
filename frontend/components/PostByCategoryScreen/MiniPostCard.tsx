@@ -61,6 +61,7 @@ function MiniPostCard({id, category, title, description, rate, date, posts_image
       <TouchableOpacity
           onPress={()=>{handlePress()}}
           style={[styles.cardContainer,{display:isActive?'none':'flex'}]}
+          testID='mini-post-card-touchable'
         >
           <Animated.View
             style={{width, height}}

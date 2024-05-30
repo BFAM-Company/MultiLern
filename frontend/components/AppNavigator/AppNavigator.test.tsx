@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor, cleanup } from '@testing-library/react-native';
-import AppNavigator, { AuthPage, ExcercisesPage, FlashcardsListPage, FlashcardsSetPage, HomePage, LogInPage, MainPage, NewFlashcardPage, SignUpPage } from './AppNavigator';
+import AppNavigator, { AuthPage, CreatePostPage, ExcercisesPage, FlashcardsListPage, FlashcardsSetPage, HomePage, LogInPage, MainPage, NewFlashcardPage, NotesPage, PostByCategoryPage, SignUpPage, UserExercisesPage } from './AppNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackParamList } from '../../types/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -103,6 +103,42 @@ describe('<AppNavigator />', () => {
       </NavigationContainer>
     );
     expect(getByText('Facebook account')).toBeDefined();
+  });
+
+  it('renders NotesPage correctly', () => {
+    const { getByText } = render(
+      <NavigationContainer>
+        <NotesPage navigation={mockNavigation} />
+      </NavigationContainer>
+    );
+    expect(getByText('normal')).toBeDefined();
+  });
+
+  it('renders CreatePostPage correctly', () => {
+    const { getByText } = render(
+      <NavigationContainer>
+        <CreatePostPage navigation={mockNavigation} />
+      </NavigationContainer>
+    );
+    expect(getByText('Dodaj tytuł do swojego pytania')).toBeDefined();
+  });
+
+  it('renders UserExercisesPage correctly', () => {
+    const { getByText } = render(
+      <NavigationContainer>
+        <UserExercisesPage route={{ params: { userId: 1} }} navigation={mockNavigation} />
+      </NavigationContainer>
+    );
+    expect(getByText('Twoje pytania i odpowiedzi')).toBeDefined();
+  });
+
+  it('renders PostByCategoryPage correctly', () => {
+    const { getByText } = render(
+      <NavigationContainer>
+        <PostByCategoryPage route={{ params: { category: 'example' } }} navigation={mockNavigation} />
+      </NavigationContainer>
+    );
+    expect(getByText('Poznaj zadania z naszej bazy z kategorii example')).toBeDefined();
   });
 
 });

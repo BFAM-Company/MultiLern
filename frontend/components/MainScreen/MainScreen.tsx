@@ -21,8 +21,6 @@ import ExcercisesCard from '../ExercisesScreen/ExercisesScreenComponents/Exercis
 import { ActivityIndicator } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 
-
-
 function MainScreen({pageSwitcher}: any) {
     const scrollY  = useRef(new Animated.Value(0)).current;
     const [userModalVisible, setUserModalVisible] = useState<boolean>(false)
@@ -32,7 +30,6 @@ function MainScreen({pageSwitcher}: any) {
     const {publicAxios, authAxios} = useContext(AxiosContext);
     const [loading, setLoading] = useState<boolean>(false);
     const [exercises, setExercises] = useState<any[]>([])
-
 
     useEffect(() => {
         fetchUserData()

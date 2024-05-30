@@ -11,6 +11,6 @@ describe('ExercisesSection', () => {
     const button = getByTestId('NotesPageSwitcher');
         fireEvent.press(button);
         expect(mockPageSwitcher).toHaveBeenCalledTimes(1);
-        expect(mockPageSwitcher).toHaveBeenCalledWith('Notes');
+        expect(mockPageSwitcher).toHaveBeenCalledWith('CreatePost');
     })
 });

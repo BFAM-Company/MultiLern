@@ -58,6 +58,7 @@ function PostCard({id, category, title, description, rate, date, posts_images, u
     <>
       <TouchableOpacity
           onPress={()=>{handlePress()}}
+          testID='post-card-touchable'
           style={[styles.cardContainer,{display:isActive?'none':'flex'}]}
         >
           <Animated.View
