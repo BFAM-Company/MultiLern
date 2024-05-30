@@ -46,6 +46,11 @@ export class PostsController {
         return this.postsService.getCommentsById(Number(id));
     }
 
+    @Get('/userposts/:id')
+    getPostsByUserId(@Param('id') id: string) {
+        return this.postsService.findByUserId(Number(id));
+    }
+
     @Patch(':id')
     update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
         return this.postsService.update(+id, updatePostDto);

@@ -107,6 +107,50 @@ export class PostsService {
         });
     }
 
+    findByUserId(id: number){
+        return this.prisma.posts.findMany({
+            where:{
+                users_posts:{
+                    some:{
+                        userId: id
+                    }
+                }
+            },
+            orderBy:{
+                posts:{
+                    date: 'desc'
+                }
+            },
+            include: {
+                users_posts: {
+                    select:{
+                        users: {
+                            select:{
+                                id: true,
+                                nickname: true,
+                                avatar: true
+                            }
+                        }
+                    }
+                },
+                posts_reviews: {
+                    include: {
+                        reviews: true,
+                    },
+                },
+                posts_images: {
+                    select: {
+                        images: {
+                            select: {
+                                img: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    }
+
     findManyByCategory(category: string) {
         return this.prisma.posts.findMany({
             where: {

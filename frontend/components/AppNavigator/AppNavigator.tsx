@@ -18,6 +18,7 @@ import AuthScreen from '../AuthScreen/AuthScreen';
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
 import NotesScreen from '../NotesScreen/NotesScreen';
 import CreatePostScreen from '../CreatePostScreen/CreatePostScreen';
+import UserExercises from '../UserExercises/UserExercises';
 
 
 
@@ -128,6 +129,15 @@ const CreatePostPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
+const UserExercisesPage: React.FC<any> = ({ navigation, route }) => {
+
+  return (
+    <PageSwitchTemplate navigation={navigation}>
+      <UserExercises />
+    </PageSwitchTemplate>
+  );
+};
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
@@ -149,6 +159,7 @@ function AppNavigator() {
          <Stack.Screen name="FlashcardsSet" component={FlashcardsSetPage} />
          <Stack.Screen name="Notes" component={gestureHandlerRootHOC(NotesPage)} />
          <Stack.Screen name="CreatePost" component={gestureHandlerRootHOC(CreatePostPage)} />
+         <Stack.Screen name="UserExercises" component={gestureHandlerRootHOC(UserExercisesPage)} />
        </Stack.Navigator>
     </NavigationContainer>
   );

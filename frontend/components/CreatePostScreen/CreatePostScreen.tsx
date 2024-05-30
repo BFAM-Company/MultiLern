@@ -59,7 +59,7 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
   const handleCommentSubmit = async() =>{
         const event = new Date();
 
-        await publicAxios.post(`/posts/comment`, {
+        await publicAxios.post(`/posts/post`, {
             title: title,
             content: content,
             date: event.toISOString(),
@@ -70,7 +70,7 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
                 'Content-Type': 'application/json'
               }
           })
-        pageSwitcher('Exercises')
+          pageSwitcher('UserExercises', {userId: userContext?.userData?.id})
       }
 
     const removeImage = (imageId: number) => {

@@ -17,6 +17,12 @@ export const linking: any = {
           description: (description: string) => description,
         },
       },
+      UserExcercises: {
+        path: "exercises/:description",
+        parse: {
+          description: (description: string) => description,
+        },
+      },
       NewFlashcard: "newflashcard",
       FlashcardsList: {
         path: "flashcards/:range",

@@ -1,10 +1,6 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import React, { useContext, useState } from 'react';
-import { Alert, Animated, Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import React, { useContext } from 'react';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { UserDataContext } from '../../../context/UserContext/UserContext';
-import { AxiosContext } from '../../../context/AxiosProvider/AxiosProvider';
-import { Modal } from 'react-native-paper';
-import * as ImagePicker from "expo-image-picker"; 
 
 
 interface NotepadSectionProps{
@@ -16,6 +12,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function ExercisesSection({pageSwitcher}: NotepadSectionProps) {
+  const userContext = useContext(UserDataContext)
     
   return (
     <View
@@ -26,6 +23,7 @@ function ExercisesSection({pageSwitcher}: NotepadSectionProps) {
         </View>
         <TouchableOpacity
             style={styles.container}
+            onPress={()=>{pageSwitcher('UserExercises', {userId: userContext?.userData?.id})}}
         >
             <Image
                 style={styles.image}

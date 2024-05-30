@@ -21,6 +21,7 @@ export type RootStackParamList = {
   Auth: undefined;
   Notes: undefined
   CreatePost: undefined
+  UserExercises: {description: string}
 };
 
 export interface PageSwitchTemplateProps {
