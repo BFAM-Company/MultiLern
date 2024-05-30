@@ -23,7 +23,10 @@ function ExercisesSection({pageSwitcher}: NotepadSectionProps) {
         </View>
         <TouchableOpacity
             style={styles.container}
-            onPress={()=>{pageSwitcher('UserExercises', {userId: userContext?.userData?.id})}}
+            onPress={()=>{
+                console.log('userId: ', userContext?.userData?.id)
+                pageSwitcher('UserExercises', {userId: userContext?.userData?.id})
+            }}
         >
             <Image
                 style={styles.image}

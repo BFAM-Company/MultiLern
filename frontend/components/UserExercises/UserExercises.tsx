@@ -14,9 +14,10 @@ function UserExercises({pageSwitcher, userId}: any) {
 
   
   useEffect(()=>{
+    console.log(userId)
     const fetchPosts = async() =>{
       setLoading(true)
-      const result = await publicAxios.get(`/userposts/${userId}`)
+      const result = await publicAxios.get(`/posts/userposts/${userId}`)
       if(result.data){
         setLoading(false)
         setFilteredExercises(result.data)
@@ -76,19 +77,19 @@ function UserExercises({pageSwitcher, userId}: any) {
               <ActivityIndicator color="gray" style={{ margin: 15 }} />
             ) : null}
             {filteredExercises.map(excercise => {
-              console.log(excercise.item.users_posts)
-              const rating = calcRating(excercise.item)
-              const isoDateString = excercise.item.date
+              console.log(excercise.users_posts)
+              const rating = calcRating(excercise)
+              const isoDateString = excercise.date
               const formattedDate = formatDate(isoDateString);
               return(
                 <ExcercisesCard
-                  key={excercise.item.id} 
-                  user_data={excercise.item.users_posts}
-                  id={excercise.item.id} category={excercise.item.category} 
-                  title={excercise.item.title} 
-                  description={excercise.item.content} 
+                  key={excercise.id} 
+                  user_data={excercise.users_posts}
+                  id={excercise.id} category={excercise.category} 
+                  title={excercise.title} 
+                  description={excercise.content} 
                   rate={rating} date={formattedDate} 
-                  posts_images={excercise.item.posts_images}/>)
+                  posts_images={excercise.posts_images}/>)
             })}
           </View>
           <View style={{height: 200}}></View>

@@ -4,6 +4,7 @@ import { UserDataContext } from '../context/UserContext/UserContext';
 import { AxiosContext } from '../context/AxiosProvider/AxiosProvider';
 import * as ImagePicker from "expo-image-picker"; 
 import { LinearGradient } from 'expo-linear-gradient';
+import RNPickerSelect from "react-native-picker-select";
 
 
 interface IImages {
@@ -15,17 +16,15 @@ interface IImages {
 }[]
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const CreatePostScreen = ({pageSwitcher}: any) =>{
     const userContext = useContext(UserDataContext)
     const {publicAxios, authAxios} = useContext(AxiosContext)
 
-    const [file, setFile] = useState();
-
     const [title, onChangeTitle] = useState<string>('')
     const [content, onChangeContent] = useState<string>('')
-    const [images, setImages] = useState<IImages[]>([]);
+    const [images, setImages] = useState<IImages[]>([])
+    const [category, setCategory] = useState<string>('')
 
     const pickImage = async () => {
 		const { status } = await ImagePicker. 
@@ -62,9 +61,11 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
         await publicAxios.post(`/posts/post`, {
             title: title,
             content: content,
+            category: category,
             date: event.toISOString(),
-			images: images,
-            userId: userContext?.userData?.id,
+            images: images,
+            tags: [],
+            userId: userContext?.userData?.id
             }, {
               headers: {
                 'Content-Type': 'application/json'
@@ -98,12 +99,32 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
                 >
                     Ułatwi to późniejsze znalezienie go innym użytkownikom
                 </Text>
-								<TextInput
-									style={[styles.input, {height:50}]}
-									onChangeText={onChangeTitle}
-									value={title}
-									placeholder='tytuł...'
-								/>
+                <TextInput
+                    style={[styles.input, {height:50}]}
+                    onChangeText={onChangeTitle}
+                    value={title}
+                    placeholder='tytuł...'
+                />
+                <Text
+                    style={styles.hintText}
+                >
+                    Dodaj kategorie zadania
+                </Text>
+                <RNPickerSelect
+                 onValueChange={(value) => setCategory(value)}
+                 placeholder={{ label: "Wybierz kategorie...", value: null }}
+                 useNativeAndroidPickerStyle={false}
+                 items={[
+                     { label: "Matematyka", value: "Matematyka" },
+                     { label: "Język Polski", value: "Język Polski" },
+                     { label: "Języki obce", value: "Języki obce" },
+                     { label: "Geografia", value: "Geografia" },
+                     { label: "Fizyka", value: "Fizyka" },
+                     { label: "Biologia", value: "Biologia" },
+                     { label: "Chemia", value: "Chemia" },
+                     { label: "Informatyka", value: "Informatyka" },
+                 ]}
+                />
                  <Text
                     style={styles.hintText}
                  >

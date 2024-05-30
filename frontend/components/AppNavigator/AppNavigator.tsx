@@ -130,10 +130,10 @@ const CreatePostPage: React.FC<any> = ({ navigation, route }) => {
 };
 
 const UserExercisesPage: React.FC<any> = ({ navigation, route }) => {
-
+  const { userId } = route.params;
   return (
     <PageSwitchTemplate navigation={navigation}>
-      <UserExercises />
+      <UserExercises userId={Number(userId)}/>
     </PageSwitchTemplate>
   );
 };

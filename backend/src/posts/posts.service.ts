@@ -118,7 +118,7 @@ export class PostsService {
             },
             orderBy:{
                 posts:{
-                    date: 'desc'
+                    date: 'asc'
                 }
             },
             include: {
