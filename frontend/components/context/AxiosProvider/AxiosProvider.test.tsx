@@ -7,6 +7,7 @@ import axios from 'axios';
 import MockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 import { Text, View } from 'react-native';
 import MockAdapter from 'axios-mock-adapter';
+import {API_URL} from '@env'
 
 // Mock AsyncStorage
 jest.mock("@react-native-async-storage/async-storage", () => require("../../../__mocks__/mock-async-storage"));
@@ -71,15 +72,12 @@ describe('AxiosProvider', () => {
       </AuthContext.Provider>
     );
 
-    expect(getByTestId('authAxiosBaseURL').props.children).toBe('https://multilern-production.up.railway.app/auth');
-    expect(getByTestId('publicAxiosBaseURL').props.children).toBe('https://multilern-production.up.railway.app');
-    // expect(getByTestId('authAxiosBaseURL').props.children).toBe('http://localhost:3001/auth');
-    // expect(getByTestId('publicAxiosBaseURL').props.children).toBe('http://localhost:3001');
+    expect(getByTestId('authAxiosBaseURL').props.children).toBe(`${API_URL}/auth`);
+    expect(getByTestId('publicAxiosBaseURL').props.children).toBe(`${API_URL}`);
   });
 
   it('authAxios sets Authorization header with accessToken', async () => {
-    axiosMock.onGet('https://multilern-production.up.railway.app/auth/users/me').reply(200, {});
-    // axiosMock.onGet('http://localhost:3001/auth/users/me').reply(200, {});
+    axiosMock.onGet(`${API_URL}/auth/users/me`).reply(200, {});
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);
@@ -117,10 +115,8 @@ describe('AxiosProvider', () => {
   });
   
   it('authAxios refreshes token on 401 response', async () => {
-    axiosMock.onGet('https://multilern-production.up.railway.app/auth/users/me').reply(401);
-    axiosMock.onPost('https://multilern-production.up.railway.app/auth/refresh').reply(200, { accessToken: 'newMockAccessToken' });
-    // axiosMock.onGet('http://localhost:3001/auth/users/me').reply(401);
-    // axiosMock.onPost('http://localhost:3001/auth/refresh').reply(200, { accessToken: 'newMockAccessToken' });
+    axiosMock.onGet(`${API_URL}/auth/users/me`).reply(401);
+    axiosMock.onPost(`${API_URL}/auth/refresh`).reply(200, { accessToken: 'newMockAccessToken' });
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);
@@ -148,17 +144,13 @@ describe('AxiosProvider', () => {
         authenticated: true,
         isLoggingByGuest: false,
       });
-      expect(axiosMock.history.post[0].url).toBe('https://multilern-production.up.railway.app/auth/refresh');
-      // expect(axiosMock.history.post[0].url).toBe('http://localhost:3001/auth/refresh');
+      expect(axiosMock.history.post[0].url).toBe(`${API_URL}/auth/refresh`);
     });
   });
 
   it('authAxios handles refresh token failure', async () => {
-    axiosMock.onGet('https://multilern-production.up.railway.app/auth/users/me').reply(401);
-    axiosMock.onPost('https://multilern-production.up.railway.app/auth/refresh').reply(400);
-
-    // axiosMock.onGet('http://localhost:3001/auth/users/me').reply(401);
-    // axiosMock.onPost('http://ocalhost:3001/auth/refresh').reply(400);
+    axiosMock.onGet(`${API_URL}/auth/users/me`).reply(401);
+    axiosMock.onPost(`${API_URL}/auth/refresh`).reply(400);
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);
