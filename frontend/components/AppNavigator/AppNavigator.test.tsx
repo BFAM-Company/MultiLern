@@ -57,7 +57,7 @@ describe('<AppNavigator />', () => {
         <ExcercisesPage route={{ params: { searchableText: 'example' } }} navigation={mockNavigation} />
       </NavigationContainer>
     );
-    expect(getByText('example')).toBeDefined();
+    expect(getByText('Najlepsze trafienia')).toBeDefined();
   });
 
   it('renders NewFlashcardPage correctly', () => {

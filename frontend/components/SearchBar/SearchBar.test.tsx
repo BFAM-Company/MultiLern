@@ -38,7 +38,7 @@ describe('SearchBar', () => {
 
         expect(mockSetModalVisibility).toHaveBeenCalled();
         expect(mockPageSwitcher).toHaveBeenCalledWith('Excercises', {
-        searchableText: '',
+        searchableText: undefined,
         });
     });
 

@@ -13,10 +13,21 @@
   "jest": {
     "preset": "jest-expo",
     "setupFiles": [
-      "./__mocks__/mock-async-storage.ts"
-    ]
+      "./__mocks__/mock-async-storage.ts",
+      "@shopify/react-native-skia/jestSetup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(@shopify/react-native-skia)"
+    ],
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
   },
   "dependencies": {
+    "@babel/preset-env": "^7.24.6",
     "@expo/metro-runtime": "^3.1.1",
     "@expo/vector-icons": "^13.0.0",
     "@hookform/error-message": "^2.0.1",

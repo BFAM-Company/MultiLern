@@ -24,7 +24,6 @@ exports[`SearchBar renders correctly 1`] = `
   }
 >
   <TextInput
-    defaultValue=""
     onChangeText={[Function]}
     placeholder="wyszukaj zadania..."
     style={

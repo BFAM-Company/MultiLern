@@ -18,9 +18,11 @@ interface AxiosContextProps {
 const AxiosContext = createContext<AxiosContextProps>({
   authAxios: axios.create({
     baseURL: "https://multilern-production.up.railway.app/auth",
+    // baseURL: "http://localhost:3001/auth",
   }),
   publicAxios: axios.create({
     baseURL: "https://multilern-production.up.railway.app",
+    // baseURL: "http://localhost:3001",
   })
 });
 
@@ -31,10 +33,12 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const authAxios = axios.create({
     baseURL: "https://multilern-production.up.railway.app/auth",
+    // baseURL: "http://localhost:3001/auth",
   });
 
   const publicAxios = axios.create({
     baseURL: "https://multilern-production.up.railway.app",
+    // baseURL: "http://localhost:3001",
   });
 
   authAxios.interceptors.request.use(
@@ -59,6 +63,7 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       method: "POST",
       data,
       url: "https://multilern-production.up.railway.app/auth/refresh",
+      // url: "http://localhost:3001/auth/refresh",
     };
 
     return axios(options)
