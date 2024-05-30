@@ -35,6 +35,7 @@ function PostContent({id, title, handleClose, posts_images, content, user_data, 
                     setZoomedImage(item.images.img)
                     setImageZoom(true)
                 }}
+                testID={`image-touchable-${index}`}
             >
                 <Image 
                     key={index}
@@ -98,11 +99,13 @@ function PostContent({id, title, handleClose, posts_images, content, user_data, 
             </ScrollView>
             <Modal
                 visible={imageZoom}
+                testID='zoom-modal'
             >
                 <TouchableOpacity
                     onPress={()=>{setImageZoom(false)}}
                 >
                     <Image
+                        testID='zoomed-image'
                         source={{uri: zoomedImage}}
                         style={{width:windowWidth, height:windowHeight, resizeMode:'contain'}}
                     />

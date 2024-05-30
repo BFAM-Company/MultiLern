@@ -13,6 +13,7 @@ const YellowStar = ({rate, handlePress}: YellowStarProps) => {
             <TouchableOpacity 
                 style={styles.container}
                 onPress={handlePress}
+                testID='star'
             >
                 <Image
                 source={require('./../../../assets/star-rate-icon.png')}

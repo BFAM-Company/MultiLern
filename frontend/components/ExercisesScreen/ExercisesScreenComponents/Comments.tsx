@@ -73,9 +73,9 @@ function Comments({id}: CommentsProps) {
         >Odpowiedzi</Text>
         <View>
         {loading ? (
-              <ActivityIndicator color="gray" style={{ margin: 15 }} />
+              <ActivityIndicator testID='activity-indicator' color="gray" style={{ margin: 15 }} />
             ) : null}
-            {comments.map(comment => {
+            {comments && comments.map(comment => {
               const rating = calcRating(comment)
               const isoDateString = comment.date
               const formattedDate = formatDate(isoDateString);

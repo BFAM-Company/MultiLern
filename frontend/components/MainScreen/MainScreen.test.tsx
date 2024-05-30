@@ -11,7 +11,7 @@ import { UserDataContext } from '../context/UserContext/UserContext';
 jest.mock("@react-native-async-storage/async-storage", () => require("../../__mocks__/mock-async-storage"));
 
 const mockAuthAxios = axios.create();
-
+const mockPublixAxios = axios.create()
 
 describe('MainScreen', () => {
   afterEach(cleanup);
@@ -45,7 +45,7 @@ describe('MainScreen', () => {
         const mockPageSwitcher = jest.fn();
         const { getByTestId, getByText } = render(<MainScreen pageSwitcher={mockPageSwitcher} />);
         fireEvent.press(getByTestId('notificationModalButton'));
-        expect(getByText('Wyszukaj')).toBeTruthy(); 
+        expect(getByText('Dodaj swoje pierwsze zadanie')).toBeTruthy(); 
     });
 
     it('should hide UserModal when userModalHideHandler is called', async () => {
@@ -87,6 +87,8 @@ describe('MainScreen', () => {
         }
         });
 
+        mockPublixAxios.get = jest.fn().mockResolvedValueOnce({})
+
         const mockSetAuthState = jest.fn();
         const mockGetAccessToken = jest.fn(() => 'testAccessToken');
         const mockLogout = jest.fn();
@@ -112,7 +114,7 @@ describe('MainScreen', () => {
 
         const { getByTestId } = render(
         <AuthContext.Provider value={mockAuthContext}>
-            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockAuthAxios}}>
+            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockPublixAxios}}>
             <UserDataContext.Provider value={{ setUserData: setUserData, userData: mockUserContext }}>
                 <MainScreen pageSwitcher={() => {}} />
             </UserDataContext.Provider>
@@ -136,6 +138,7 @@ describe('MainScreen', () => {
     const setAuthState = jest.fn();
 
     mockAuthAxios.get = jest.fn().mockRejectedValueOnce({});
+    mockPublixAxios.get = jest.fn().mockResolvedValueOnce({})
     
     const mockAuthContext = {
         setAuthState: setAuthState,
@@ -151,7 +154,7 @@ describe('MainScreen', () => {
 
     const { getByTestId } = render(
         <AuthContext.Provider value={mockAuthContext}>
-            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockAuthAxios}}>
+            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockPublixAxios}}>
                 <UserDataContext.Provider value={{ setUserData: jest.fn(), userData: {id: -1, nickname: 'Gość', email: '', avatar: 'dupa dupa.png'} }}>
                     <MainScreen pageSwitcher={() => {}} />
                 </UserDataContext.Provider>
@@ -171,6 +174,7 @@ it('handles fetching data failure', async () => {
     const setUserData = jest.fn();
 
     mockAuthAxios.get = jest.fn().mockRejectedValueOnce({});
+    mockPublixAxios.get = jest.fn().mockResolvedValueOnce({})
     
     const mockAuthContext = {
         setAuthState: jest.fn(),
@@ -186,7 +190,7 @@ it('handles fetching data failure', async () => {
 
     const { getByTestId } = render(
         <AuthContext.Provider value={mockAuthContext}>
-            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockAuthAxios}}>
+            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockPublixAxios}}>
                 <UserDataContext.Provider value={{ setUserData: setUserData, userData: {id: -1, nickname: 'Gość', email: '', avatar: 'dupa dupa.png'} }}>
                     <MainScreen pageSwitcher={() => {}} />
                 </UserDataContext.Provider>
@@ -202,6 +206,7 @@ it('handles guest login', async () => {
     const setUserData = jest.fn();
 
     mockAuthAxios.get = jest.fn().mockRejectedValueOnce({});
+    mockPublixAxios.get = jest.fn().mockResolvedValueOnce({})
     
     const mockAuthContext = {
         setAuthState: jest.fn(),
@@ -217,7 +222,7 @@ it('handles guest login', async () => {
 
     const { getByTestId } = render(
         <AuthContext.Provider value={mockAuthContext}>
-            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockAuthAxios}}>
+            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockPublixAxios}}>
                 <UserDataContext.Provider value={{ setUserData: setUserData, userData: {id: -1, nickname: 'Gość', email: '', avatar: null} }}>
                     <MainScreen pageSwitcher={() => {}} />
                 </UserDataContext.Provider>
@@ -235,6 +240,66 @@ it('handles guest login', async () => {
         });
     })
 });
+
+it('fetches posts data on mount', async () => {
+    const mockPostsData = [
+        {
+            id: 1,
+            title: 'test post',
+            content: 'test content',
+            users_posts: [
+                {
+                    users: {
+                        avatar: 'testavatar.png'
+                    }
+                }
+            ],
+            posts_reviews: [
+                {
+                    reviews: {
+                        rate: 5
+                    }
+                }
+            ],
+            date: '2023-05-29T00:00:00.000Z'
+        }
+    ];
+    
+    mockPublixAxios.get = jest.fn().mockResolvedValueOnce({data: mockPostsData});
+
+    const mockUserContext = {
+            id: -1,
+            nickname: '',
+            email: 'null',
+            avatar: null,
+        }
+
+    const mockAuthContext = {
+        setAuthState: jest.fn(),
+        getAccessToken: jest.fn(() => ''),
+        logout: jest.fn(),
+        authState: {
+            accessToken: '',
+            refreshToken: '',
+            authenticated: false,
+            isLoggingByGuest: true,
+        }
+    };
+
+    render(
+        <AuthContext.Provider value={mockAuthContext}>
+            <AxiosContext.Provider value={{ authAxios: mockAuthAxios, publicAxios: mockPublixAxios }}>
+                <UserDataContext.Provider value={{ setUserData: jest.fn(), userData: mockUserContext }}>
+                    <MainScreen pageSwitcher={() => {}} />
+                </UserDataContext.Provider>
+            </AxiosContext.Provider>
+        </AuthContext.Provider>
+    );
+
+    await waitFor(() => expect(mockPublixAxios.get).toHaveBeenCalledWith('/posts'));
+    // Ensure state update occurs correctly (e.g., checking the component renders posts correctly)
+});
+
 
 
 });
