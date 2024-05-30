@@ -29,6 +29,7 @@ function ExercisesSection({pageSwitcher}: NotepadSectionProps) {
             </TouchableOpacity>
         </TouchableOpacity>
         <TouchableOpacity
+            testID='NotesPageSwitcher'
             style={styles.container}
             onPress={()=>{pageSwitcher('Notes')}}
         >

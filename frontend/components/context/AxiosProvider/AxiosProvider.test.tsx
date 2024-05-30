@@ -71,12 +71,15 @@ describe('AxiosProvider', () => {
       </AuthContext.Provider>
     );
 
-    expect(getByTestId('authAxiosBaseURL').props.children).toBe('http://localhost:3001/auth');
-    expect(getByTestId('publicAxiosBaseURL').props.children).toBe('http://localhost:3001/');
+    expect(getByTestId('authAxiosBaseURL').props.children).toBe('https://multilern-production.up.railway.app/auth');
+    expect(getByTestId('publicAxiosBaseURL').props.children).toBe('https://multilern-production.up.railway.app');
+    // expect(getByTestId('authAxiosBaseURL').props.children).toBe('http://localhost:3001/auth');
+    // expect(getByTestId('publicAxiosBaseURL').props.children).toBe('http://localhost:3001');
   });
 
   it('authAxios sets Authorization header with accessToken', async () => {
-    axiosMock.onGet('http://localhost:3001/auth/users/me').reply(200, {});
+    axiosMock.onGet('https://multilern-production.up.railway.app/auth/users/me').reply(200, {});
+    // axiosMock.onGet('http://localhost:3001/auth/users/me').reply(200, {});
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);
@@ -114,8 +117,10 @@ describe('AxiosProvider', () => {
   });
   
   it('authAxios refreshes token on 401 response', async () => {
-    axiosMock.onGet('http://localhost:3001/auth/users/me').reply(401);
-    axiosMock.onPost('http://localhost:3001/auth/refresh').reply(200, { accessToken: 'newMockAccessToken' });
+    axiosMock.onGet('https://multilern-production.up.railway.app/auth/users/me').reply(401);
+    axiosMock.onPost('https://multilern-production.up.railway.app/auth/refresh').reply(200, { accessToken: 'newMockAccessToken' });
+    // axiosMock.onGet('http://localhost:3001/auth/users/me').reply(401);
+    // axiosMock.onPost('http://localhost:3001/auth/refresh').reply(200, { accessToken: 'newMockAccessToken' });
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);
@@ -143,13 +148,17 @@ describe('AxiosProvider', () => {
         authenticated: true,
         isLoggingByGuest: false,
       });
-      expect(axiosMock.history.post[0].url).toBe('http://localhost:3001/auth/refresh');
+      expect(axiosMock.history.post[0].url).toBe('https://multilern-production.up.railway.app/auth/refresh');
+      // expect(axiosMock.history.post[0].url).toBe('http://localhost:3001/auth/refresh');
     });
   });
 
   it('authAxios handles refresh token failure', async () => {
-    axiosMock.onGet('http://localhost:3001/auth/users/me').reply(401);
-    axiosMock.onPost('http://localhost:3001/auth/refresh').reply(400);
+    axiosMock.onGet('https://multilern-production.up.railway.app/auth/users/me').reply(401);
+    axiosMock.onPost('https://multilern-production.up.railway.app/auth/refresh').reply(400);
+
+    // axiosMock.onGet('http://localhost:3001/auth/users/me').reply(401);
+    // axiosMock.onPost('http://ocalhost:3001/auth/refresh').reply(400);
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);

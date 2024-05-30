@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentButton renders correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "borderRadius": 20,
+      "height": 55,
+      "margin": 20,
+      "opacity": 1,
+      "width": 300,
+    }
+  }
+>
+  <ViewManagerAdapter_ExpoLinearGradient
+    colors={
+      [
+        4281150775,
+        4281150775,
+        4284769390,
+      ]
+    }
+    style={
+      {
+        "alignItems": "center",
+        "borderRadius": 20,
+        "display": "flex",
+        "height": "100%",
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "white",
+          "fontSize": 22,
+          "fontWeight": "900",
+        }
+      }
+    >
+      Odpowiedz
+    </Text>
+  </ViewManagerAdapter_ExpoLinearGradient>
+</View>
+`;

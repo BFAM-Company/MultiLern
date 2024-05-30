@@ -27,16 +27,16 @@ describe('NotificationModal component', () => {
     const buttonAction = jest.fn();
 
     const { getByText } = render(<NotificationModal isVisible={true} hideHandler={hideHandler} buttonAction={buttonAction} user={{ avatar: 'avatar-url', nickname: 'dupa', id: 1, email: '' }} />);
-    fireEvent.press(getByText('Wyszukaj'));
-    expect(buttonAction).toHaveBeenCalledWith('Home');
+    fireEvent.press(getByText('Dodaj swoje pierwsze zadanie'));
+    expect(buttonAction).toHaveBeenCalledWith('Exercises');
 
-    fireEvent.press(getByText('Twoje Zadania'));
-    expect(buttonAction).toHaveBeenCalledWith('Home');
+    fireEvent.press(getByText('Pomagaj innym! Dodawaj własne rozwiązania i dziel się swoją wiedzą'));
+    expect(buttonAction).toHaveBeenCalledWith('Exercises');
 
-    fireEvent.press(getByText('Konto'));
-    expect(buttonAction).toHaveBeenCalledWith('Home');
+    fireEvent.press(getByText('Zobacz najbardziej popularne sety leksykalne!'));
+    expect(buttonAction).toHaveBeenCalledWith('FlashcardsList');
 
-    fireEvent.press(getByText('Ustawienia'));
-    expect(buttonAction).toHaveBeenCalledWith('Home');
+    fireEvent.press(getByText('Notuj z MultiLern'));
+    expect(buttonAction).toHaveBeenCalledWith('Notes');
   });
 });

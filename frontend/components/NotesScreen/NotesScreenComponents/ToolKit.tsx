@@ -50,6 +50,7 @@ function ToolKit({color, width, style,  isDrawingEnabled, returnColor, returnWid
                             setSelectedColor('red')
                             returnColor('red')
                         }}
+                        testID="color-picker-red" 
                     >
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -285,6 +286,7 @@ function ToolKit({color, width, style,  isDrawingEnabled, returnColor, returnWid
             onPress={()=>{
                 setIsVisibleColor(true)
             }}
+            testID="main-color-picker"
         >
         </TouchableOpacity>
         <TouchableOpacity

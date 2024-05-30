@@ -151,13 +151,13 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
 									</Text>
 									<View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'}}>
 										{images && images.map((image: any, index) => (
-                                            <TouchableOpacity key={index} onPress={() => removeImage(index)}>
+                                            <TouchableOpacity testID={`image-${index}`} key={index} onPress={() => removeImage(index)}>
 												<View style={styles.imageButton}>
 														<Image style={{width: 100, height: 100, opacity: .7, borderRadius: 5}} source={{uri: image.images.create.img}}/>
 												</View>
                                             </TouchableOpacity>
 										))}
-                                        <TouchableOpacity onPress={pickImage}>
+                                        <TouchableOpacity onPress={pickImage} testID='uploadButton'>
                                             <View style={styles.uploadButton}>
                                                     <Image style={{width: 50, height: 50,opacity: .5}} source={require('../../../assets/upload-icon.png')}/>
                                             </View>
