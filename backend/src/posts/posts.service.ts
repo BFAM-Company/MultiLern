@@ -154,9 +154,20 @@ export class PostsService {
     findManyByCategory(category: string) {
         return this.prisma.posts.findMany({
             where: {
-                postType: category,
+                category: category,
             },
             include: {
+                users_posts: {
+                    select:{
+                        users: {
+                            select:{
+                                id: true,
+                                nickname: true,
+                                avatar: true
+                            }
+                        }
+                    }
+                },
                 posts_images: {
                     select: {
                         images: {

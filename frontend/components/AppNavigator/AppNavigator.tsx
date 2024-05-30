@@ -19,6 +19,7 @@ import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
 import NotesScreen from '../NotesScreen/NotesScreen';
 import CreatePostScreen from '../CreatePostScreen/CreatePostScreen';
 import UserExercises from '../UserExercises/UserExercises';
+import PostByCategoryScreen from '../PostByCategoryScreen/PostByCategoryScreen';
 
 
 
@@ -138,6 +139,15 @@ const UserExercisesPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
+const PostByCategoryPage: React.FC<any> = ({ navigation, route }) => {
+  const { category } = route.params;
+  return (
+    <PageSwitchTemplate navigation={navigation}>
+      <PostByCategoryScreen category={category}/>
+    </PageSwitchTemplate>
+  );
+};
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
@@ -160,6 +170,7 @@ function AppNavigator() {
          <Stack.Screen name="Notes" component={gestureHandlerRootHOC(NotesPage)} />
          <Stack.Screen name="CreatePost" component={gestureHandlerRootHOC(CreatePostPage)} />
          <Stack.Screen name="UserExercises" component={gestureHandlerRootHOC(UserExercisesPage)} />
+         <Stack.Screen name="PostByCategory" component={gestureHandlerRootHOC(PostByCategoryPage)} />
        </Stack.Navigator>
     </NavigationContainer>
   );
