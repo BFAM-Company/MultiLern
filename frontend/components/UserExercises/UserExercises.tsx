@@ -74,7 +74,7 @@ function UserExercises({pageSwitcher, userId}: any) {
           </Text>
           <View style={styles.excercisesCardsSection}>
             {loading ? (
-              <ActivityIndicator color="gray" style={{ margin: 15 }} />
+              <ActivityIndicator testID="loading-indicator" color="gray" style={{ margin: 15 }} />
             ) : null}
             {filteredExercises.map(excercise => {
               console.log(excercise.users_posts)

@@ -81,6 +81,7 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
                 <Text 
                   style={styles.titleText}
                   numberOfLines={2}
+                  testID='title'
                 >
                   {title}
                 </Text>

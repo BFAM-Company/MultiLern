@@ -112,7 +112,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({navigation}) => {
   );
 }
 
-const NotesPage: React.FC<any> = ({ navigation, route }) => {
+export const NotesPage: React.FC<any> = ({ navigation, route }) => {
 
   return (
     <PageSwitchTemplate navigation={navigation}>
@@ -121,7 +121,7 @@ const NotesPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
-const CreatePostPage: React.FC<any> = ({ navigation, route }) => {
+export const CreatePostPage: React.FC<any> = ({ navigation, route }) => {
 
   return (
     <PageSwitchTemplate navigation={navigation}>
@@ -130,7 +130,7 @@ const CreatePostPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
-const UserExercisesPage: React.FC<any> = ({ navigation, route }) => {
+export const UserExercisesPage: React.FC<any> = ({ navigation, route }) => {
   const { userId } = route.params;
   return (
     <PageSwitchTemplate navigation={navigation}>
@@ -139,7 +139,7 @@ const UserExercisesPage: React.FC<any> = ({ navigation, route }) => {
   );
 };
 
-const PostByCategoryPage: React.FC<any> = ({ navigation, route }) => {
+export const PostByCategoryPage: React.FC<any> = ({ navigation, route }) => {
   const { category } = route.params;
   return (
     <PageSwitchTemplate navigation={navigation}>

@@ -1517,7 +1517,6 @@ exports[`MainScreen renders correctly 1`] = `
             </View>
           </View>
           <View
-            collapsable={false}
             style={
               {
                 "alignItems": "center",
@@ -1572,7 +1571,7 @@ exports[`MainScreen renders correctly 1`] = `
               }
               accessible={true}
               collapsable={false}
-              focusable={false}
+              focusable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -2060,6 +2059,60 @@ exports[`MainScreen renders correctly 1`] = `
                       </View>
                     </View>
                   </View>
+                </View>
+                <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onClick={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "rgb(45,45,55)",
+                      "borderRadius": 20,
+                      "display": "flex",
+                      "height": 50,
+                      "justifyContent": "center",
+                      "margin": 20,
+                      "opacity": 1,
+                      "width": "90%",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      {
+                        "color": "#fff",
+                        "fontSize": 18,
+                        "fontWeight": "900",
+                      }
+                    }
+                  >
+                    Pokaż więcej...
+                  </Text>
                 </View>
               </View>
             </View>

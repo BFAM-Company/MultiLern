@@ -48,6 +48,7 @@ function PostContent({id, title, handleClose, posts_images, content, user_data, 
   return (
     <View        
         style={styles.fixedContainerBgc}
+        testID='post-content'
         >   
             <ScrollView
                 onScroll={handleClose}
