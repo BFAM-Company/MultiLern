@@ -13,7 +13,7 @@ function SubjectCard({buttonAction, image, title}: SubjectCardProps) {
 
   return (
     <TouchableOpacity
-        onPress={()=>{buttonAction('Main')}}
+        onPress={()=>{buttonAction('PostByCategory', {category: title.toLowerCase()})}}
         style={styles.cardContainer}
     >
         <Image
