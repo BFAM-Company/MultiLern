@@ -19,6 +19,7 @@ import { UserDataContext } from '../context/UserContext/UserContext';
 import ExercisesSection from './MainScreenComponents/ExercisesSection/ExercisesSection';
 import ExcercisesCard from '../ExercisesScreen/ExercisesScreenComponents/ExercisesCard';
 import { ActivityIndicator } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 
@@ -203,7 +204,7 @@ function MainScreen({pageSwitcher}: any) {
                             {loading ? (
                             <ActivityIndicator color="gray" style={{ margin: 15 }} />
                             ) : null}
-                            {exercises.slice(0,5).map(excercise => {
+                            {exercises.slice(0,3).map(excercise => {
                             console.log(excercise.users_posts)
                             const rating = calcRating(excercise)
                             const isoDateString = excercise.date
@@ -218,6 +219,16 @@ function MainScreen({pageSwitcher}: any) {
                                 rate={rating} date={formattedDate} 
                                 posts_images={excercise.posts_images}/>)
                             })}
+                            <TouchableOpacity
+                            onPress={()=>{pageSwitcher('Excercises', {searchableText: ' '})}}
+                            style={styles.moreButton}
+                        >
+                            <Text
+                                style={styles.buttonText}
+                            >
+                                Pokaż więcej...
+                            </Text>
+                        </TouchableOpacity>
                         </View>
                     </ScrollView>
                     <SubjectsSection pageSwitcher={pageSwitcher}/>
@@ -291,6 +302,22 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         paddingBottom:100,
+      },
+      moreButton:{
+        width:'90%',
+        height:50,
+        backgroundColor:'rgb(45,45,55)',
+        margin:20,
+        borderRadius:20,
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+      },
+      buttonText:{
+        color:'#fff',
+        fontSize:18,
+        
+        fontWeight:'900',
       },
 })
 

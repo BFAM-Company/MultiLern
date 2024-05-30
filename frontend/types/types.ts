@@ -20,6 +20,7 @@ export type RootStackParamList = {
   FlashcardsSet: { id: number };
   Auth: undefined;
   Notes: undefined
+  CreatePost: undefined
 };
 
 export interface PageSwitchTemplateProps {

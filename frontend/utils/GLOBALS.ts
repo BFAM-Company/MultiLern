@@ -10,6 +10,7 @@ export const linking: any = {
       SignUp: "signup",
       Notes: "notes",
       Main: "main",
+      CreatePost: "create-post",
       Excercises: {
         path: "exercises/:description",
         parse: {

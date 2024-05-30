@@ -1,15 +1,10 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import React, { useContext, useState } from 'react'
-import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View, Image, ScrollView, Alert} from 'react-native'
-import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
-import { UserDataContext } from '../../context/UserContext/UserContext';
-import { TextInput } from 'react-native-paper';
+import React, { useContext, useState } from 'react';
+import { ScrollView, StyleSheet, TouchableOpacity, View, Alert, Text, TextInput, Dimensions, Image } from 'react-native';
+import { UserDataContext } from '../context/UserContext/UserContext';
+import { AxiosContext } from '../context/AxiosProvider/AxiosProvider';
 import * as ImagePicker from "expo-image-picker"; 
+import { LinearGradient } from 'expo-linear-gradient';
 
-interface PostContentProps{
-    id:number,
-    handleRefresh: any,
-}
 
 interface IImages {
 	images: {
@@ -22,16 +17,17 @@ interface IImages {
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function CommentButton({id, handleRefresh}: PostContentProps) {
-  const userContext = useContext(UserDataContext)
-  const {publicAxios, authAxios} = useContext(AxiosContext)
-  const [modalVisible, setModalVisibile] = useState<boolean>(false)
+const CreatePostScreen = ({pageSwitcher}: any) =>{
+    const userContext = useContext(UserDataContext)
+    const {publicAxios, authAxios} = useContext(AxiosContext)
 
-  const [title, onChangeTitle] = useState<string>('')
-  const [content, onChangeContent] = useState<string>('')
-  const [images, setImages] = useState<IImages[]>([]);
+    const [file, setFile] = useState();
 
-  const pickImage = async () => {
+    const [title, onChangeTitle] = useState<string>('')
+    const [content, onChangeContent] = useState<string>('')
+    const [images, setImages] = useState<IImages[]>([]);
+
+    const pickImage = async () => {
 		const { status } = await ImagePicker. 
             requestMediaLibraryPermissionsAsync(); 
 
@@ -59,15 +55,7 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
 		} 
 	}
      
-  const handleClick = () =>{
-    setModalVisibile(true)
-  }
-  
-    const removeImage = (imageId: number) => {
-        const updatedImages = images.filter((_, index) => index !== imageId);
-        setImages(updatedImages);
-    }
-    
+
   const handleCommentSubmit = async() =>{
         const event = new Date();
 
@@ -75,66 +63,56 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
             title: title,
             content: content,
             date: event.toISOString(),
-            parentPostId: id,
-						images: images,
+			images: images,
             userId: userContext?.userData?.id,
             }, {
               headers: {
                 'Content-Type': 'application/json'
               }
           })
-        setModalVisibile(false)
-        await handleRefresh()
+        pageSwitcher('Exercises')
       }
 
+    const removeImage = (imageId: number) => {
+        const updatedImages = images.filter((_, index) => index !== imageId);
+        setImages(updatedImages);
+    }
 
-  return (
-    <>
-        <Modal
-            visible={modalVisible}
-            style={{width:windowWidth, height:windowHeight}}
+    return(
+        <ScrollView
+            style={{width:windowWidth, height:'auto'}}
         >
-            <ScrollView>
+            <ScrollView             
+            style={{width:windowWidth,}}
+            >
             <View
                 style={styles.modalContainer}
             >
-                <View
-                    style={styles.closeButtonContainer}
-                >
-                    <TouchableOpacity
-                        onPress={()=>{setModalVisibile(false)}}
-                    >
-                        <Image 
-                            source={require('./../../../assets/close-icon-bold.png')} 
-                            style={{width:30,height:30,}}
-                        />
-                    </TouchableOpacity>
-                </View>
                 <Text
                     style={styles.hintText}
                 >
-                    Dodaj tytuł do swojej odpowiedzi!
+                    Dodaj tytuł do swojego pytania
                 </Text>
                 <Text
                     style={styles.smallHintText}
                 >
-                    Może ułatwić to późniejsze znalezienie twojej odpowiedzi innym użytkownikom
+                    Ułatwi to późniejsze znalezienie go innym użytkownikom
                 </Text>
 								<TextInput
-									style={styles.input}
+									style={[styles.input, {height:50}]}
 									onChangeText={onChangeTitle}
 									value={title}
-									placeholder='tytuł(opcjonalny)...'
+									placeholder='tytuł...'
 								/>
                  <Text
                     style={styles.hintText}
                  >
-                    Dodaj treść swojej odpowiedzi
+                    Dodaj treść swojego pytania
                 </Text>
                 <Text
                     style={styles.smallHintText}
                 >
-                    Pomóż innym. Staraj się wyjaśnić rozwiązanie i swój tok myślenia!
+                    Nie bój się poprosić o pomoc! Codziennie tysiące użytkowników jest gotowych by pomóc
                 </Text>
 								<TextInput
 									editable
@@ -142,12 +120,12 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
 									style={[styles.input, {minHeight:400,}]}
 									onChangeText={onChangeContent}
 									value={content}
-									placeholder={'Rozwiązanie...'}
+									placeholder={'Treść zadania...'}
 							/>
 									<Text
 										style={styles.hintText}
 									>
-										Dodaj obrazy do swojej odpowiedzi
+										Dodaj obrazy do swojego pytania
 									</Text>
 									<View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'}}>
 										{images && images.map((image: any, index) => (
@@ -159,7 +137,7 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
 										))}
                                         <TouchableOpacity onPress={pickImage}>
                                             <View style={styles.uploadButton}>
-                                                    <Image style={{width: 50, height: 50,opacity: .5}} source={require('../../../assets/upload-icon.png')}/>
+                                                    <Image style={{width: 50, height: 50,opacity: .5}} source={require('./../../assets/upload-icon.png')}/>
                                             </View>
                                         </TouchableOpacity>
 									</View>
@@ -176,25 +154,10 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
                 </TouchableOpacity>
             </View> 
             </ScrollView>
-        </Modal>
-        <TouchableOpacity
-            onPress={handleClick}
-            style={styles.button}
-        >
-            <LinearGradient
-                colors={['rgb(45,45,55)', 'rgb(45,45,55)', 'rgb(100,100,110)']}
-                style={styles.linearGradient}
-            >
-                <Text style={{color:'white', fontWeight:'900', fontSize:22}}>Odpowiedz</Text>
-            </LinearGradient>
-        </TouchableOpacity>
-    </>
-    
-  );
+        </ScrollView>
+            
+    );
 }
-
-
-
 
 const styles = StyleSheet.create({
     button:{
@@ -202,6 +165,12 @@ const styles = StyleSheet.create({
         height:55,
         borderRadius:20,
         margin:20,
+    },
+    buttonDescription:{
+        color:'#c085ff',
+        fontSize:16,
+        fontWeight:'500',
+        padding:5,
     },
     linearGradient:{
         width:'100%',
@@ -212,12 +181,13 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     modalContainer:{
-        width:'100%',
-        height:'100%',
+        width:windowWidth,
+        height:'auto',
         display:'flex',
         alignItems:'center',
         justifyContent:'flex-start',
         padding:20,
+        backgroundColor:'white'
     },
     closeButtonContainer:{
         width:'100%',
@@ -239,6 +209,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10.32,
 
         elevation: 16,
+        padding:10,
     },
     hintText:{
         marginTop:50,
@@ -268,6 +239,7 @@ const styles = StyleSheet.create({
 			borderRadius: 5,
 			margin: 5
 		}
-})
+});
 
-export default CommentButton;
+export default CreatePostScreen;
+
