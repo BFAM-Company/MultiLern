@@ -18,7 +18,7 @@ function ExamsScreen({pageSwitcher, category}: any) {
   useEffect(()=>{
     const fetchPosts = async() =>{
       setLoading(true)
-      const result = await publicAxios.get(`/posts/exams}`)
+      const result = await publicAxios.get(`/posts/exams/list}`)
       if(result.data){
         setLoading(false)
         setFilteredExercises(result.data)

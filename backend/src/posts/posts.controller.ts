@@ -41,7 +41,7 @@ export class PostsController {
         return this.postsService.findManyByCategory(category);
     }
 
-    @Get('/exams')
+    @Get('/exams/list')
     findAllExams() {
         return this.postsService.findAllExams();
     }
