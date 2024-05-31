@@ -227,8 +227,8 @@ export class PostsService {
     findAllExams() {
         return this.prisma.posts.findMany({
             where: {
-                posts:{
-                    postType: 'exam'
+                postType:{
+                    equals: 'exam'
                 } 
             },
             include: {
