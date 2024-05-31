@@ -30,7 +30,7 @@ function Footer({pageSwitcher}: any) {
               />
         </TouchableOpacity>
         <View style={styles.verticalLine}/>
-        <TouchableOpacity style={[styles.button]} onPress={() => pageSwitcher('Main')}>
+        <TouchableOpacity testID='homeIcon' style={[styles.button]} onPress={() => pageSwitcher('Main')}>
             <Image
                 source={require('./../../assets/home-icon.png')}
                 style={[styles.bellIcon]}
@@ -44,7 +44,7 @@ function Footer({pageSwitcher}: any) {
                 />
         </TouchableOpacity>
         <View style={styles.verticalLine}/>
-        <TouchableOpacity style={[styles.button]} onPress={() => setModalVisibility(true)}>
+        <TouchableOpacity testID='bellIcon' style={[styles.button]} onPress={() => setModalVisibility(true)}>
             <Image
                 source={require('./../../assets/search-icon.png')}
                 style={[styles.bellIcon]}

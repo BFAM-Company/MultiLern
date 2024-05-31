@@ -7,9 +7,7 @@ import axios from 'axios';
 import MockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 import { Text, View } from 'react-native';
 import MockAdapter from 'axios-mock-adapter';
-import {API_URL} from '@env'
 
-// Mock AsyncStorage
 jest.mock("@react-native-async-storage/async-storage", () => require("../../../__mocks__/mock-async-storage"));
 
 describe('AxiosProvider', () => {
@@ -40,7 +38,7 @@ describe('AxiosProvider', () => {
 
   afterEach(() => {
     AsyncStorage.clear();
-    axiosMock.reset(); // Reset mock adapter after each test
+    axiosMock.reset();
   });
 
   it('renders children and provides authAxios and publicAxios in context', () => {
@@ -72,12 +70,12 @@ describe('AxiosProvider', () => {
       </AuthContext.Provider>
     );
 
-    expect(getByTestId('authAxiosBaseURL').props.children).toBe(`${API_URL}/auth`);
-    expect(getByTestId('publicAxiosBaseURL').props.children).toBe(`${API_URL}`);
+    expect(getByTestId('authAxiosBaseURL').props.children).toBe(`${process.env.API_URL}/auth`);
+    expect(getByTestId('publicAxiosBaseURL').props.children).toBe(`${process.env.API_URL}`);
   });
 
   it('authAxios sets Authorization header with accessToken', async () => {
-    axiosMock.onGet(`${API_URL}/auth/users/me`).reply(200, {});
+    axiosMock.onGet(`${process.env.API_URL}/auth/users/me`).reply(200, {});
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);
@@ -115,13 +113,13 @@ describe('AxiosProvider', () => {
   });
   
   it('authAxios refreshes token on 401 response', async () => {
-    axiosMock.onGet(`${API_URL}/auth/users/me`).reply(401);
-    axiosMock.onPost(`${API_URL}/auth/refresh`).reply(200, { accessToken: 'newMockAccessToken' });
+    axiosMock.onGet(`${process.env.API_URL}/auth/users/me`).reply(401);
+    axiosMock.onPost(`${process.env.API_URL}/auth/refresh`).reply(200, { accessToken: 'newMockAccessToken' });
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);
       useEffect(() => {
-        authAxios.get('users/me').catch(() => {}); // catch to prevent unhandled promise rejection
+        authAxios.get('users/me').catch(() => {});
       }, []);
 
       return null;
@@ -144,13 +142,13 @@ describe('AxiosProvider', () => {
         authenticated: true,
         isLoggingByGuest: false,
       });
-      expect(axiosMock.history.post[0].url).toBe(`${API_URL}/auth/refresh`);
+      expect(axiosMock.history.post[0].url).toBe(`${process.env.API_URL}/auth/refresh`);
     });
   });
 
   it('authAxios handles refresh token failure', async () => {
-    axiosMock.onGet(`${API_URL}/auth/users/me`).reply(401);
-    axiosMock.onPost(`${API_URL}/auth/refresh`).reply(400);
+    axiosMock.onGet(`${process.env.API_URL}/auth/users/me`).reply(401);
+    axiosMock.onPost(`${process.env.API_URL}/auth/refresh`).reply(400);
 
     const ChildComponent = () => {
       const { authAxios } = useContext(AxiosContext);

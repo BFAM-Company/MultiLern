@@ -20,6 +20,19 @@ describe('ExcercisesScreen', () => {
   it('fetches data and updates state correctly', async () => {
     const mockData = [
       {
+        item: {
+          id: 1,
+          category: 'category1',
+          title: 'title1',
+          content: 'content1',
+          posts_reviews: [{ reviews: { rate: 4 } }],
+          users_posts: { name: 'User1' },
+          date: '2023-05-30T12:34:56.789Z',
+          posts_images: []
+        },
+      },
+      {
+      item: {
         id: 1,
         category: 'category1',
         title: 'title1',
@@ -29,16 +42,7 @@ describe('ExcercisesScreen', () => {
         date: '2023-05-30T12:34:56.789Z',
         posts_images: []
       },
-       {
-        id: 1,
-        category: 'category1',
-        title: 'title1',
-        content: 'content1',
-        posts_reviews: [{ reviews: { rate: 4 } }, { reviews: { rate: 3 } }],
-        users_posts: { name: 'User1' },
-        date: '2023-05-30T12:34:56.789Z',
-        posts_images: []
-      },
+    },
     ];
 
     mockAxiosContextValue.publicAxios.get = jest.fn().mockResolvedValueOnce({ data: mockData });

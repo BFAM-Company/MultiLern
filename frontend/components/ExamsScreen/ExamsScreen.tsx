@@ -101,7 +101,7 @@ function ExamsScreen({pageSwitcher, category}: any) {
                 horizontal={true}
             >
                 {loading ? (
-                <ActivityIndicator color="gray" style={{ margin: 15 }} />
+                <ActivityIndicator testID="loading-indicator" color="gray" style={{ margin: 15 }} />
                 ) : null}
                 {filteredExercises.slice(0,5).map(excercise => {
                 console.log(excercise.users_posts)

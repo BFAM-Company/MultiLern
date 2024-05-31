@@ -24,7 +24,7 @@ describe('FlashcardsListItem', () => {
                     range={'my'}/>
         );
         fireEvent.press(getByTestId('edit-icon'));
-        expect(mockPageSwitcher).toHaveBeenCalledWith('NewFlashcard'); // Replace 'Title of Flashcard' with the actual title rendered by FlashcardListItem
+        expect(mockPageSwitcher).toHaveBeenCalledWith('NewFlashcard'); 
     });
 
 });

@@ -41,4 +41,12 @@ describe('FlashcardsSection', () => {
 
         expect(mockPageSwitcher).toHaveBeenCalledWith('NewFlashcard');
     });
+
+    it('test pageSwitcher Nowe Fiszki', () => {
+        const mockPageSwitcher = jest.fn();
+        const { getByText } = render(<FlashcardsSection pageSwitcher={mockPageSwitcher} />);
+        fireEvent.press(getByText('Nowe Fiszki'));
+
+        expect(mockPageSwitcher).toHaveBeenCalledWith('NewFlashcard');
+    });
 });

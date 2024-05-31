@@ -30,7 +30,7 @@ describe('PostContent component', () => {
 
     it('opens zoom modal with correct image when an image is pressed', () => {
     const { getByTestId } = render(<PostContent {...mockProps} />);
-    const imageTouchable = getByTestId('image-touchable-0'); // Assume you add testID to TouchableOpacity
+    const imageTouchable = getByTestId('image-touchable-0');
     fireEvent.press(imageTouchable);
 
     const zoomedImage = getByTestId('zoomed-image');
@@ -39,7 +39,7 @@ describe('PostContent component', () => {
 
   it('closes the zoom modal when the modal is pressed', () => {
     const { getByTestId } = render(<PostContent {...mockProps} />);
-    const imageTouchable = getByTestId('image-touchable-0'); // Assume you add testID to TouchableOpacity
+    const imageTouchable = getByTestId('image-touchable-0');
     fireEvent.press(imageTouchable);
 
     const zoomModal = getByTestId('zoom-modal');

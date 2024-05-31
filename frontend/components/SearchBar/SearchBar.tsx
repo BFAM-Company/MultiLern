@@ -11,7 +11,8 @@ function SearchBar({currentText, pageSwitcher, setModalVisibility, modalVisibili
   }, [currentText])
   return (
     <View style={styles.mainContainer}>
-        <TextInput 
+        <TextInput
+            testID='searchExercise'
             style={styles.TextInput}
             placeholder='wyszukaj zadania...'
 						defaultValue={searchedText}
