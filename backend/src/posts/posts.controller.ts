@@ -21,6 +21,11 @@ export class PostsController {
         return this.postsService.createPost(createPostDto);
     }
 
+    @Post('/exam')
+    createExam(@Body() createPostDto: CreatePostDto) {
+        return this.postsService.createExam(createPostDto);
+    }
+
     @Post('/comment')
     createComment(@Body() createPostDto: CreateCommentDto) {
         return this.postsService.createComment(createPostDto);

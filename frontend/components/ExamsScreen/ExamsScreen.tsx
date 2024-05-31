@@ -69,47 +69,32 @@ function ExamsScreen({pageSwitcher, category}: any) {
       <SafeAreaView>
         <ScrollView style={{width: '100%'}}>
             <ImageBackground
-                source={require('./../../assets/cool-background.png')}
+                source={require('./../../assets/exams-image.png')}
                 blurRadius={0}
                 style={[styles.header, {marginBottom:50,}]}
+                imageStyle={styles.header}
             >
                 <Text
                     style={styles.boldText}
                 >
-                    Poznaj zadania z naszej bazy z kategorii {category}
+                    Największa baza realnych testów &nbsp;i sprawdzianów {category}
                 </Text>
             </ImageBackground>
-            <View style={styles.SearchBarContainer}>
-                <SearchBar pageSwitcher={pageSwitcher} currentText={''} />
-            </View>
           <View style={styles.excercisesCardsSection}>
+            <TouchableOpacity
+                    onPress={()=>{pageSwitcher('AddExam')}}
+                    style={styles.moreButton}
+                >
+                    <Text
+                        style={styles.buttonText}
+                    >
+                        Podziel się!
+                    </Text>
+            </TouchableOpacity>
             <Text
                 style={styles.descText}
             >
                 Ostatnio dodane
-            </Text>
-            {loading ? (
-              <ActivityIndicator color="gray" style={{ margin: 15 }} />
-            ) : null}
-            {filteredExercises.slice(0,3).map(excercise => {
-              console.log(excercise.users_posts)
-              const rating = calcRating(excercise)
-              const isoDateString = excercise.date
-              const formattedDate = formatDate(isoDateString);
-              return(
-                <PostCard
-                  key={excercise.id} 
-                  user_data={excercise.users_posts}
-                  id={excercise.id} category={excercise.category} 
-                  title={excercise.title} 
-                  description={excercise.content} 
-                  rate={rating} date={formattedDate} 
-                  posts_images={excercise.posts_images}/>)
-            })}
-            <Text
-                style={styles.descText}
-            >
-               {filteredExercises.slice(3,) !=null?'Pozostałe zadania':null} 
             </Text>
             <ScrollView
                 style={styles.horizontalScrollView}
@@ -134,6 +119,37 @@ function ExamsScreen({pageSwitcher, category}: any) {
                     </View>)
                 })}
             </ScrollView>
+            <Text
+                style={styles.descText}
+            >
+               Szukasz czegoś konkretnego? Wyszukaj to!
+            </Text>
+            <View style={styles.SearchBarContainer}>
+                <SearchBar pageSwitcher={pageSwitcher} currentText={''} />
+            </View>
+            <Text
+                style={styles.descText}
+            >
+               Inne
+            </Text>
+            {loading ? (
+              <ActivityIndicator color="gray" style={{ margin: 15 }} />
+            ) : null}
+            {filteredExercises.slice(0,3).map(excercise => {
+              console.log(excercise.users_posts)
+              const rating = calcRating(excercise)
+              const isoDateString = excercise.date
+              const formattedDate = formatDate(isoDateString);
+              return(
+                <PostCard
+                  key={excercise.id} 
+                  user_data={excercise.users_posts}
+                  id={excercise.id} category={excercise.category} 
+                  title={excercise.title} 
+                  description={excercise.content} 
+                  rate={rating} date={formattedDate} 
+                  posts_images={excercise.posts_images}/>)
+            })}
           </View>
           <TouchableOpacity
             onPress={()=>{pageSwitcher('CreatePost')}}

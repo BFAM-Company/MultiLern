@@ -24,6 +24,7 @@ export type RootStackParamList = {
   UserExercises: {description: string}
   PostByCategory: {description: string}
   Exams: undefined
+  AddExam: undefined
 };
 
 export interface PageSwitchTemplateProps {

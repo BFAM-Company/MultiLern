@@ -16,7 +16,7 @@ function ExamsSection({pageSwitcher}: ExamsSectionProps) {
         </View>
         <TouchableOpacity
             style={styles.container}
-            onPress={pageSwitcher('Exams')}
+            onPress={()=>{pageSwitcher('Exams')}}
         >
             <Text style={styles.title}>Nasz Zbiór Sprawdzianów</Text>
             <Image
@@ -29,7 +29,7 @@ function ExamsSection({pageSwitcher}: ExamsSectionProps) {
             </Text>
             <TouchableOpacity
                 style={styles.button}
-                onPress={pageSwitcher('Exams')}
+                onPress={()=>{pageSwitcher('Exams')}}
             >
                 <Text style={styles.buttonText}>Sprawdź</Text>
             </TouchableOpacity>

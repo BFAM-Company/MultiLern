@@ -38,6 +38,35 @@ export class PostsService {
         });
     }
 
+    createExam(createPostDto: CreatePostDto) {
+        return this.prisma.posts.create({
+            data: {
+                title: createPostDto.title,
+                content: createPostDto.content,
+                category: createPostDto.category,
+                date: createPostDto.date,
+                postType: 'exam',
+                posts_images: {
+                    create: createPostDto.images,
+                },
+                tags_posts: {
+                    createMany: {
+                        data: createPostDto.tags,
+                    },
+                },
+                users_posts: {
+                    create: {
+                        users: {
+                            connect: {
+                                id: createPostDto.userId,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    }
+
     createComment(createPostDto: CreateCommentDto) {
         return this.prisma.posts.create({
             data: {

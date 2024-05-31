@@ -21,6 +21,7 @@ import CreatePostScreen from '../CreatePostScreen/CreatePostScreen';
 import UserExercises from '../UserExercises/UserExercises';
 import PostByCategoryScreen from '../PostByCategoryScreen/PostByCategoryScreen';
 import ExamsScreen from '../ExamsScreen/ExamsScreen';
+import AddExamScreen from '../ExamsScreen/AddExamScreen';
 
 
 
@@ -156,6 +157,14 @@ export const ExamsPage: React.FC<any> = ({navigation}) => {
     </PageSwitchTemplate>
   );
 }
+
+export const AddExamPage: React.FC<any> = ({navigation}) => {
+  return (
+    <PageSwitchTemplate navigation={navigation}>
+      <AddExamScreen />
+    </PageSwitchTemplate>
+  );
+}
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
@@ -180,6 +189,7 @@ function AppNavigator() {
          <Stack.Screen name="UserExercises" component={gestureHandlerRootHOC(UserExercisesPage)} />
          <Stack.Screen name="PostByCategory" component={gestureHandlerRootHOC(PostByCategoryPage)} />
          <Stack.Screen name="Exams" component={gestureHandlerRootHOC(ExamsPage)} />
+         <Stack.Screen name="AddExam" component={gestureHandlerRootHOC(AddExamPage)} />
        </Stack.Navigator>
     </NavigationContainer>
   );
