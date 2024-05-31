@@ -38,7 +38,7 @@ describe('FlashcardsListScreen', () => {
             expect(mockPublicAxios.get).toHaveBeenCalledWith('/fiches/0')
         })
         fireEvent.press(getByText('Dupa'));
-        expect(mockPageSwitcher).toHaveBeenCalledWith('FlashcardsSet', { id: 1 }); // Replace 'Title of Flashcard' with the actual title rendered by FlashcardListItem
+        expect(mockPageSwitcher).toHaveBeenCalledWith('FlashcardsSet', { id: 1 });
     });
 
     it('renders "my" flashcards', async () => {

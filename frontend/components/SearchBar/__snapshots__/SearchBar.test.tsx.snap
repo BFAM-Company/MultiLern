@@ -35,6 +35,7 @@ exports[`SearchBar renders correctly 1`] = `
         "width": "80%",
       }
     }
+    testID="searchExercise"
   />
   <View
     style={

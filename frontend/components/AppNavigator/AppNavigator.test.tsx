@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor, cleanup } from '@testing-library/react-native';
-import AppNavigator, { AuthPage, CreatePostPage, ExcercisesPage, FlashcardsListPage, FlashcardsSetPage, HomePage, LogInPage, MainPage, NewFlashcardPage, NotesPage, PostByCategoryPage, SignUpPage, UserExercisesPage } from './AppNavigator';
+import AppNavigator, { AddExamPage, AuthPage, CreatePostPage, ExamsPage, ExcercisesPage, FlashcardsListPage, FlashcardsSetPage, HomePage, LogInPage, MainPage, NewFlashcardPage, NotesPage, PostByCategoryPage, SignUpPage, UserExercisesPage } from './AppNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackParamList } from '../../types/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -139,6 +139,24 @@ describe('<AppNavigator />', () => {
       </NavigationContainer>
     );
     expect(getByText('Poznaj zadania z naszej bazy z kategorii example')).toBeDefined();
+  });
+
+  it('renders ExamsPage correctly', () => {
+    const { getByText } = render(
+      <NavigationContainer>
+        <ExamsPage navigation={mockNavigation} />
+      </NavigationContainer>
+    );
+    expect(getByText('Podziel się!')).toBeDefined();
+  });
+
+  it('renders AddExamPage correctly', () => {
+    const { getByText } = render(
+      <NavigationContainer>
+        <AddExamPage navigation={mockNavigation} />
+      </NavigationContainer>
+    );
+    expect(getByText('Ułatwi to późniejsze znalezienie go innym użytkownikom')).toBeDefined();
   });
 
 });

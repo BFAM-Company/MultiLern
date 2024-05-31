@@ -11,5 +11,20 @@ describe('NotepadSection', () => {
         fireEvent.press(registerButton);
 
         expect(mockPageSwitcher).toHaveBeenCalledWith('Notes');
+
+        const nextButton = getByText('Dalej');
+        fireEvent.press(nextButton);
+
+        expect(mockPageSwitcher).toHaveBeenCalledWith('Notes');
+
+        const yourNotesButton = getByText('Twoje Notatki');
+        fireEvent.press(yourNotesButton);
+
+        expect(mockPageSwitcher).toHaveBeenCalledWith('Notes');
+
+        const createButton = getByText('Utwórz +');
+        fireEvent.press(createButton);
+
+        expect(mockPageSwitcher).toHaveBeenCalledWith('Notes');
     })
 })
