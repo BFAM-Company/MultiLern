@@ -3,7 +3,8 @@ import axios, { AxiosInstance } from "axios";
 import { AuthContext } from "../AuthContext/AuthContext";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {API_URL} from '@env'
+
+
 
 interface AuthState {
   accessToken: string | null;
@@ -17,10 +18,10 @@ interface AxiosContextProps {
 
 const AxiosContext = createContext<AxiosContextProps>({
   authAxios: axios.create({
-    baseURL: `${API_URL}/auth`,
+    baseURL: `${process.env.API_URL}/auth`,
   }),
   publicAxios: axios.create({
-    baseURL: `${API_URL}`,
+    baseURL: `${process.env.API_URL}`,
   })
 });
 
@@ -30,11 +31,11 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: `${API_URL}/auth`,
+    baseURL: `${process.env.API_URL}/auth`,
   });
 
   const publicAxios = axios.create({
-    baseURL: `${API_URL}`,
+    baseURL: `${process.env.API_URL}`,
   });
 
   authAxios.interceptors.request.use(
@@ -58,7 +59,7 @@ const AxiosProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const options = {
       method: "POST",
       data,
-      url: `${API_URL}/auth/refresh`,
+      url: `${process.env.API_URL}/auth/refresh`,
     };
 
     return axios(options)

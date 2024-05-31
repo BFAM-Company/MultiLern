@@ -67,7 +67,7 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
               imageStyle={{
                 borderRadius:20,
               }}
-              blurRadius={100}
+              blurRadius={80}
             >
               <View
                 style={styles.infoContainer}

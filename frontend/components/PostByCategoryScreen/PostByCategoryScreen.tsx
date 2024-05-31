@@ -109,7 +109,7 @@ function PostByCategoryScreen({pageSwitcher, category}: any) {
             <Text
                 style={styles.descText}
             >
-                Pozostałe zadania
+               {filteredExercises.slice(3,) !=null?'Pozostałe zadania':null} 
             </Text>
             <ScrollView
                 style={styles.horizontalScrollView}

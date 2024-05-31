@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '15%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     shadowColor: "#000",
         shadowOffset: {
