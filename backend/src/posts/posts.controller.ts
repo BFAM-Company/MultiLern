@@ -37,7 +37,7 @@ export class PostsController {
     }
 
     @Get('/exams')
-    findAllExams(@Param('category') category: string) {
+    findAllExams() {
         return this.postsService.findAllExams();
     }
 

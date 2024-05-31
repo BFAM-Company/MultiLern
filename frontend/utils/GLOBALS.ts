@@ -42,6 +42,7 @@ export const linking: any = {
           id: (id: number) => id,
         },
       },
+      Exams: "exams"
     },
   },
 };
