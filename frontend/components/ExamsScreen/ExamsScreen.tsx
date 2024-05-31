@@ -100,7 +100,10 @@ function ExamsScreen({pageSwitcher, category}: any) {
                 style={styles.horizontalScrollView}
                 horizontal={true}
             >
-                {filteredExercises.slice(3,).map(excercise => {
+                {loading ? (
+                <ActivityIndicator color="gray" style={{ margin: 15 }} />
+                ) : null}
+                {filteredExercises.slice(0,5).map(excercise => {
                 console.log(excercise.users_posts)
                 const rating = calcRating(excercise)
                 const isoDateString = excercise.date
@@ -135,7 +138,7 @@ function ExamsScreen({pageSwitcher, category}: any) {
             {loading ? (
               <ActivityIndicator color="gray" style={{ margin: 15 }} />
             ) : null}
-            {filteredExercises.slice(0,3).map(excercise => {
+            {filteredExercises.slice(5,).map(excercise => {
               console.log(excercise.users_posts)
               const rating = calcRating(excercise)
               const isoDateString = excercise.date
@@ -151,16 +154,6 @@ function ExamsScreen({pageSwitcher, category}: any) {
                   posts_images={excercise.posts_images}/>)
             })}
           </View>
-          <TouchableOpacity
-            onPress={()=>{pageSwitcher('CreatePost')}}
-            style={styles.moreButton}
-            >
-                <Text
-                    style={styles.buttonText}
-                >
-                    Dodaj nowe
-                </Text>
-            </TouchableOpacity>
           <View style={{height: 100}}></View>
         </ScrollView>
       </SafeAreaView>
