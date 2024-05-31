@@ -15,6 +15,7 @@ function NotepadSection({pageSwitcher}: NotepadSectionProps) {
         </View>
         <TouchableOpacity
             style={styles.container}
+            onPress={()=>{pageSwitcher('Notes')}}
         >
             <Image
                 style={styles.image}
@@ -24,6 +25,7 @@ function NotepadSection({pageSwitcher}: NotepadSectionProps) {
             <Text style={styles.buttonDescription}>Zobacz wszystkie</Text>
             <TouchableOpacity
                 style={styles.button}
+                onPress={()=>{pageSwitcher('Notes')}}
             >
                 <Text style={styles.buttonText}>Dalej</Text>
             </TouchableOpacity>
@@ -42,6 +44,7 @@ function NotepadSection({pageSwitcher}: NotepadSectionProps) {
              <Text style={styles.buttonDescription}>Zacznij notować</Text>
              <TouchableOpacity
                 style={styles.button}
+                onPress={()=>{pageSwitcher('Notes')}}
             >
                 <Text style={styles.buttonText}>Utwórz +</Text>
             </TouchableOpacity>

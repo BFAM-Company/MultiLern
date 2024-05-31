@@ -41,6 +41,7 @@ function FlashcardsSection({pageSwitcher}: any) {
              <Text style={styles.buttonDescription}>Utwórz nowy set</Text>
              <TouchableOpacity
                 style={styles.button}
+                onPress={ () => pageSwitcher('NewFlashcard')}
             >
                 <Text style={styles.buttonText}>Utwórz +</Text>
             </TouchableOpacity>

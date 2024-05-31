@@ -194,6 +194,50 @@ export class PostsService {
             },
         });
     }
+
+    findAllExams() {
+        return this.prisma.posts.findMany({
+            where: {
+                postType: 'exam'
+            },
+            include: {
+                users_posts: {
+                    select:{
+                        users: {
+                            select:{
+                                id: true,
+                                nickname: true,
+                                avatar: true
+                            }
+                        }
+                    }
+                },
+                posts_images: {
+                    select: {
+                        images: {
+                            select: {
+                                img: true,
+                            },
+                        },
+                    },
+                },
+                posts_reviews: {
+                    include: {
+                        reviews: true,
+                    },
+                },
+                tags_posts: {
+                    include: {
+                        tags: {
+                            select: {
+                                title: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    }
     getCommentsById(id: number) {
         return this.prisma.posts.findMany({
             where: {

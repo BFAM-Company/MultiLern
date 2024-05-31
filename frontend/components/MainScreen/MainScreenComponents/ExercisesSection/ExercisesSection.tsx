@@ -24,7 +24,6 @@ function ExercisesSection({pageSwitcher}: NotepadSectionProps) {
         <TouchableOpacity
             style={styles.container}
             onPress={()=>{
-                console.log('userId: ', userContext?.userData?.id)
                 pageSwitcher('UserExercises', {userId: userContext?.userData?.id})
             }}
         >
@@ -36,6 +35,9 @@ function ExercisesSection({pageSwitcher}: NotepadSectionProps) {
             <Text style={styles.buttonDescription}>Zobacz wszystkie</Text>
             <TouchableOpacity
                 style={styles.button}
+                onPress={()=>{
+                    pageSwitcher('UserExercises', {userId: userContext?.userData?.id})
+                }}
             >
                 <Text style={styles.buttonText}>Dalej</Text>
             </TouchableOpacity>
@@ -55,6 +57,7 @@ function ExercisesSection({pageSwitcher}: NotepadSectionProps) {
              <Text style={styles.buttonDescription}>Zacznij notować</Text>
              <TouchableOpacity
                 style={styles.button}
+                onPress={()=>{pageSwitcher('CreatePost')}}
             >
                 <Text style={styles.buttonText}>Utwórz +</Text>
             </TouchableOpacity>

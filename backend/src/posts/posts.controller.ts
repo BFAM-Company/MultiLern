@@ -36,6 +36,11 @@ export class PostsController {
         return this.postsService.findManyByCategory(category);
     }
 
+    @Get('/exams')
+    findAllExams(@Param('category') category: string) {
+        return this.postsService.findAllExams();
+    }
+
     @Get('/search/:keywords')
     findManyByKeyWords(@Param('keywords') keywords: string) {
         return this.postsService.findManyByKeyWord(keywords);
