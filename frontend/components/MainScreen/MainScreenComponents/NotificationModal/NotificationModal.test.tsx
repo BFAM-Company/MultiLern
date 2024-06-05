@@ -28,10 +28,10 @@ describe('NotificationModal component', () => {
 
     const { getByText } = render(<NotificationModal isVisible={true} hideHandler={hideHandler} buttonAction={buttonAction} user={{ avatar: 'avatar-url', nickname: 'dupa', id: 1, email: '' }} />);
     fireEvent.press(getByText('Dodaj swoje pierwsze zadanie'));
-    expect(buttonAction).toHaveBeenCalledWith('Exercises');
+    expect(buttonAction).toHaveBeenCalledWith('CreatePost');
 
     fireEvent.press(getByText('Pomagaj innym! Dodawaj własne rozwiązania i dziel się swoją wiedzą'));
-    expect(buttonAction).toHaveBeenCalledWith('Exercises');
+    expect(buttonAction).toHaveBeenCalledWith('CreatePost');
 
     fireEvent.press(getByText('Zobacz najbardziej popularne sety leksykalne!'));
     expect(buttonAction).toHaveBeenCalledWith('FlashcardsList');

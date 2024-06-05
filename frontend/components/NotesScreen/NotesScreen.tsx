@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import {DrawingComponent} from '../DrawingComponent/DrawingComponent';
 import ToolKit from './NotesScreenComponents/ToolKit';
 import HomeButton from './NotesScreenComponents/HomeButton';
@@ -25,7 +25,7 @@ function NotesScreen({pageSwitcher}: any) {
     setIsDrawingEnabled(drw)
   }
   return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <DrawingComponent 
           color={color} 
           width={width} 
@@ -43,7 +43,7 @@ function NotesScreen({pageSwitcher}: any) {
           returnIsDrawingEnabled={drawingChanger}
         />
         <HomeButton pageSwitcher={()=>{pageSwitcher('Main')}}/>
-      </View>
+      </SafeAreaView>
   );
 }
 

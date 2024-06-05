@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NotesScreen renders correctly 1`] = `
-<View
+<RCTSafeAreaView
   style={
     {
       "alignItems": "center",
@@ -348,10 +348,10 @@ exports[`NotesScreen renders correctly 1`] = `
   <View
     style={
       {
-        "left": 10,
+        "left": 16,
         "position": "absolute",
         "right": 10,
-        "top": 10,
+        "top": 50,
         "zIndex": 10000000,
       }
     }
@@ -402,5 +402,5 @@ exports[`NotesScreen renders correctly 1`] = `
       />
     </View>
   </View>
-</View>
+</RCTSafeAreaView>
 `;
