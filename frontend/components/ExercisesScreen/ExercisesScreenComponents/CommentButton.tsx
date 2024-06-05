@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useContext, useState } from 'react'
-import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View, Image, ScrollView, Alert} from 'react-native'
+import {StyleSheet, TouchableOpacity, Text, Modal, Dimensions, View, Image, ScrollView, Alert, SafeAreaView} from 'react-native'
 import { AxiosContext } from '../../context/AxiosProvider/AxiosProvider';
 import { UserDataContext } from '../../context/UserContext/UserContext';
 import { TextInput } from 'react-native-paper';
@@ -98,7 +98,7 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
             <View
                 style={styles.modalContainer}
             >
-                <View
+                <SafeAreaView
                     style={styles.closeButtonContainer}
                 >
                     <TouchableOpacity
@@ -109,7 +109,7 @@ function CommentButton({id, handleRefresh}: PostContentProps) {
                             style={{width:30,height:30,}}
                         />
                     </TouchableOpacity>
-                </View>
+                </SafeAreaView>
                 <Text
                     style={styles.hintText}
                 >
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
         elevation: 16,
     },
     hintText:{
-        marginTop:50,
+        marginTop:20,
         marginBottom:20,
         fontSize:20,
         fontWeight:'900',

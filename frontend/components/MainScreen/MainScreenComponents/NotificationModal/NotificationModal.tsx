@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions, Platform, Image } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions, Platform, Image, SafeAreaView} from 'react-native';
 import Modal from 'react-native-modal'
 import { UserDataState } from '../../../context/UserContext/UserContext';
 
@@ -52,7 +52,7 @@ function NotificationModal({buttonAction, hideHandler, isVisible, user}: Notific
         swipeDirection="left"
         testID='notificationModal'
         >
-        <View style={styles.mainModalContainer}>
+        <SafeAreaView style={styles.mainModalContainer}>
           <View style={styles.closeButtonContainer}>
           <Text
                 style={styles.notificationTitle}
@@ -71,12 +71,12 @@ function NotificationModal({buttonAction, hideHandler, isVisible, user}: Notific
             </TouchableOpacity>
           </View>
           <View style={styles.buttonsContainer}>
-            <Notification content={'Dodaj swoje pierwsze zadanie'} buttonAction={()=>{buttonAction('Exercises')}}/>
-            <Notification content={'Pomagaj innym! Dodawaj własne rozwiązania i dziel się swoją wiedzą'}  buttonAction={()=>{buttonAction('Exercises')}}/>
+            <Notification content={'Dodaj swoje pierwsze zadanie'} buttonAction={()=>{buttonAction('CreatePost')}}/>
+            <Notification content={'Pomagaj innym! Dodawaj własne rozwiązania i dziel się swoją wiedzą'}  buttonAction={()=>{buttonAction('CreatePost')}}/>
             <Notification content={'Zobacz najbardziej popularne sety leksykalne!'} buttonAction={()=>{buttonAction('FlashcardsList')}} coloredIcon={false}/>
             <Notification content={'Notuj z MultiLern'} buttonAction={()=>{buttonAction('Notes')}}/>
           </View>
-        </View>
+        </SafeAreaView>
     </Modal>
   );
 }

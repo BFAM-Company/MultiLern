@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native'
+import { Dimensions, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View, ScrollView, SafeAreaView } from 'react-native'
 import RateComponent from './RateComponent';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import PostContent from './PostContent';

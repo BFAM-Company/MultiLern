@@ -70,7 +70,7 @@ function UserModal({buttonAction, hideHandler, isVisible, user}: UserModalProps)
           </LinearGradient>
           <LinearGradient colors={['#fff', '#eee' , '#CDE1F1']} style={styles.buttonsContainer}>
             <Button content={'Wyszukaj'} icon={require('../../../../assets/search-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
-            <Button content={'Twoje Zadania'} icon={require('../../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
+            <Button content={'Twoje Zadania'} icon={require('../../../../assets/exercises-icon.png')} buttonAction={()=>{buttonAction('UserExercises', {userId: user?.id})}}/>
             <Button content={'Konto'} icon={user?.avatar} buttonAction={()=>{buttonAction('Home')}} coloredIcon={false}/>
             <Button content={'Ustawienia'} icon={require('../../../../assets/settings-icon.png')} buttonAction={()=>{buttonAction('Home')}}/>
             <Pressable onPress={logout} style={{margin:20,}}><Text style={{fontWeight:'700', fontSize:20,}}>Wyloguj się</Text></Pressable>
