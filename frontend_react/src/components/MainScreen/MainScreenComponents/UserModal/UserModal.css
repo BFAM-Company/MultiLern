@@ -1,0 +1,102 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.modalContent {
+  width: 70%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+.mainModalContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.accountContainer {
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(rgb(33, 33, 43), rgb(53, 53, 53));
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+}
+
+.usernameTitle {
+  font-size: 22px;
+  margin: 0;
+}
+
+.emailText {
+  font-size: 16px;
+}
+
+.avatarImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.buttonsContainer {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(white, #eee, #cde1f1);
+}
+
+.modalButton {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.44);
+  cursor: pointer;
+}
+
+.modalButton:hover {
+  background-color: #f9f9f9;
+}
+
+.buttonIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.coloredIcon {
+  filter: brightness(0.5);
+}
+
+.logoutButton {
+  margin: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  text-decoration: underline;
+}

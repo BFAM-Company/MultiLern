@@ -1,0 +1,82 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalContent {
+  width: 30%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+.mainModalContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closeButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notificationTitle {
+  font-size: 22px;
+  font-weight: 900;
+  color: rgb(45, 45, 55);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.closeButtonIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.buttonsContainer {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modalButton {
+  width: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modalButton:hover {
+  background-color: #f9f9f9;
+}
+
+.notificationContent {
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(33, 33, 43);
+}

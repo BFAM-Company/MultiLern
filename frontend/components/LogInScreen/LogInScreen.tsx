@@ -51,7 +51,7 @@ function LogInScreen({pageSwitcher}: any) {
     }
 
     const loginByDiscord = async () => {
-        const response = await openAuthSessionAsync('https://multilern-production.up.railway.app/auth/discord', 'https://multilern-production.up.railway.app/auth/discord/callback')
+        const response = await openAuthSessionAsync('http://localhost:3001/auth/discord', 'http://localhost:3001/auth/discord/callback')
         if(response.type === 'success') {
             const REGEX =  /[?&]([^=#]+)=([^&#]*)/g
             let params: any = {}, match;

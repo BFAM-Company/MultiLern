@@ -1,0 +1,94 @@
+.main-container {
+  width: 100%;
+  height: 100vh; /* Cała wysokość ekranu */
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("/assets/gradientBackground.png") no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
+.account-create-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%; /* Mniejsza szerokość na większym ekranie */
+  max-width: 600px; /* Ustawiamy maksymalną szerokość kontenera */
+  height: 60%; /* Wysokość kontenera dostosowana do ekranu */
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.title-text {
+  font-size: 36px; /* Większy rozmiar czcionki dla lepszej widoczności */
+  color: rgb(33, 33, 43);
+  font-weight: 600;
+  margin: 10px;
+}
+
+.main-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.main-text {
+  font-size: 22px; /* Większy rozmiar tekstu */
+  font-weight: 700;
+  color: gray;
+  text-align: center;
+  max-width: 90%; /* Ograniczanie szerokości tekstu */
+}
+
+.buttons-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px; /* Odstępy między przyciskami */
+}
+
+@media (max-width: 768px) {
+  /* Dostosowanie do mniejszych ekranów */
+  .account-create-container {
+    width: 80%;
+  }
+
+  .title-text {
+    font-size: 28px; /* Zmniejszenie rozmiaru czcionki na mniejszych ekranach */
+  }
+
+  .main-text {
+    font-size: 18px; /* Zmniejszenie tekstu na mniejszych ekranach */
+  }
+
+  .buttons-container {
+    width: 100%;
+    flex-direction: column;
+  }
+}

@@ -159,7 +159,7 @@ function MainScreen({pageSwitcher}: any) {
                 testID='dupa'
                 source= {require('./../../assets/gradientBoobles.png')}
                 style={styles.fixedContainerBgc}
-                imageStyle={{height:350}}
+                imageStyle={{height:500}}
                 resizeMode='cover'
                 blurRadius={40}
         >   

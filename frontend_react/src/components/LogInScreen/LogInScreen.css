@@ -1,0 +1,91 @@
+.login-main-container {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-image-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("./../../assets/gradientBackground.png") no-repeat center
+    center;
+  background-size: cover;
+}
+
+.login-account-create-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.login-fading-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.login-logo-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.login-title-text {
+  font-size: 30px;
+  color: #21212b;
+  font-weight: 600;
+  margin: 10px;
+}
+
+.login-main-text-container {
+  text-align: center;
+}
+
+.login-main-text {
+  font-size: 19px;
+  font-weight: 700;
+  color: gray;
+}
+
+.login-input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid gray;
+  border-radius: 20px;
+}
+
+.login-button {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.login-button.discord {
+  background-color: #7289da;
+}
+
+.login-or-text-container {
+  margin: 10px;
+}

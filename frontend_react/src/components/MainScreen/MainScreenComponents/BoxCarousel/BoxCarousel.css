@@ -1,0 +1,30 @@
+.mainContainer {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.scroll {
+  width: 100%;
+  padding: 20px 0;
+  background-color: #fff;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.carousel::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}

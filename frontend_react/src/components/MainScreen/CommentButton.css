@@ -1,0 +1,84 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+}
+
+.modal-container {
+  width: 80%;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.close-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+}
+
+.hint-text {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 900;
+  color: rgb(45, 45, 55);
+}
+
+.small-hint-text {
+  font-size: 16px;
+  color: gray;
+}
+
+.input,
+textarea {
+  width: 90%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.upload-button,
+.image-button {
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.submit-button {
+  width: 300px;
+  height: 55px;
+  border-radius: 20px;
+  margin: 20px;
+  background: linear-gradient(45deg, rgb(45, 45, 55), rgb(100, 100, 110));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background: rgb(100, 100, 110);
+}

@@ -1,0 +1,84 @@
+.mainContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.topHeader {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 900;
+  color: rgb(33, 33, 43);
+}
+
+.container {
+  width: 180px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.image {
+  width: 170px;
+  height: 170px;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  object-fit: cover;
+}
+
+.buttonTitle {
+  color: rgb(33, 33, 43);
+  font-size: 18px;
+  font-weight: 900;
+  padding: 5px;
+}
+
+.buttonDescription {
+  color: #c085ff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 5px;
+  text-align: center;
+}
+
+.button {
+  width: 90%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(33, 33, 43);
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #555;
+}
