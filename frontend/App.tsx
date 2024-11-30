@@ -5,10 +5,13 @@ import { AxiosProvider } from './components/context/AxiosProvider/AxiosProvider'
 import { UserDataProvider } from './components/context/UserContext/UserContext';
 import { FichesProvider } from './components/context/FichesContext/FichesContext';
 import {GestureHandlerRootView} from 'react-native-gesture-handler'
-import { StyleSheet } from 'react-native';
+import { LogBox, StyleSheet } from 'react-native';
 
 
 function App() {
+
+  LogBox.ignoreAllLogs()
+
   return (
       <AuthProvider>
         <AxiosProvider>

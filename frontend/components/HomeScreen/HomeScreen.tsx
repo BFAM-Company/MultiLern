@@ -31,7 +31,7 @@ function HomeScreen({pageSwitcher}: any) {
             <View style={styles.AccountCreateContainer}>
                 <View style={styles.LogoContainer}>
                     <Image testID='logoImage' source={require('./../../assets/multilern-logo.png')} style={styles.LogoImage}/>
-                    <Text style={styles.titleText}>MultiLern</Text>
+                    <Text testID='logoText' style={styles.titleText}>MultiLern</Text>
                 </View>
                 <View style={styles.mainTextContainer}>
                     <Text style={styles.mainText}>Dołącz do nas i podnieść swoją naukę na wyższy poziom</Text>

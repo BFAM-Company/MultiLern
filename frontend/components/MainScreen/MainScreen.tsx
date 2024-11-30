@@ -36,8 +36,12 @@ function MainScreen({pageSwitcher}: any) {
         const fetchPosts = async() =>{
             setLoading(true)
             const result = await publicAxios.get(`/posts`)
+            console.log("dupa dupa")
+            console.log(result)
             if(result.data){
               setLoading(false)
+              console.log("dupa dupa dupa posts")
+              console.log(result.data)
               setExercises(result.data)
             }
           }
@@ -150,6 +154,7 @@ function MainScreen({pageSwitcher}: any) {
 
   return (
     <KeyboardAvoidingView
+        testID='MainScreen'
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >

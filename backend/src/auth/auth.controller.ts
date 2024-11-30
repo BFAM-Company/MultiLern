@@ -86,7 +86,8 @@ export class AuthController {
         );
 
         res.redirect(
-            `exp://192.168.33.8:8081?accessToken=${userData.accessToken}&refreshToken=${userData.refreshToken}`
+            // `exp://192.168.33.8:8081?accessToken=${userData.accessToken}&refreshToken=${userData.refreshToken}`
+            `com.bfam.multilern://expo-development-client/main?accessToken=${userData.accessToken}&refreshToken=${userData.refreshToken}`
         );
     }
 

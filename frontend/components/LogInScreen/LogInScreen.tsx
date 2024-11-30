@@ -51,26 +51,32 @@ function LogInScreen({pageSwitcher}: any) {
     }
 
     const loginByDiscord = async () => {
-        const response = await openAuthSessionAsync('https://multilern-production.up.railway.app/auth/discord', 'https://multilern-production.up.railway.app/auth/discord/callback')
-        if(response.type === 'success') {
-            const REGEX =  /[?&]([^=#]+)=([^&#]*)/g
-            let params: any = {}, match;
-            while (match = REGEX.exec(response.url)) {
-                params[match[1]] = match[2];
-            }
-            const {accessToken, refreshToken} = params
-            await AsyncStorage.setItem('auth', JSON.stringify({
+        const response = await openAuthSessionAsync('http://localhost:3001/auth/discord', 'http://localhost:3001/auth/discord/callback')
+        if (response.type === 'success') {
+            const urlParams = new URLSearchParams(response.url.split('?')[1]);
+            const accessToken = urlParams.get('accessToken');
+            const refreshToken = urlParams.get('refreshToken');
+
+            if (authContext?.setAuthState) {
+                authContext.setAuthState({
                     accessToken,
                     refreshToken,
-                }))
-
-                authContext?.setAuthState({
-                    accessToken: accessToken,
-                    refreshToken: refreshToken,
                     authenticated: true,
+                    isLoggingByGuest: false,
                 });
-        }            
-        dismissBrowser()
+            }
+
+            await AsyncStorage.setItem(
+                'auth',
+                JSON.stringify({
+                    accessToken,
+                    refreshToken,
+                })
+            );
+
+            console.log('Saved tokens:', await AsyncStorage.getItem('auth'));
+        }
+        dismissBrowser();
     }
 
     const fadeAnimHeader = React.useRef(new Animated.Value(0)).current;
@@ -135,6 +141,8 @@ function LogInScreen({pageSwitcher}: any) {
                                 style={styles.input} 
                                 value={login} 
                                 onChangeText={setLogin} 
+                                testID='input_email'
+                                accessible={true}
                                 placeholder='Nazwa użytkownika lub email'
                                 autoCapitalize='none'
                                 autoCorrect={false}
@@ -142,6 +150,7 @@ function LogInScreen({pageSwitcher}: any) {
                             <TextInput 
                                 style={styles.input} 
                                 value={passwordText} 
+                                testID='passwordInput'
                                 secureTextEntry={true}
                                 onChangeText={setPasswordText} 
                                 placeholder='Hasło '
