@@ -88,6 +88,7 @@
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.48",
     "@types/react-test-renderer": "^18.0.7",
+    "cypress": "^13.16.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
   },
