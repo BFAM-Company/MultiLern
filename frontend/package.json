@@ -17,7 +17,9 @@
     "e2e:build-android-debug": "yarn android:clean && npx detox build -c android.emu.debug",
     "e2e:build-android-release": "yarn android:clean && detox build -c android.emu.release",
     "e2e:test-android-debug": "detox test -c android.emu.debug",
-    "e2e:test-android-release": "detox test -c android.emu.release"
+    "e2e:test-android-release": "detox test -c android.emu.release",
+    "e2e:build": "detox build --configuration",
+    "e2e:test": "detox test --configuration"
   },
   "jest": {
     "preset": "jest-expo",
@@ -53,6 +55,7 @@
     "axios-auth-refresh": "^3.3.6",
     "axios-mock-adapter": "^1.22.0",
     "detox": "^20.28.0",
+    "eas-cli": "^13.4.2",
     "env": "^0.0.2",
     "expo": "~50.0.2",
     "expo-image-picker": "^15.0.5",
