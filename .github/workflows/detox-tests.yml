@@ -19,6 +19,12 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install Docker
+        run: |
+          brew install --cask docker
+          open /Applications/Docker.app  # Uruchamiamy aplikację Docker na macOS
+          sleep 30  # Czekamy na uruchomienie Dockera
+
       - name: Start MySQL service
         run: |
           docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=root -d mysql:8
