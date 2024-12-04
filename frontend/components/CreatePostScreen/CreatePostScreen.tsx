@@ -82,12 +82,13 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
     return(
         <ScrollView
             style={{width:windowWidth, height:'auto'}}
+            testID='createPostScroll'
         >
             <ScrollView             
             style={{width:windowWidth,}}
             >
-            <View
-                style={styles.modalContainer}
+            <ScrollView
+                contentContainerStyle={styles.modalContainer}
             >
                 <Text
                     style={styles.hintText}
@@ -104,6 +105,7 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
                     onChangeText={onChangeTitle}
                     value={title}
                     placeholder='tytuł...'
+                    testID='title'
                 />
                 <Text
                     style={styles.hintText}
@@ -136,6 +138,7 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
                     Nie bój się poprosić o pomoc! Codziennie tysiące użytkowników jest gotowych by pomóc
                 </Text>
 								<TextInput
+                                    testID='content'
 									editable
 									multiline
 									style={[styles.input, {minHeight:400,}]}
@@ -151,7 +154,7 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
 									<View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'}}>
 										{images && images.map((image: any, index) => (
                                             <TouchableOpacity key={index} onPress={() => removeImage(index)} testID={`image-${index}`}>
-												<View style={styles.imageButton}>
+												<View  style={styles.imageButton}>
 														<Image style={{width: 100, height: 100, opacity: .7, borderRadius: 5}} source={{uri: image.images.create.img}}/>
 												</View>
                                             </TouchableOpacity>
@@ -170,10 +173,10 @@ const CreatePostScreen = ({pageSwitcher}: any) =>{
                             colors={['rgb(45,45,55)', 'rgb(45,45,55)', 'rgb(100,100,110)']}
                             style={styles.linearGradient}
                         >
-                            <Text style={{color:'white', fontWeight:'900', fontSize:22}}>Wyślij</Text>
+                            <Text testID='submit' style={{color:'white', fontWeight:'900', fontSize:22}}>Wyślij</Text>
                         </LinearGradient>
                 </TouchableOpacity>
-            </View> 
+            </ScrollView> 
             </ScrollView>
         </ScrollView>
             

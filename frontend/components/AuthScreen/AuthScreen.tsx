@@ -51,7 +51,7 @@ function AuthScreen({pageSwitcher}: any) {
     pageSwitcher(initialScreen);
 
     return (
-        <View style={styles.mainContainer}>
+        <View testID='AuthScreenId' style={styles.mainContainer}>
             <ActivityIndicator testID='loading-indicator' size="large"/>
         </View>
     )

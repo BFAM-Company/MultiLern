@@ -5,7 +5,6 @@ import createAuthRefreshInterceptor from "axios-auth-refresh";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-
 interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;

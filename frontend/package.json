@@ -4,11 +4,22 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --silent --runInBand",
-    "coverage": "npx jest --coverage --silent --runInBand"
+    "coverage": "npx jest --coverage --silent --runInBand",
+    "android:clean": "cd android && ./gradlew clean && cd ..",
+    "e2e:build-ios-debug": "npx detox build -c ios.sim.debug",
+    "e2e:build-ios-release": "npx detox build -c ios.sim.release",
+    "e2e:test-ios-debug": "npx detox test -c ios.sim.debug",
+    "e2e:test-ios-release": "npx detox test -c ios.sim.release",
+    "e2e:build-android-debug": "yarn android:clean && npx detox build -c android.emu.debug",
+    "e2e:build-android-release": "yarn android:clean && detox build -c android.emu.release",
+    "e2e:test-android-debug": "detox test -c android.emu.debug",
+    "e2e:test-android-release": "detox test -c android.emu.release",
+    "e2e:build": "detox build --configuration",
+    "e2e:test": "detox test --configuration"
   },
   "jest": {
     "preset": "jest-expo",
@@ -43,6 +54,8 @@
     "axios": "^1.6.7",
     "axios-auth-refresh": "^3.3.6",
     "axios-mock-adapter": "^1.22.0",
+    "detox": "^20.28.0",
+    "eas-cli": "^13.4.2",
     "env": "^0.0.2",
     "expo": "~50.0.2",
     "expo-image-picker": "^15.0.5",
@@ -78,6 +91,7 @@
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.48",
     "@types/react-test-renderer": "^18.0.7",
+    "cypress": "^13.16.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
   },

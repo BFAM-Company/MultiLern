@@ -36,8 +36,12 @@ function MainScreen({pageSwitcher}: any) {
         const fetchPosts = async() =>{
             setLoading(true)
             const result = await publicAxios.get(`/posts`)
+            console.log("dupa dupa")
+            console.log(result)
             if(result.data){
               setLoading(false)
+              console.log("dupa dupa dupa posts")
+              console.log(result.data)
               setExercises(result.data)
             }
           }
@@ -150,6 +154,7 @@ function MainScreen({pageSwitcher}: any) {
 
   return (
     <KeyboardAvoidingView
+        testID='MainScreen'
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[styles.mainContainer, {flex:1}]}
     >
@@ -164,6 +169,7 @@ function MainScreen({pageSwitcher}: any) {
                 blurRadius={40}
         >   
             <Animated.ScrollView 
+                testID={"mainScroll"}
                 style={{
                     zIndex:10,
                 }}
@@ -207,7 +213,7 @@ function MainScreen({pageSwitcher}: any) {
                             const isoDateString = excercise.date
                             const formattedDate = formatDate(isoDateString);
                             return(
-                                <ExcercisesCard  
+                                <ExcercisesCard 
                                 key={excercise.id} 
                                 user_data={excercise.users_posts}
                                 id={excercise.id} category={excercise.category} 

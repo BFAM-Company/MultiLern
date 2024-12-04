@@ -53,7 +53,7 @@ function SignUpScreen({pageSwitcher}: any) {
   	};
 
 	const loginByDiscord = async () => {
-        const response = await openAuthSessionAsync('https://multilern-production.up.railway.app/auth/discord', 'https://multilern-production.up.railway.app/auth/discord/callback')
+        const response = await openAuthSessionAsync('http://localhost:3001/auth/discord', 'http://localhost:3001/auth/discord/callback')
         if(response.type === 'success') {
             const REGEX =  /[?&]([^=#]+)=([^&#]*)/g
             let params: any = {}, match;
@@ -118,22 +118,22 @@ function SignUpScreen({pageSwitcher}: any) {
 							<ErrorMessage
 								errors={errors}
 								name='username'
-								render={({message}) => <Text style={styles.errorMessage}>⚠ {message}</Text>}
+								render={({message}) => <Text testID='usernameError' style={styles.errorMessage}>⚠ {message}</Text>}
 							/>
 							<ErrorMessage
 								errors={errors}
 								name='email'
-								render={({message}) => <Text style={styles.errorMessage}>⚠ {message}</Text>}
+								render={({message}) => <Text testID='emailError' style={styles.errorMessage}>⚠ {message}</Text>}
 							/>
 							<ErrorMessage
 								errors={errors}
 								name='password'
-								render={({message}) => <Text style={styles.errorMessage}>⚠ {message}</Text>}
+								render={({message}) => <Text testID='passwordError' style={styles.errorMessage}>⚠ {message}</Text>}
 							/>
 							<ErrorMessage
 								errors={errors}
 								name='repeatedPassword'
-								render={({message}) => <Text style={styles.errorMessage}>⚠ {message}</Text>}
+								render={({message}) => <Text testID='rPasswordError' style={styles.errorMessage}>⚠ {message}</Text>}
 							/>
 						</View>
 					</View>
@@ -192,6 +192,7 @@ function SignUpScreen({pageSwitcher}: any) {
 									control={control}
 									render={({field: {onChange, onBlur, value}}) => (
 										<TextInput 
+											testID='name'
 											style={styles.input} 
 											placeholder='Podaj nazwę użytkownika'
 											onBlur={onBlur}
@@ -214,6 +215,7 @@ function SignUpScreen({pageSwitcher}: any) {
 									control={control}
 									render={({field: {onChange, onBlur, value}}) => (
 										<TextInput 
+											testID='email'
 											style={styles.input} 
 											placeholder='Podaj email'
 											onBlur={onBlur}
@@ -234,9 +236,10 @@ function SignUpScreen({pageSwitcher}: any) {
 									name='password'
 									control={control}
 									render={({field: {onChange, onBlur, value}}) => (
-										<TextInput 
+										<TextInput
+										testID='pass'
 											style={styles.input} 
-											secureTextEntry={true}
+											// secureTextEntry={true}
 											placeholder='Podaj hasło '
 											onBlur={onBlur}
 											onChangeText={onChange}
@@ -251,8 +254,9 @@ function SignUpScreen({pageSwitcher}: any) {
 										control={control}
 										render={({field: {onChange, onBlur, value}}) => (
 											<TextInput
+											testID='rpass'
 												style={styles.input} 
-												secureTextEntry={true}
+												// secureTextEntry={true}
 												placeholder='Powtórz hasło '
 												onBlur={onBlur}
 												onChangeText={onChange}
