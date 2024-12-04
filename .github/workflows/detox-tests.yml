@@ -19,11 +19,11 @@ jobs:
         with:
           node-version: 18
 
-      # Instalacja MySQL
-      - name: Install MySQL
+      # Instalacja MySQL 8.0
+      - name: Install MySQL 8.0
         run: |
-          brew install mysql@5.7  # Instalacja MySQL (5.7 jest stabilną wersją)
-          brew services start mysql@5.7  # Uruchomienie MySQL jako usługi
+          brew install mysql  # Instalacja MySQL (najnowsza wersja 8.0)
+          brew services start mysql  # Uruchomienie MySQL jako usługi
           mysql --version  # Sprawdzenie wersji MySQL
 
       # Tworzenie bazy danych
@@ -71,5 +71,5 @@ jobs:
       # Zatrzymywanie MySQL i backendu
       - name: Stop MySQL service and backend
         run: |
-          brew services stop mysql@5.7  # Zatrzymujemy usługę MySQL
+          brew services stop mysql  # Zatrzymujemy usługę MySQL
           kill $(jobs -p)  # Zatrzymujemy proces backendu
