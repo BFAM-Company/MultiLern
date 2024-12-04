@@ -75,15 +75,19 @@ Przed rozpoczęciem upewnij się, że masz zainstalowane następujące narzędzi
 - Emulator Androida lub symulator iOS.
 
 Uruchamianie testów
-
-
+jeżeli używasz domyslnej konfiguracji package.json możesz użyć komendy
+```
+yarn e2e:build-ios-debug
+yarn e2e:test-ios-debug
+```
+jeżeli z używasz innego package.json postępuj zgodnie z instrukcją
 Budowanie aplikacji
-	Dla iOS:
+Dla iOS:
 ```
 detox build -c ios.sim.debug
 ```
 
-	Dla Androida:
+Dla Androida:
 ```
 detox build -c android.emu.debug
 
@@ -92,6 +96,7 @@ Uruchamianie testów
 ```
 detox test -c <konfiguracja>
 ```
+> [!WARNING]
 Zamień <konfiguracja> na ios.sim.debug lub android.emu.debug.
 
  
