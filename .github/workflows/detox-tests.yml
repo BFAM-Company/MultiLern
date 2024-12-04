@@ -1,0 +1,43 @@
+name: Detox Tests Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  detox-tests:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Navigate to frontend
+        working-directory: frontend
+        run: echo "Navigated to frontend folder"
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: yarn install
+
+      - name: Install iOS dependencies
+        if: runner.os == 'macOS'
+        working-directory: frontend
+        run: |
+          brew install cocoapods
+          cd ios && pod install
+
+      - name: Build Detox
+        working-directory: frontend
+        run: yarn e2e:build-ios-debug
+
+      - name: Run Detox tests
+        working-directory: frontend
+        run: yarn e2e:test-ios-debug
