@@ -72,6 +72,12 @@ jobs:
         working-directory: frontend
         run: yarn e2e:build-ios-debug
 
+      - name: Start the app
+        working-directory: frontend
+        run: |
+          yarn ios &  # Uruchomienie aplikacji w tle
+          sleep 60  # Czekanie na pełne uruchomienie aplikacji
+
       - name: Run Detox tests
         working-directory: frontend
         run: yarn e2e:test-ios-debug
