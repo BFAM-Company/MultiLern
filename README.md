@@ -56,3 +56,41 @@ yarn android // jeśli chcesz włączyć aplikację za pomocą emulatora Android
 yarn coverage // z poziomu frontendu
 yarn test:cov // z poziomu backendu
 ```
+
+## Testy End-to-End (E2E) z Detox dla aplikacji React Native
+
+Testy end-to-end (E2E) są realizowane za pomocą narzędzia [Detox](https://wix.github.io/Detox/), które umożliwia automatyczne testowanie aplikacji React Native na urządzeniach z systemami iOS i Android. Poniżej znajdziesz instrukcję konfiguracji oraz uruchamiania testów.
+
+### Wymagania
+
+Przed rozpoczęciem upewnij się, że masz zainstalowane następujące narzędzia:
+- **Node.js** (zalecana wersja 14 lub nowsza),
+- **React Native CLI** lub **Expo CLI** (w zależności od projektu),
+- **Detox CLI**: Zainstaluj globalnie:
+  ```
+  npm install -g detox-cli
+  ```
+
+- Android Studio (dla Androida) lub Xcode (dla iOS),
+- Emulator Androida lub symulator iOS.
+
+Uruchamianie testów
+
+	1.	Budowanie aplikacji
+	•	Dla iOS:
+```
+detox build -c ios.sim.debug
+```
+
+	•	Dla Androida:
+```
+detox build -c android.emu.debug
+
+```
+	2.	Uruchamianie testów
+```
+detox test -c <konfiguracja>
+```
+Zamień <konfiguracja> na ios.sim.debug lub android.emu.debug.
+
+ 
