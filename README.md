@@ -76,18 +76,19 @@ Przed rozpoczęciem upewnij się, że masz zainstalowane następujące narzędzi
 
 Uruchamianie testów
 
-	1.	Budowanie aplikacji
-	•	Dla iOS:
+
+Budowanie aplikacji
+	Dla iOS:
 ```
 detox build -c ios.sim.debug
 ```
 
-	•	Dla Androida:
+	Dla Androida:
 ```
 detox build -c android.emu.debug
 
 ```
-	2.	Uruchamianie testów
+Uruchamianie testów
 ```
 detox test -c <konfiguracja>
 ```
