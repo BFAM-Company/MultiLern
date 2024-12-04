@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2024 at 09:38 PM
+-- Generation Time: Dec 04, 2024 at 09:28 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -32,6 +32,15 @@ CREATE TABLE `fiches` (
   `title` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `fiches`
+--
+
+INSERT INTO `fiches` (`id`, `title`) VALUES
+(65, 'Zestaw fiszek'),
+(66, 'Zestaw fiszek'),
+(67, 'Test Fich');
+
 -- --------------------------------------------------------
 
 --
@@ -43,6 +52,14 @@ CREATE TABLE `fiches_translations` (
   `fichesId` int(11) NOT NULL,
   `translationsId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fiches_translations`
+--
+
+INSERT INTO `fiches_translations` (`id`, `fichesId`, `translationsId`) VALUES
+(25, 65, 105),
+(26, 66, 106);
 
 -- --------------------------------------------------------
 
@@ -138,6 +155,198 @@ CREATE TABLE `refresh_tokens` (
   `ipAdress` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `refresh_tokens`
+--
+
+INSERT INTO `refresh_tokens` (`id`, `userId`, `userAgent`, `ipAdress`) VALUES
+(6, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(7, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(8, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(9, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(10, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(11, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(12, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(13, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(14, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(15, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(16, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(17, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(18, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(19, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(20, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(21, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(22, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(23, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(24, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(25, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(26, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(27, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(28, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(29, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(30, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(31, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(32, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(33, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(34, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(35, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(36, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(37, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(38, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(39, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(40, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(41, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(42, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(43, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(44, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(45, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(46, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(47, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(48, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(50, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(51, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(52, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(53, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(54, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(55, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(56, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(57, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(58, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(59, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(60, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(61, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(62, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(63, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(64, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(65, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(66, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(67, 18, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(68, 18, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(69, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(70, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(71, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(72, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(73, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(74, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(75, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(76, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(77, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(78, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(79, 17, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(80, 18, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(81, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(82, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(83, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(84, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(85, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(86, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(87, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(88, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(89, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(90, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(91, 18, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(92, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(93, 19, 'Expo/2.30.10 CFNetwork/1490.0.4 Darwin/23.3.0', '::1'),
+(94, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(95, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(96, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(97, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(98, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(99, 19, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(100, 19, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(101, 19, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(102, 19, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(103, 19, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(104, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(105, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(106, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(107, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(108, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(109, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(110, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(111, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(112, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(113, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(114, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(115, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(116, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(117, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(118, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(119, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(120, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(121, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(122, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(123, 17, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36', '::1'),
+(124, 18, 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1', '::1'),
+(125, 17, 'userAgent', 'ipAddress'),
+(126, 17, 'userAgent', 'ipAddress'),
+(127, 17, 'userAgent', 'ipAddress'),
+(128, 17, 'userAgent', 'ipAddress'),
+(129, 17, 'userAgent', 'ipAddress'),
+(130, 17, 'userAgent', 'ipAddress'),
+(131, 17, 'userAgent', 'ipAddress'),
+(132, 17, 'userAgent', 'ipAddress'),
+(133, 17, 'userAgent', 'ipAddress'),
+(134, 17, 'userAgent', 'ipAddress'),
+(135, 17, 'userAgent', 'ipAddress'),
+(136, 17, 'userAgent', 'ipAddress'),
+(137, 17, 'userAgent', 'ipAddress'),
+(138, 17, 'userAgent', 'ipAddress'),
+(139, 17, 'userAgent', 'ipAddress'),
+(140, 17, 'userAgent', 'ipAddress'),
+(141, 17, 'userAgent', 'ipAddress'),
+(142, 17, 'userAgent', 'ipAddress'),
+(143, 17, 'userAgent', 'ipAddress'),
+(144, 17, 'userAgent', 'ipAddress'),
+(145, 17, 'userAgent', 'ipAddress'),
+(146, 17, 'userAgent', 'ipAddress'),
+(147, 17, 'userAgent', 'ipAddress'),
+(148, 17, 'Test User Agent', '127.0.0.1'),
+(149, 17, 'userAgent', 'ipAddress'),
+(150, 17, 'Test User Agent', '127.0.0.1'),
+(151, 17, 'Test User Agent', '127.0.0.1'),
+(152, 17, 'userAgent', 'ipAddress'),
+(153, 17, 'Test User Agent', '127.0.0.1'),
+(154, 17, 'userAgent', 'ipAddress'),
+(155, 17, 'Test User Agent', '127.0.0.1'),
+(156, 17, 'userAgent', 'ipAddress'),
+(157, 17, 'Test User Agent', '127.0.0.1'),
+(158, 17, 'userAgent', 'ipAddress'),
+(159, 17, 'userAgent', 'ipAddress'),
+(160, 17, 'Test User Agent', '127.0.0.1'),
+(161, 17, 'userAgent', 'ipAddress'),
+(162, 17, 'Test User Agent', '127.0.0.1'),
+(163, 17, 'userAgent', 'ipAddress'),
+(164, 17, 'Test User Agent', '127.0.0.1'),
+(165, 17, 'userAgent', 'ipAddress'),
+(166, 17, 'Test User Agent', '127.0.0.1'),
+(167, 17, 'Test User Agent', '127.0.0.1'),
+(168, 17, 'userAgent', 'ipAddress'),
+(169, 17, 'userAgent', 'ipAddress'),
+(170, 17, 'Test User Agent', '127.0.0.1'),
+(171, 17, 'Test User Agent', '127.0.0.1'),
+(172, 17, 'userAgent', 'ipAddress'),
+(173, 17, 'userAgent', 'ipAddress'),
+(174, 17, 'Test User Agent', '127.0.0.1'),
+(175, 17, 'Test User Agent', '127.0.0.1'),
+(176, 17, 'userAgent', 'ipAddress'),
+(177, 17, 'userAgent', 'ipAddress'),
+(178, 17, 'Test User Agent', '127.0.0.1'),
+(179, 17, 'Test User Agent', '127.0.0.1'),
+(180, 17, 'userAgent', 'ipAddress'),
+(181, 17, 'userAgent', 'ipAddress'),
+(182, 17, 'Test User Agent', '127.0.0.1'),
+(183, 17, 'Test User Agent', '127.0.0.1'),
+(184, 17, 'userAgent', 'ipAddress'),
+(185, 17, 'Test User Agent', '127.0.0.1'),
+(186, 17, 'userAgent', 'ipAddress'),
+(187, 17, 'userAgent', 'ipAddress'),
+(188, 17, 'Test User Agent', '127.0.0.1'),
+(189, 17, 'userAgent', 'ipAddress'),
+(190, 17, 'Test User Agent', '127.0.0.1'),
+(191, 17, 'userAgent', 'ipAddress'),
+(192, 17, 'Test User Agent', '127.0.0.1');
+
 -- --------------------------------------------------------
 
 --
@@ -208,6 +417,36 @@ CREATE TABLE `translations` (
   `polishTranslation` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `translations`
+--
+
+INSERT INTO `translations` (`id`, `foreignTranslation`, `polishTranslation`) VALUES
+(82, '123', '123Dupa'),
+(83, 'Dupa', 'Dupa123'),
+(84, 'Bjguftyrdgchvb', 'Fdrte5ioujklnm'),
+(85, '32rwefg', '4retwgsderw'),
+(86, 'dupa', 'xd'),
+(87, 'dupa', 'xd'),
+(88, 'dupa', 'xd'),
+(89, 'dupa', 'xd'),
+(90, 'dupa', 'xd'),
+(91, 'Teskt4', 'Tekst4.4'),
+(92, 'Teskt3', 'Tekst3.3'),
+(93, 'Testk2', 'Teskt2.2'),
+(94, 'Tekst1', 'Teskt1.1'),
+(95, 'Teskt4r32rf2r32', 'Tekst4.42er3grkiouwe1bvdjye'),
+(96, 'Teskt33r2f22erhh', 'Tekst3.33r2fewrbgt4t3w'),
+(97, 'Testk2fwefwfwef', 'Teskt2.21eregrt23e'),
+(98, 'Tekst1fewfwefe', 'Teskt1.1fewfwefwe'),
+(100, 'Sdcs', 'Ederds'),
+(101, '3242342', '423423rf'),
+(102, 'Sdcs342423423', 'Ederds'),
+(103, '3242342', '423423rf'),
+(104, '1233', '12312312'),
+(105, 'Defensevergf', '13ewqsasvferewr'),
+(106, 'Wfwerd', 'rwerwewfwe');
+
 -- --------------------------------------------------------
 
 --
@@ -216,19 +455,41 @@ CREATE TABLE `translations` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `nickname` varchar(100) NOT NULL,
+  `nickname` varchar(100) DEFAULT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `avatar` text DEFAULT NULL
+  `avatar` text DEFAULT NULL,
+  `logginMethod` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nickname`, `password`, `email`, `avatar`) VALUES
-(1, 'Kubus', 'zartowalemWoleOliwkeHiHi', 'hotkubusiek@example.com', ''),
-(10, 'Mateuszek', 'kochamKubusiaIMozecieToMowic', 'oBozeJakGoKocham@example.com', '');
+INSERT INTO `users` (`id`, `nickname`, `password`, `email`, `avatar`, `logginMethod`) VALUES
+(1, 'Kubus', 'zartowalemWoleOliwkeHiHi', 'hotkubusiek@example.com', '', ''),
+(11, 'Oliwka', '$2b$10$6wpBdqDgsH7boiHod9Rkj.3uhOeyfNteecEUr7o3xDGGCr4ENnYnO', 'dupadupadupa@example.com', NULL, 'Multilern'),
+(17, 'Szarmander', '$2b$10$/MkTWwrZPLuciIOXRSkcjul1.e4E0vZXKabfB1JgAs925FZksHqui', 'kubuszrama@gmail.com', NULL, 'Multilern'),
+(18, 'Szarmander', '$2b$10$E7IiZcjDjFfF9L287K3OT.t/D/IJqxCA/BL5ED.TLgWPKwEBfGCS6', 'kubuszrama@gmail.com', 'https://cdn.discordapp.com/avatars/320506234803585025/de67e91c85a4a679e371451fe7a4b231.png', 'Discord'),
+(19, 'Kubuszrama10', '$2b$10$TZowA0MiqRBTitVrZ0A/7uy9HgdR.eYg/jrVVOUUGFwk7aKhWoJJm', 'jakub.szram@wp.pl', NULL, 'Multilern'),
+(20, 'testuser', '$2b$10$zsnHWAV9HL0YOzWfpb8uMOCV7iMkNpHFiE0nTgtRUlCYPyaVUyUga', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(21, 'testuser', '$2b$10$sFoOz9UPhM1plAPlur1N4uTCwlF8WaOgl2xZuQ.SPHpMVGV82eFoe', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(22, 'testuser', '$2b$10$A77C04x8PdhdSvBRGYQOfuO73itt5cAAk9TsKUzJSp6Z1ucIsZKzK', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(23, 'testuser', '$2b$10$YuaVOCjhzswlFZnN/nlvWezIw.TwIFbaBB9HOI59tUI3J8OACsW/e', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(24, 'testuser', '$2b$10$YiDeDR3UdO1kfu5e8joKzesUx3N8vnX1BTchbPhzla.XZhXtoRGhq', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(25, 'testuser', '$2b$10$Pda4BuphPfP8rIlBi7hLn.35/6tk0pQGp/ReIRMxNlxnZ0g.b4oHu', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(26, 'testuser', '$2b$10$Dv04DFDyX5xd8d7yFIPL4u0cjwXDv4AmtYA0NBvLTXBoLXCjSxupu', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(27, 'testuser', '$2b$10$COL2kex2l050CX66R7OiT.lNcUS/q6wXWU3T1xzkaa/N8lP6.8LgS', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(28, 'testuser', '$2b$10$RdKrQhI65WIS0DQfS3B57OyEVWHcL7ato3euecDsIKLNMvbWASs4K', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(29, 'testuser', '$2b$10$UXyB9Y.UQU95C5ZSGCqvt.J581.V3q1N5OEI3vYsH9RaZttlhoEo2', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(30, 'testuser', '$2b$10$fN0IGQRW.BnUNiuo9A25Z.6SJUUXwP0iwxeE4dLhfffvXNJu78I16', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(31, 'testuser', '$2b$10$kAe6109QnXvs9V8MBEl54.PMV1w96aLUpOzRx2s8te0ZIQDco6wMa', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(32, 'testuser', '$2b$10$Z6rKjrzHenAxcH/.ae63U.59dT71ZVWt9MYkCtx/xRknZaqoKXUYS', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(33, 'testuser', '$2b$10$qwNHQSGbFC5XAq9xK6pvwu15kv/w4ABHHyEN6veItL4Ew8ai443eC', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(34, 'testuser', '$2b$10$AnqHJYFWCJFvt7lqUGI3v.FbJnxrlDpr9uMiwahJ/Bf8mNhMDlo9a', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(35, 'testuser', '$2b$10$0eqUqX4X8/Oj2BE3uaKWfOKnsgu8zFhER1ZBK0piHrNi3zGiZ/czm', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(36, 'testuser', '$2b$10$IKYfpFY2U4y.lv7HQQWjH.6hOY2CyIdL5iI.cCGXwYOSmrHBXxe6G', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord'),
+(37, 'testuser', '$2b$10$5HIVf6s3i/j8idGXjiKvL.hACSgGo3PAJp.PIcIq2i0JzRTsNXY/G', 'test@example.com', 'https://cdn.discordapp.com/avatars/123/avatar.jpg.png', 'Discord');
 
 -- --------------------------------------------------------
 
@@ -241,6 +502,15 @@ CREATE TABLE `users_fiches` (
   `userId` int(11) NOT NULL,
   `fichesId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users_fiches`
+--
+
+INSERT INTO `users_fiches` (`id`, `userId`, `fichesId`) VALUES
+(25, 18, 65),
+(26, 17, 66),
+(27, 1, 67);
 
 -- --------------------------------------------------------
 
@@ -276,8 +546,8 @@ ALTER TABLE `fiches`
 --
 ALTER TABLE `fiches_translations`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fichesId` (`fichesId`),
-  ADD KEY `translationsId` (`translationsId`);
+  ADD KEY `fiches_translations_ibfk_1` (`fichesId`),
+  ADD KEY `fiches_translations_ibfk_2` (`translationsId`);
 
 --
 -- Indeksy dla tabeli `images`
@@ -345,9 +615,7 @@ ALTER TABLE `translations`
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nickname` (`nickname`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `users_fiches`
@@ -373,13 +641,13 @@ ALTER TABLE `users_posts`
 -- AUTO_INCREMENT for table `fiches`
 --
 ALTER TABLE `fiches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `fiches_translations`
 --
 ALTER TABLE `fiches_translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -409,7 +677,7 @@ ALTER TABLE `posts_reviews`
 -- AUTO_INCREMENT for table `refresh_tokens`
 --
 ALTER TABLE `refresh_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -433,19 +701,19 @@ ALTER TABLE `tags_posts`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `users_fiches`
 --
 ALTER TABLE `users_fiches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users_posts`
@@ -461,8 +729,8 @@ ALTER TABLE `users_posts`
 -- Constraints for table `fiches_translations`
 --
 ALTER TABLE `fiches_translations`
-  ADD CONSTRAINT `fiches_translations_ibfk_1` FOREIGN KEY (`fichesId`) REFERENCES `fiches` (`id`),
-  ADD CONSTRAINT `fiches_translations_ibfk_2` FOREIGN KEY (`translationsId`) REFERENCES `translations` (`id`);
+  ADD CONSTRAINT `fiches_translations_ibfk_1` FOREIGN KEY (`fichesId`) REFERENCES `fiches` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fiches_translations_ibfk_2` FOREIGN KEY (`translationsId`) REFERENCES `translations` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`

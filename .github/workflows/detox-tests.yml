@@ -19,11 +19,35 @@ jobs:
         with:
           node-version: 18
 
+      - name: Set up MySQL
+        uses: devcontainers/features@v0
+        with:
+          name: mysql
+
+      - name: Start MySQL service
+        run: |
+          docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=root -d mysql:8
+
+      - name: Create database
+        run: |
+          docker exec -i mysql-db mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS multilern;"
+
+      - name: Create database from dump
+        run: |
+          sleep 15  # Czekamy na uruchomienie MySQL
+          docker exec -i mysql-db mysql -uroot -proot multilern < backend/helpers/multilern.sql
+
+      - name: Start backend
+        run: |
+          cd backend
+          yarn install
+          yarn start &  # Uruchamiamy backend w tle
+
       - name: Navigate to frontend
         working-directory: frontend
         run: echo "Navigated to frontend folder"
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         working-directory: frontend
         run: yarn install
 
@@ -32,6 +56,7 @@ jobs:
         working-directory: frontend
         run: |
           brew install cocoapods
+          brew install applesimutils
           cd ios && pod install
 
       - name: Build Detox
@@ -41,3 +66,9 @@ jobs:
       - name: Run Detox tests
         working-directory: frontend
         run: yarn e2e:test-ios-debug
+
+      - name: Stop MySQL container and backend
+        run: |
+          docker stop mysql-db
+          docker rm mysql-db
+          kill $(jobs -p)  # Zatrzymujemy proces backendu
