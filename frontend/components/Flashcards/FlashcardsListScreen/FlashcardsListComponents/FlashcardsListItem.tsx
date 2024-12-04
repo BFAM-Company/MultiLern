@@ -21,6 +21,7 @@ function FlashcardsListItem({flashcardsID, title, pageSwitcher, setChosenFlashca
     <TouchableOpacity
         onPress={()=>{pageSwitcher('FlashcardsSet', {id: flashcardsID})}}
         style={styles.cardContainer}
+        testID={`flashcard${flashcardsID}`}
     >
         <Text style={[styles.title, {width: '80%'}]}>{title}</Text>
         <View style={styles.iconContainer}>

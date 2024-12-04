@@ -96,7 +96,7 @@ export const DrawingComponent = ({color, width, style, isDrawingEnabled}: Drawin
   );
 
   return (
-      <Canvas style={myStyle.container} onTouch={touchHandler}>
+      <Canvas testID="canvas" style={myStyle.container} onTouch={touchHandler}>
         {paths.map((path, index) => (
           <Path
             key={index}

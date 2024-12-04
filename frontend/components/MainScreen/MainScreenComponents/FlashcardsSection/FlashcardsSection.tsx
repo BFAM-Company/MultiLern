@@ -19,7 +19,7 @@ function FlashcardsSection({pageSwitcher}: any) {
                 source={require('../../../../assets/flashcards-icon2.png')}
             />
             <Text style={styles.buttonTitle}>Twoje Fiszki</Text>
-            <TouchableOpacity onPress={ () => pageSwitcher('FlashcardsList', {range: 'all'})}><Text style={styles.buttonDescription}>Zobacz wszystkie</Text></TouchableOpacity>
+            <TouchableOpacity onPress={ () => pageSwitcher('FlashcardsList', {range: 'all'})}><Text testID='seeAllFiches' style={styles.buttonDescription}>Zobacz wszystkie</Text></TouchableOpacity>
             <TouchableOpacity
                 style={styles.button}
                 onPress={ () => pageSwitcher('FlashcardsList', {range: 'my'})}

@@ -86,6 +86,7 @@ function PostContent({id, title, handleClose, posts_images, content, user_data, 
                     <Text 
                         numberOfLines={4}
                         style={styles.postTitle}
+                        testID={`title${id}`}
                     >
                         {title}
                     </Text>

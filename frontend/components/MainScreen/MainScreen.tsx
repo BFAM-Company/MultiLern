@@ -169,6 +169,7 @@ function MainScreen({pageSwitcher}: any) {
                 blurRadius={40}
         >   
             <Animated.ScrollView 
+                testID={"mainScroll"}
                 style={{
                     zIndex:10,
                 }}
@@ -212,7 +213,7 @@ function MainScreen({pageSwitcher}: any) {
                             const isoDateString = excercise.date
                             const formattedDate = formatDate(isoDateString);
                             return(
-                                <ExcercisesCard  
+                                <ExcercisesCard 
                                 key={excercise.id} 
                                 user_data={excercise.users_posts}
                                 id={excercise.id} category={excercise.category} 

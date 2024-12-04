@@ -50,25 +50,4 @@ describe("LoginScreen", () => {
 
     await logout();
   });
-
-  // it("should go to LoginPage and try to login by Discord", async () => {
-  //   await enterLoginPage();
-
-  //   await element(by.text("Discord")).tap();
-
-  //   console.log(await element(by.type("RCTAlertController")).toString());
-
-  //   await waitFor(element(by.type("RCTAlertController")))
-  //     .toBeVisible()
-  //     .withTimeout(5000);
-
-  //   await element(by.text("Dalej")).tap();
-
-  //   await element(by.text("Multilern")).scrollTo("bottom");
-  //   await element(by.text("Autoryzuj")).tap();
-
-  //   await expect(element(by.id("MainScreen"))).toBeVisible();
-
-  //   await logout();
-  // });
 });

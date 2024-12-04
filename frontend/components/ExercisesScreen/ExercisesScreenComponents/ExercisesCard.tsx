@@ -25,6 +25,8 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
   const height = useSharedValue(250)
   const [isActive, setIsActive] = useState<boolean>(false)
 
+  console.log(`e${id}`)
+
 
   // const handleScroll = (event:any) => {
   //   const offsetY = event.nativeEvent.contentOffset.y;
@@ -55,6 +57,7 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
   return (
     <>
       <TouchableOpacity
+          testID={`e${id}`}
           onPress={()=>{handlePress()}}
           style={[styles.cardContainer,{display:isActive?'none':'flex'}]}
         >
@@ -75,6 +78,7 @@ function ExcercisesCard({id, category, title, description, rate, date, posts_ima
                 <Text
                   style={styles.categoryText}
                   numberOfLines={1}
+                  testID={`c${id}`}
                 >
                   {category}
                 </Text>

@@ -124,7 +124,8 @@ function NewFlashcardScreen({pageSwitcher}: any) {
 					>
 					<View style={styles.centeredViewModal}>
 						<View style={styles.modalView}>
-              <Text style={styles.errorMessage}>⚠ Nie uzupełniłes wszystkich pól!</Text>
+              <Text           testID='fichesError'
+ style={styles.errorMessage}>⚠ Nie uzupełniłes wszystkich pól!</Text>
 						</View>
 					</View>
 					</TouchableOpacity>
@@ -183,6 +184,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                     control={control}
                     render={({field: {onChange, onBlur, value}}) => (
                       <TextInput 
+                      testID='foreignTranslation'
                         style={styles.input}  
                         placeholder='Podaj obce tłumaczenie'
                         onBlur={onBlur}
@@ -197,6 +199,7 @@ function NewFlashcardScreen({pageSwitcher}: any) {
                       control={control}
                       render={({field: {onChange, onBlur, value}}) => (
                         <TextInput 
+                        testID='polishTranslation'
                           style={styles.input}  
                           placeholder='Podaj polskie tłumaczenie'
                           onBlur={onBlur}
