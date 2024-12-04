@@ -64,6 +64,7 @@ jobs:
         working-directory: frontend
         run: |
           brew install cocoapods
+          brew tap wix/brew
           brew install applesimutils
           cd ios && pod install
 
