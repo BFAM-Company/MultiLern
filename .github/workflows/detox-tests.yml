@@ -8,7 +8,7 @@ on:
 
 jobs:
   detox-tests:
-    runs-on: macos-latest
+    runs-on: macos-latest # Używamy macOS, aby uruchomić symulatory iOS
 
     steps:
       - name: Checkout repository
@@ -19,25 +19,25 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Docker
+      # Instalacja MySQL
+      - name: Install MySQL
         run: |
-          brew install --cask docker
-          open /Applications/Docker.app  # Uruchamiamy aplikację Docker na macOS
-          sleep 30  # Czekamy na uruchomienie Dockera
+          brew install mysql@5.7  # Instalacja MySQL (5.7 jest stabilną wersją)
+          brew services start mysql@5.7  # Uruchomienie MySQL jako usługi
+          mysql --version  # Sprawdzenie wersji MySQL
 
-      - name: Start MySQL service
-        run: |
-          docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=root -d mysql:8
-
+      # Tworzenie bazy danych
       - name: Create database
         run: |
-          docker exec -i mysql-db mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS multilern;"
+          mysql -uroot -e "CREATE DATABASE IF NOT EXISTS multilern;"  # Tworzenie bazy danych
 
+      # Import bazy danych z pliku dump
       - name: Create database from dump
         run: |
-          sleep 15  # Czekamy na uruchomienie MySQL
-          docker exec -i mysql-db mysql -uroot -proot multilern < backend/helpers/multilern.sql
+          sleep 5  # Czekamy chwilę na uruchomienie MySQL
+          mysql -uroot multilern < backend/helpers/multilern.sql  # Załadowanie dumpu bazy danych
 
+      # Start backendu
       - name: Start backend
         run: |
           cd backend
@@ -68,8 +68,8 @@ jobs:
         working-directory: frontend
         run: yarn e2e:test-ios-debug
 
-      - name: Stop MySQL container and backend
+      # Zatrzymywanie MySQL i backendu
+      - name: Stop MySQL service and backend
         run: |
-          docker stop mysql-db
-          docker rm mysql-db
+          brew services stop mysql@5.7  # Zatrzymujemy usługę MySQL
           kill $(jobs -p)  # Zatrzymujemy proces backendu
