@@ -26,6 +26,14 @@ jobs:
           brew services start mysql  # Uruchomienie MySQL jako usługi
           mysql --version  # Sprawdzenie wersji MySQL
 
+      # Oczekiwanie na pełne uruchomienie MySQL
+      - name: Wait for MySQL to start
+        run: |
+          while ! mysqladmin ping --silent; do
+            echo "Waiting for MySQL to start..."
+            sleep 2
+          done
+
       # Tworzenie bazy danych
       - name: Create database
         run: |
@@ -34,7 +42,6 @@ jobs:
       # Import bazy danych z pliku dump
       - name: Create database from dump
         run: |
-          sleep 5  # Czekamy chwilę na uruchomienie MySQL
           mysql -uroot multilern < backend/helpers/multilern.sql  # Załadowanie dumpu bazy danych
 
       # Start backendu
