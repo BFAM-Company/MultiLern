@@ -76,7 +76,7 @@ jobs:
         working-directory: frontend
         run: |
           yarn ios &  # Uruchomienie aplikacji w tle
-          sleep 60  # Czekanie na pełne uruchomienie aplikacji
+          sleep 120  # Czekanie na pełne uruchomienie aplikacji
 
       - name: Run Detox tests
         working-directory: frontend
