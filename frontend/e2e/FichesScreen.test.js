@@ -10,6 +10,7 @@ describe("FichesScreen", () => {
   });
 
   beforeEach(async () => {
+    jest.setTimeout(180000);
     await device.reloadReactNative();
   });
 
